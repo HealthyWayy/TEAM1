@@ -7,6 +7,8 @@ public class MemberController {
 
   //김진우dd
 	//가나다라
+	
+	// 신수진 수정
 }
 
 
