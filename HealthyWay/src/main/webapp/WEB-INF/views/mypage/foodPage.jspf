@@ -1,0 +1,255 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<style>
+	#foodFavorDiv>div:nth-of-type(1){
+		height:530px;
+		overflow:auto;
+		border:1px solid #ddd;
+		border-radius:10px;
+		transition-duration:1s;
+	}
+	#foodFavorDiv>div::-webkit-scrollbar{
+		display:none;
+	}
+	#foodFavorDiv>div:nth-of-type(1):hover{
+		transform: translate(0,-10px);
+	}
+	.foodDiv{
+		background-color:#ddd;
+		padding:20px;
+		border-radius:10px;
+		margin:10px;
+		width:43%;
+		box-shadow:1px 1px 5px 1px black;
+	}
+	.foodDiv:hover{
+		box-shadow:1px 1px 10px 1px black;
+	}
+	.foodDiv, .foodDiv>div{
+		float:left;
+	}
+	.foodDiv>div:nth-of-type(1){
+		width:200px;
+		height:200px;
+		overflow:hidden;
+		border-radius:10px;
+		margin-right:20px;
+	}
+	.foodDiv>div:nth-of-type(1)>img{
+		height:100%;
+	}
+	.foodDiv>div:nth-of-type(2){
+		padding-top:10px;
+	}
+	.foodDiv>div:nth-of-type(2)>span:nth-of-type(1){
+		font-size:1.3em;
+		font-weight:bold;
+	}
+	.foodDiv>div:nth-of-type(2)>span:nth-of-type(2){
+		font-size:1.2em;
+	}
+	.foodIconImg{
+		width:30px;
+	}
+	#kcalDiv{
+		width:100%;
+	}
+	#kcalDiv>div:nth-of-type(1){
+		width:95%;
+		margin:0 auto;
+	}
+	#kcalDiv>div:nth-of-type(1)>div{
+		float:left;
+		width:50%;
+		line-height:30px;
+		background-color:#ddd;
+		padding:10px;
+		box-sizing:border-box;
+		margin-top:20px;
+		margin-bottom:20px;
+	}
+	.calImg{
+		width:50px;
+		margin-left:20px;
+	}
+	.calPersent1,.calPersent2{
+		position:relative;
+		display:inline-block;
+		width:60%;
+		height:50px;
+		background-color:#ddd;
+		border-radius:25px;
+		line-height:50px;
+		padding-left:20px;
+		margin-left:10px;
+		overflow:hidden;
+	}
+	.calPersent1::before{
+		content:"";
+		position:absolute;
+		height:50px;
+		width:100%;
+		left:-90%;
+	}
+	.calPersent2::after{
+		content:"";
+		position:absolute;
+		height:50px;
+		width:100%;
+		left:10%;
+		background-color:green;
+	}
+	#kcalChk{
+		padding:30px;
+	}
+	#kcalChk>div{
+		float:left;
+	}
+	#kcalChk>div:nth-of-type(1){
+		border:1px solid #ddd;
+		width:45%;
+		height:100px;
+		margin-bottom:20px;
+		margin-right:20px;
+		padding:30px;
+	}
+	#kcalChk li{
+		list-style:inside;
+		float:left;
+		width:35%;
+		padding-right:50px;
+		font-size:1.3em;
+		height:50px;
+		line-height:50px;
+	}
+	#kcalChk>div:nth-of-type(2){
+		/*이미지 들어갈 자리*/
+	}
+</style>
+<script>
+	function calKcal(){
+		//권장 칼로리 계산
+		var restKcal = '남은 칼로디';
+		var dayKcal = '1일 권장 칼로리';
+		$('#dayKcal').html(dayKcal);
+		$('#restKcal').html(restKcal);
+	}
+	$(()=>{
+		
+	});
+</script>
+<div id='foodFavorDiv'>
+	<span>I like this 식단</span><br/><br/>
+	<div>
+		<!-- 푸드 즐겨찾기 모듈 -->
+		<div class="foodDiv">
+			<div>
+				<img src='/myPageImg/foodtest.jpg'/>
+			</div>
+			<div>
+				<span>닭가슴살 샐러드</span><br/><br/>
+				<span>칼로리 : 100Kcal</span><br/><br/>
+				<img src='/myPageImg/heart.png' class='foodIconImg'/>
+				<span>1</span><br/>
+				<img src='/myPageImg/review.png' class='foodIconImg'/>
+				<span>2</span><br/>
+			</div>
+		</div>
+		
+		<!-- 푸드 즐겨찾기 모듈 -->
+		<div class="foodDiv">
+			<div>
+				<img src='/myPageImg/foodtest.jpg'/>
+			</div>
+			<div>
+				<span>닭가슴살 샐러드</span><br/><br/>
+				<span>칼로리 : 100Kcal</span><br/><br/>
+				<img src='/myPageImg/heart.png' class='foodIconImg'/>
+				<span>1</span><br/>
+				<img src='/myPageImg/review.png' class='foodIconImg'/>
+				<span>2</span><br/>
+			</div>
+		</div>
+		
+		<!-- 푸드 즐겨찾기 모듈 -->
+		<div class="foodDiv">
+			<div>
+				<img src='/myPageImg/foodtest.jpg'/>
+			</div>
+			<div>
+				<span>닭가슴살 샐러드</span><br/><br/>
+				<span>칼로리 : 100Kcal</span><br/><br/>
+				<img src='/myPageImg/heart.png' class='foodIconImg'/>
+				<span>1</span><br/>
+				<img src='/myPageImg/review.png' class='foodIconImg'/>
+				<span>2</span><br/>
+			</div>
+		</div>
+		
+		<!-- 푸드 즐겨찾기 모듈 -->
+		<div class="foodDiv">
+			<div>
+				<img src='/myPageImg/foodtest.jpg'/>
+			</div>
+			<div>
+				<span>닭가슴살 샐러드</span><br/><br/>
+				<span>칼로리 : 100Kcal</span><br/><br/>
+				<img src='/myPageImg/heart.png' class='foodIconImg'/>
+				<span>1</span><br/>
+				<img src='/myPageImg/review.png' class='foodIconImg'/>
+				<span>2</span><br/>
+			</div>
+		</div>
+		<div class="foodDiv">
+			<div>
+				<img src='/myPageImg/foodtest.jpg'/>
+			</div>
+			<div>
+				<span>닭가슴살 샐러드</span><br/><br/>
+				<span>칼로리 : 100Kcal</span><br/><br/>
+				<img src='/myPageImg/heart.png' class='foodIconImg'/>
+				<span>1</span><br/>
+				<img src='/myPageImg/review.png' class='foodIconImg'/>
+				<span>2</span><br/>
+			</div>
+		</div>
+		<div class="foodDiv">
+			<div>
+				<img src='/myPageImg/foodtest.jpg'/>
+			</div>
+			<div>
+				<span>닭가슴살 샐러드</span><br/><br/>
+				<span>칼로리 : 100Kcal</span><br/><br/>
+				<img src='/myPageImg/heart.png' class='foodIconImg'/>
+				<span>1</span><br/>
+				<img src='/myPageImg/review.png' class='foodIconImg'/>
+				<span>2</span><br/>
+			</div>
+		</div>
+	</div>
+	<div id='kcalDiv'>
+		<div>
+			<div>1일 권장 칼로리 : <span id='dayKcal'></span>Kcal</div>
+			<div>남은 칼로리 : <span id='restKcal'></span>Kcal</div>
+		</div>
+		<div>
+			<img src='/myPageImg/calImg1.png' class='calImg'/>
+			<div class='calPersent1'></div>
+			<br/>
+			<img src='/myPageImg/calImg2.png' class='calImg'/>
+			<div class='calPersent2'></div>
+		</div>
+		<div id='kcalChk'>
+			<div>
+				<ul>
+					<li><span>아침</span> : <span></span></li>
+					<li><span>점심</span> : <span></span></li>
+					<li><span>저녁</span> : <span></span></li>
+					<li><span>간식</span> : <span></span></li>
+				</ul>
+			</div>
+			<div>
+				이미지 들어갈 자리
+			</div>
+		</div>
+	</div>
+</div>
