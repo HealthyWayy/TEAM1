@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.team1.health.service.RecipeService;
 import com.team1.health.vo.IngredientVO;
 
 @Controller
@@ -33,8 +34,7 @@ public class RecipeController {
 	}
 	//재료 검색
 	@PostMapping("/recipe/searchIngred")
-	public List<IngredientVO> searchIngred(){
-		
-		retrun;
+	public List<IngredientVO> searchIngred(String searchKey, String searchValue){
+		return service.searchIngred(searchKey, searchValue);
 	}
 }
