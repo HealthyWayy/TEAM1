@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
+/*a태그 설정*/
+a:link { color: black; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: black; text-decoration: none;}
+
+/*메인 배너*/
 #recipe_banner{
 	position:relative;
 	width:100%;
@@ -8,21 +14,28 @@
 	margin-top:50px;
 	margin-bottom:50px;
 }
-#recipe_banner>img{
+#bannerImg{
 	position:absolute;
 	width:100%;
 	height:100%;
 }
-#recipe_banner>h1{
+#recipe_banner>a>h1{
 	position:absolute;
-	top:100px;
+	top:80px;
 	width:100%;
 	heihgt:50px;
 	text-align: center;
 	line-height:50px;
 	font-size:30pt;
-	background-color: white;
 }
+#recipe_banner>a>p{
+	position:absolute;
+	top:160px;
+	width:100%;
+	text-align: center;
+	font-size:11pt;
+}
+/*추천 레시피 리스트*/
 #recipe_list{
 	margin:0 auto;
 	padding-left:50px;
@@ -75,13 +88,16 @@ $(function(){
 <div>
 	<!-- 배너 이미지 -->
 	<div id="recipe_banner">
-		<img src="/img/recipe_banner.jpg"/>
-		<h1>More Recipes</h1>
+		<a href="/recipe/list">
+			<img src="/img/banner.jpg" id="bannerImg"/>
+			<h1>MORE RECIPES</h1>
+			<p>더 많은 레시피를 확인하세요</p>
+		</a>
 	</div>
 	<!-- 레시피 목록 -->
 	<div id="recipe_list">
 		<div class="recipe_img">
-			<img src="/img/recipe_banner.jpg" class="recipe_img"/>
+			<img src="/img/sample.jpg" class="recipe_img"/>
 			<a href="javascript:void(0);"><img src="/img/heart2.png" class="heart2"/></a>
 			<div class="recipe_info" onclick="javascript:void(0);">
 				<a href="javascript:void(0);"><img src="/img/heart2.png" class="heart2"/></a>
@@ -91,7 +107,7 @@ $(function(){
             </div>
 		</div>
 		<div class="recipe_img">
-			<img src="/img/recipe_banner.jpg" class="recipe_img"/>
+			<img src="/img/sample.jpg" class="recipe_img"/>
 			<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
 			<div class="recipe_info" onclick="javascript:void(0);">
 			<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
@@ -101,7 +117,7 @@ $(function(){
             </div>
 		</div>
 		<div class="recipe_img">
-			<img src="/img/recipe_banner.jpg" class="recipe_img"/>
+			<img src="/img/sample.jpg" class="recipe_img"/>
 			<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
 			<div class="recipe_info" onclick="javascript:void(0);">
 				<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
@@ -111,7 +127,7 @@ $(function(){
             </div>
 		</div>
 		<div class="recipe_img">
-			<img src="/img/recipe_banner.jpg" class="recipe_img"/>
+			<img src="/img/sample.jpg" class="recipe_img"/>
 			<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
 			<div class="recipe_info" onclick="javascript:void(0);">
 				<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
