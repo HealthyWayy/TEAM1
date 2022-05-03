@@ -1,0 +1,241 @@
+@charset "UTF-8";
+/*a태그 설정*/
+a:link { color: black; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: black; text-decoration: none;}
+
+ul,li{
+	margin:0;
+	padding:0;
+	list-style: none;
+}
+
+input:focus, select:focus{
+	outline:none;
+}
+
+/*폼*/
+#writeFrm{
+	margin:85px;
+	padding:50px;
+	overflow:auto;
+	border-radius:20px;
+	border:1px solid #ddd;
+}
+#imgDiv{
+	width:35%;
+	height:80%;
+	float: left;
+	margin-right:40px;
+}
+#imgDiv>label{
+	font-size:13pt;
+	font-weight: bold;
+	text-align: center;
+}
+#imgDiv>input[type=text]{
+	width:84%;
+	height:30px;
+	padding:10px;
+	border-radius:10px;
+	border:1px solid rgb(200,200,200);
+	font-size:12pt;
+}
+
+/*input file*/
+#file {
+	display: none
+}
+#imgfile{
+	width:30px;
+	float:right;
+	margin-right:5px;
+}
+#preview{
+	width:100%;
+	height:85%;
+	margin-top:8px;
+}
+
+/*recipeInfo div---------------------------------------------*/
+#recipeInfo{
+	padding-top:10px;
+	width:60%;
+	height:80%;
+	float:left;
+}
+#recipeInfo>p{
+	text-align:center;
+}
+#recipeInfo>hr{
+	width:160px;
+	border:1px solid #FF5454;
+}
+.subTitle{
+	font-weight: bold;
+}
+#content{
+	margin-left:5%;
+	margin-right:5%;
+	padding:15px;
+	width:90%;
+	height:40%;
+	border:1px solid rgb(200,200,200);
+	resize: none;
+	font-size:11pt;
+}
+/*재료 리스트*/
+#ingredList{
+	margin:0 auto;
+	max-width:65%;
+	text-align: center;
+	margin-bottom:30px;
+}
+#ingredList>li{
+	display:inline-block;
+	
+}
+/*소스 리스트*/
+#souceList{
+	margin:0 auto;
+	max-width:65%;
+	text-align: center;
+	margin-bottom:50px;
+}
+#souceList>li{
+	display:inline-block;
+}
+/* x */
+.times{
+	color:#FF5454;
+	cursor: pointer;
+}
+#recipeInfo>input[type=submit]{
+	width:70px;
+	height:27px;
+	border:none;
+	border-radius:30px;
+	background-color: #FF5454;
+	color:white;
+	cursor: pointer;
+	float:right;
+	margin-top:10px;
+	margin-right:40px;
+}
+#recipeInfo>input[type=reset]{
+	width:70px;
+	height:27px;
+	border:none;
+	border-radius:30px;
+	background-color: #FF5454;
+	color:white;
+	cursor: pointer;
+	float:right;
+	margin-top:10px;
+	margin-right:40px;
+}
+
+/*모달창------------------------------------------*/
+.modal-dialog{
+	max-width: 55%;
+    margin: 2rem auto;
+}
+.modal-body{
+	height:500px;
+}
+#closeBtn{
+	width:70px;
+	height:27px;
+	border:none;
+	border-radius:30px;
+	background-color: #FF5454;
+	color:white;
+	cursor: pointer;
+}
+
+/*재료 리스트 div*/
+#ingredView{
+	padding-top:10px;
+	width:50%;
+	height:100%;
+	float:left;
+}
+#ingredView>hr{
+	margin-bottom:10px;
+	border:1px solid #ffd0d0;
+	opacity: 0.5;
+}
+#ingredView p{
+	text-align: center;
+	margin-bottom:7px;
+}
+#ingredSearch>select{/*카테고리*/
+	width:18%;
+	height:30px;
+	border-radius:10px;
+	border-color:rgb(200,200,200);
+	font-size:11pt;
+	text-align: center;
+}
+#ingredSearch>select>option{
+	text-align: center;
+}
+#ingredSearch>input[type=text]{/*검색창*/
+	width:60%;
+	height:30px;
+	padding:10px;
+	border-radius:10px;
+	border:1px solid rgb(200,200,200);
+}
+#ingredSearch>input[type=submit]{/*검색*/
+	width:18%;
+	height:30px;
+	border:none;
+	border-radius:30px;
+	background-color: #FF5454;
+	color:white;
+	cursor : pointer;
+}
+
+/*재료 리스트*/
+.list-group-item{
+	height:40px;
+	line-height:40px;
+	font-size:11pt;
+	padding:0;
+	padding-left:10px;
+}
+
+/*페이징*/
+.paging{
+	text-align: center;
+	margin-left:4px;
+	margin-top:10px;
+}
+.paging>a>li{
+	display:inline-block;
+	width:25px;
+	height:25px;
+	line-height:24px;
+	text-align:center;
+	font-size:10pt;
+	margin-right:4px;
+	border-radius:10px;
+	background-color: rgb(235,235,235);
+}
+.active_list{
+	color:white;
+	background-color:#FF5454 !important;
+}
+
+/*재료 추가 폼-------------------------------------------*/
+#ingredFrm{
+	background-color:#ddd;
+	width:50%;
+	height:100%;
+	float:left;
+}
+#ingredFrm>p{
+	text-align: center;
+	margin-top:20px;
+}
