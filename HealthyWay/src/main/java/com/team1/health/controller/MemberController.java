@@ -1,23 +1,25 @@
 package com.team1.health.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.team1.health.service.MemberService;
+
+@Controller
+@RequestMapping("/member/")
+@Service
 public class MemberController {
-	//깃허브 커밋 테스트 _ 백동현
-  //김진우
-	// 유의선 ㄷㄷㄷㄷ
 
-  //김진우dd
-	//가나다라
+	@GetMapping("loginForm")
+	public String loginForm() {
+		return "member/loginForm";
+	}
 	
-	// 신수진 수정
+	@GetMapping("memberForm")
+    public String memberForm() {
+        return "member/memberForm";
+    }
 }
-
-
-
-
-
-//김동욱
-
-
-
-
-
