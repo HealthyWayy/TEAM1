@@ -29,5 +29,5 @@ public class IngredientVO {
 	}
 	public void setGred_num(String gred_num) {
 		this.gred_num = gred_num;
-	}
+	}	
 }

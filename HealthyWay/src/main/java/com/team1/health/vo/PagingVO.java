@@ -79,5 +79,5 @@ public class PagingVO {
 			totalPage = totalRecord/onePageRecord+1;
 		}
 	}
-	
+
 }
