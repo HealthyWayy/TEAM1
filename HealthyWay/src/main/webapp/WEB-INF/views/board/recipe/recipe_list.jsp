@@ -26,7 +26,6 @@ ul,li{
 #searchFrm>input[type=text]{
 	width:210px;
 	height:27px;
-	padding:10px;
 	border-radius:10px;
 	border:1px solid rgb(200,200,200);
 }
@@ -86,19 +85,16 @@ ul,li{
 }
 /*페이징*/
 .paging{
-	width:200px;
-	overflow:auto;
-	margin:0 auto;
-	padding-left:5px;
+	text-align: center;
 }
 .paging>a>li{
-	float:left;
+	display:inline-block;
 	width:25px;
 	height:25px;
 	line-height:24px;
 	text-align:center;
 	font-size:10pt;
-	margin-right:7px;
+	margin-right:5px;
 	border-radius:10px;
 	background-color: rgb(235,235,235);
 }
@@ -127,36 +123,36 @@ ul,li{
 	<!-- 글 목록 -->
 	<div id="recipe_list">
 		<div class="recipe_img">
-			<a href="javascript:void(0);"><img src="/img/sample.jpg" class="recipe_img"/></a>
-			<a href="javascript:void(0);"><img src="/img/heart2.png" class="heart2"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/sample.jpg" class="recipe_img"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/heart2.png" class="heart2"/></a>
 		</div>
 		<div class="recipe_img">
-			<a href="javascript:void(0);"><img src="/img/sample.jpg" class="recipe_img"/></a>
-			<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/sample.jpg" class="recipe_img"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
 		</div>
 		<div class="recipe_img">
-			<a href="javascript:void(0);"><img src="/img/sample.jpg" class="recipe_img"/></a>
-			<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/sample.jpg" class="recipe_img"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
 		</div>
 		<div class="recipe_img">
-			<a href="javascript:void(0);"><img src="/img/sample.jpg" class="recipe_img"/></a>
-			<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/sample.jpg" class="recipe_img"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
 		</div><hr/><br/>
 		<div class="recipe_img">
-			<a href="javascript:void(0);"><img src="/img/sample.jpg" class="recipe_img"/></a>
-			<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/sample.jpg" class="recipe_img"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
 		</div>
 		<div class="recipe_img">
-			<a href="javascript:void(0);"><img src="/img/sample.jpg" class="recipe_img"/></a>
-			<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/sample.jpg" class="recipe_img"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
 		</div>	
 		<div class="recipe_img">
-			<a href="javascript:void(0);"><img src="/img/sample.jpg" class="recipe_img"/></a>
-			<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/sample.jpg" class="recipe_img"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
 		</div>
 		<div class="recipe_img">
-			<a href="javascript:void(0);"><img src="/img/sample.jpg" class="recipe_img"/></a>
-			<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/sample.jpg" class="recipe_img"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
 		</div>
 		
 	</div>

@@ -4,6 +4,7 @@ public class Recipe_IngredVO {
 	private String gred_num;
 	private int board_num;
 	private double gred_gram;
+	private String gred_name;
 	
 	public String getGred_num() {
 		return gred_num;
@@ -22,5 +23,11 @@ public class Recipe_IngredVO {
 	}
 	public void setGred_gram(double gred_gram) {
 		this.gred_gram = gred_gram;
+	}
+	public String getGred_name() {
+		return gred_name;
+	}
+	public void setGred_name(String gred_name) {
+		this.gred_name = gred_name;
 	}
 }
