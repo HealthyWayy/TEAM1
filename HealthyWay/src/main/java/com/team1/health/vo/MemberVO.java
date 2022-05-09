@@ -11,34 +11,18 @@ public class MemberVO {
 	private String user_authority;
 	private String profie_img;
 	private int report_hit;
-  private double  height;
+	private double  height;
 	private String join_date;
 	private String gender;
 	private int age;
 	private String weight;
 	
-		public String getUser_id() {
+	public String getUser_id() {
 		return user_id;
 	}
-  
-  public void setUser_id(String user_id) {
+	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-  
-	public Double getHeight() {
-		return height;
-	}
-	public void setHeight(Double height) {
-		this.height = height;
-	
-	public String getWeight() {
-		return weight;
-	}
-	public void setWeight(String weight) {
-		this.weight = weight;
-	}
-
-	
 	public String getUser_pw() {
 		return user_pw;
 	}
@@ -81,19 +65,16 @@ public class MemberVO {
 	public void setProfie_img(String profie_img) {
 		this.profie_img = profie_img;
 	}
-
-
-
 	public int getReport_hit() {
 		return report_hit;
 	}
 	public void setReport_hit(int report_hit) {
 		this.report_hit = report_hit;
 	}
-	public int getHeight() {
+	public double getHeight() {
 		return height;
 	}
-	public void setHeight(int height) {
+	public void setHeight(double height) {
 		this.height = height;
 	}
 	public String getJoin_date() {
@@ -108,12 +89,18 @@ public class MemberVO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
 	public int getAge() {
 		return age;
 	}
 	public void setAge(int age) {
 		this.age = age;
 	}
+	public String getWeight() {
+		return weight;
+	}
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+	
 
 }
