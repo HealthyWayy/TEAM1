@@ -15,7 +15,16 @@ public class MemberVO {
 	private String join_date;
 	private String gender;
 	private int age;
+	private String weight;
 	
+	
+	
+	public String getWeight() {
+		return weight;
+	}
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
 	public String getUser_id() {
 		return user_id;
 	}

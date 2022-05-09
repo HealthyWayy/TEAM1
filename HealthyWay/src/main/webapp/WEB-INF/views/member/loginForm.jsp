@@ -48,26 +48,26 @@
 	<section class="loginForm">
 		<div id="log">
 			<h1>Login</h1>
-			<form method="post" action="/member/loginOk" id="logFrm">
+			<form method="post" action="/member/loginOk" id="logFrm" onsubmit="return logFormCheck()">
 				
 				<div class="input-id">
 					<div class="input-area1">
-						<label for="userId">ID</label> 
+						<label for="user_id">ID</label> 
 					</div>
 					<div class="input-area2">
-						<input type="text" name="userId" id="userId" required />
+						<input type="text" name="user_id" id="user_id" required />
 					</div>
 				</div>
 				<div class="input-id">
 					<div class="input-area1">
-						<label for="userPwd">Password</label>
+						<label for="user_pw">Password</label>
 					</div>
 					<div class="input-area2">
-						<input type="password" name="userPwd" id="userPwd" autocomplete="off" required>
+						<input type="password" name="user_pw" id="user_pw" autocomplete="off" required>
 					</div>
 				</div>
 				<div class="login-btn">
-					<button type="button" value="로그인" onclick="LogFormCheck()">Login</button>
+					<button type="submit" value="로그인" onclick="LogFormCheck()">Login</button>
 				</div>
 				<div class="bottom-menu">
 					<a href="${url}/member/memberFind">아이디/비밀번호 찾기</a>&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -78,4 +78,20 @@
 		</div>
 	</section>
 </div>
+<script>
+=
+	var id = document.getElementById("user_id");
+	if (id.value == "") {//아이디가 없을 때
+		alert("아이디를 입력하세요.");
+		id.focus();//focus : 커서를 해당 객체에 위치시킨다.
+		return false;
+	}
+	if (document.querySelector("#user_pw").value == "") {
+		alert("비밀번호를 입력하세요.");
+		document.querySelector("#user_pw").focus();
+		return false;
+	}
+	//아이디와 비밀번호가 모두 입력되었을 떄    
+	return true;
+</script>
 
