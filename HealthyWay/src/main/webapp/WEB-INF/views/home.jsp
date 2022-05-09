@@ -6,7 +6,7 @@
         <div class="box">
         	<div class="cover">
         		<div class="copywriteBox">
-        			<div class="copywriteContent-first">
+        			<div class="copywrite-first">
         				<span class="fade-in-box dFirst">color is beautiful</span><br/>
         				<span class="fade-in-box dSecond">color is beautiful</span><br/>
         				<span class="fade-in-box dThird">color is beautiful</span>
@@ -18,9 +18,9 @@
         <div class="box">
         	<div class="cover">
         		<ul class="copywrite-second">
-        			<li>Dream&nbsp;</li>
-        			<li>comes&nbsp;</li>
-        			<li>true</li>
+        			<li class="slideUp dFirst">Dream&nbsp;</li>
+        			<li class="slideUp dSecond">comes&nbsp;</li>
+        			<li class="slideUp dThird">true</li>
         		</ul>
         	</div>
         	<img  id="image-back" alt="" src="/img/exercise02.jpg">
