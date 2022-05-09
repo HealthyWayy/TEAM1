@@ -1,5 +1,6 @@
 package com.team1.health.vo;
 
+
 public class BoardVO {
 	//board 테이블
 	private int board_num;
@@ -30,6 +31,7 @@ public class BoardVO {
 	}
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+
 	}
 	public String getTitle() {
 		return title;
@@ -43,6 +45,7 @@ public class BoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
+
 	public int getHit() {
 		return hit;
 	}
@@ -55,12 +58,21 @@ public class BoardVO {
 	public void setWritedate(String writedate) {
 		this.writedate = writedate;
 	}
+
+	public String getWrite_date() {
+		return write_date;
+	}
+	public void setWrite_date(String write_date) {
+		this.write_date = write_date;
+	}	
+
 	public String getMod_date() {
 		return mod_date;
 	}
 	public void setMod_date(String mod_date) {
 		this.mod_date = mod_date;
 	}
+
 	public int getType_num() {
 		return type_num;
 	}
@@ -102,5 +114,13 @@ public class BoardVO {
 	}
 	public void setPt_img_file(String pt_img_file) {
 		this.pt_img_file = pt_img_file;
+
+	
+
+	public boolean is_notice() {
+		
+		return false;
+
 	}
 }
+

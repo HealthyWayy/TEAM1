@@ -1,6 +1,7 @@
 package com.team1.health.vo;
 
 public class MemberVO {
+
 	private String user_id;
 	private String user_pw;
 	private String user_email;
@@ -9,24 +10,35 @@ public class MemberVO {
 	private String tel;
 	private String user_authority;
 	private String profie_img;
-	private String report_hit;
-	private Double height;
+	private int report_hit;
+  private double  height;
 	private String join_date;
 	private String gender;
-	private String age;
+	private int age;
+	private String weight;
 	
-	public String getUser_id() {
+		public String getUser_id() {
 		return user_id;
 	}
+  
+  public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+  
 	public Double getHeight() {
 		return height;
 	}
 	public void setHeight(Double height) {
 		this.height = height;
+	
+	public String getWeight() {
+		return weight;
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setWeight(String weight) {
+		this.weight = weight;
 	}
+
+	
 	public String getUser_pw() {
 		return user_pw;
 	}
@@ -69,11 +81,20 @@ public class MemberVO {
 	public void setProfie_img(String profie_img) {
 		this.profie_img = profie_img;
 	}
-	public String getReport_hit() {
+
+
+
+	public int getReport_hit() {
 		return report_hit;
 	}
-	public void setReport_hit(String report_hit) {
+	public void setReport_hit(int report_hit) {
 		this.report_hit = report_hit;
+	}
+	public int getHeight() {
+		return height;
+	}
+	public void setHeight(int height) {
+		this.height = height;
 	}
 	public String getJoin_date() {
 		return join_date;
@@ -87,10 +108,12 @@ public class MemberVO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getAge() {
+
+	public int getAge() {
 		return age;
 	}
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
+
 }
