@@ -89,7 +89,7 @@ $(function(){
 	<!-- 배너 이미지 -->
 	<div id="recipe_banner">
 		<a href="/recipe/list">
-			<img src="/img/banner.jpg" id="bannerImg"/>
+			<img src="/recipeImg/banner.jpg" id="bannerImg"/>
 			<h1>MORE RECIPES</h1>
 			<p>더 많은 레시피를 확인하세요</p>
 		</a>
@@ -97,40 +97,40 @@ $(function(){
 	<!-- 레시피 목록 -->
 	<div id="recipe_list">
 		<div class="recipe_img">
-			<img src="/img/sample.jpg" class="recipe_img"/>
-			<a href="javascript:void(0);"><img src="/img/heart2.png" class="heart2"/></a>
+			<img src="/recipeImg/sample.jpg" class="recipe_img"/>
+			<a href="javascript:void(0);"><img src="/recipeImg/heart2.png" class="heart2"/></a>
 			<div class="recipe_info" onclick="javascript:void(0);">
-				<a href="javascript:void(0);"><img src="/img/heart2.png" class="heart2"/></a>
+				<a href="javascript:void(0);"><img src="/recipeImg/heart2.png" class="heart2"/></a>
 				<br/><br/><br/><br/>
 				<p>식단명</p>
 				<p>0kcal</p>
             </div>
 		</div>
 		<div class="recipe_img">
-			<img src="/img/sample.jpg" class="recipe_img"/>
-			<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
+			<img src="/recipeImg/sample.jpg" class="recipe_img"/>
+			<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
 			<div class="recipe_info" onclick="javascript:void(0);">
-			<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
+			<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
 				<br/><br/><br/><br/>
 				<p>식단명</p>
 				<p>kcal</p>
             </div>
 		</div>
 		<div class="recipe_img">
-			<img src="/img/sample.jpg" class="recipe_img"/>
-			<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
+			<img src="/recipeImg/sample.jpg" class="recipe_img"/>
+			<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
 			<div class="recipe_info" onclick="javascript:void(0);">
-				<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
+				<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
 				<br/><br/><br/><br/>
 				<p>식단명</p>
 				<p>kcal</p>
             </div>
 		</div>
 		<div class="recipe_img">
-			<img src="/img/sample.jpg" class="recipe_img"/>
-			<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
+			<img src="/recipeImg/sample.jpg" class="recipe_img"/>
+			<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
 			<div class="recipe_info" onclick="javascript:void(0);">
-				<a href="javascript:void(0);"><img src="/img/heart1.png" class="heart1"/></a>
+				<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
 				<br/><br/><br/><br/>
 				<p>식단명</p>
 				<p>kcal</p>
