@@ -1,54 +1,91 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <style>
 	#foodFavorDiv>div:nth-of-type(1){
-		height:530px;
+		height:445px;
 		overflow:auto;
 		border:1px solid #ddd;
 		border-radius:10px;
-		transition-duration:1s;
 	}
 	#foodFavorDiv>div::-webkit-scrollbar{
 		display:none;
 	}
-	#foodFavorDiv>div:nth-of-type(1):hover{
-		transform: translate(0,-10px);
-	}
 	.foodDiv{
-		background-color:#ddd;
-		padding:20px;
+		position:relative;
 		border-radius:10px;
-		margin:10px;
-		width:43%;
+		margin:20px;
+		width:45%;
+		height:200px;
 		box-shadow:1px 1px 5px 1px black;
+		background-size: 100%;
+		background-repeat:no-repeat;
+		background-position:center center;
+		transition-duration:0.5s;
+		overflow:hidden;
 	}
 	.foodDiv:hover{
 		box-shadow:1px 1px 10px 1px black;
+		background-size: 110%;
 	}
 	.foodDiv, .foodDiv>div{
 		float:left;
 	}
-	.foodDiv>div:nth-of-type(1){
-		width:200px;
-		height:200px;
-		overflow:hidden;
-		border-radius:10px;
-		margin-right:20px;
-	}
-	.foodDiv>div:nth-of-type(1)>img{
-		height:100%;
-	}
 	.foodDiv>div:nth-of-type(2){
-		padding-top:10px;
+		position:relative;
+		padding:20px;
+		width:100%;
+		height:100%;
+		box-sizing:border-box;
+		z-index:2;
 	}
-	.foodDiv>div:nth-of-type(2)>span:nth-of-type(1){
+	.foodDivBack{
+		position:absolute;
+		top:0px;
+		width:100%;
+		height:100%;
+		background:linear-gradient(
+    		to top,
+            rgba(145,141,199, 0.4) 10%,
+            rgba(145,141,199, 0.6) 25%,
+            rgba(145,141,199, 0.7) 50%,
+            rgba(145,141,199, 0.8) 75%,
+            rgba(145,141,199, 0.9) 100%
+            );
+		z-index:1;
+		opacity:0;
+		transition-duration:0.5s;
+	}
+	.hoverEventDiv{
+		position:absolute;
+		top:0px;
+		width:100%;
+		height:100%;
+		z-index:3;
+	}
+	.foodDiv>div>div{
+		position:relative;
+		height:30px;
+		overflow:hidden;
+	}
+	.foodDiv>div>div:nth-of-type(1)>span{
+		position:relative;
 		font-size:1.3em;
 		font-weight:bold;
+		transition-duration:0.5s;
+		top:30px;
+		color:white;
 	}
-	.foodDiv>div:nth-of-type(2)>span:nth-of-type(2){
+	.foodDiv>div>div:nth-of-type(2)>span{
+		position:relative;
+		top:-30px;
 		font-size:1.2em;
+		transition-duration:0.5s;
+		color:white;
 	}
 	.foodIconImg{
 		width:30px;
+		position:absolute;
+		top:20px;
+		left:340px;
 	}
 	#kcalDiv{
 		width:100%;
@@ -89,6 +126,7 @@
 		height:50px;
 		width:100%;
 		left:-90%;
+		background-color:red;
 	}
 	.calPersent2::after{
 		content:"";
@@ -96,7 +134,7 @@
 		height:50px;
 		width:100%;
 		left:10%;
-		background-color:green;
+		background-color:blue;
 	}
 	#kcalChk{
 		padding:30px;
@@ -135,96 +173,94 @@
 	}
 	$(()=>{
 		
+		calKcal();
+		
+		$(".hoverEventDiv").hover(function(){
+			console.log($(event.target).next().next().html())
+			$(event.target).next().children().eq(0).children().css('top','0px');
+			$(event.target).next().children().eq(1).children().css('top','0px');
+			$(event.target).next().next().css('opacity','1');
+		},function(){
+			$(event.target).next().children().eq(0).children().css('top','30px');
+			$(event.target).next().children().eq(1).children().css('top','-30px');
+			$(event.target).next().next().css('opacity','0');
+		});
 	});
 </script>
 <div id='foodFavorDiv'>
 	<span>I like this 식단</span><br/><br/>
 	<div>
 		<!-- 푸드 즐겨찾기 모듈 -->
-		<div class="foodDiv">
+		<div class="foodDiv" style='background-image:url(/myPageImg/foodtest.jpg) ;'>
+			<div class='hoverEventDiv'></div>
 			<div>
-				<img src='/myPageImg/foodtest.jpg'/>
-			</div>
-			<div>
-				<span>닭가슴살 샐러드</span><br/><br/>
-				<span>칼로리 : 100Kcal</span><br/><br/>
+				<div>
+					<span>닭가슴살 샐러드</span>
+				</div>
+				<div>
+					<span>칼로리 : 100Kcal</span>
+				</div>
 				<img src='/myPageImg/heart.png' class='foodIconImg'/>
-				<span>1</span><br/>
-				<img src='/myPageImg/review.png' class='foodIconImg'/>
-				<span>2</span><br/>
 			</div>
+			<div class='foodDivBack'></div>
+		</div>
+		<!-- 푸드 즐겨찾기 모듈 -->
+		<div class="foodDiv" style='background-image:url(/myPageImg/foodtest.jpg) ;'>
+			<div class='hoverEventDiv'></div>
+			<div>
+				<div>
+					<span>닭가슴살 샐러드</span>
+				</div>
+				<div>
+					<span>칼로리 : 100Kcal</span>
+				</div>
+				<img src='/myPageImg/heart.png' class='foodIconImg'/>
+			</div>
+			<div class='foodDivBack'></div>
+		</div>
+		<!-- 푸드 즐겨찾기 모듈 -->
+		<div class="foodDiv" style='background-image:url(/myPageImg/foodtest.jpg) ;'>
+			<div class='hoverEventDiv'></div>
+			<div>
+				<div>
+					<span>닭가슴살 샐러드</span>
+				</div>
+				<div>
+					<span>칼로리 : 100Kcal</span>
+				</div>
+				<img src='/myPageImg/heart.png' class='foodIconImg'/>
+			</div>
+			<div class='foodDivBack'></div>
+		</div>
+		<!-- 푸드 즐겨찾기 모듈 -->
+		<div class="foodDiv" style='background-image:url(/myPageImg/foodtest.jpg) ;'>
+			<div class='hoverEventDiv'></div>
+			<div>
+				<div>
+					<span>닭가슴살 샐러드</span>
+				</div>
+				<div>
+					<span>칼로리 : 100Kcal</span>
+				</div>
+				<img src='/myPageImg/heart.png' class='foodIconImg'/>
+			</div>
+			<div class='foodDivBack'></div>
+		</div>
+		<!-- 푸드 즐겨찾기 모듈 -->
+		<div class="foodDiv" style='background-image:url(/myPageImg/foodtest.jpg) ;'>
+			<div class='hoverEventDiv'></div>
+			<div>
+				<div>
+					<span>닭가슴살 샐러드</span>
+				</div>
+				<div>
+					<span>칼로리 : 100Kcal</span>
+				</div>
+				<img src='/myPageImg/heart.png' class='foodIconImg'/>
+			</div>
+			<div class='foodDivBack'></div>
 		</div>
 		
-		<!-- 푸드 즐겨찾기 모듈 -->
-		<div class="foodDiv">
-			<div>
-				<img src='/myPageImg/foodtest.jpg'/>
-			</div>
-			<div>
-				<span>닭가슴살 샐러드</span><br/><br/>
-				<span>칼로리 : 100Kcal</span><br/><br/>
-				<img src='/myPageImg/heart.png' class='foodIconImg'/>
-				<span>1</span><br/>
-				<img src='/myPageImg/review.png' class='foodIconImg'/>
-				<span>2</span><br/>
-			</div>
-		</div>
-		
-		<!-- 푸드 즐겨찾기 모듈 -->
-		<div class="foodDiv">
-			<div>
-				<img src='/myPageImg/foodtest.jpg'/>
-			</div>
-			<div>
-				<span>닭가슴살 샐러드</span><br/><br/>
-				<span>칼로리 : 100Kcal</span><br/><br/>
-				<img src='/myPageImg/heart.png' class='foodIconImg'/>
-				<span>1</span><br/>
-				<img src='/myPageImg/review.png' class='foodIconImg'/>
-				<span>2</span><br/>
-			</div>
-		</div>
-		
-		<!-- 푸드 즐겨찾기 모듈 -->
-		<div class="foodDiv">
-			<div>
-				<img src='/myPageImg/foodtest.jpg'/>
-			</div>
-			<div>
-				<span>닭가슴살 샐러드</span><br/><br/>
-				<span>칼로리 : 100Kcal</span><br/><br/>
-				<img src='/myPageImg/heart.png' class='foodIconImg'/>
-				<span>1</span><br/>
-				<img src='/myPageImg/review.png' class='foodIconImg'/>
-				<span>2</span><br/>
-			</div>
-		</div>
-		<div class="foodDiv">
-			<div>
-				<img src='/myPageImg/foodtest.jpg'/>
-			</div>
-			<div>
-				<span>닭가슴살 샐러드</span><br/><br/>
-				<span>칼로리 : 100Kcal</span><br/><br/>
-				<img src='/myPageImg/heart.png' class='foodIconImg'/>
-				<span>1</span><br/>
-				<img src='/myPageImg/review.png' class='foodIconImg'/>
-				<span>2</span><br/>
-			</div>
-		</div>
-		<div class="foodDiv">
-			<div>
-				<img src='/myPageImg/foodtest.jpg'/>
-			</div>
-			<div>
-				<span>닭가슴살 샐러드</span><br/><br/>
-				<span>칼로리 : 100Kcal</span><br/><br/>
-				<img src='/myPageImg/heart.png' class='foodIconImg'/>
-				<span>1</span><br/>
-				<img src='/myPageImg/review.png' class='foodIconImg'/>
-				<span>2</span><br/>
-			</div>
-		</div>
 	</div>
 	<div id='kcalDiv'>
 		<div>
