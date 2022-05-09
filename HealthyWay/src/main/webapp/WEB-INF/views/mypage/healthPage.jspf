@@ -1,39 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!-- chart.js 플러그인 -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- 도넛 그래프 -->
+<script>
+	$(()=>{	
+		const data = {
+				  datasets: [{
+				    label: '목표 달성량',
+				    data: [80,20],
+				    backgroundColor: [
+				      'rgb(255, 99, 132)',
+				      '#ddd'
+				    ],
+				    hoverOffset: 3
+				  }]
+				};
+		const config = {
+				  type: 'doughnut',
+				  data: data,
+				  options: {
+					  plugins: {
+		  	    	    legend: {
+			  	    	      display: false,
+			  	    	    }
+			  	    	  },
+			  			responsive: false
+			  			}
+				};
+		const myChart = new Chart(
+  			    document.getElementById('circleGraph'),
+  			    config
+  			  );
+	})
+</script>
 <!-- 막대 그래프 -->
 <script>
 $(()=>{	
 	const data = {
 	  labels: [
-		    '1',
-		    '2',
-		    '3',
-		    '4',
-		    '5',
-		    '6',
-		    '7'
+		    '나의 루틴1',
+		    '나의 루틴2',
+		    '나의 루틴3',
+		    '나의 루틴4'
 		  ],
 	  datasets: [{
-	    label: 'My First Dataset',
+	    label: '운동 횟수',
 	    data: [65, 59, 80, 81, 56, 55, 40],
 	    backgroundColor: [
-	      'rgba(255, 99, 132, 0.2)',
-	      'rgba(255, 159, 64, 0.2)',
-	      'rgba(255, 205, 86, 0.2)',
-	      'rgba(75, 192, 192, 0.2)',
-	      'rgba(54, 162, 235, 0.2)',
-	      'rgba(153, 102, 255, 0.2)',
-	      'rgba(201, 203, 207, 0.2)'
+	    	'rgba(172, 167, 241, 0.5)'
 	    ],
 	    borderColor: [
-	      'rgb(255, 99, 132)',
-	      'rgb(255, 159, 64)',
-	      'rgb(255, 205, 86)',
-	      'rgb(75, 192, 192)',
-	      'rgb(54, 162, 235)',
-	      'rgb(153, 102, 255)',
-	      'rgb(201, 203, 207)'
+	    	'rgba(226, 224, 250, 1)'
 	    ],
 	    borderWidth: 1
 	  }]
@@ -64,34 +81,6 @@ $(()=>{
 			  );
 })
 </script>
-<!-- 도넛 그래프 -->
-<script>
-	$(()=>{	
-		const data = {
-				  datasets: [{
-				    label: 'My First Dataset',
-				    data: [300, 50, 100],
-				    backgroundColor: [
-				      'rgb(255, 99, 132)',
-				      'rgb(54, 162, 235)',
-				      'rgb(255, 205, 86)'
-				    ],
-				    hoverOffset: 4
-				  }]
-				};
-		const config = {
-				  type: 'doughnut',
-				  data: data,
-				  options: {
-			  			responsive: false
-			  			}
-				};
-		const myChart = new Chart(
-  			    document.getElementById('circleGraph'),
-  			    config
-  			  );
-	})
-</script>
 <!-- 선 그래프 -->
 <script>
 	$(()=>{
@@ -106,9 +95,9 @@ $(()=>{
 	  	  const data = {
 	  	    labels: labels,
 	  	    datasets: [{
-	  	      label: 'My First dataset',
-	  	      backgroundColor: 'rgb(255, 99, 132)',
-	  	      borderColor: 'rgb(255, 99, 132)',
+	  	      label: '몸무게',
+	  	      backgroundColor: 'white',
+	  	      borderColor: 'rgb(81,81,81)',
 	  	      data: [0, 10, 11, 12, 13, 14, 15],
 	  	    }]
 	  	  };
@@ -155,11 +144,14 @@ $(()=>{
 		margin-top:20px;
 		width:100%;
 		box-sizing:border-box;
-		padding-top:20px;
-		padding-bottom:20px;
+		/*탑 오른쪽 아래 왼쪽*/
+		padding:10px 20px 10px 20px;
+	}
+	.healthDiv>span:nth-of-type(1){
+		font-weight:bold;
 	}
 	#healthPlanDiv{
-		width:63%;
+		width:73%;
 		margin-right:2%;
 	}
 	#healthPlanDiv>div{
@@ -174,7 +166,12 @@ $(()=>{
 		position:relative;
 	}
 	#toDayHealth{
-		width:35%;
+		width:25%;
+		text-align:center;
+	}
+	#circleGraph{
+		margin:0 auto;
+		margin-top:20px;
 	}
 	.routinList{
 		margin:0 auto;
@@ -229,26 +226,31 @@ $(()=>{
 	.routinModule>img{
 		height:100%;
 	}
+	.graphSize{
+		margin:0 auto;
+		margin-top:20px;
+	}
 </style>
+
 <div id='healthPlanDiv' class='healthDiv'>
 	<span>DailyPlan</span><br/>
 	<div>
 		<div>박스 내용</div>
 		<button>목표 설정</button>
 	</div>
-	<canvas id="circleGraph" width="150" height="150"></canvas>
 </div>
 <div id='toDayHealth' class='healthDiv'>
 	<span>todayHealth</span>
+	<canvas id="circleGraph" width="150" height="150"></canvas>
 </div>
 <div id='heathHistory' class='healthDiv'>
 	<span>health history</span><br/>
-	<canvas id="barGraph" width="850px" height="200"></canvas>
+	<canvas id="barGraph" class='graphSize' width="800px" height="200"></canvas>
 </div>
 <div id='changeWeight' class='healthDiv'>
 	<span>change weight</span><br/>
 	<div>
-  		<canvas id="weightGraph" width="850px" height="200"></canvas>
+  		<canvas id="weightGraph" class='graphSize' width="800px" height="200"></canvas>
 	</div>
 </div>
 <div id='myRoutin' class='healthDiv'>

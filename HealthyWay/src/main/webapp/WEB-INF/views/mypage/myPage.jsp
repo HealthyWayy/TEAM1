@@ -35,15 +35,12 @@ body,ul,li{
 	height:340px;
 }
 #groupPageDiv{
-	height:540px;
+	height:0px;
 	overflow:auto;
-	padding-bottom:20px;
+	padding-bottom:15px;
 	border:1px solid #ddd;
 	border-radius:10px;
 	transition-duration:1s;
-}
-#groupPageDiv:hover{
-	transform: translate(0,-10px);
 }
 #groupPageDiv::-webkit-scrollbar{
 	display:none;
@@ -64,13 +61,15 @@ body,ul,li{
 }
 .groupPage>div:nth-of-type(1){
 	margin:0 auto;
-	width:90%;
+	width:170px;
 	height:100px;
 	overflow:hidden;
+	background-color:green;
+	text-align:center;
+	border-radius:10px;
 }
 .groupPage>div>img{
-	widhth:100%;
-	height:100%;
+	width:100%;
 }
 #imgDiv{
 	width:200px;
@@ -81,6 +80,11 @@ body,ul,li{
 	border: 1px solid #ddd;
 }
 #imgDiv img{
+	text-align:left;
+	position:relative;
+	left:50%;
+	top:50%;
+	transform:translate(-50%,-50%);
 	height:100%;
 }
 #sidePage>div>span{
@@ -88,32 +92,44 @@ body,ul,li{
 	font-weight:bold;
 }
 #logout{
+	position:relative;
 	margin-top:20px;
 	width:200px;
-	height:30px;
-	background-color:rgb(254,76,84);
+	height:40px;
+}
+.btnClass{
+	line-height:0px;
 	border-radius:15px;
 	border:none;
-	transition-duration:0.5s;
-	border:1px solid #ddd;
+	color:white;
+	overflow:hidden;
+	cursor:pointer;
+    background:linear-gradient(
+    		to right,
+            rgba(181, 179, 217, 1) 0%,
+            rgb(164,162,208) 20%,
+            rgba(117, 114, 184, 1) 100%
+            );
 }
-#logout:hover{
-	animation-duration: 0.5s;
-	animation-name: slidein;
-	animation-iteration-count: infinite;
-	background-color:blue;
-	transform: scale(1.1,1.1);
+.btnClass::before{
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%, -50%);
+	content:'로그아웃';
+	width:100%;
+	height:100%;
+	line-height:40px;
+	background:linear-gradient(
+    		to right,
+            rgba(181, 179, 217, 1) 0%,
+            rgb(164,162,208) 20%,
+            rgb(145,141,199) 100%
+            );
+    transition-duration:0.5s;
 }
-@keyframes slidein {
-	0%{
-		transform: scale(1.1,1.1);
-	}
-	50%{
-		transform: scale(1.2,1.2);
-	}
-	100%{
-		transform: scale(1.1,1.1);
-	}
+.btnClassHover::before{
+	opacity:0;
 }
 #mainPage{
 	width:80%;
@@ -126,73 +142,40 @@ body,ul,li{
 #mainPage>div:nth-of-type(1){
 	width:100%;
 	/*탑 오른쪽 아래 왼쪽*/
-	padding:0px 30px 40px 20px;
+	padding:0px 30px 40px 0px;
 	box-sizing:border-box;
-}
-#myDataPart{
-	width:100%;
-	border:1px solid #ddd;
-	border-radius:10px;
-	height:250px;
-	overflow:hidden;
-}
-#myDataPart>div{
-	float:left;
-	font-size:1.5em;
-	box-sizing:border-box;
-}
-#myDataPart>div:nth-of-type(1){
-	width:100%;
-	/*탑 오른쪽 아래 왼쪽*/
-	padding:15px 10px 0px 80px;
-	box-sizing:border-box;
-	height:25%;
-}
-#myDataPart>div:nth-of-type(n+2){
-	/*탑 오른쪽 아래 왼쪽*/
-	padding:25px 0px 0px 0px;
-	width:25%;
-	text-align:center;
-	height:50%;
-}
-#myDataPart>div:nth-of-type(6){
-	width:100%;
-	padding:0px;
-	height:25%;
-	background-color:#ddd;
-}
-#myDataPart>div:nth-of-type(6) label{
-	/*탑 오른쪽 아래 왼쪽*/
-	padding:15px 0px 0px 0px;
-	display:inline-block;
-	width:32%;
-	height:100%;
-	cursor:pointer;
 }
 .pageBtn{
 	background-color:#ddd;
 	border-top-left-radius:10px;
 	border-top-right-radius:10px;
 	height:40px;
-	position:relative;
-	border:1px solid black;
+	position:absolute;
+	border:none;
 	border-bottom:none;
+	top:-70px;
+	border:1px solid black;
+}
+.inforBtn{
+	left:660px;
+	z-index:4;	
 }
 .healthBtn{
-	left:750px;
-	z-index:1;
-}
-.foodBtn{
 	left:720px;
 	z-index:3;
 }
-.writeBtn{
-	left:700px;
+.foodBtn{
+	left:780px;
 	z-index:2;
+}
+.writeBtn{
+	left:840px;
+	z-index:1;
 }
 .clickUpClass{
 	background-color:white;
-	z-index:4;
+	z-index:5;
+	border:none;
 }
 .pageUpClass{
 	display:block !important;
@@ -200,7 +183,7 @@ body,ul,li{
 .pageView{
 	position:absolute;
 	/*탑 오른쪽 아래 왼쪽*/
-	padding:30px 40px 0px 40px;
+	padding:20px 40px 0px 40px;
 	box-sizing:border-box;
 	width:100%;
 	display:none;
@@ -225,18 +208,48 @@ body,ul,li{
 	width   : 90%;  /* or 100px */
 	border-bottom:1px solid #ddd;
 }
-
+#groupShow{
+	margin:10px 0 10px 0;
+	width:10%;
+	cursor:pointer;
+}
+#groupShow {
+	animation-duration: 0.5s;
+	animation-name: imgUpDown;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-timing-function:linear;
+}
+@keyframes imgUpDown{
+	0% {
+		transform: translate(0, -3px);
+	}
+	100% {
+		transform: translate(0, 3px);
+	}
+}
 </style>
 <script>
-
 $(()=> {
-	//미리보기 이벤트
-	$("#profileImg").on('change', function(){
-    readURL();
-    });
-	
+	let groupShow=false;
+	$("#groupShow").click(function(){
+		console.log("실행");
+		if(groupShow==false){
+			$("#groupPageDiv").css("height","540px");
+			groupShow=true;
+		}else{
+			$("#groupPageDiv").css("height","0px");
+			groupShow=false;
+		}
+	});
+	//로그아웃 버튼 색변화 이벤트
+	$('.btnClass').hover(function(){
+		$(event.target).addClass('btnClassHover')
+	},function(){
+		$(event.target).removeClass('btnClassHover')
+	})
 	//페이지 네이션 처리 이벤트
-	var indexPrev = 1;
+	var indexPrev = 0;
 	$('.pageBtn').eq(indexPrev).addClass('clickUpClass');
 	$('.pageView').eq(indexPrev).addClass('clickUpClass pageUpClass');
 	//console.log($('.pageView').eq(0).html())
@@ -253,19 +266,7 @@ $(()=> {
 		}
 	});
 });
-//미리보기 함수
-function readURL() {
-	//console.log(input)
-	//console.log(event.target)
-    if (event.target.files && event.target.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-        	//console.log(e)
-        	$('#View').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(event.target.files[0]);
-    }
-}
+
 </script>	
 <!-- 뒷 배경 -->
 <div id='myPageBackground'></div>
@@ -275,81 +276,42 @@ function readURL() {
 	<nav id='sidePage'>
 		<div>
 			<div id="imgDiv">
-				<img src='/myPageImg/test.jpg' id='View'/>
+				<img src='/myPageImg/${userData.profie_img }' id='View'/>
 			</div>
 			<br/>
-			<span>id</span><br/>
-			<button id='logout'>로그아웃</button>
+			<span>${userData.user_id }</span><br/>
+			<button id='logout' class='btnClass'>로그아웃</button>
 		</div>
 		<div>
-			<span>Group Page</span><br/><br/>
+			<span>Group Page</span>
+			<br/>
+			<img src='/myPageImg/groupShow.png' id="groupShow"/>
+			<br/>
 			<div id="groupPageDiv">
-				
-				<!-- 내가 가입한 그룹 -->
-				<div class="groupPage">
-					<div>
-						<img src='/myPageImg/groupTest.jpg'/>
+				<c:forEach items="${PTboardData}" var="item">
+					<div class="groupPage">
+						<div>
+							<img src='/myPageImg/${item.pt_img_file }'/>
+						</div>
+						<span>${item.title }</span>
+						<span>${item.content }</span>
 					</div>
-					<span>그룹 내용</span>
-				</div>
-				<!-- 내가 가입한 그룹 -->
-				<div class="groupPage">
-					<div>
-						<img src='/myPageImg/groupTest.jpg'/>
-					</div>
-					<span>그룹 내용</span>
-				</div>
-				<!-- 내가 가입한 그룹 -->
-				<div class="groupPage">
-					<div>
-						<img src='/myPageImg/groupTest.jpg'/>
-					</div>
-					<span>그룹 내용</span>
-				</div>
-				
+				</c:forEach>
 			</div>
 		</div>
 	</nav>
 	<!-- 메인메뉴 : 80% -->
 	<!-- 메인메뉴 : 전체 데이터는 다 이 페이지로 가져오고, 페이지 네이션은 include방식으로 -->
 	<section id='mainPage'>
-		<div>
-			<!-- 간단한 개인 정보 출력 -->
-			<div id='myDataPart'>
-				<div>
-					<span>체지방 3% 달성! 할 수 있다! 아자아자!</span>
-				</div>
-				<div>
-					<span>185cm</span><br/>
-					<span>height</span>
-				</div>
-				<div>
-					<span>185cm</span><br/>
-					<span>height</span>
-				</div>
-				<div>
-					<span>185cm</span><br/>
-					<span>height</span>
-				</div>
-				<div>
-					<span>185cm</span><br/>
-					<span>height</span>
-				</div>
-				<div>
-					<input type='file' accept='image/*' id='profileImg' style='display:none;'/>
-					<label for='profileImg'>프로필 변경</label>
-					<input type='button' id='updateInfo' style='display:none;'/>
-					<label for='updateInfo'>개인 정보 수정</label>
-					<input type='button' id='deleteInfo' style='display:none;'/>
-					<label for='deleteInfo'>회원 탈퇴</label>
-				</div>
-			</div>
-		</div>
 		<!-- 페이지 출력 -->
 		<div style="position:relative;">
+			<button class='pageBtn inforBtn'>개인 정보</button>
 			<button class='pageBtn healthBtn'>운동 관리</button>
 			<button class='pageBtn foodBtn'>식단 관리</button>
 			<button class='pageBtn writeBtn'>내글 관리</button>
+			<div class='pageView'>
+				<%@ include file="/WEB-INF/views/mypage/inforPage.jspf" %>
+			</div>
 			<div class='pageView'>
 				<%@ include file="/WEB-INF/views/mypage/healthPage.jspf" %>
 			</div>
