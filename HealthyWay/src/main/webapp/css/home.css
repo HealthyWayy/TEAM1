@@ -1,3 +1,9 @@
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 body {
 	margin: 0;
 }
@@ -54,12 +60,23 @@ ul, li {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+	position:relative;
+	top: -10px;
 }
 .copywrite-first span  {
 	opacity: 0;
 	padding-left: 30px;
 }
-
+/*======================첫번째 페이지================================*/
+.inner1 {
+	/*이동하기*/
+	position:relative;
+	left: 240px;
+	top: 19px;
+	width: 600px;
+	margin: 0 auto;
+	
+}
 
 /*==========================애니메이션===============================*/
 
@@ -140,6 +157,17 @@ iteration-count | direction | fill-mode | play-state | name */
 	line-height: 300px;
 	font-size: 80px;
 }
+
+.inner2 {
+	/*이동하기*/
+	position:relative;
+	left: 490px;
+	top: 0px;
+	width: 600px;
+	margin: 0 auto;
+	
+}
+
 .slideUp {
 	animation:slideup 1s ease-in-out forwards;
 	-moz-animation: slideup 1s ease-in-out forwards;/* Firefox */
@@ -202,6 +230,132 @@ iteration-count | direction | fill-mode | play-state | name */
         top: 113px;
     }
 }
+
+/*=================세번째 페이지=====================*/
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap");
+.copywrite-third {
+	font-family: 'Spartan', sans-serif;
+	color: white;
+	margin: 80px 0 0 80px;
+	font-size: 64px;
+	width: max-content;
+	display: flex;
+	flex-direction: row;
+	position: absolute;
+	left: 20vw;
+	top:  -5vh;
+}
+
+.copywrite-third>div {
+	overflow: hidden;
+}
+
+.copywrite-third>div>p {
+	width: max-content;
+	white-space: nowrap;
+	margin: 0;
+	line-height: 117%;
+}
+
+.slide-up {
+	animation: slide-up 0.9s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+@keyframes slide-up {
+	0% {
+         transform: translateY(100px);
+    }
+
+    100% {
+          transform: translateY(0);
+    }
+}
+
+
+/*============================서클형 버튼======================================*/
+
+
+
+.activity {
+	padding: 0;
+	margin: 2em 0;
+	list-style: none;
+}
+
+/*안쪽 원*/
+.activity li:before {
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	transition: all 0.2s ease;
+	border-radius: 50%;
+	border-style: solid;
+	border-width: 4px;
+	bottom: 0;
+	box-shadow: 0 0 0 1px #fff;
+	content: "";
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+
+.activity li {
+	-webkit-transition: box-shadow 0.2s ease;
+	-moz-transition: box-shadow 0.2s ease;
+	transition: box-shadow 0.2s ease;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	border-radius: 50%;
+	border-style:solid;
+	border-width:3px;
+	display: inline-block;
+	font-size: 0.889em;
+	margin: 0 1em 1em;
+	position: relative;
+	text-align: center;
+	text-transform: lowercase;
+	/*크기*/
+	width: 4em;
+	height: 4em;
+	line-height: 4em;
+	display:flex;
+	justify-content: center;
+}
+
+.activity li a {
+	position:relative;
+	left: 0px;
+	top: -5px;
+	align-self: center;
+}
+
+.activity li:hover {
+	box-shadow: 0 0 0 7px #fff;
+}
+
+.activity li:hover:before {
+	-webkit-transform: scale(0.925);
+	-moz-transform: scale(0.925);
+	-ms-transform: scale(0.925);
+	-o-transform: scale(0.925);
+	transform: scale(0.925);
+	box-shadow: 0 0 0 1px #fff;
+	opacity: 0.5;
+}
+
+
+
+.activity li:active {
+	-webkit-transform: scale(0.925);
+	-moz-transform: scale(0.925);
+	-ms-transform: scale(0.925);
+	-o-transform: scale(0.925);
+	transform: scale(0.925);
+	box-shadow: 0 0 0 1px #fff;
+	opacity: 0.5;
+}
+
 
 /*================================ 애니메이션 딜레이 ===============================*/
 .dFirst {
