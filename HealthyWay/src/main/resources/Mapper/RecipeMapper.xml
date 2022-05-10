@@ -4,6 +4,32 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.team1.health.dao.RecipeDAO">
+	
+	<select id="mainList" resultType="com.team1.health.vo.BoardVO">
+		select b.board_num, b.user_id, b.title, r.recipe_img_file, r.total_kcal
+		from board b join recipe_board r
+		on b.board_num = r.board_num
+		where b.type_num=1 and b.board_num!=0
+	</select>
+	
+	<select id="boardList" resultType="com.team1.health.vo.BoardVO">
+		select b.board_num, b.user_id, b.title, b.type_num, r.recipe_img_file, r.total_kcal
+		from board b join recipe_board r
+		on b.board_num = r.board_num
+		where b.type_num=1 and b.board_num!=0
+		<if test='searchValue!=null'>
+			and ${searchKey} like '%${searchValue}%'
+		</if>
+		order by b.board_num desc limit ${onePageRecord} offset ${offsetIndex}
+	</select>
+	
+	<select id="totalRecord" resultType="int">
+		select count(board_num) from board where type_num=1
+		<if test='searchValue != null'>
+			and ${searchKey} like "%${searchValue}%"
+		</if>
+	</select>
+	
 	<select id="searchIngred" resultType="com.team1.health.vo.IngredientVO">
 		select gred_num, gred_kcal, gred_name, gred_type from ingredient where
 		<if test="searchKey=='음식명'">
@@ -19,18 +45,64 @@
 	</select>
 	
 	<insert id="insertIngred">
-		insert into recipe_ingredient(gred_num, board_num, gred_gram)
-		values(#{param1}, ${param2}, ${param3})
+		insert into recipe_ingredient(gred_num, board_num, gred_gram, gred_kcal)
+		values(#{gred_num}, 0, ${gred_gram}, ${gred_kcal})
 	</insert>
 	
 	<select id="ingredList" resultType="com.team1.health.vo.Recipe_IngredVO">
-		select i.gred_name, r.gred_gram, r.gred_num
+		select i.gred_name, r.gred_gram, r.gred_num, r.gred_kcal, r.board_num
 		from ingredient i join recipe_ingredient r
 		on i.gred_num = r.gred_num
-		where r.board_num=0
+		where r.board_num=${param1} or r.board_num=0
 	</select>
 	
 	<delete id="deleteIngred">
-		delete from recipe_ingredient where gred_num=#{param1} and board_num=0
+		delete from recipe_ingredient where gred_num=#{param1} and board_num=${param2}
+	</delete>
+	
+	<delete id="deleteAllIngred">
+		delete from recipe_ingredient where board_num=${board_num}
+	</delete>
+	
+	<insert id="recipeInsert">
+		insert into board(user_id, title, content, type_num)
+		values(#{user_id}, #{title}, #{content}, ${type_num})
+	</insert>
+	
+	<insert id="recipeInsert2">
+		insert into recipe_board(user_id, board_num, recipe_img_file, total_kcal)
+		values(#{user_id},(select board_num from board where user_id=#{user_id} and title=#{title} and content=#{content})
+				, #{recipe_img_file}, ${total_kcal})
+	</insert>
+	
+	<update id="setBoardNum">
+		update recipe_ingredient set board_num=(select board_num from board where user_id=#{user_id} and title=#{title} and content=#{content})
+		where board_num=0
+	</update>
+	
+	<select id="recipeView" resultType="com.team1.health.vo.BoardVO">
+		select b.board_num, b.user_id, b.title, b.content, b.hit, b.write_date, b.mod_date, b.type_num
+				, r.recipe_img_file, r.total_kcal
+		from board b join recipe_board r
+		on b.board_num = r.board_num
+		where b.board_num=${param1}
+	</select>
+	
+	<update id="hitCount">
+		update board set hit = hit+1 where board_num=${param1}
+	</update>
+	
+	<update id="recipeUpdate">
+		update board set title=#{title}, content=#{content}, mod_date=now()
+		where board_num=${board_num}
+	</update>
+	
+	<update id="recipeUpdate2">
+		update recipe_board set recipe_img_file=#{param1}, total_kcal=${param2}
+		where board_num=${param3}
+	</update>
+	
+	<delete id="recipeDelete">
+		delete from board where board_num=#{param1}
 	</delete>
 </mapper>
