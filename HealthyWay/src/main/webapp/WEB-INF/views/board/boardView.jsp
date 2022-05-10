@@ -6,15 +6,15 @@
 		//confirm()은 사용자가 y, n을 선택 가능한 대화 상자
 		if(confirm("글을 삭제하시겠습니까?")){
 			//확인버튼 선택시
-			location.href = "/myapp/board/boardDel?no="+${vo.no};
+			location.href = "/board/boardDel?no="+${vo.no};
 		}
 	}
 	//댓글-----------------------------------------
 	$(function(){
 		//댓글목록
 		function replyListAll(){//현재 글의 댓글을 모두 가져온다
-			var url = "/myapp/reply/list";
-			var params = "no=${vo.no}";
+			var url = "/reply/list";
+			var params = "board_num=${vo.board_num}";
 			$.ajax({
 				url : url,
 				data : params,
@@ -129,7 +129,7 @@
 <div class="container">
 	<h1>글 내용 보기</h1>
 	<ul>
-		<li>번호 : ${vo.no}</li>
+		<li>번호 : ${vo.board_num}</li>
 		<li>작성자 : ${vo.userid}</li>
 		<li>작성일 : ${vo.writedate}, 조회수 : ${vo.hit}</li>
 		<li>제목 : ${vo.subject}</li>

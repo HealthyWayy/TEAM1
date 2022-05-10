@@ -5,6 +5,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.team1.health.dao.BoardDAO">
+	<!-- PT페이지 -->
 	<insert id="ptBoardInsert">
 		insert into board(user_id, title, content, type_num) 
 		values(#{user_id}, #{title}, #{content}, 2)
@@ -34,7 +35,7 @@
 		update board set hit = hit+1
 		where board_num=${param1}
 	</update>
-	
+	<!--  게시판  -->
 	<insert id = "boardInsert">
 		insert into board(title, content, user_id)
 		value(#{title},#{content},#{user_id})
@@ -48,6 +49,11 @@
 		order by board_num desc
 		limit ${onePageRecord} offset ${offsetIndex}
 	</select>
+	<select id="boardSelect" resultType="com.team1.health.vo.BoardVO">
+		select board_num, title, content, user_id, hit, write_date
+		from board where board_num=#{param1}
+	</select>
+	
 	<select id = "totalRecord" resultType="int">
 		select count(board_num) cnt from board
 		<if test='searchWord!=null'>
