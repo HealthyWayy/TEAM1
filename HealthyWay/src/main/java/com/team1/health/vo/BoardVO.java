@@ -25,22 +25,8 @@ public class BoardVO {
 	private String recipe_img_file;
 	private double total_kcal;
 	
-	public double getTotal_kcal() {
-		return total_kcal;
-	}
-	public void setTotal_kcal(double total_kcal) {
-		this.total_kcal = total_kcal;
-	}
-	public String getRecipe_img_file() {
-		return recipe_img_file;
-	}
-	public void setRecipe_img_file(String recipe_img_file) {
-		this.recipe_img_file = recipe_img_file;
-	}
 
-	//recipe_board
-	private String recipe_img_file;
-	private double total_kcal;
+
 	
 
 	public int getBoard_num() {
