@@ -58,7 +58,7 @@
 		<li>등록일</li>
 		<c:forEach var="vo" items="${list}">
 			<li>${vo.board_num}</li>
-			<li><a href="/myapp/board/boardView?no=${vo.board_num}">${vo.title}</a></li>
+			<li><a href="/board/boardView?board_num=${vo.board_num}" style="color : black;">${vo.title}</a></li>
 			<li>${vo.user_id}</li>
 			<li>${vo.hit}</li>
 			<li>${vo.writedate}</li>
