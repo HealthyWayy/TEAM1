@@ -4,8 +4,6 @@
 <link rel="stylesheet" href="${url}/css/board/pt/ptWrite.css" type="text/css" />
 <link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
 <script src="//cdn.ckeditor.com/4.18.0/basic/ckeditor.js"></script>
 <script src="${url}/js/board/pt/ptWrite.js"></script>
 
@@ -28,7 +26,7 @@
 			</li>
 			<li id="keyword_li">
 				<h3>키워드</h3>
-				<input type="text" name="">
+				<input type="text" name="keyword" placeholder="예시) #스쿼트 #2주챌린지">
 			</li>
 			<li id="img_file_li">
 				<h3>대표 사진</h3>
