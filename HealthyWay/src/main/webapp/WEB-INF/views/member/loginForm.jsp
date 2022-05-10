@@ -31,7 +31,6 @@
 					</div>
 				</div>
 				<div class="bottom-menu">
-
 					<div class="bottom-menu-left">Forgot?&nbsp;<a href="${url}/member/idSearch">ID or Password</a></div>
 					<div>Not a member?&nbsp;<a href="${url}/member/memberForm">Join Us</a></div>
 				</div>

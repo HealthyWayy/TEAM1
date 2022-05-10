@@ -1,6 +1,5 @@
 package com.team1.health.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -52,27 +51,4 @@ public class BoardServiceImpl implements BoardService {
 	public int boardDelete(int no, String userid) {
 		return dao.boardDelete(no, userid);
 	}
-
-	@Override
-	public int ptBoardInsert(BoardVO vo) {
-		return dao.ptBoardInsert(vo);
-	}
-	@Override
-	public int ptGroupInsert(BoardVO vo) {
-		return dao.ptGroupInsert(vo);
-	}
-	@Override
-	public ArrayList<BoardVO> ptList() {
-		return dao.ptList();
-	}
-	@Override
-	public BoardVO ptBoardSelect(int no) {
-		return dao.ptBoardSelect(no);
-	}
-	@Override
-	public int boardDelete(String userid, int no) {
-		return dao.boardDelete(no, userid);
-	}
-
-
 }
