@@ -9,13 +9,9 @@ public class PagingVO {
 	private int offsetIndex = 0;
 	private int onePageCount = 5;
 	private int startPage = 1;
-
-	// ptList paging
-	private int onePageRecord_PT = 16;
-
+	
 	private String searchKey;
 	private String searchWord;
-	
 	
 	
 	public int getOnePageRecord() {
@@ -82,18 +78,5 @@ public class PagingVO {
 	}
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
-
-	}
-
-	public int getOnePageRecord_PT() {
-		return onePageRecord_PT;
-	}
-	public void setOnePageRecord_PT(int onePageRecord_PT) {
-		this.onePageRecord_PT = onePageRecord_PT;
-	}
-	
-	
-
+	}	
 }
-
-
