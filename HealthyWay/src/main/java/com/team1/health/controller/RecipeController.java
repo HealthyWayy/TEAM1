@@ -1,16 +1,25 @@
 package com.team1.health.controller;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team1.health.service.RecipeService;
+import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.IngredientVO;
 import com.team1.health.vo.RecipePagingVO;
 import com.team1.health.vo.Recipe_IngredVO;
@@ -21,66 +30,192 @@ public class RecipeController {
 	@Inject
 	RecipeService service;
 
-	// 메인 페이지
+	//레시피 메인 페이지
 	@GetMapping("/recipe/main")
-	public String main() {
-		return "/recipe/recipe_main";
+	public ModelAndView main() {
+		ModelAndView mav = new ModelAndView();
+		List<BoardVO> vo = service.mainList();
+		Collections.shuffle(vo);// 리스트 랜덤 정렬
+		
+		//랜덤으로 정렬 후 새로운 newVO에 4개 집어넣기
+		List<BoardVO> newVO = new ArrayList<BoardVO>();
+		for (int i = 0; i < 4; i++) {
+			newVO.add(vo.get(i));
+		}
+
+		mav.addObject("vo", newVO);
+		mav.setViewName("/recipe/recipe_main");
+		return mav;
 	}
 
-	// 레시피 목록 페이지(게시판)
+	//레시피 게시판 페이지
 	@GetMapping("/recipe/list")
-	public String list() {
-		return "/board/recipe/recipe_list";
+	public ModelAndView list(RecipePagingVO pVO) {
+		ModelAndView mav = new ModelAndView();
+		pVO.setTotalRecord(service.totalRecord(pVO));
+		mav.addObject("pVO", pVO);
+		mav.addObject("vo", service.boardList(pVO));
+		mav.setViewName("board/recipe/recipeList");
+		return mav;
 	}
 
-	// 레시피 등록 페이지
+	//레시피 등록 페이지
 	@GetMapping("/recipe/write")
 	public String write() {
 		return "/board/recipe/recipeWrite";
 	}
-	//재료 추가 관련-----------------------------------------
-	// 재료 검색
+
+	//재료 추가 관련 컨트롤러-----------------------------------------
+	//재료 검색
 	@PostMapping("/recipe/searchIngred")
 	@ResponseBody
 	public List<IngredientVO> searchIngred(RecipePagingVO vo) {
 		return service.searchIngred(vo);
 	}
 
-	// 재료 선택
+	//재료 선택(추가할 재료 클릭했을 때)
 	@PostMapping("/recipe/addIngred")
 	@ResponseBody
 	public List<IngredientVO> addIngred(String gred_num) {
 		return service.addIngred(gred_num);
 	}
-	
-	//레시피_재료 테이블에 추가
+
+	//재료 추가(DB)
 	@PostMapping("/recipe/insertIngred")
 	@ResponseBody
-	public int insertIngred(String gred_num, int board_num, double gred_gram) {
-		//board_num은 아직 생성되지 않았기 때문에 0으로 설정
-		return service.insertIngred(gred_num, board_num, gred_gram);
+	public int insertIngred(Recipe_IngredVO vo) {
+		return service.insertIngred(vo);
 	}
-	
-	//레시피 리스트 출력
-	@GetMapping("/recipe/ingredList")
+
+	//DB에 추가된 레시피 리스트 select
+	@PostMapping("/recipe/ingredList")
 	@ResponseBody
-	public List<Recipe_IngredVO> ingredList(){
-		return service.ingredList();
+	public List<Recipe_IngredVO> ingredList(int board_num) {
+		return service.ingredList(board_num);
 	}
-	
-	//재료 삭제
+
+	//추가된 재료 개별 삭제
 	@PostMapping("/recipe/deleteIngred")
 	@ResponseBody
-	public int deleteIngred(String gred_num) {
-		return service.deleteIngred(gred_num);
+	public int deleteIngred(String gred_num, int board_num) {
+		return service.deleteIngred(gred_num, board_num);
+	}
+
+	//추가된 재료 모두 삭제
+	@PostMapping("/recipe/deleteAllIngred")
+	@ResponseBody
+	public int deleteAllIngred(int board_num) {
+		return service.deleteAllIngred(board_num);
 	}
 	
-	//글 등록 관련-----------------------------------------
-	@PostMapping("/recipe/insertRecipe")
-	public ModelAndView insertRecipe() {
+	//레시피 등록(DB)
+	@PostMapping("/recipe/addRecipe")
+	@ResponseBody
+	public int addRecipe(BoardVO vo, HttpSession session, HttpServletRequest request, MultipartHttpServletRequest mr) {
+
+		// 파일 업로드
+		mr = (MultipartHttpServletRequest) request;
+		MultipartFile file = mr.getFile("file");
+		System.out.println(file);
+
+		String path = request.getSession().getServletContext().getRealPath("/recipeImg/upload");
+
+		//파일명 중복되지 않게 처리
+		UUID uuid = UUID.randomUUID();
+		String filename = uuid.toString()+"_"+file.getOriginalFilename();
+		vo.setRecipe_img_file(filename);
+		File uploadFile = new File(path, filename);
+		
+
+		// 실제 파일 업로드
+		try {
+			file.transferTo(uploadFile);
+			System.out.println("파일 업로드 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("파일 업로드 실패");
+		}
+
+		// db 추가 코드
+		// String logid = (String)session.getAttribute("logid");
+		vo.setUser_id("tpdbs"); //여기 나중에 꼭 바꾸기!
+		vo.setType_num(1);
+		
+		int result = service.recipeInsert(vo); // board
+		service.recipeInsert2(vo); // recipe_board
+		service.setBoardNum(vo); // recipe_ingredient(board_num 수정)
+
+		return result;
+	}
+	
+	//레시피 글 뷰페이지
+	@GetMapping("/recipe/view")
+	public ModelAndView recipeView(int board_num) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/recipe/list");
+		// service.hitCount(board_num);
+		mav.addObject("vo", service.recipeView(board_num));
+		mav.addObject("gredList", service.ingredList(board_num));
+		mav.setViewName("board/recipe/recipeView");
 		return mav;
 	}
 
+	//레시피 수정 페이지
+	@GetMapping("/recipe/edit")
+	public ModelAndView recipeEdit(int board_num) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", service.recipeView(board_num));
+		mav.addObject("gredList", service.ingredList(board_num));
+		mav.setViewName("board/recipe/recipeEdit");
+		return mav;
+	}
+	
+	//레시피 수정(DB)
+	@PostMapping("/recipe/update")
+	@ResponseBody
+	public int recipeUpdate(BoardVO vo, HttpServletRequest request, MultipartHttpServletRequest mr) {
+
+		// 파일 업로드
+		mr = (MultipartHttpServletRequest) request;
+		MultipartFile file = mr.getFile("file");
+		
+		//이미지 새로 업로드했을 때(업로드 전은 none으로 설정해둠)
+		if(file.getOriginalFilename()!="none") {
+			
+			//파일명 중복되지 않게 처리
+			UUID uuid = UUID.randomUUID();
+			String filename = uuid.toString()+"_"+file.getOriginalFilename();
+			vo.setRecipe_img_file(filename);
+			
+			//이름 덮어쓰기 코드 작성해야 함!
+			//String filename= vo.getRecipe_img_file();
+			String path = request.getSession().getServletContext().getRealPath("/recipeImg/upload");
+			File uploadFile = new File(path, filename);
+			
+			// 덮어쓰기
+			try {
+				file.transferTo(uploadFile);
+				System.out.println("파일 업로드 성공");
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("파일 업로드 실패");
+			}
+		}
+		
+		// String logid = (String)session.getAttribute("logid");
+		vo.setUser_id("tpdbs");
+		int result = service.recipeUpdate(vo);
+		service.recipeUpdate2(vo.getRecipe_img_file(), vo.getTotal_kcal(), vo.getBoard_num());
+		service.setBoardNum(vo);
+		
+		return result;
+	}
+	
+	//레시피 삭제(DB)
+	@PostMapping("/recipe/delete")
+	@ResponseBody
+	public int recipeDelete(int board_num) {
+		//이미지 파일 삭제 코드 작성하기
+		
+		return service.recipeDelete(board_num);
+	}
 }

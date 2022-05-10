@@ -1,22 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="/css/recipeWrite.css" type="text/css" />
-<script>
+
 $(function(){	
 	
 	//이미지 첨부되면 실행
 	$("#file").change(function() {
 		setImage(this, "#preview");
+		var file = $("#file").val();
+		var idx = file.lastIndexOf("\\")+1;
+		var img = $("#imgFile").val(file.substring(idx));
+		$("#imgFile").val(file.substring(idx));
+	});
+	
+	$("#preview").click(function(){
+		if(confirm("이미지를 수정하시겠습니까?")==true){
+			$("#file").click();
+		}
 	});
 	
 	//취소 버튼
     $("#recipeBtn>input[type=reset]").click(function(){
-    	if(confirm("글 작성을 취소하시겠습니까?")==true){
-    		deleteAllIngred();
+    	if(confirm("글 수정을 취소하시겠습니까?")==true){
+    		deleteAllIngred(0);
 			location="/recipe/list";
 		}
     });
@@ -33,7 +36,6 @@ $(function(){
 		}
 		
 		var params = $("#ingredSearch").serialize();
-		
 		$.ajax({
 			url: '/recipe/searchIngred',
 			data: params,
@@ -97,6 +99,7 @@ $(function(){
 		
 		//재료 추가 매핑
 		var params = $("#ingredFrm").serialize();
+		
 		$.ajax({
 			url: '/recipe/insertIngred',
 			data: params,
@@ -106,7 +109,7 @@ $(function(){
 					alert("재료가 추가되지 않았습니다.");
 				}
 				alert("재료가 추가되었습니다.");
-				ingredList();	//재료 리스트 출력
+				ingredList($("#ingredBoardNum").val());	//재료 리스트 출력
 			},
 			error: function(e){
 				console.log(e.responseText);
@@ -114,7 +117,7 @@ $(function(){
 		});
 	});
 	
-	//글 등록 submit 이벤트
+	//글 수정 submit 이벤트
 	$("#writeFrm").submit(function(){
 		event.preventDefault();
 		
@@ -133,33 +136,30 @@ $(function(){
 			$("#content").focus();
 			return false;
 		}
+		
 		if ($("#file").val() == '') {//input file
 			alert("이미지를 첨부하세요.");
 			return false;
 		}
 		
-		var file = $("#file").val();
-		var idx = file.lastIndexOf("\\")+1;
-		var img = $("#imgFile").val(file.substring(idx));
-		$("#imgFile").val(file.substring(idx));
 		
 		var params = new FormData($("#writeFrm")[0]);
-		
+		var board_num = $("#board_num").val();
 		$.ajax({
-			url: '/recipe/addRecipe',
+			url: '/recipe/update',
 			data: params,
 			method:"post",
 			processData: false,
 			contentType: false,
 			success:function(result){
 				if(result>0){
-					alert("레시피가 등록되었습니다.");
-					location="/recipe/list";
+					alert("레시피가 수정되었습니다.");
+					location="/recipe/view?board_num="+board_num;
 				}
 			},
 			error:function(e){
 				console.log(e.responseText);
-				alert("레시피가 등록되지 않았습니다.");
+				alert("레시피가 수정 실패하였습니다.");
 			}
 		});
 	});
@@ -288,21 +288,22 @@ function paging(pageNum, totalRecord){
 }
 
 //재료 리스트 출력
-function ingredList(){
+function ingredList(boardNum){
+	$("#ingredList").html("");
 	$.ajax({
 		url: "/recipe/ingredList",
 		type: "post",
-		data: "board_num=0",
+		data: "board_num="+boardNum,
 		success: function(result){
 			var tag="";
 			var kcal=0;
 			$("#ingredList").html("");
 			$(result).each(function(){
-				tag = '<li id="'+this.gred_num+'"onclick="deleteIngred(\''+this.gred_num+'\', \''+this.gred_kcal+'\');">'+this.gred_name+'&nbsp;'+this.gred_gram+'g&nbsp;<span class="times">&times;</span></li>';
-				$("#ingredList").append(tag);
+				tag += '<li id="'+this.gred_num+'"onclick="deleteIngred(\''+this.gred_num+'\', \''+this.board_num+'\');">'+this.gred_name+'&nbsp;'+this.gred_gram+'g&nbsp;<span class="times">&times;</span></li>';
 				kcal+=this.gred_kcal;
 			});
 			
+			$("#ingredList").html(tag);
 			$("#total_kcal").val(kcal);
 			$("#totalKcal").text("Total Kcal : "+kcal+"kcal");
 		},
@@ -312,7 +313,7 @@ function ingredList(){
 	});
 }
 
-function deleteIngred(gredNum, gredkcal){
+function deleteIngred(gredNum, boardNum){
 	
 	if(confirm("재료를 삭제하시겠습니까?")==false){
 		return false;
@@ -320,140 +321,49 @@ function deleteIngred(gredNum, gredkcal){
 	
 	$.ajax({
 		url: "/recipe/deleteIngred",
-		data: "gred_num="+gredNum+"&board_num=0",
+		data: "gred_num="+gredNum+"&board_num="+boardNum,
 		type: "post",
 		success: function(result){
 			if(result<0){
 				alert("재료 삭제 실패");
 			}
 			alert("재료 삭제 완료");
-			$("#gredNum").html("");
+			/*$("#gredNum").html("");
 			var kcal = $("#totalKcal").text();
 			var idx =  kcal.lastIndexOf(":")+2;
 			var idx2 = kcal.indexOf("kcal");
 			kcal = kcal.substring(idx,idx2);
 			kcal -= gredkcal;
 			$("#totalKcal").text("Total : "+kcal+"kcal");
+			*/
+			ingredList(boardNum);//재료 리스트 설정
 		},
 		error: function(e){
 			console.log(e.responseText);
 		}
 	});
 }
-function deleteAllIngred(){
+function deleteAllIngred(boardNum){
+	
 	if(confirm("추가하신 재료를 모두 삭제하시겠습니까?")==false){
 		return false;
 	}
 	
 	$.ajax({
 		url: "/recipe/deleteAllIngred",
+		data: "board_num="+boardNum,
 		type: "post",
-		data: "board_num=0",
 		success: function(result){
 			if(result<0){
 				alert("재료 삭제 실패");
 			}
 			alert("재료 삭제 완료");
 			$("#totalKcal").text("Total : 0kcal");
-			$("#ingredList").html("");
+			$("#ingredList").html("");	//재료 리스트 초기화
+			ingredList(boardNum);
 		},
 		error: function(e){
 			console.log(e.responseText);
 		}
 	});
 }
-</script>
-<div>
-	<!-- 재료 모달창 -->
-	<div class="modal fade" id="ingredModal">
-		<div class="modal-dialog modal-dialog-centered">
-	    <div class="modal-content">
-			<div class="modal-header">
-	        <h4 class="modal-title">Ingredient List</h4>
-	        <button type="button" class="close" data-dismiss="modal" onclick="ingredReset();">&times;</button>
-		</div>
-		
-	    <div class="modal-body">
-	    	<!-- 재료 리스트 -->
-	    	<div id="ingredView">
-	    		<form method="post" action="/recipe/searchIngred" id="ingredSearch">
-		    		<select name="searchKey">
-		    			<option>음식명</option>
-		    			<option>분류</option>
-		    		</select>
-		    		<input type="text" name="searchValue" id="searchValue"/>
-		    		<input type="hidden" name="pageNum" id="pageNum" value="1"/>
-		    		<input type="submit" value="검색" id="searchSubmit"/>
-	    		</form><hr/>
-	    		<p>재료 선택</p>
-				<div class="list-group">
-					<br/><p>재료를 검색하세요.</p><br/>
-				</div>
-				<!-- 페이징 -->
-				<ul class="paging">
-				</ul>
-	    	</div>
-	    	<!-- 재료 추가 폼 -->
-	    	<form method="post" action="/recipe/insertIngred" id="ingredFrm">
-	    		<br/><p id="ingredName" style="font-size:15pt;">재료</p>
-	    		<input type="hidden" name="gred_num" id="ingredNum" value=""/>
-	    		<input type="hidden" name="board_num" value="0"/><!-- 임의로 설정 -->
-	    		<input type="hidden" name="gred_kcal" id="ingredKcal" value=""/>
-				<ul id="measurement">
-					<li onclick="mesureClick('100');"><img src="/recipeImg/mesure.png"><p class="g1">100g</p></li>
-					<li onclick="mesureClick('200');"><img src="/recipeImg/mesure.png"><p class="g2">200g</p></li>
-					<li onclick="mesureClick('300');"><img src="/recipeImg/mesure.png"><p class="g3">300g</p></li>
-				</ul>
-				<p style="font-size:9pt; margin:0; color:gray;">*정확한 칼로리 계산을 위해 <br/>직접 입력하시는 것을 추천드립니다.</p>
-	    		<div id="ingredInfo">
-	    			<input type="number" name="gred_gram" id="ingredGram" placeholder="직접입력"/>&nbsp;g
-	    			<p id="gKcal">kcal: <p/>
-	    		</div>
-	    		<div id="ingredBtn">
-		   			<input type="submit" value="추가"/>
-		   			<input type="reset" value="취소" onclick="ingredReset();"/>
-	   			</div>
-	    	</form>
-	    </div>
-	
-	      <!-- Modal footer -->
-	      <div class="modal-footer">
-	        <button type="button" id="closeBtn" data-dismiss="modal" onclick="ingredReset();">닫기</button>
-	      </div>
-	
-	    </div>
-	  </div>
-	</div>
-	<form method="post" action="/recipe/addRecipe" id="writeFrm" enctype="multipart/form-data">
-		
-		<div id="imgDiv">
-			<!-- 이미지 첨부 -->
-			<input type="file" name="file" id ="file" value=""/>
-			<input type="hidden" name="recipe_img_file" value="" id="imgFile"/>
-			<a href="javascript:document.getElementById('file').click();"><img src="/recipeImg/inputimg3.png" id="preview"/></a>
-		</div>
-		<div id="recipeInfo">
-			<!-- title -->
-			<p id="title">레시피명&nbsp;&nbsp;<input type="text" name="title"/></p>
-	
-			<!-- 재료 리스트 -->
-			<p>재료
-				<button type="button" onclick="deleteAllIngred();" style="margin-left:10px; background-color: #ddd;" title="모든 재료 삭제">삭제</button>
-				<button type="button" data-toggle="modal" data-target="#ingredModal">추가</button>
-			</p>
-			<ul id="ingredList">
-			</ul>
-			
-			<!-- 레시피 설명 -->
-			<p>레시피 설명 <span id="totalKcal">Total: 0kcal</span></p>
-			<textarea name="content" id="content"></textarea>
-			<input type="hidden" name="total_kcal" id="total_kcal" value=""/>
-			
-			<!-- 버튼 -->
-			<div id="recipeBtn">
-				<input type="reset" value="취소"/>
-				<input type="submit" value="등록" style="margin-right:30px;"/>
-			</div>
-		</div>
-	</form>
-</div>
