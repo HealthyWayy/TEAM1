@@ -5,40 +5,79 @@ body,ul,li{
 	padding:0px;
 	list-style:none;
 }
+body{
+	background-color:rgb(236,236,236);
+}
 #myPageBackground{
-	background-color:rgb(226,224,250);
+	background-image:url(/myPageImg/myPageBackground.jpg);
+	background-repeat:no-repeat;
+	background-size:100%;
 	width:100%;
-	height:200px;
-	z-index:-1;
+	height:250px;
+}
+#myPageBackground::after{
+	font-weight: bold;
+	position:absolute;
+	top:10%;
+	left:50%;
+	transform:translate(-50%,0%);
+	text-align:center;
+	content:'myPage';
+	width:100%;
+	overflow:hidden;
+	height:100px;
+	line-height:100px;
+	font-size:3em;
+	white-space:nowrap;
+	animation-duration: 1s;
+	animation-name: textShow;  
+    animation-timing-function: ease-in-out;
+    background: linear-gradient(
+    		to right,
+            rgba(181, 179, 217, 1) 0%,
+            rgb(164,162,208) 20%,
+            rgba(117, 114, 184, 1) 100%
+            );
+    -webkit-background-clip: text;
+     color: transparent;
+    -webkit-text-stroke:1px black;
+}
+@keyframes textShow{
+	0%{
+		opacity:0;
+	}
+	100%{
+		opacity:1;
+	}
 }
 #myPageContainer{
 	position:relative;
-	top:-160px;
+	top:0px;
 	width:1200px;
 	margin:0 auto;
-	margin-top:50px;
 }
 #myPageContainer>section, #myPageContainer>nav{
 	float:left;
 	background-color:white;
-	padding-top:30px;
 }
 #sidePage{
 	width:20%;
 	text-align:center;
 	position:relative;
+	top:-50px;
+	left:-30px;
 	/*탑 오른쪽 아래 왼쪽*/
-	padding:0px 0px 0px 20px;
+	padding:0px 0px 20px 0px;
 	box-sizing:border-box;
+	box-shadow:0px 0px 20px 0px rgb(196,196,196);
 }
-#sidePage>div:nth-of-type(1){
-	height:340px;
+#sidePage>div:nth-of-type(2){
+	margin-top:20px;
 }
 #groupPageDiv{
 	height:0px;
 	overflow:auto;
 	padding-bottom:15px;
-	border:1px solid #ddd;
 	border-radius:10px;
 	transition-duration:1s;
 }
@@ -72,20 +111,17 @@ body,ul,li{
 	width:100%;
 }
 #imgDiv{
-	width:200px;
-	height:200px;
-	border-radius:100%;
+	width:100%;
 	overflow:hidden;
 	margin: 0 auto;
-	border: 1px solid #ddd;
+	text-align:left;
 }
 #imgDiv img{
 	text-align:left;
 	position:relative;
 	left:50%;
-	top:50%;
-	transform:translate(-50%,-50%);
-	height:100%;
+	transform:translate(-50%,0%);
+	width:100%;
 }
 #sidePage>div>span{
 	font-size:1.2em;
@@ -132,8 +168,9 @@ body,ul,li{
 	opacity:0;
 }
 #mainPage{
+	position:relative;
 	width:80%;
-	height:500px;
+	z-index:0;
 }
 #mainPage>div{
 	float:left;
@@ -146,30 +183,28 @@ body,ul,li{
 	box-sizing:border-box;
 }
 .pageBtn{
-	background-color:#ddd;
-	border-top-left-radius:10px;
-	border-top-right-radius:10px;
+	background-color:rgb(240,240,240);
 	height:40px;
 	position:absolute;
 	border:none;
 	border-bottom:none;
-	top:-70px;
-	border:1px solid black;
+	top:-20px;
+	width:80px;
 }
 .inforBtn{
-	left:660px;
-	z-index:4;	
+	left:610px;
+	z-index:4;
 }
 .healthBtn{
-	left:720px;
+	left:690px;
 	z-index:3;
 }
 .foodBtn{
-	left:780px;
+	left:770px;
 	z-index:2;
 }
 .writeBtn{
-	left:840px;
+	left:850px;
 	z-index:1;
 }
 .clickUpClass{
@@ -181,27 +216,19 @@ body,ul,li{
 	display:block !important;
 }
 .pageView{
-	position:absolute;
+	position:relative;
 	/*탑 오른쪽 아래 왼쪽*/
-	padding:20px 40px 0px 40px;
+	margin:20px 0px 0px 0px;
+	margin-bottom:30px;
+	padding:40px 40px 0px 40px;
 	box-sizing:border-box;
 	width:100%;
 	display:none;
-}
-#mainPage>div:nth-of-type(2):before{
-	content:"";
-	display:block;
-	border-bottom:1px solid black;
-	top:38px;
-	left:20px;
-	z-index:5;
-	height  : 1px;
-	width   : 95%;  /* or 100px */
-	position:absolute;
+	box-shadow:0px 15px 10px 5px rgb(196,196,196);
 }
 #sidePage>div:nth-of-type(1):after{
 	content : "";
-	margin-top : 20px;
+	margin-top : 10%;
 	margin-left : 10px; 
 	display:block;
 	height  : 1px;
@@ -235,7 +262,7 @@ $(()=> {
 	$("#groupShow").click(function(){
 		console.log("실행");
 		if(groupShow==false){
-			$("#groupPageDiv").css("height","540px");
+			$("#groupPageDiv").css("height","270px");
 			groupShow=true;
 		}else{
 			$("#groupPageDiv").css("height","0px");
@@ -249,7 +276,7 @@ $(()=> {
 		$(event.target).removeClass('btnClassHover')
 	})
 	//페이지 네이션 처리 이벤트
-	var indexPrev = 0;
+	var indexPrev = 2;
 	$('.pageBtn').eq(indexPrev).addClass('clickUpClass');
 	$('.pageView').eq(indexPrev).addClass('clickUpClass pageUpClass');
 	//console.log($('.pageView').eq(0).html())
@@ -304,7 +331,7 @@ $(()=> {
 	<!-- 메인메뉴 : 전체 데이터는 다 이 페이지로 가져오고, 페이지 네이션은 include방식으로 -->
 	<section id='mainPage'>
 		<!-- 페이지 출력 -->
-		<div style="position:relative;">
+		<div style="position:absolute;">
 			<button class='pageBtn inforBtn'>개인 정보</button>
 			<button class='pageBtn healthBtn'>운동 관리</button>
 			<button class='pageBtn foodBtn'>식단 관리</button>

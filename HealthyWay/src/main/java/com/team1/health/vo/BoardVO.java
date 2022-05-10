@@ -19,6 +19,23 @@ public class BoardVO {
 	private int max_user;
 	private int pt_count;
 	private String pt_img_file;
+	
+	//recipe_board 좋아요 테이블
+	private String recipe_img_file;
+	private double total_kcal;
+	
+	public double getTotal_kcal() {
+		return total_kcal;
+	}
+	public void setTotal_kcal(double total_kcal) {
+		this.total_kcal = total_kcal;
+	}
+	public String getRecipe_img_file() {
+		return recipe_img_file;
+	}
+	public void setRecipe_img_file(String recipe_img_file) {
+		this.recipe_img_file = recipe_img_file;
+	}
 	public int getBoard_num() {
 		return board_num;
 	}
