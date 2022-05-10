@@ -22,18 +22,39 @@ public class MemberServiceImpl implements MemberService {
     }
 	
 	@Override
-	public MemberVO checkId(MemberVO vo) {
-		return dao.checkId(vo);
+	public String checkId(String user_id) {
+		return dao.checkId(user_id);
 	}
 
 	@Override
-	public MemberVO checkNick(MemberVO vo) {
-		return dao.checkNick(vo);
+	public String checkNick(String user_nickname) {
+		return dao.checkNick(user_nickname);
 	}
 
 	@Override
-	public MemberVO checkTel(MemberVO vo) {
-		return dao.checkTel(vo);
+	public String checkTel(String tel) {
+		return dao.checkTel(tel);
+	}
+
+	@Override
+	public String checkEmail(String user_email) {
+		return dao.checkEmail(user_email);
+	}
+
+	// 찾기
+	@Override
+	public String findId(String user_id) {
+		return dao.findId(user_id);
+	}
+
+	@Override
+	public String findPw(String user_pw) {
+		return dao.findPw(user_pw);
+	}
+
+	@Override
+	public String updatePw(String user_id) {
+		return dao.updatePw(user_id);
 	}
 
 }

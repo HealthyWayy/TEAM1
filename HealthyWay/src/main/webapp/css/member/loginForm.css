@@ -1,0 +1,81 @@
+@charset "UTF-8";
+body, ul, li{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.joinimg {
+    width: 100%;
+}
+.loginForm {
+    margin: 0 auto;
+    width: 800px;
+    height: 170px;
+    padding: 200px 0;
+    background-color: #f3f3f3;
+    border-radius: 100px;
+    margin-top: 180px;
+}
+#logFrm{
+    width: 450px;
+    margin: 0 auto;
+}
+.logFrm_btn_wrap{
+    display: flex;
+}
+#log {
+    text-align: center;
+}
+.input-id {
+    text-align: center;
+    display: flex;
+    border-bottom: 2px solid #000;
+    width: 350px;
+    margin: 0 auto;
+    height: 50px;
+    line-height: 60px;
+    margin-bottom: 20px;
+}
+.input-area1 {
+    text-align: left;
+    width: 80px;
+}
+.input-area2 {
+    width: 200px;
+    height: 50px;
+    line-height: 60px;
+}
+.input-area2 input {
+    width: 90%;
+    height: 30px;
+    border: none;
+    background-color: #f3f3f3;
+}
+.input-area2 input:focus{
+    outline: none;
+}
+.login-btn button {
+    height: 92%;
+    width: 80px;
+    margin-left: 20px;
+    border: none;
+    border-radius: 10px;
+    background: #000;
+    color: #fff;
+}
+.bottom-menu{
+    text-align: left;
+    font-size: 14px;
+}
+.bottom-menu-left{
+    float: left;
+    margin-right: 75px;
+}
+.bottom-menu a:link,
+.bottom-menu a:visited{
+    text-decoration: none;
+    color: #000;
+}
+.bottom-menu a:hover{
+    text-decoration: underline;
+}
