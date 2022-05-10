@@ -65,10 +65,10 @@ $(()=>{
 			})
 		}
 	});
-	$("#inforDiv ul>li>input[type='text'],#gender").focus(function(){
+	$("#inforDiv ul>li>input[type='text'],select").focus(function(){
 		$(event.target).parent().addClass('inputFocusClass');
 	})
-	$("#inforDiv ul>li>input[type='text'],#gender").blur(function(){
+	$("#inforDiv ul>li>input[type='text'],select").blur(function(){
 		$(event.target).parent().removeClass('inputFocusClass');
 	})
 })
@@ -92,35 +92,37 @@ function readURL() {
 }
 #imgInforDiv{
 	text-align:left;
-	width:50%;
-	height:720px;
+	width:250px;
+	height:250px;
+	border-radius:100%;
 	overflow:hidden;
+	margin: 0 auto;
 	border: 1px solid #ddd;
-	float:left;
 }
 #imgInforDiv img{
 	position:relative;
 	left:50%;
 	top:50%;
 	transform:translate(-50%,-50%);
-	height:100%;
+	width:100%;
 }
 #inforDiv ul{
+	margin:0 auto;
 	width:350px;
-	float:left;
-	margin:0px 0px 0px 30px;
+}
+#inforDiv ul>li{
 }
 #inforDiv ul>li:nth-of-type(2n+1){
 	/*위 오른 아래 왼*/
-	margin:10px 0px 10px 10px;
+	margin:20px 0px 5px 10px;
 	text-align:left;
 }
 #inforDiv ul>li:nth-of-type(2n+2){
 	margin:0 auto;
 	border:1px solid #ddd;
 	transition-duration:0.5s;
-	height:40px;
-	line-height:40px;
+	height:50px;
+	line-height:50px;
 	border-radius:10px;
 	overflow:hidden;
 }
@@ -150,7 +152,7 @@ function readURL() {
 	box-shadow:1px 1px 5px 1px rgba(20, 149, 167, 0.4);
 }
 .inforDataBtn{
-	height:40px;
+	height:50px;
 	width:150px;
 	margin-bottom:50px;
 	border:none;
@@ -240,4 +242,3 @@ function readURL() {
 		</ul>	
 	</form>
 </div>
-<div style='position:relative; height:760px; width:10px;'></div>

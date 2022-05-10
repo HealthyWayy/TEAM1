@@ -134,18 +134,56 @@ $(()=>{
 			$(event.target).css('display','none');
 			$(event.target).next().next().css('display','inline-block');
 		})
+		let healthDivNum=1;
+		$('#healthDivClick').click(function(){
+			var healthDiv = document.querySelectorAll('.healthDiv');
+			for(i=0;i<healthDiv.length;i++){
+				console.log(healthDivNum)
+				healthDiv[healthDivNum].className='healthDiv healthDivNum'+i;
+				if(healthDivNum>=3){
+					healthDivNum=0;
+				}else{
+					healthDivNum++;
+				}
+			}
+			if(healthDivNum>=3){
+				healthDivNum=0;
+			}else{
+				healthDivNum++;
+			}
+		})
 	})
 </script>
 <style>
+	.healthDivNum0{
+		z-index:2;
+		background-color:white;
+		opacity:1;
+	}
+	.healthDivNum1{
+		transform:rotateY(90deg) translate(-450px,0px);
+		opacity:0.1;
+	}
+	.healthDivNum2{
+		transform:rotateY(-90deg) translate(450px,0px);
+		opacity:0.1;
+	}
+	.healthDivNum3{
+		opacity:0.1;
+	}
 	.healthDiv{
 		float:left;
 		border: 1px solid #ddd;
 		margin:0 auto;
-		margin-top:20px;
-		width:100%;
+		margin-top:50px;
+		width:850px;
+		height:400px;
 		box-sizing:border-box;
 		/*탑 오른쪽 아래 왼쪽*/
 		padding:10px 20px 10px 20px;
+		position:absolute;
+		top:25px;
+		transition-duration:0.5s;
 	}
 	.healthDiv>span:nth-of-type(1){
 		font-weight:bold;
@@ -231,29 +269,34 @@ $(()=>{
 		margin-top:20px;
 	}
 </style>
-
-<div id='healthPlanDiv' class='healthDiv'>
-	<span>DailyPlan</span><br/>
-	<div>
-		<div>박스 내용</div>
-		<button>목표 설정</button>
+<button id='healthDivClick'>클릭</button>
+<div class='healthDiv healthDivNum0'>
+	<div id='healthPlanDiv'>
+		<span>DailyPlan</span><br/>
+		<div>
+			<div>박스 내용</div>
+			<button>목표 설정</button>
+		</div>
+	</div>
+	<div id='toDayHealth'>
+		<span>todayHealth</span>
+		<canvas id="circleGraph" width="150" height="150"></canvas>
 	</div>
 </div>
-<div id='toDayHealth' class='healthDiv'>
-	<span>todayHealth</span>
-	<canvas id="circleGraph" width="150" height="150"></canvas>
-</div>
-<div id='heathHistory' class='healthDiv'>
+
+<div id='heathHistory' class='healthDiv healthDivNum1'>
 	<span>health history</span><br/>
 	<canvas id="barGraph" class='graphSize' width="800px" height="200"></canvas>
 </div>
-<div id='changeWeight' class='healthDiv'>
+
+<div id='changeWeight' class='healthDiv healthDivNum2'>
 	<span>change weight</span><br/>
 	<div>
   		<canvas id="weightGraph" class='graphSize' width="800px" height="200"></canvas>
 	</div>
 </div>
-<div id='myRoutin' class='healthDiv'>
+
+<div id='myRoutin' class='healthDiv healthDivNum3'>
 	<span>my Routin</span><br/>
 	<!-- 루틴 목록 -->
 	<div class='routinList'>
@@ -314,4 +357,4 @@ $(()=>{
 		</div>
 	</div>
 </div>
-<div style='position:relative; height:1300px; width:10px;'></div>
+<div style='position:relative; height:500px; width:10px;'></div>
