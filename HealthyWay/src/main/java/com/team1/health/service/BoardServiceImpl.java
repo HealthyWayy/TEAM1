@@ -53,6 +53,27 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public int ptBoardInsert(BoardVO vo) {
+		return dao.ptBoardInsert(vo);
+	}
+	@Override
+	public int ptGroupInsert(BoardVO vo) {
+		return dao.ptGroupInsert(vo);
+	}
+	@Override
+	public ArrayList<BoardVO> ptList() {
+		return dao.ptList();
+	}
+	@Override
+	public BoardVO ptBoardSelect(int no) {
+		return dao.ptBoardSelect(no);
+	}
+	@Override
+	public int hitCount(int no) {
+		return dao.hitCount(no);
+	}
+
 
 	
 

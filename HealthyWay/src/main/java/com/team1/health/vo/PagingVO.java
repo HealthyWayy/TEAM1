@@ -11,6 +11,9 @@ public class PagingVO {
 	private int onePageCount = 5;
 	private int startPage = 1;
 	
+	// ptList paging
+	private int onePageRecord_PT = 16;
+	
 	public int getOnePageRecord() {
 		return onePageRecord;
 	}
@@ -79,5 +82,13 @@ public class PagingVO {
 			totalPage = totalRecord/onePageRecord+1;
 		}
 	}
+	public int getOnePageRecord_PT() {
+		return onePageRecord_PT;
+	}
+	public void setOnePageRecord_PT(int onePageRecord_PT) {
+		this.onePageRecord_PT = onePageRecord_PT;
+	}
+	
+	
 
 }

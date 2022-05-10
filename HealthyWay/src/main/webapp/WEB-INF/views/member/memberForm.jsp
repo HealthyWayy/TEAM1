@@ -1,213 +1,261 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<style>
-.joinimg {
-	width: 100%;
-}
-.memberForm {
-	margin: 0 40% auto;
-	padding: 0 auto;
-}
-.member-input {
-	width: 100px;
-}
-.member-input input {
-	width: 300px;
-	height: 30px;
-}
-h1 {
-	color: black;
-}
-</style>
-<div>
-	<div>
-		<img src="../../img/welcomeimg.jpg" class="joinimg" />
-	</div>
-	<div class="memberForm">
-		<form method="post" action="/member/memberOk" id="mFrm" onsubmit="return MemberCheck()">
-            <div class="member-input">
-                <input type="text" name="user_id" id="user_id" onkeyup="CheckId()" required/>
-                <label>아이디</label>
-                <span id="stateIdChk" class="state">아이디를 입력하세요</span>
-            </div>
-            <div class="member-input">
-                <input type="text" name="user_nickname" id="user_nickname" onkeyup="CheckNick()" required/>
-                <label>닉네임</label>
-                <span id="stateNickChk" class="state">닉네임을 입력하세요</span>
-            </div>
-            <div class="member-input">
-                <input type="password" name="user_pw" id="user_pw" required/>
-                <label>비밀번호</label>
-            </div>
-            <div class="member-input">
-                <input type="password" name="user_pw2" id="user_pw2" required/>
-                <label>비밀번호확인</label>
-            </div>
-            <div class="member-input">
-                <input type="text" name="user_name" id="user_name" required/>
-                <label>이름</label>
-            </div>
-            <div class="radio">
-                <label>성별:&nbsp;&nbsp;&nbsp;</label>
-                <label><input type="radio" name="gender" value="M" required>남</label>
-                &nbsp;&nbsp;&nbsp;
-                <label><input type="radio" name="gender" value="W" required>여</label>
-            </div>
-            
-            <div class="tel">
-                <input type="text" name="tel" id="tel" maxlength="15" required/>
-                <label>연락처</label>
-            </div>
-            <div class="date">
-                <label>나이: </label>
-                <input type='text' name='age' required/>
-            </div>
-            <div class="member-input">
-                <input type="text" name="user_email" id="user_email" required/>
-                <label>이메일</label>
-            </div>
-            <div class="join-btn">
-                <button type="submit" onclick="MemberCheck()">가입하기</button>
-            </div>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link rel="stylesheet" type="text/css" href="${url}/css/member/memberForm.css">
 
+<div class="wrap">
+	<div class="memberForm">
+		<h1>Healthy Way와 함께<br>
+			건강한 운동 경험을 얻어가세요!</h1>
+		<form method="post" action="/member/memberOk" id="mFrm" onsubmit="return MemberCheck()">
+            <ul>
+            	<li>아이디</li>
+            	<li>
+            		<input type='text' name='user_id' id='user_id' placeholder='아이디 입력' required/><br>
+					<span id='chk'></span>
+					<input type="text" id='idchk' value="N" style="display:none;">
+            	</li>
+				<li>닉네임</li>
+				<li>
+	            	<input type='text' name='user_nickname' id='user_nickname' placeholder='닉네임 입력' required/><br>
+					<span id='chkN'></span>
+					<input type="text" id='stateNickChk' value="N" style="display:none;">
+				</li>
+				<li>비밀번호</li>
+				<li>
+					<input type="password" name="user_pw" id="user_pw" autocomplete="off" required/>
+				</li>
+				<li>비밀번호 확인</li>
+				<li>
+					<input type="password" name="user_pw2" id="user_pw2" autocomplete="off" required/>
+				</li>
+				<li>이름</li>
+				<li>
+					<input type="text" name="user_name" id="user_name" required/>
+				</li>
+				<li>연락처</li>
+				<li>
+					<input type='text' name='tel' id='tel' placeholder='예시) 01012341234' required/><br>
+					<span id='chkT'></span>
+					<input type="text" id='telChk' value="N" style="display:none;">
+				</li>
+				<li>이메일</li>
+				<li>
+	            	<input type='text' name='user_email' id='user_email' placeholder='예시) healthyWay@naver.com' required/><br>
+					<span id='chkE'></span>
+					<input type="text" id='EmailChk' value="N" style="display:none;">
+				</li>
+				<li>나이</li>
+				<li>
+					<input type='text' name='age' required/>
+				</li>
+				<li style="float: left; margin-right: 30px;">성별</li>
+				<li style="margin-top: 10px;">
+					<label><input type="radio" name="gender" value="M" required>남</label>&nbsp;&nbsp;&nbsp;
+					<label><input type="radio" name="gender" value="W" required>여</label>
+				</li>
+				<li>
+            		<button type="submit" onclick="MemberCheck()">가입하기</button>
+            	</li>
+    		</ul>
         </form>
+        <div class="check_account">이미 계정이 있으신가요?&nbsp;&nbsp;<a href="${url}/member/loginForm">로그인</a></div>
+	</div>
+	<div class="img_wrap">
+		<img src="${url}/img/join_img.jpeg">
 	</div>
 </div>
-<script>
-function MemberCheck() {
-    //비밀번호 체크
-    const user_pw = document.getElementById("user_pw");
-    const user_pw2 = document.getElementById("user_pw2");
-    var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
-    if(!user_pw.value || !user_pw2.value){
-        alert("비밀번호를 입력하세요");
-        user_pw.focus();
-        return false;
-    }
-    if(user_pw.value!=user_pw2.value){
-        alert("비밀번호가 일치하지 않습니다.");
-        user_pw.focus();
-        return false;
-    }
-    if(!pwdCheck.test(user_pw.value)){
-        alert("비밀번호는 영문, 숫자, 특수기호를 조합으로 8~25자를 입력해야합니다.");
-        user_pw.focus();
-        return false;
-    }
-    //-----------------------------------------------비밀번호 체크 끝
-
-    //이름 체크
-    const user_name = document.getElementById("user_name")
-    var nameCheck = /^[가-힣]{2,4}$/;
-    if(!user_name.value){
-        alert("이름을 입력하세요");
-        user_name.focus();
-        return false;
-    }
-    if(!nameCheck.test(user_name.value)){
-        alert("한글만 입력 가능합니다.(최대 4글자)");
-        user_name.focus();
-        return false;
-    }
-    //--------------------------------------------------이름 끝
-    
-    //연락처 체크
-    const tel = document.getElementById("tel")
-    var regExp = /^[0-9]{7,15}$/;
-    if(!regExp.test(tel.value)){
-        alert("연락처 형식에 맞게 작성해주세요.");
-        tel.focus();
-        return false;
-    }
-    
-    const user_email = document.getElementById("user_email")
-    var emailCheck = /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/;
-
-    if(!user_email.value){
-        alert("이메일을 입력해주세요.");
-        userEmail.focus();
-        return false;
-    }
-
-    if(!emailCheck.test(user_email.value)) {
-        alert("이메일 형식으로 입력해주세요.")
-        user_email.focus();
-        return false;
-    }
-}
-function CheckTel() {
-    const tel = document.getElementById("tel").value;
-    const regExp = /^[0-9]{7,15}$/;
-    if(!regExp.test(tel)){
-        document.getElementById("statePhoneChk").innerText = "연락처 형식에 맞게 입력해주세요";
-        return;
-    }
-    const body = {
-    	tel : tel,
-    }
-    axios.post("/member/checkTel",body)
-        .then((res) => {
-            if(res.data!=="") {
-                document.getElementById("statePhoneChk").innerText = "이미 사용중인 휴대폰 번호입니다";
-            } else {
-                SendPhoneCheck();
-            }
-        })
-}
-function CheckId () {
-    const user_id = document.getElementById("user_id").value;
-    const idCheck =  /^[A-za-z0-9]{6,15}$/g;
-    if(!idCheck.test(user_id)){
-        document.getElementById("stateIdChk").innerText = "아이디는 영문, 숫자 조합 6~15자를 입력해야 합니다.";
-        document.getElementById("stateIdChk").className = "state"
-        return;
-    }
-    const body = {
-		user_id : user_id
-    }
-    axios.post("/member/checkId", body)
-        .then((res) => {
-            if(res.data!==""){
-                document.getElementById("stateIdChk").innerText = "이미 사용중인 아이디입니다.";
-                document.getElementById("stateIdChk").className = "state";
-            } else {
-                document.getElementById("stateIdChk").innerText = "사용 가능한 아이디입니다.";
-                document.getElementById("stateIdChk").className = "stateOk";
-            }
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-}
-function CheckNick() {
-    const user_nickname = document.getElementById("user_nickname").value;
-    if(!nickname){
-        document.getElementById("stateNickChk").innerText = "닉네임을 입력하세요";
-        document.getElementById("stateNickChk").className = "state";
-        return;
-    }
-    if(nickname.length>10){
-        document.getElementById("stateNickChk").innerText = "닉네임은 최대 10글자까지 사용가능합니다.";
-        document.getElementById("stateNickChk").className = "state";
-        return;
-    }
-    const body = {
-    		user_nickname : user_nickname
-    }
-    axios.post("/member/checkNick", body)
-        .then((res) => {
-            if(res.data!==""){
-                document.getElementById("stateNickChk").innerText = "이미 사용중인 닉네임입니다.";
-                document.getElementById("stateNickChk").className = "state";
-            } else {
-                document.getElementById("stateNickChk").innerText = "사용 가능한 닉네임입니다.";
-                document.getElementById("stateNickChk").className = "stateOk";
-                nickPass = true;
-            }
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-}
-
+<script type="text/javascript">
+	let nickPass = false;
+	let telPass = false;
+	let emailPass = false;
+	//가입하기 클릭시
+	function MemberCheck() {
+		let user_id = document.getElementById("user_id");
+		if(user_id.value=='') {
+			alert("아이디를 입력하세요");
+			user_id.focus();
+			return false;
+		}
+		
+		// 비밀번호 확인
+		let user_pw = document.getElementById("user_pw");
+		let user_pw2 = document.getElementById("user_pw2");
+		if(user_pw.value=='' || user_pw2.value=='') {
+			alert("비밀번호를 입력하세요");
+			user_pw.focus();
+			return false;
+		}
+		if(user_pw.value != user_pw2.value) {
+			alert("비밀번호가 일치하지 않습니다");
+			user_pw2.focus();
+			return false;
+		}
+		
+		// 이름
+		let user_name = document.querySelector("#user_name");
+		if(user_name.value==''){
+			alert("이름을 입력하세요");
+			user_name.focus();
+			return false;
+		}
+		
+		//----------------- 중복방지
+		// 닉네임중복확인
+		if(!nickPass){
+	        alert("닉네임을 확인해주세요");
+	        return false
+	    }
+		
+		// 전화번호중복확인
+		if(!telPass){
+	        alert("전화번호를 확인해주세요");
+	        return false
+	    }
+		
+		// 이메일중복확인
+		if(!emailPass){
+	        alert("이메일을 확인해주세요");
+	        return false
+	    }
+		
+		return true;
+	}
+	
+	//----------------------------------------------------------------
+	$(function() {
+		//아이디 중복검사
+		$("#user_id").keyup(function() {
+			var user_id = $("#user_id").val();
+			console.log(user_id);
+			if (user_id != '' && user_id.length >= 6) {
+				var url = "/member/checkId";
+				$.ajax({
+					url : url,
+					data : "user_id=" + user_id,
+					type : "POST",
+					success : function(result) {
+						if (result == user_id) {//사용불가능
+							$("#chk").html("이미 사용중인 아이디입니다.");
+							
+							$("#idchk").val("N");
+							$("#chk").css("color", "red")
+						} else {//사용가능
+							$("#chk").html("사용 가능한 아이디입니다.");
+							$("#idchk").val("Y");
+							$("#chk").css("color", "blue")
+						}
+					}
+				});
+			} else {//사용불가
+				$("#chk").html("6자 이상으로 입력해주세요.");
+				$("#idchk").val("N");
+				$("#chk").css("color", "red")
+			}
+		});
+	});
+	
+	$(function() {
+		//닉네임 중복검사
+		$("#user_nickname").keyup(function() {
+			var user_nickname = $("#user_nickname").val();
+			nickPass = false;
+			if (user_nickname != '' && user_nickname.length >= 2) {
+				var url = "/member/checkNick";
+				$.ajax({
+					url : url,
+					data : "user_nickname=" + user_nickname,
+					type : "POST",
+					success : function(result) {
+						if (result == user_nickname) {//사용불가능
+							$("#chkN").html("이미 사용중인 닉네임입니다.");
+							$("#stateNickChk").val("N");
+							$("#chkN").css("color", "red")
+							nickPass = false;
+						} else {//사용가능
+							$("#chkN").html("사용 가능한 닉네임입니다.");
+							$("#stateNickChk").val("Y");
+							$("#chkN").css("color", "blue")
+							nickPass = true;
+						}
+					}
+				});
+			} else {//사용불가
+				$("#chkN").html("2자 이상으로 입력해주세요.");
+				$("#stateNickChk").val("N");
+				$("#chkN").css("color", "red")
+				nickPass = false;
+			}
+		});
+	});
+	
+	$(function() {
+		//핸드폰번호 중복검사
+		$("#tel").keyup(function() {
+			var tel = $("#tel").val();
+			telPass = false;
+			if (tel != '' && tel.length >= 10 && tel.length <=12) {
+				var url = "/member/checkTel";
+				$.ajax({
+					url : url,
+					data : "tel=" + tel,
+					type : "POST",
+					success : function(result) {
+						if (result == tel) {//사용불가능
+							$("#chkT").html("</br>이미 사용중인 전화번호입니다.");
+							$("#telChk").val("N");
+							$("#chkT").css("color", "red")
+							telPass = false;
+						} else {//사용가능
+							$("#chkT").html("</br>사용 가능한 전화번호입니다.");
+							$("#telChk").val("Y");
+							$("#chkT").css("color", "blue")
+							telPass = true;
+						}
+					}
+				});
+			} else {//사용불가
+				$("#chkT").html("9자~12자 사이어야 합니다. 다음과 같이 입력해주세요. </br> 예) 01012341234");
+				$("#telChk").val("N");
+				$("#chkT").css("color", "red")
+				telPass = false;
+			}
+		});
+	});
+	
+	$(function() {
+		//이메일 중복검사
+		$("#user_email").keyup(function() {
+			var user_email = $("#user_email").val();
+			emailPass = false;
+			if (user_email != '' && user_email.length >= 8) {
+				var url = "/member/checkEmail";
+				$.ajax({
+					url : url,
+					data : "user_email=" + user_email,
+					type : "POST",
+					success : function(result) {
+						if (result == user_email) {//사용불가능
+							$("#chkE").html("이미 사용중인 이메일입니다.");
+							$("#EmailChk").val("N");
+							$("#chkE").css("color", "red")
+							emailPass = false;
+						} else {//사용가능
+							$("#chkE").html("사용 가능한 이메일입니다.");
+							$("#EmailChk").val("Y");
+							$("#chkE").css("color", "blue")
+							emailPass = true;
+						}
+					}
+				});
+			} else {//사용불가
+				$("#chkE").html("이메일은 아이디/비밀번호 찾기에 필요하니 정확히 입력바랍니다.");
+				$("#EmailChk").val("N");
+				$("#chkE").css("color", "red")
+				emailPass = false;
+			}
+		});
+	});
+	
+	
 </script>

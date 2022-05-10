@@ -19,6 +19,8 @@ public class BoardVO {
 	private int max_user;
 	private int pt_count;
 	private String pt_img_file;
+	private String keyword;
+	
 	public int getBoard_num() {
 		return board_num;
 	}
@@ -103,7 +105,14 @@ public class BoardVO {
 	public void setPt_img_file(String pt_img_file) {
 		this.pt_img_file = pt_img_file;
 	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 
+	
 
 }
 
