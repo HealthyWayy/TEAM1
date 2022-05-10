@@ -13,9 +13,9 @@
     
 <div class="wrap">
 	<div class="head_wrap">
-		<span id="keyword">#평일내내 #스쿼트 #런지 #2세트</span>
-		<h1>평일 8시부터 런지, 스쿼트 파티</h1>
-		<span id="state">모집중</span>
+		<span id="keyword">${vo.keyword}</span>
+		<h1>${vo.title}</h1>
+		<span id="state">${vo.state}</span>
 	</div>
 	
 	<div class="main_wrap">
@@ -45,13 +45,7 @@
 			<div class="content_wrap all_content">
 				<h2>내용</h2>
 				<p>
-					[필수조건]<br>
-					1. 운동 1시간 이상<br>
-					2. 매일 스쿼트 2세트 / 런지 2세트 / 플랭크 2세트<br>
-					3. 사진 인증<br>
-					<br>
-					운동강도는 중간입니다.<br>
-					다 같이 한달동안 빡다합니다!
+					${vo.content}
 				</p>
 			</div>
 			
@@ -103,7 +97,7 @@
 			
 			</div>
 			
-			<div class="manage_wrap all_content" style="display: block">
+			<div class="manage_wrap all_content" style="display: none;">
 				<h2>참여자</h2>
 				<ul class="manage_list">
 					<li>상태</li>
@@ -146,11 +140,13 @@
 			<div class="profile_info_wrap">
 				<h4>리더정보</h4>
 				<div class="leader_img_wrap"><img src="${url}/img/pt_recu.jpeg"></div>
-				<div class="leader_name_wrap">김헬짱 (id)</div>
+				<div class="leader_name_wrap">
+					김헬짱 (${vo.user_id})
+				</div>
 			</div>
 			<div class="profile_info_wrap">
 				<h4>활동 기간</h4>
-				22.05.01 ~22.11.01  (185일)
+				${vo.start_date} ~ ${vo.end_date} (185일)
 			</div>
 			<div>
 				<h4>그룹 멤버 (2명)</h4>

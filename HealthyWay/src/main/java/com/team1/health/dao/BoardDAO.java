@@ -1,5 +1,6 @@
 package com.team1.health.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -25,6 +26,16 @@ public interface BoardDAO {
 	public void hitCount(int no);
 	
 	public int boardUpdate(BoardVO vo);
-	
+
+	// 그룹pt 글작성(board)
+	public int ptBoardInsert(BoardVO vo);
+	// 그룹pt 글작성(PT_group)
+	public int ptGroupInsert(BoardVO vo);
+	// 그룹pt 글목록
+	public ArrayList<BoardVO> ptList();
+	// 그룹pt 뷰페이지 선택
+	public BoardVO ptBoardSelect(int no);
+
 	public int boardDelete(int no, String userid);
 }
+
