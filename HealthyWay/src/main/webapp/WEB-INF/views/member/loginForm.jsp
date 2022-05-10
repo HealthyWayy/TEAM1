@@ -31,7 +31,8 @@
 					</div>
 				</div>
 				<div class="bottom-menu">
-					<div class="bottom-menu-left">Forgot?&nbsp;<a href="${url}/member/memberFind">ID or Password</a></div>
+
+					<div class="bottom-menu-left">Forgot?&nbsp;<a href="${url}/member/idSearch">ID or Password</a></div>
 					<div>Not a member?&nbsp;<a href="${url}/member/memberForm">Join Us</a></div>
 				</div>
 			</form>
@@ -39,7 +40,6 @@
 	</section>
 </div>
 <script>
-=
 	var id = document.getElementById("user_id");
 	if (id.value == "") {//아이디가 없을 때
 		alert("아이디를 입력하세요.");

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
+
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
@@ -34,6 +35,24 @@
 		where board_num=${param1}
 	</update>
 	
-
+	<insert id = "boardInsert">
+		insert into board(title, content, user_id)
+		value(#{title},#{content},#{user_id})
+	</insert>
+	<select id = "boardList" resultType="com.team1.health.vo.BoardVO">
+		select board_num, title, user_id, hit, date_format(write_date,'%m-%d %H:%i') write_date
+		from board 
+		<if test='searchWord !=null'>
+			where ${searchKey} like '%${searchWord}%'
+		</if>
+		order by board_num desc
+		limit ${onePageRecord} offset ${offsetIndex}
+	</select>
+	<select id = "totalRecord" resultType="int">
+		select count(board_num) cnt from board
+		<if test='searchWord!=null'>
+			where ${searchKey} like '%${searchWord}%'
+		</if>
+	</select>
 
 </mapper>

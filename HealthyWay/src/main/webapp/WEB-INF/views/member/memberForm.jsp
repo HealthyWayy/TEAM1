@@ -60,10 +60,12 @@
     		</ul>
         </form>
         <div class="check_account">이미 계정이 있으신가요?&nbsp;&nbsp;<a href="${url}/member/loginForm">로그인</a></div>
+
 	</div>
 	<div class="img_wrap">
 		<img src="${url}/img/join_img.jpeg">
 	</div>
+
 </div>
 <script type="text/javascript">
 	let nickPass = false;
@@ -259,3 +261,4 @@
 	
 	
 </script>
+
