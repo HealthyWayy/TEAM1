@@ -57,14 +57,20 @@ $(document).ready(function() {
 			}
 			console.log('idx',idx);
 			if(idx==1) {
-			$('.copywriteContent-first>span').removeClass('fade-in-box');
-			setTimeout(function() {
-  	 		$('.copywriteContent-first>span').addClass('fade-in-box');
-			},1);
+				$('.copywrite-first>span').removeClass('fade-in-box');
+				setTimeout(function() {
+	  	 		$('.copywrite-first>span').addClass('fade-in-box');
+				},1);
 			}else if(idx==2){
-			
+				$('.copywrite-second>li').removeClass('slideUp');
+				setTimeout(function() {
+	  	 		$('.copywrite-second>li').addClass('slideUp');
+				},1);
 			}else if(idx==3){
-			
+				$('.copywrite-third>div>p').removeClass("slide-up");
+				setTimeout(function() {
+	  	 		$('.copywrite-third>div>p').addClass("slide-up");
+				},1);
 			}else if(idx==4){
 			
 			}
@@ -76,6 +82,10 @@ $(document).ready(function() {
 	$(window).resize(function() {
 		for (let i = 0; i < $('.box').length; i++) {
 			array[i] = $('.box').eq(i).offset().left
-		} tmp();
+		} 
+		tmp();
 	});
 });
+
+
+/*================ 타자기 효과 =================*/
