@@ -434,7 +434,7 @@ function deleteAllIngred(){
 		</div>
 		<div id="recipeInfo">
 			<!-- title -->
-			<p id="title">레시피명&nbsp;&nbsp;<input type="text" name="title"/></p>
+			<p id="title"><span>레시피명</span><input type="text" name="title"/></p>
 	
 			<!-- 재료 리스트 -->
 			<p>재료
@@ -442,6 +442,7 @@ function deleteAllIngred(){
 				<button type="button" data-toggle="modal" data-target="#ingredModal">추가</button>
 			</p>
 			<ul id="ingredList">
+				<p style="margin-top:5%; text-align:center;">재료를 추가하세요.</p>
 			</ul>
 			
 			<!-- 레시피 설명 -->
