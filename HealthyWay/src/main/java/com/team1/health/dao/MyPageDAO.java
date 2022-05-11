@@ -15,4 +15,7 @@ public interface MyPageDAO {
 	public List<BoardVO> PTboard(String user);
 	public int userUpdate(MemberVO vo);
 	public int userDelete(String user);
+	public List<BoardVO> recipeHeart(String user);
+	public BoardVO reciepeInfor(int board_num);
+	public int reciepeHeartDel(int board_num);
 }

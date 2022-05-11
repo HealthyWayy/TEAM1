@@ -35,10 +35,30 @@ public class MyPageController {
 		//String user_id = (String)session.getAttribute("logId");
 		MemberVO userData = service.userData(user);
 		List<BoardVO> PTboardData = service.PTboard(user);
+		//pt그룹 데이터
 		mav.addObject("PTboardData",PTboardData);
+		//유저 데이터
 		mav.addObject("userData",userData);
 		mav.setViewName("/mypage/myPage");
 		return mav;
+	}
+	@DeleteMapping("/mypage/heart")
+	@ResponseBody
+	public int reciepeHeartDel(int board_num) {
+		return service.reciepeHeartDel(board_num);
+	}
+	@PostMapping("/mypage/reciepeHeart")
+	@ResponseBody
+	public List<BoardVO> reciepeHeart(HttpSession session){
+		//임시 데이터 입력
+		String user = "test";
+		//String user_id = (String)session.getAttribute("logId");
+		return service.recipeHeart(user);
+	}
+	@PostMapping("/mypage/reciepeInfor")
+	@ResponseBody
+	public BoardVO reciepeInfor(int board_num) {
+		return service.reciepeInfor(board_num);
 	}
 	//마이페이지 개인정보 삭제
 	@DeleteMapping("/mypage/user")
@@ -74,7 +94,7 @@ public class MyPageController {
 								int point = orgFileName.lastIndexOf(".");
 								String fileName = orgFileName.substring(0,point);
 								String ext = orgFileName.substring(point+1);
-								f = new File(path,fileName+"("+renameNum+")."+ext);
+								f = new File(path,fileName+"-"+renameNum+"."+ext);
 								System.out.println("if2"+!f.exists());
 								if(!f.exists()) {
 									orgFileName = f.getName();

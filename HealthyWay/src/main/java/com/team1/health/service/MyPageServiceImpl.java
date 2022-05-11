@@ -34,4 +34,19 @@ public class MyPageServiceImpl implements MyPageService{
 	public int userDelete(String user) {
 		return dao.userDelete(user);
 	}
+
+	@Override
+	public List<BoardVO> recipeHeart(String user) {
+		return dao.recipeHeart(user);
+	}
+
+	@Override
+	public BoardVO reciepeInfor(int board_num) {
+		return dao.reciepeInfor(board_num);
+	}
+
+	@Override
+	public int reciepeHeartDel(int board_num) {
+		return dao.reciepeHeartDel(board_num);
+	}
 }

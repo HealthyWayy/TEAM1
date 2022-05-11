@@ -14,10 +14,6 @@ body{
 	background-repeat : no-repeat;
     background-size : cover;
 }
-#writeFrm{
-	background-color: white;
-	opacity: 0.9;
-}
 input:focus, select:focus, textarea:focus{
 	outline:none;
 }
@@ -29,28 +25,17 @@ input:focus, select:focus, textarea:focus{
 	overflow:auto;
 	border-radius:20px;
 	border:1px solid #ddd;
+	background-color: white;
+	opacity: 0.9;
 }
 #imgDiv{
 	width:35%;
-	height:80%;
+	height:510px;
 	float: left;
 	margin-right:40px;
 }
-#imgDiv>button{
-	width:90px;
-	height:30px;
-	border:none;
-	border-radius:30px;
-	background-color: #FF5454;
-	color:white;
-}
 #file {
 	display: none
-}
-#imgfile{
-	width:30px;
-	float:right;
-	margin-right:5px;
 }
 #preview{
 	width:100%;
@@ -61,44 +46,75 @@ input:focus, select:focus, textarea:focus{
 /*오른쪽 div(레시피 정보)-------------------------------------------*/
 #recipeInfo{
 	padding-top:10px;
+	padding-left:35px;
 	width:60%;
 	float:left;
 }
-#recipeInfo>p>input[type=text]{
-	width:60%;
-	height:30px;
+#title{
+	text-align: center;
+	font-weight: bold;
+}
+#title>input{
+	width:88%;
+	height:35px;
 	padding:10px;
+	border-radius:10px;
 	border:1px solid rgb(200,200,200);
 	font-size:12pt;
 }
 #recipeInfo>p{
-	text-align:center;
+	text-align:left;
+	width:90%;
 	font-weight: bold;
 }
-#recipeInfo>p>button{
+#totalKcal{
+	padding-left:10px;
+	padding-right:10px;
+	margin-right:5px;
+	height:25px;
+	line-height:25px;
 	float:right;
+	background-color: #474747;
+	color:white;
+	border-radius:5px;
+	font-size:11pt;
 }
+
 #content{
-	margin-left:5%;
-	margin-right:5%;
 	padding:15px;
 	width:90%;
 	height:270px;
+	border-radius:10px;
 	border:1px solid rgb(200,200,200);
 	resize: none;
 	font-size:11pt;
+	margin:0 auto;
 }
 /*재료 리스트*/
 #ingredList{
-	margin:0 auto;
-	height:70px;
-	text-align: center;
-	margin-bottom:30px;
 	overflow:auto;
+	width:90%;
+	height:70px;
+	margin-bottom:30px;
+	border:1px solid rgb(200,200,200);
+	border-radius: 10px;
 }
 #ingredList>li{
+	padding-left:10px;
 	font-size: 11pt;
 	cursor: pointer;
+}
+/*재료 추가,삭제 버튼*/
+#recipeInfo>p>button{
+	float:right;
+	width:55px;
+	height:25px;
+	line-height:25px;
+	border:none;
+	border-radius:5px;
+	background-color: rgb(252,199,71);
+	font-weight:bold;
+	font-size:10pt;
 }
 #ingredList>li:hover{
 	font-weight: bold;
@@ -107,19 +123,11 @@ input:focus, select:focus, textarea:focus{
 .times{
 	color:#FF5454;
 }
-#recipeInfo>input[type=submit]{
-	width:75px;
-	height:30px;
-	border:none;
-	border-radius:30px;
-	background-color: #FF5454;
-	color:white;
-	cursor: pointer;
-	float:right;
-	margin-top:10px;
-	margin-right:40px;
+
+#recipeBtn{
+	width:90%;
 }
-#recipeInfo>input[type=reset]{
+#recipeBtn>input[type=submit], #recipeBtn>input[type=reset]{
 	width:75px;
 	height:30px;
 	border:none;
@@ -129,7 +137,6 @@ input:focus, select:focus, textarea:focus{
 	cursor: pointer;
 	float:right;
 	margin-top:10px;
-	margin-right:40px;
 }
 
 /*모달창-------------------------------------------------*/

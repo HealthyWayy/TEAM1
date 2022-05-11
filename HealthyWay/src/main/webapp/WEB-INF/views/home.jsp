@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link href="/css/home.css" rel="stylesheet" type="text/css"/>
@@ -53,4 +54,5 @@
         	<img alt="" src="/img/exercise03.jpg">
         </div>
         <div class="box"><img alt="" src="/img/exercise04.jpg"></div>
+
 </div>
