@@ -48,6 +48,7 @@
 						<p class="slide-up dThird">a test.</p>
 					</div>
 				</div>
+				 <button class="custom-btn btn-5"><span>start</span></button>
 		</div>
         	<img alt="" src="/img/exercise03.jpg">
         </div>
