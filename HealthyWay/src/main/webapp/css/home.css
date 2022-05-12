@@ -273,7 +273,7 @@ iteration-count | direction | fill-mode | play-state | name */
 
 /* 5 */
 .btn-5 {
-	width: 120px;
+	width: 150px;
 	height: 50px;
 	line-height: 50px;
 	padding: 0;
@@ -281,18 +281,19 @@ iteration-count | direction | fill-mode | play-state | name */
 	background: rgb(255, 27, 0);
 	background: linear-gradient(0deg, rgba(255, 27, 0, 1) 0%,
 		rgba(251, 75, 2, 1) 100%);
-	transform: translateY(100px);
-	transform: translateX(48vw);
-	font-size:20px;
+	transform: translate(48vw, 3vh);
+	font-size:25px;
 	color:white;
 	box-sizing: border-box;
 	border-radius: 10px;
+	transition: all 300ms ease-out;
 }
 
 .btn-5:hover {
   color: #f0094a;
   background: transparent;
    box-shadow:none;
+   font-size: 35px;
 }
 .btn-5:before,
 .btn-5:after{
@@ -304,7 +305,7 @@ iteration-count | direction | fill-mode | play-state | name */
   width:0;
   background: #f0094a;
   box-shadow:
-   -1px -1px 5px 0px #fff,
+   0px 0px 1px 0px #fff,
    7px 7px 20px 0px #0003,
    4px 4px 5px 0px #0002;
   transition:400ms ease all;
@@ -320,6 +321,68 @@ iteration-count | direction | fill-mode | play-state | name */
   width:100%;
   transition:800ms ease all;
 }
+
+/*===================== 네번째 버튼 ===========================*/
+
+@import url(https://fonts.googleapis.com/css?family=Hind:700);
+
+.copywrite-fourth {
+	font-family: 'Hind', sans-serif;
+	position: relative;
+	left: 5vw;
+}
+.blur-animation {
+	color: transparent;
+	animation: blur 10s ease-out forwards;
+	-webkit-animation: blur 5s ease-out forwards;
+}
+
+.copywrite-fourth>span:nth-child(1) {
+	animation-delay: 0.1s;
+	-webkit-animation-delay: 0.1s;
+}
+.copywrite-fourth>span:nth-child(2) {
+	animation-delay: 0.2s;
+	-webkit-animation-delay: 0.2s;
+}
+.copywrite-fourth>span:nth-child(3) {
+	animation-delay: 0.3s;
+	-webkit-animation-delay: 0.3s;
+}
+.copywrite-fourth>span:nth-child(4) {
+	animation-delay: 0.4s;
+	-webkit-animation-delay: 0.4s;
+}
+.copywrite-fourth>span:nth-child(5) {
+	animation-delay: 0.5s;
+	-webkit-animation-delay: 0.5s;
+}
+.copywrite-fourth>span:nth-child(6) {
+	animation-delay: 0.6s;
+	-webkit-animation-delay: 0.6s;
+}
+.copywrite-fourth>span:nth-child(7) {
+	animation-delay: 0.7s;
+	-webkit-animation-delay: 0.7s;
+}
+
+@keyframes blur {
+	0%		{text-shadow:  0 0 100px #fff; opacity:0;}
+	20%		{text-shadow:  0 0 90px #fff;}
+	30%		{opacity: 1;}
+	40%		{text-shadow:  0 0 0px #fff;}
+	100%	{text-shadow:  0 0 0px #fff;}
+}
+
+@-webkit-keyframes blur {
+	0%		{text-shadow:  0 0 100px #fff; opacity:0;}
+	20%		{text-shadow:  0 0 90px #fff;}
+	30%		{opacity: 1;}
+	40%		{text-shadow:  0 0 0px #fff;}
+	100%	{text-shadow:  0 0 0px #fff;}
+}
+
+
 
 /*============================서클형 버튼======================================*/
 

@@ -11,6 +11,7 @@
         				<span class="fade-in-box dSecond">color is beautiful</span><br/>
         				<span class="fade-in-box dThird">color is beautiful</span>
         			</div>
+        			<div></div>
         		</div>
   			 	<div class="inner1">
 					<ul class="activity">
@@ -52,5 +53,18 @@
 		</div>
         	<img alt="" src="/img/exercise03.jpg">
         </div>
-        <div class="box"><img alt="" src="/img/exercise04.jpg"></div>
+        <div class="box">
+	        <div class="cover">
+				<p class="copywrite-fourth">
+					<span class="blur-animation">It's</span>
+					<span class="blur-animation">all</span>
+					<span class="blur-animation">becoming</span>
+					<span class="blur-animation">clear</span>
+					<span class="blur-animation">to</span>
+					<span class="blur-animation">me</span>
+					<span class="blur-animation">now</span>
+				</p>
+			</div>
+	        <div class="box"><img alt="" src="/img/exercise04.jpg"></div>
+        </div>
 </div>
