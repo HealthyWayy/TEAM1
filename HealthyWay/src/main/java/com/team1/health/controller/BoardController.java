@@ -1,6 +1,7 @@
 package com.team1.health.controller;
 
 import java.nio.charset.Charset;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -31,9 +32,10 @@ public class BoardController {
 	public ModelAndView boardList(PagingVO pVO){
 		ModelAndView mav = new ModelAndView();
 		
+		List<BoardVO> temp = service.boardList(pVO);
+		System.out.println("temp : " + temp.get(0).getTitle());
 		
 		pVO.setTotalRecord(service.totalRecord(pVO));
-		
 		mav.addObject("list", service.boardList(pVO));
 		mav.addObject("pVO", pVO);
 		
@@ -62,7 +64,7 @@ public class BoardController {
 			service.boardInsert(vo);
 			String msg = "<script>";
 				   msg += "alert('성공');";
-				   msg += "location.href='/myapp/board/boardList';";
+				   msg += "location.href='/board/boardList';";
 				   msg += "</script>";
 			entity = new ResponseEntity<String>(msg, header, HttpStatus.OK);
 		}catch(Exception e) {
@@ -79,13 +81,13 @@ public class BoardController {
 	
 	
 	@GetMapping("boardView")
-	public ModelAndView boardView(int no){
+	public ModelAndView boardView(int board_num){
 		ModelAndView mav = new ModelAndView();
 		
-		service.hitCount(no);
+		service.hitCount(board_num);
 		
-		mav.addObject("vo", service.boardSelect(no));
-		mav.setViewName("board/boardView");
+		mav.addObject("vo", service.boardSelect(board_num));
+		mav.setViewName("/board/boardView");
 		return mav;
 	}
 	
@@ -150,7 +152,7 @@ public class BoardController {
 	public String getEditSuccessMessage(int no) {
 		String msg = "<script>";
 			   msg += "alert('등록이 성공했습니다.');";
-			   msg += "location.href='/myapp/board/boardView?no="+no+"';";
+			   msg += "location.href='/board/boardView?no="+no+"';";
 			   msg += "</script>";
 		return msg;
 	}

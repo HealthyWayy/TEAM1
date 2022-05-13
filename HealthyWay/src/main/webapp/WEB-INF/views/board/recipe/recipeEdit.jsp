@@ -7,14 +7,6 @@
 <link rel="stylesheet" href="/css/recipeWrite.css" type="text/css" />
 <script src="/js/recipeScript.js"></script>
 
-<style>
-
-</style>
-
-<script>
-
-</script>
-
 <div>
 	<!-- 재료 모달창 -->
 	<div class="modal fade" id="ingredModal">

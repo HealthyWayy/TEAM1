@@ -25,6 +25,7 @@ public class BoardServiceImpl implements BoardService {
 	//4
 	@Override
 	public List<BoardVO> boardList(PagingVO pVO) {
+		System.out.println("dao : " + dao.boardList(pVO).get(0).getBoard_num());
 		return dao.boardList(pVO);
 	}
 	//5
