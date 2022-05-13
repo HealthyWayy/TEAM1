@@ -1,3 +1,4 @@
+
 package com.team1.health.vo;
 
 
@@ -25,7 +26,7 @@ public class BoardVO {
 	//recipe_board 좋아요 테이블
 	private String recipe_img_file;
 	private double total_kcal;
-
+	private String originRecipeImg;
 
 
 	public int getBoard_num() {
@@ -133,8 +134,14 @@ public class BoardVO {
 	public void setTotal_kcal(double total_kcal) {
 		this.total_kcal = total_kcal;
 	}
+	public String getOriginRecipeImg() {
+		return originRecipeImg;
+	}
+	public void setOriginRecipeImg(String originRecipeImg) {
+		this.originRecipeImg = originRecipeImg;
+	}
+
 
 
 }
-
 

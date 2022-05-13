@@ -5,12 +5,22 @@
 a:link { color: black; text-decoration: none;}
 a:visited { color: black; text-decoration: none;}
 a:hover { color: black; text-decoration: none;}
+@font-face {
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 400;
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+}
 
+body{
+	font-family: "NanumBarunGothic";
+}
 /*메인 배너*/
 #recipe_banner{
 	position:relative;
 	width:100%;
-	height:300px;
+	height:250px;
 	margin-top:4%;
 	margin-bottom:3%;
 }
@@ -23,7 +33,7 @@ a:hover { color: black; text-decoration: none;}
 }
 #headText{
 	position:absolute;
-	top:80px;
+	top:27%;
 	width:100%;
 	heihgt:50px;
 	text-align: center;
@@ -32,7 +42,7 @@ a:hover { color: black; text-decoration: none;}
 }
 #recipe_banner>a>p{
 	position:absolute;
-	top:150px;
+	top:54%;
 	width:100%;
 	text-align: center;
 	font-size:11pt;
@@ -40,25 +50,23 @@ a:hover { color: black; text-decoration: none;}
 /*추천 레시피 리스트*/
 #recipe_list{
 	margin:0 auto;
-	padding-left:50px;
 	margin-bottom:50px;
-	width:1200px;
+	width:90%;
 	overflow:auto;
 }
 .recipe_div{
 	position:relative;
-	width:250px;
-	height:300px;
+	width:23%;
+	height:340px;
 	float:left;
-	margin-right:50px;
 	border-radius:15px;
+	margin-left:1.6%;
 }
 .recipe_img{
 	position:relative;
-	width:250px;
-	height:300px;
+	width:100%;
+	height:99%;
 	float:left;
-	margin-right:50px;
 	border-radius:15px;
 }
 .recipe_info{
@@ -69,10 +77,10 @@ a:hover { color: black; text-decoration: none;}
 	height:100%;
 	border-radius:15px;
 	background-color: white;
-	display:none;
-	opacity: 0.8;
+	opacity: 0;
 	cursor : pointer;
 }
+
 .title, .kcal{
 	font-size:20px;
 	text-align: center;
@@ -80,24 +88,42 @@ a:hover { color: black; text-decoration: none;}
 }
 .title{
 	position: absolute;
-	top:95px;
+	top:35%;
 }
 .kcal{
 	position:absolute;
-	top:130px;
+	top:45%;
 }
 .recipe_div:hover .recipe_info{
-	display:block;
-	transition:500ms;
+	opacity:0.75;
+	transition:0.4s;
 }
 .heart1, .heart2{
 	position:absolute;
-	left:220px;
-	top:8px;
-	width:25px;
+	left:87%;
+	top:2%;
+	width:10%;
+}
+.heart2{
+	display:none;
 }
 
-
+@media ( min-width: 1800px ) {
+	#recipe_banner{
+		height:400px;
+	}
+	#headText{
+		top:30%;
+		font-size:35pt;
+	}
+	#recipe_banner>a>p{
+		top:53%;
+		font-size:13pt;
+	}
+	.recipe_div{
+		height:580px;
+	}
+}
 </style>
 <script>
 $(function(){
@@ -109,12 +135,83 @@ $(function(){
 		$("#headText").css("color","black");
 	});
 	
-	$(".heart2").click(function(){
-		console.log("하트 클릭");
-		return false;//하트 클릭 후 페이지 이동되지 않도록
+	$(document).ready(function(){
+		setHeart();
 	});
 	
+	$(".heart1").click(function(){
+		var num = $(this).attr("id").substring(2);
+		insertHeart(num);
+		return false;
+	});
+	
+	$(".heart2").click(function(){
+		var num = $(this).attr("id").substring(2);
+		deleteHeart(num);
+		return false;
+	});
 });
+
+function setHeart(){
+	$.ajax({
+		url: "/recipe/selectHeart",
+		type: "post",
+		success: function(result){
+			if(result.length>0){
+				$(result).each(function(){
+					var boardNum = this.board_num;
+					$("#e_"+boardNum).css("display", "none");
+					$("#e-"+boardNum).css("display", "none");
+					$("#f_"+boardNum).css("display", "block");
+					$("#f-"+boardNum).css("display", "block");
+				});
+			}
+		},
+		error: function(e){
+			console.log(e.responseText);
+		}
+	});
+}
+
+function insertHeart(boardNum){
+	
+	$.ajax({
+		url: "/recipe/insertHeart",
+		type: "post",
+		data: "board_num="+boardNum,
+		success: function(result){
+			$("#e_"+boardNum).css("display", "none");
+			$("#e-"+boardNum).css("display", "none");
+			$("#f_"+boardNum).css("display", "block");
+			$("#f-"+boardNum).css("display", "block");
+		},
+		error: function(e){
+			console.log(e.responseText);
+		}
+	});
+	
+	return false;
+}
+function deleteHeart(boardNum){
+	
+	$.ajax({
+		url: "/recipe/deleteHeart",
+		type: "post",
+		data: "board_num="+boardNum,
+		success: function(result){
+			$("#e_"+boardNum).css("display", "block");
+			$("#e-"+boardNum).css("display", "block");
+			$("#f_"+boardNum).css("display", "none");
+			$("#f-"+boardNum).css("display", "none");
+		},
+		error: function(e){
+			console.log(e.responseText);
+		}
+	});
+	
+	return false;
+}
+
 
 </script>
 <div>
@@ -129,60 +226,24 @@ $(function(){
 	
 	<!-- 레시피 목록 -->
 	<div id="recipe_list">
-		<c:if test="${vo!=null}">
+		<c:if test="${not empty vo}">
 			<c:forEach var="vo" items="${vo}">
 				<div class="recipe_div">
 					<img src="/recipeImg/upload/${vo.recipe_img_file}" class="recipe_img"/>
-					<a href="javascript:void(0);"><img src="/recipeImg/heart2.png" class="heart2"/></a>
+					<c:if test="${logId!=null}">
+						<img src="/recipeImg/heart1.png" class="heart1" id="e_${vo.board_num}"/>
+						<img src="/recipeImg/heart2.png" class="heart2" id="f_${vo.board_num}"/>
+					</c:if>
 					<div class="recipe_info" onclick="javascript:location='/recipe/view?board_num=${vo.board_num}';">
-						<a href="javascript:void(0);"><img src="/recipeImg/heart2.png" class="heart2"/></a>
+					<c:if test="${logId!=null}">
+						<img src="/recipeImg/heart1.png" class="heart1" id="e-${vo.board_num}"/>
+						<img src="/recipeImg/heart2.png" class="heart2" id="f-${vo.board_num}"/>
+					</c:if>
 						<p class="title">${vo.title}</p>
 						<p class="kcal">${vo.total_kcal}kcal</p>
 		            </div>
 				</div>
 			</c:forEach>
 		</c:if>
-	<!--  
-		<div class="recipe_img">
-			<img src="/recipeImg/sample.jpg" class="recipe_img"/>
-			<a href="javascript:void(0);"><img src="/recipeImg/heart2.png" class="heart2"/></a>
-			<div class="recipe_info" onclick="javascript:void(0);">
-				<a href="javascript:void(0);"><img src="/recipeImg/heart2.png" class="heart2"/></a>
-				<br/><br/><br/><br/>
-				<p>연어 샌드위치</p>
-				<p>100kcal</p>
-            </div>
-		</div>
-		<div class="recipe_img">
-			<img src="/recipeImg/sample.jpg" class="recipe_img"/>
-			<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
-			<div class="recipe_info" onclick="javascript:void(0);">
-			<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
-				<br/><br/><br/><br/>
-				<p>시금치 파스타</p>
-				<p>100kcal</p>
-            </div>
-		</div>
-		<div class="recipe_img">
-			<img src="/recipeImg/sample.jpg" class="recipe_img"/>
-			<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
-			<div class="recipe_info" onclick="javascript:void(0);">
-				<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
-				<br/><br/><br/><br/>
-				<p>곤약 냉면</p>
-				<p>100kcal</p>
-            </div>
-		</div>
-		<div class="recipe_img">
-			<img src="/recipeImg/sample.jpg" class="recipe_img"/>
-			<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
-			<div class="recipe_info" onclick="javascript:void(0);">
-				<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
-				<br/><br/><br/><br/>
-				<p>라이스페이퍼 치킨</p>
-				<p>100kcal</p>
-            </div>
-		</div>
 	</div>
-	-->
 </div>
