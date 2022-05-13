@@ -68,15 +68,7 @@ ul, li {
 	padding-left: 30px;
 }
 /*======================첫번째 페이지================================*/
-.inner1 {
-	/*이동하기*/
-	position:relative;
-	left: 240px;
-	top: 19px;
-	width: 600px;
-	margin: 0 auto;
-	
-}
+
 
 /*==========================애니메이션===============================*/
 
@@ -156,16 +148,6 @@ iteration-count | direction | fill-mode | play-state | name */
 	height: 190px;
 	line-height: 300px;
 	font-size: 80px;
-}
-
-.inner2 {
-	/*이동하기*/
-	position:relative;
-	left: 490px;
-	top: 0px;
-	width: 600px;
-	margin: 0 auto;
-	
 }
 
 .slideUp {
@@ -271,30 +253,32 @@ iteration-count | direction | fill-mode | play-state | name */
     }
 }
 
+
+/*.btn1-box {
+	transform:translate(47vw, 3vh);
+	max-height:12vw;
+	max-height: 7vh;
+	padding:0px !important;
+}*/
+
 /* 5 */
-.btn-5 {
-	width: 150px;
-	height: 50px;
-	line-height: 50px;
+/*.btn-5 {
+	width: 12vw;
+	height: 7vh;
+	line-height: 7vh;
 	padding: 0;
+	margin:0 !important;
 	border: none;
 	background: rgb(255, 27, 0);
 	background: linear-gradient(0deg, rgba(255, 27, 0, 1) 0%,
 		rgba(251, 75, 2, 1) 100%);
-	transform: translate(48vw, 3vh);
 	font-size:25px;
 	color:white;
-	box-sizing: border-box;
-	border-radius: 10px;
+	border-radius: 10%;
 	transition: all 300ms ease-out;
+	
 }
 
-.btn-5:hover {
-  color: #f0094a;
-  background: transparent;
-   box-shadow:none;
-   font-size: 35px;
-}
 .btn-5:before,
 .btn-5:after{
   content:'';
@@ -316,24 +300,40 @@ iteration-count | direction | fill-mode | play-state | name */
   left:0;
   bottom:0;
 }
+
+.btn-5:hover {
+  color: #f0094a;
+  background: transparent;
+   box-shadow:none;
+   font-size: 35px;
+}
+
 .btn-5:hover:before,
 .btn-5:hover:after{
   width:100%;
   transition:800ms ease all;
 }
+.btn-5:active {
+	transform:scale(0.9);
+		
+}
+.btn-5:active:before, .btn-5:active:after {
+	width:100%;
+  	transition:800ms ease all;
+}*/
 
-/*===================== 네번째 버튼 ===========================*/
+/*===================== 네번째 페이지 ===========================*/
 
 @import url(https://fonts.googleapis.com/css?family=Hind:700);
 
 .copywrite-fourth {
 	font-family: 'Hind', sans-serif;
 	position: relative;
-	left: 5vw;
+	left: 2vw;
 }
 .blur-animation {
 	color: transparent;
-	animation: blur 10s ease-out forwards;
+	animation: blur 5s ease-out forwards;
 	-webkit-animation: blur 5s ease-out forwards;
 }
 
@@ -381,21 +381,160 @@ iteration-count | direction | fill-mode | play-state | name */
 	40%		{text-shadow:  0 0 0px #fff;}
 	100%	{text-shadow:  0 0 0px #fff;}
 }
+/*== 버튼 ===*/
+.btn-container {
+	height: 30vh;
+	line-height:25vh;
+	
+}
 
+.form-move-1 {
+	transform:translate(45vw, 1.8vh);
+}
 
+.form-move-2 {
+	transform:translate(74vw, 0vh);
+}
+
+.form-move-3 {
+	transform:translate(44vw, 2vh);
+}
+
+.form-move-4 {
+	transform:translate(25vw, 2.3vh);
+}
+
+.blob-btn {
+    z-index: 1;
+    position: relative;
+    padding: 20px 46px;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #f0094a;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    transition: color 0.5s;
+    cursor: pointer;
+    border-radius: 30px;
+    box-sizing: border-box;
+    
+  }
+  .blob-btn:before {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+	border-style:none;
+    border-radius: 30px;
+    box-sizing: border-box;
+  }
+  .blob-btn:after {
+    content: "";
+    z-index: -2;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s 0.2s;
+    border-radius: 30px;
+    box-sizing: border-box;
+  }
+  .blob-btn:hover {
+    color: #FFFFFF;
+    border-radius: 30px;
+  }
+  .blob-btn:hover:after {
+    transition: all 0.3s;
+    left: 0;
+    top: 0;
+    border-radius: 30px;
+  }
+  
+  .blob-btn:active {
+    color: #FFFFFF;
+    border-radius: 30px;
+    transform:scale(0.95);
+  }
+
+  
+  
+  .blob-btn__inner {
+    z-index: -1;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    background: #ffffff;
+  }
+  .blob-btn__blobs {
+    position: relative;
+    display: block;
+    height: 100%;
+    filter: url('#goo');
+  }
+  .blob-btn__blob {
+    position: absolute;
+    top: 2px;
+    width: 25%;
+    height: 100%;
+    background: #f0094a;
+    border-radius: 100%;
+    transform: translate3d(0, 150%, 0) scale(1.7);
+    transition: transform 0.45s;
+  }
+  @supports (filter: url('#goo')) {
+    .blob-btn__blob {
+      transform: translate3d(0, 150%, 0) scale(1.4);
+    }
+  }
+  .blob-btn__blob:nth-child(1) {
+    left: 0%;
+    transition-delay: 0s;
+  }
+  .blob-btn__blob:nth-child(2) {
+    left: 30%;
+    transition-delay: 0.08s;
+  }
+  .blob-btn__blob:nth-child(3) {
+    left: 60%;
+    transition-delay: 0.16s;
+  }
+  .blob-btn__blob:nth-child(4) {
+    left: 90%;
+    transition-delay: 0.24s;
+  }
+  .blob-btn:hover .blob-btn__blob {
+    transform: translateZ(0) scale(1.7);
+  }
+  @supports (filter: url('#goo')) {
+    .blob-btn:hover .blob-btn__blob {
+      transform: translateZ(0) scale(1.4);
+    }
+  }
 
 /*============================서클형 버튼======================================*/
 
 
-
+/*
 .activity {
 	padding: 0;
 	margin: 2em 0;
 	list-style: none;
-}
+}*/
 
 /*안쪽 원*/
-.activity li:before {
+/*.activity li:before {
 	-webkit-transition: all 0.2s ease;
 	-moz-transition: all 0.2s ease;
 	transition: all 0.2s ease;
@@ -426,9 +565,10 @@ iteration-count | direction | fill-mode | play-state | name */
 	margin: 0 1em 1em;
 	position: relative;
 	text-align: center;
-	text-transform: lowercase;
+	text-transform: lowercase; 
+	*/
 	/*크기*/
-	width: 4em;
+/*	width: 4em;
 	height: 4em;
 	line-height: 4em;
 	display:flex;
@@ -440,9 +580,11 @@ iteration-count | direction | fill-mode | play-state | name */
 	left: 0px;
 	top: -5px;
 	align-self: center;
+	color:white;
 }
 
 .activity li:hover {
+	color:white !important;
 	box-shadow: 0 0 0 7px #fff;
 }
 
@@ -467,9 +609,10 @@ iteration-count | direction | fill-mode | play-state | name */
 	box-shadow: 0 0 0 1px #fff;
 	opacity: 0.5;
 }
-
+*/
 
 /*================================ 애니메이션 딜레이 ===============================*/
+
 .dFirst {
 	animation-delay:1s;
 	-moz-animation-delay:1s;

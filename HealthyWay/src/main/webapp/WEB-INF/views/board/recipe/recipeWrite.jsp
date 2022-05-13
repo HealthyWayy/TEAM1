@@ -6,7 +6,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="/css/recipeWrite.css" type="text/css" />
 <script>
-$(function(){
+$(function(){	
 	
 	//이미지 첨부되면 실행
 	$("#file").change(function() {
@@ -14,8 +14,9 @@ $(function(){
 	});
 	
 	//취소 버튼
-    $("#recipeInfo>input[type=reset]").click(function(){
+    $("#recipeBtn>input[type=reset]").click(function(){
     	if(confirm("글 작성을 취소하시겠습니까?")==true){
+    		deleteAllIngred();
 			location="/recipe/list";
 		}
     });
@@ -32,6 +33,7 @@ $(function(){
 		}
 		
 		var params = $("#ingredSearch").serialize();
+		
 		$.ajax({
 			url: '/recipe/searchIngred',
 			data: params,
@@ -69,7 +71,7 @@ $(function(){
 		var kcal = $("#ingredKcal").val();
 		var gram = $(this).val();
 		var result = kcal/100*gram;
-		$(".gKcal").text("칼로리: "+result.toFixed(1)+"kcal");
+		$("#gKcal").text("kcal: "+result.toFixed(0)+"kcal");
 	});
 	
 	//재료 추가(db insert)
@@ -87,6 +89,11 @@ $(function(){
 			$("#ingredGram").focus();
 			return false;
 		}
+		var kcal = $("#gKcal").text();
+		var idx =  kcal.lastIndexOf(":")+2;
+		var idx2 = kcal.lastIndexOf("kcal");
+		kcal = kcal.substring(idx,idx2);
+		$("#ingredKcal").val(kcal);
 		
 		//재료 추가 매핑
 		var params = $("#ingredFrm").serialize();
@@ -111,23 +118,50 @@ $(function(){
 	$("#writeFrm").submit(function(){
 		event.preventDefault();
 		
-		//유효성 검사
-		if($("#title").val()==""){
+		//유효성 검사------------------------------
+		if($("#title>input").val()==""){//title
 			alert("레시피 제목을 입력하세요.");
-			$("#title").focus();
+			$("#title>input").focus();
 			return false;
 		}
-		if($("#ingredList>li").length<=0){
+		if($("#ingredList>li").length<=0){//재료
 			alert("재료를 추가하세요.");
 			return false;
 		}
-		if($("#contnet").val()==""){
-			alert("레시피 설명란을 입력하세요.");
-			$("#contnet").focus();
+		if($("#content").val()==""){//content
+			alert("레시피 설명을 입력하세요.");
+			$("#content").focus();
+			return false;
+		}
+		if ($("#file").val() == '') {//input file
+			alert("이미지를 첨부하세요.");
 			return false;
 		}
 		
-		return false;
+		var file = $("#file").val();
+		var idx = file.lastIndexOf("\\")+1;
+		var img = $("#imgFile").val(file.substring(idx));
+		$("#imgFile").val(file.substring(idx));
+		
+		var params = new FormData($("#writeFrm")[0]);
+		
+		$.ajax({
+			url: '/recipe/addRecipe',
+			data: params,
+			method:"post",
+			processData: false,
+			contentType: false,
+			success:function(result){
+				if(result>0){
+					alert("레시피가 등록되었습니다.");
+					location="/recipe/list";
+				}
+			},
+			error:function(e){
+				console.log(e.responseText);
+				alert("레시피가 등록되지 않았습니다.");
+			}
+		});
 	});
 });
 
@@ -186,7 +220,7 @@ function ingredReset(){
 	$("#ingredKcal").val("");
 	$("#ingredGram").val("");
 	$("#ingredName").html("재료");
-	$(".gKcal").val("칼로리: ");
+	$("#gKcal").html("kcal: ");
 	$("#measurement>li>img").attr("src","/recipeImg/mesure.png");
 	$(".g1").html("100g");
 	$(".g2").html("200g");
@@ -199,7 +233,7 @@ function mesureClick(gram){
 	$("#ingredGram").val(gram);
 	var kcal = $("#ingredKcal").val();
 	var result = kcal/100*gram;
-	$(".gKcal").text("칼로리: "+result.toFixed(1)+"kcal");
+	$("#gKcal").text("kcal: "+result.toFixed(0)+"kcal");
 }
 //페이지 클릭 이벤트
 function setPageNum(num){
@@ -257,13 +291,20 @@ function paging(pageNum, totalRecord){
 function ingredList(){
 	$.ajax({
 		url: "/recipe/ingredList",
-		type: "get",
+		type: "post",
+		data: "board_num=0",
 		success: function(result){
 			var tag="";
+			var kcal=0;
+			$("#ingredList").html("");
 			$(result).each(function(){
-				tag = '<li id="'+this.gred_num+'"onclick="deleteIngred(\''+this.gred_num+'\');">'+this.gred_name+'&nbsp;'+this.gred_gram+'g&nbsp;<span class="times">&times;</span></li>';
+				tag = '<li id="'+this.gred_num+'"onclick="deleteIngred(\''+this.gred_num+'\', \''+this.gred_kcal+'\');">'+this.gred_name+'&nbsp;'+this.gred_gram+'g&nbsp;<span class="times">&times;</span></li>';
 				$("#ingredList").append(tag);
+				kcal+=this.gred_kcal;
 			});
+			
+			$("#total_kcal").val(kcal);
+			$("#totalKcal").text("Total Kcal : "+kcal+"kcal");
 		},
 		error: function(e){
 			console.log(e.responseText);
@@ -271,21 +312,50 @@ function ingredList(){
 	});
 }
 
-function deleteIngred(gredNum){
+function deleteIngred(gredNum, gredkcal){
 	
 	if(confirm("재료를 삭제하시겠습니까?")==false){
 		return false;
 	}
+	
 	$.ajax({
 		url: "/recipe/deleteIngred",
-		data: "gred_num="+gredNum,
+		data: "gred_num="+gredNum+"&board_num=0",
 		type: "post",
 		success: function(result){
 			if(result<0){
 				alert("재료 삭제 실패");
 			}
 			alert("재료 삭제 완료");
-			$("#"+gredNum).html("");
+			$("#gredNum").html("");
+			var kcal = $("#totalKcal").text();
+			var idx =  kcal.lastIndexOf(":")+2;
+			var idx2 = kcal.indexOf("kcal");
+			kcal = kcal.substring(idx,idx2);
+			kcal -= gredkcal;
+			$("#totalKcal").text("Total : "+kcal+"kcal");
+		},
+		error: function(e){
+			console.log(e.responseText);
+		}
+	});
+}
+function deleteAllIngred(){
+	if(confirm("추가하신 재료를 모두 삭제하시겠습니까?")==false){
+		return false;
+	}
+	
+	$.ajax({
+		url: "/recipe/deleteAllIngred",
+		type: "post",
+		data: "board_num=0",
+		success: function(result){
+			if(result<0){
+				alert("재료 삭제 실패");
+			}
+			alert("재료 삭제 완료");
+			$("#totalKcal").text("Total : 0kcal");
+			$("#ingredList").html("");
 		},
 		error: function(e){
 			console.log(e.responseText);
@@ -300,7 +370,7 @@ function deleteIngred(gredNum){
 	    <div class="modal-content">
 			<div class="modal-header">
 	        <h4 class="modal-title">Ingredient List</h4>
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <button type="button" class="close" data-dismiss="modal" onclick="ingredReset();">&times;</button>
 		</div>
 		
 	    <div class="modal-body">
@@ -337,7 +407,7 @@ function deleteIngred(gredNum){
 				<p style="font-size:9pt; margin:0; color:gray;">*정확한 칼로리 계산을 위해 <br/>직접 입력하시는 것을 추천드립니다.</p>
 	    		<div id="ingredInfo">
 	    			<input type="number" name="gred_gram" id="ingredGram" placeholder="직접입력"/>&nbsp;g
-	    			<p class="gKcal">칼로리: <p/>
+	    			<p id="gKcal">kcal: <p/>
 	    		</div>
 	    		<div id="ingredBtn">
 		   			<input type="submit" value="추가"/>
@@ -354,30 +424,37 @@ function deleteIngred(gredNum){
 	    </div>
 	  </div>
 	</div>
-	<form method="post" action="/recipe/wirte" id="writeFrm" enctype="multipart/form-data">
+	<form method="post" action="/recipe/addRecipe" id="writeFrm" enctype="multipart/form-data">
+		
 		<div id="imgDiv">
-			<button type="button" data-toggle="modal" data-target="#ingredModal">+재료추가</button>
 			<!-- 이미지 첨부 -->
-			<input type="file" name="filename" id ="file"/>
-			<input type="hidden" name="imgFile" value="" id="imgFile"/>
-			<a href="javascript:document.getElementById('file').click();"><img src="/recipeImg/sampleimg.png" id="preview"/></a>
+			<input type="file" name="file" id ="file" value=""/>
+			<input type="hidden" name="recipe_img_file" value="" id="imgFile"/>
+			<a href="javascript:document.getElementById('file').click();"><img src="/recipeImg/inputimg3.png" id="preview"/></a>
 		</div>
 		<div id="recipeInfo">
 			<!-- title -->
-			<p>레시피 이름&nbsp;&nbsp;<input type="text" name="title" id="title"/></p>
-			
+			<p id="title"><span>레시피명</span><input type="text" name="title"/></p>
+	
 			<!-- 재료 리스트 -->
-			<p>재료</p>
+			<p>재료
+				<button type="button" onclick="deleteAllIngred();" style="margin-left:10px; background-color: #ddd;" title="모든 재료 삭제">삭제</button>
+				<button type="button" data-toggle="modal" data-target="#ingredModal">추가</button>
+			</p>
 			<ul id="ingredList">
+				<p style="margin-top:5%; text-align:center;">재료를 추가하세요.</p>
 			</ul>
 			
 			<!-- 레시피 설명 -->
-			<p>레시피 설명</p>
+			<p>레시피 설명 <span id="totalKcal">Total: 0kcal</span></p>
 			<textarea name="content" id="content"></textarea>
+			<input type="hidden" name="total_kcal" id="total_kcal" value=""/>
 			
 			<!-- 버튼 -->
-			<input type="reset" value="취소"/>
-			<input type="submit" value="등록"/>
+			<div id="recipeBtn">
+				<input type="reset" value="취소"/>
+				<input type="submit" value="등록" style="margin-right:30px;"/>
+			</div>
 		</div>
 	</form>
 </div>

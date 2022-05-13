@@ -21,4 +21,15 @@
 	<delete id="userDelete">
 		delete from user where user_id=#{param1};
 	</delete>
+	<select id="recipeHeart" resultType='BoardVO'>
+		select b.board_num,b.user_id,content,title,total_kcal,recipe_img_file from board b join heart h on b.board_num=h.board_num 
+		join recipe_board r on b.board_num=r.board_num where h.user_id=#{param1};
+	</select>
+	<select id="reciepeInfor" resultType='BoardVO'>
+		select b.board_num,b.user_id,content,title,total_kcal,recipe_img_file from board b join heart h on b.board_num=h.board_num 
+		join recipe_board r on b.board_num=r.board_num where b.board_num=#{param1};
+	</select>
+	<delete id='reciepeHeartDel'>
+		delete from heart where board_num=${param1}
+	</delete>
 </mapper>

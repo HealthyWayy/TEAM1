@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import com.team1.health.service.MemberService;
 import com.team1.health.vo.MemberVO;
 
+
 @Controller
 @RequestMapping("/member/")
 @Service
@@ -44,6 +45,7 @@ public class MemberController {
 		return mav;
 	}
 	
+	// 로그아웃
     @GetMapping("logout")
     public ModelAndView logout(HttpSession session) {
         session.invalidate();
@@ -52,11 +54,13 @@ public class MemberController {
         return mav;
     }
 	
+    // 회원가입 폼
 	@GetMapping("memberForm")
     public String memberForm() {
         return "member/memberForm";
     }
 	
+	// 회원가입 확인
 	@PostMapping("memberOk")
     public String memberFormOk(MemberVO vo, Model model) {
         int cnt = service.memberInsert(vo);
@@ -64,20 +68,46 @@ public class MemberController {
         return "member/memberResult";
     }
 	
+	// ---중복검사
 	@PostMapping("checkId")
     @ResponseBody
-    public MemberVO checkId (@RequestBody MemberVO vo) {
-        return service.checkId(vo);
+    public String checkId (String user_id) {
+		user_id = service.checkId(user_id);
+		return user_id;
     }
+	
     @PostMapping("checkNick")
     @ResponseBody
-    public MemberVO checkNick (@RequestBody MemberVO vo) {
-        return service.checkNick(vo);
+    public String checkNick (String user_nickname) {
+    	user_nickname = service.checkNick(user_nickname);
+		return user_nickname;
     }
     @PostMapping("checkTel")
     @ResponseBody
-    public MemberVO checkTel (@RequestBody MemberVO vo) {
-        return service.checkTel(vo);
+    public String checkTel (String tel) {
+    	tel = service.checkTel(tel);
+		return tel;
     }
+    
+    @PostMapping("checkEmail")
+    @ResponseBody
+    public String checkEmail (String user_email) {
+    	user_email = service.checkEmail(user_email);
+		return user_email;
+    }
+    // ---중복검사 끝
+	    
+	// 아이디 찾기
+    @GetMapping("idSearch")
+    public String idSearch() {
+        return "member/idSearch";
+    }
+    
+ // 비밀번호 찾기
+    @GetMapping("pwSearch")
+    public String pwSearch() {
+        return "member/pwSearch";
+    }
+    
 }
  
