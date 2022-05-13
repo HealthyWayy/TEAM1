@@ -17,13 +17,13 @@
   <div>
   	<a href="/trainning/trainningHome">Training</a>
   	<a href="/recipe/main">Recipe</a>
+  	<a href="/board/ptList">PT</a>
   	<c:if test="${logStatus != 'Y' }">
-  		<a href="/member/loginForm">Login</a>
+  		<a href="/member/loginForm" class="last-icon">Login</a>
   	</c:if>
   	<c:if test="${logStatus == 'Y' }">
   		<a href="/mypage">Mypage</a>
   		<a href="/member/logout">Logout</a>
-  	</c:if>
-  	
+  	</c:if>	
   </div>  
 </header>

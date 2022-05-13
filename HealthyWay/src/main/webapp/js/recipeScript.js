@@ -120,7 +120,7 @@ $(function(){
 	//글 수정 submit 이벤트
 	$("#writeFrm").submit(function(){
 		event.preventDefault();
-		
+		console.log($("#file").val());
 		//유효성 검사------------------------------
 		if($("#title>input").val()==""){//title
 			alert("레시피 제목을 입력하세요.");
@@ -136,13 +136,12 @@ $(function(){
 			$("#content").focus();
 			return false;
 		}
-		
+		/*
 		if ($("#file").val() == '') {//input file
 			alert("이미지를 첨부하세요.");
 			return false;
 		}
-		
-		
+		*/
 		var params = new FormData($("#writeFrm")[0]);
 		var board_num = $("#board_num").val();
 		$.ajax({
@@ -345,7 +344,7 @@ function deleteIngred(gredNum, boardNum){
 }
 function deleteAllIngred(boardNum){
 	
-	if(confirm("추가하신 재료를 모두 삭제하시겠습니까?")==false){
+	if(confirm("추가하신 재료를 모두 삭제하시겠습니까?\n(기존에 있던 재료는 삭제되지 않습니다.)")==false){
 		return false;
 	}
 	
@@ -357,7 +356,6 @@ function deleteAllIngred(boardNum){
 			if(result<0){
 				alert("재료 삭제 실패");
 			}
-			alert("재료 삭제 완료");
 			$("#totalKcal").text("Total : 0kcal");
 			$("#ingredList").html("");	//재료 리스트 초기화
 			ingredList(boardNum);
