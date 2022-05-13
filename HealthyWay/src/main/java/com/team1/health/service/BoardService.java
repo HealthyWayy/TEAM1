@@ -2,6 +2,7 @@ package com.team1.health.service;
 
 import java.util.List;
 
+
 import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.PagingVO;
 
@@ -13,14 +14,21 @@ public interface BoardService {
 	//3
 	public int totalRecord(PagingVO pVO);
 	//4
-	public BoardVO boardSelect(int no);
+	public BoardVO boardSelect(int board_num);
 	//5
-	public void hitCount(int no);
+	public void hitCount(int board_num);
 	//6
 	public int boardUpdate(BoardVO vo);
 
-	public int boardDelete(String userid, int no);
+	//7
+	public int boardDelete(int board_num, String user_id);
+	
+	//8
+	public BoardVO boardSelectByNo(int board_num);
 
-	public int boardDelete(int no, String userid);
+	//9
+	public BoardVO boardView(int board_num);
+
+	
+	
 }
-

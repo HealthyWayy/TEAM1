@@ -8,7 +8,7 @@ public class BoardVO {
 	private String title;
 	private String content;
 	private int hit;
-	private String writedate;
+	private String write_date;
 	private String mod_date;
 	private int type_num;
 	
@@ -20,8 +20,6 @@ public class BoardVO {
 	private int pt_count;
 	private String pt_img_file;
 	private String keyword;
-	
-	private int datecal;
 
 
 	//recipe_board 좋아요 테이블
@@ -60,11 +58,11 @@ public class BoardVO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	public String getWritedate() {
-		return writedate;
+	public String getWrite_date() {
+		return write_date;
 	}
-	public void setWritedate(String writedate) {
-		this.writedate = writedate;
+	public void setWrite_date(String write_date) {
+		this.write_date = write_date;
 	}
 	public String getMod_date() {
 		return mod_date;
@@ -135,14 +133,8 @@ public class BoardVO {
 	public void setTotal_kcal(double total_kcal) {
 		this.total_kcal = total_kcal;
 	}
-	
-	public int getDatecal() {
-		return datecal;
-	}
-	public void setDatecal(int datecal) {
-		this.datecal = datecal;
-	}
 
 
 }
+
 
