@@ -47,7 +47,7 @@
         await predict();
         window.requestAnimationFrame(loop);
     }
-
+    var count = 0;
     async function predict() {
         // Prediction #1: run input through posenet
         // estimatePose can take in an image, video or canvas html element
@@ -57,7 +57,27 @@
         // Prediction 2: run input through teachable machine classification model
         // 예측 2: 학습 가능한 기계 분류 모델을 통해 입력 실행
         const prediction = await model.predict(posenetOutput);
-        console.log(prediction[0]);
+        // console.log(prediction[0].probability); // 확률을 나타내주는 것 prediction[0].probability
+
+        let movement = prediction[1].probability
+        
+        setInterval(() => {
+            if (movement >= 0.99){
+            console.log('잘하셨습니다!');
+            document.getElementById('display').innerHTML = '잘하셨습니다!' + count;
+                count = count + 1;
+            
+            
+            console.log(count);
+            
+        }else if(movement>=0.6){
+            console.log('조금더 정확한 자세를 취해주세요!');
+            document.getElementById('display').innerHTML = '조금더 정확한 자세를 취해주세요!';
+            count = count;
+        }
+        }, 4000);
+        
+
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
@@ -80,9 +100,13 @@
             }
         }
     }
-    init();
+    setTimeout(() => {
+        init()
+    }, 4000);
+    // init();
 </script>
-
+    <P id="display"></P>
+	<video src="/my_model/countdown5s.mp4" autoplay muted style="width:100%; heigth:100%; margin: 0 auto;"></video>
     영상 띄워 놓는곳
     <video src="/my_model/힙으뜸/프론트컬.mp4" autoplay controls loop muted style="float:left">
         tmp
