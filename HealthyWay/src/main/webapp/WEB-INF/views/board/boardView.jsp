@@ -24,4 +24,4 @@
             <input class="bo__btn__m" type="submit" id="btn_submit" value="수정">
             <input class="bo__btn__mb" type="button" value="목록으로" onclick="javascript:history.back()">
        </form>
-    </div>
+</div>

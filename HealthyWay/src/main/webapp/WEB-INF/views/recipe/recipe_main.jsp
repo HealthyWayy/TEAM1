@@ -11,14 +11,15 @@ a:hover { color: black; text-decoration: none;}
 	position:relative;
 	width:100%;
 	height:300px;
-	margin-top:50px;
-	margin-bottom:50px;
+	margin-top:4%;
+	margin-bottom:3%;
 }
 #bannerImg{
 	position:absolute;
 	width:90%;
 	height:90%;
 	margin-left:5%;
+	margin-right:5%;
 }
 #headText{
 	position:absolute;

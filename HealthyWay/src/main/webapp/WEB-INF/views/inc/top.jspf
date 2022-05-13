@@ -12,18 +12,25 @@
 <link href="/css/top.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<header id="navbar">
-  <a href="/">Logo</a>
-  <div>
-  	<a href="/trainning/trainningHome">Training</a>
-  	<a href="/recipe/main">Recipe</a>
+<header class="nav-bar">
+  <ul>
+  	<li><a href="/">Logo</a></li>
+  </ul>
+  <ul>
   	<c:if test="${logStatus != 'Y' }">
-  		<a href="/member/loginForm">Login</a>
+  		<li><a href="/member/loginForm">Login</a></li>	
   	</c:if>
   	<c:if test="${logStatus == 'Y' }">
-  		<a href="/mypage">Mypage</a>
-  		<a href="/member/logout">Logout</a>
+  		<li><div class="profile-container dropbtn"></div></li>
+	  	<li><a href="/member/logout">Logout</a></li>
   	</c:if>
-  	
-  </div>  
+  </ul>
 </header>
+<nav class="dropdown-content">
+	 <ul>
+	 	<li>menu1</li>
+	 	<li>menu2</li>
+	 	<li>menu3</li>
+	 	<li>menu4</li>
+	 </ul>
+</nav>

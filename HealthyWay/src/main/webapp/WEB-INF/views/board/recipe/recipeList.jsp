@@ -192,7 +192,7 @@ function deleteRecipe(boardNum){
 			<div class="recipe_div" style="margin-bottom:30px;">
 				<a href="/recipe/view?board_num=${vo.board_num}"><img src="/recipeImg/upload/${vo.recipe_img_file}" class="recipe_img"/></a>
 				<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
-				<c:if test="${logid==vo.user_id}">
+				<c:if test="${logId==vo.user_id}">
 					<div id="editDelete">
 						<a href="/recipe/edit?board_num=${vo.board_num}">수정</a>/<a href="javascript:deleteRecipe(${vo.board_num});">삭제</a>
 					</div>

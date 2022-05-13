@@ -1,8 +1,10 @@
 package com.team1.health.controller;
 
 
-import java.util.HashMap;
 
+import java.util.HashMap;
+import java.nio.charset.Charset;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +38,7 @@ public class BoardController {
 	@Inject 
 	BoardService service;
 	
-	@Inject
+  @Inject
 	MemberService memberService;
 	
 	//건의할래요 뷰 1
@@ -68,6 +70,7 @@ public class BoardController {
 		}
 	
 	
+
 	
 	
 	//공지사항 등록 뷰 2
@@ -101,8 +104,10 @@ public class BoardController {
 		try {
 			service.boardInsert(vo);
 			String msg = "<script>";
+
 				   msg += "alert('등록이 성공했습니다');";
-				   msg += "location.href='/boardList';";
+				   msg += "location.href='/board/boardList';";
+
 				   msg += "</script>";
 				   
 			System.out.println("write");
@@ -118,6 +123,7 @@ public class BoardController {
 		
 		return entity;
 	}
+
 	//공지 삭제요청 3
 	@DeleteMapping("/board/boardList")
     public ResponseEntity<HashMap<String,String>> suggestionDelete(int board_num, HttpServletRequest request, HttpSession session){
@@ -198,6 +204,7 @@ public class BoardController {
 	    	}
 	    	return mav;
 	    }  
+
 		
 	    
 	    
@@ -242,4 +249,5 @@ public class BoardController {
 	    	return entity;
 	    }
 		
+
 }

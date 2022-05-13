@@ -19,6 +19,7 @@ public interface BoardService {
 	public void hitCount(int board_num);
 	//6
 	public int boardUpdate(BoardVO vo);
+
 	//7
 	public int boardDelete(int board_num, String user_id);
 	
@@ -27,9 +28,7 @@ public interface BoardService {
 
 	//9
 	public BoardVO boardView(int board_num);
-	
-	
-	
+
 	
 	
 }

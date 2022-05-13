@@ -66,7 +66,7 @@
 	<div class="bo__n__page">
 		현재 페이지 ${pvo.pageNum}/ ${pvo.totalPage }
 	</div>
-	
+
 	
 	<!-- 페이징 -->
 	<ul class="paging">

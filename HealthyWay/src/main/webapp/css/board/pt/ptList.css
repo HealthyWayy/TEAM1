@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-*{
-	font-family: 'Noto Sans KR', sans-serif;
-	font-family: 'Open Sans', sans-serif;
-}
-
 body, ul, li{
 	margin: 0;
 	padding: 0;
@@ -60,10 +55,10 @@ body, ul, li{
 
 .search_box input{
 	border: none;
-    width: 270px;
+    width: 250px;
     float: left;
     padding: 5px;
-    height: 35px;
+    height: 25px;
 }
 
 .search_box input:focus{
@@ -112,6 +107,7 @@ body, ul, li{
     margin-right: 20px;
     margin-bottom: 30px;
     cursor: pointer;
+    height: 340px;
 }
 
 .pt_post_wrap li{
@@ -124,19 +120,24 @@ body, ul, li{
 }
 
 .main_img_wrap img{
-	width: 100%;
+    width: 280px;
+    height: 150px;
 }
 
 .pt_post_wrap li:nth-child(7n+2){
 	font-size: 13px;
     margin: 10px;
     color: #929292;
+    width: 93%;
+    height: 15.5px;
 }
 
 .pt_post_wrap li:nth-child(7n+3){
-	font-size: 1.2em;
+    font-size: 1.2em;
     font-weight: 900;
-    margin: 0px 10px 40px;
+    margin: 0px 10px 30px;
+    width: 93%;
+    height: 50px;
 }
 
 .pt_post_wrap li:nth-child(7n+4){
@@ -144,7 +145,7 @@ body, ul, li{
     margin-left: 10px;
     font-size: 14px;
     color: gray;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .pt_post_wrap li:nth-child(7n+5){
@@ -153,7 +154,7 @@ body, ul, li{
 	margin-right: 10px;
     font-size: 14px;
     color: gray;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .pt_post_wrap li:nth-child(7n+6){

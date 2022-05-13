@@ -72,7 +72,10 @@ $(document).ready(function() {
 	  	 		$('.copywrite-third>div>p').addClass("slide-up");
 				},1);
 			}else if(idx==4){
-			
+				$('.copywrite-fourth>span').removeClass("blur-animation");
+				setTimeout(function() {
+	  	 		$('.copywrite-fourth>span').addClass("blur-animation");
+				},1);
 			}
 		}
 	});

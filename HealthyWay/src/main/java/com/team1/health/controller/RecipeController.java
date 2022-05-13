@@ -137,8 +137,8 @@ public class RecipeController {
 		}
 
 		// db 추가 코드
-		// String logid = (String)session.getAttribute("logid");
-		vo.setUser_id("tpdbs"); //여기 나중에 꼭 바꾸기!
+		String logId = (String)session.getAttribute("logId");
+		vo.setUser_id(logId);
 		vo.setType_num(1);
 		
 		int result = service.recipeInsert(vo); // board
@@ -172,16 +172,17 @@ public class RecipeController {
 	//레시피 수정(DB)
 	@PostMapping("/recipe/update")
 	@ResponseBody
-	public int recipeUpdate(BoardVO vo, HttpServletRequest request, MultipartHttpServletRequest mr) {
-
+	public int recipeUpdate(BoardVO vo, HttpSession session, HttpServletRequest request, MultipartHttpServletRequest mr) {
+/*
 		// 파일 업로드
 		mr = (MultipartHttpServletRequest) request;
 		MultipartFile file = mr.getFile("file");
 		
+		System.out.println(mr.getFileNames());
 		//이미지 새로 업로드했을 때(업로드 전은 none으로 설정해둠)
 		if(file.getOriginalFilename()!="none") {
 			
-			//파일명 중복되지 않게 처리
+			//파일명 중복되지 않게 처리하는 코드
 			UUID uuid = UUID.randomUUID();
 			String filename = uuid.toString()+"_"+file.getOriginalFilename();
 			vo.setRecipe_img_file(filename);
@@ -200,9 +201,9 @@ public class RecipeController {
 				System.out.println("파일 업로드 실패");
 			}
 		}
-		
-		// String logid = (String)session.getAttribute("logid");
-		vo.setUser_id("tpdbs");
+*/		
+		String logId = (String)session.getAttribute("logId");
+		vo.setUser_id(logId);
 		int result = service.recipeUpdate(vo);
 		service.recipeUpdate2(vo.getRecipe_img_file(), vo.getTotal_kcal(), vo.getBoard_num());
 		service.setBoardNum(vo);
