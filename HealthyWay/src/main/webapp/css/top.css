@@ -2,12 +2,20 @@
 a {
 	text-decoration: none;
 	color:white;
+	transition: all 300ms ease;
 }
 
-body {
+* {
 	font-family: sans-serif;
 }
-
+ul, li {
+	margin:0;
+	padding:0;
+	list-style-type: none;
+}
+a:hover {
+	color: orange;
+}
 header {
 	position: absolute;
 	left:0;
@@ -15,21 +23,25 @@ header {
 	width: 100vw;
 	height: 6vh;
 	/*background-color: rgba(0,0,0,0.4);*/
-	z-index: 9999999;
+	z-index: 1000;
 	font-size: 17px;
 	display: flex;
 	justify-content: space-between;
+	align-items:center;
+}
+
+.nav-bar>ul {
+	display:flex;
 	align-items: center;
 }
-header a {
-	padding-left: 10px;
-	padding-right: 10px;
+.nav-bar>ul:first-of-type {
+	margin-left:1.5vw;
 }
-header a:first-of-type {
-	padding-left: 30px;
+.nav-bar>ul:last-of-type {
+	margin-right:1.5vw;
 }
-header a:last-of-type {
-	padding-right: 30px;
+.nav-bar>ul:last-of-type>li {
+	margin-left:0.8vw;
 }
 @font-face{
 	src:url("/font/Binggrae-Bold.ttf");
@@ -42,5 +54,17 @@ header a:last-of-type {
 @font-face{
  	src:url("/font/Binggrae.ttf");
  	font-family : "BinggraeReguler";
+}
+.profile-container {
+	background-color:beige;
+	margin-top:0.6vh;
+	width: 5vh;
+	height: 5vh;
+	border-radius: 50%;
+	overflow: hidden;
+	cursor: pointer;
+}
+.dropdown-content {
+	display:none;
 }
 
