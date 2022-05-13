@@ -9,10 +9,19 @@ ul,li{
 	padding:0;
 	list-style: none;
 }
+@font-face {
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 400;
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+}
+
 body{
 	background-image:url('/recipeImg/recipe.jpg');
 	background-repeat : no-repeat;
     background-size : cover;
+    font-family: "NanumBarunGothic";
 }
 input:focus, select:focus, textarea:focus{
 	outline:none;
@@ -20,7 +29,7 @@ input:focus, select:focus, textarea:focus{
 
 /*왼쪽 div(제목, 이미지 추가)-------------------------------------------*/
 #writeFrm{
-	margin:5%;
+	margin:7%;
 	padding:4%;
 	overflow:auto;
 	border-radius:20px;
@@ -30,7 +39,8 @@ input:focus, select:focus, textarea:focus{
 	font-size: 11pt;
 }
 #imgDiv{
-	width:40%;
+	width:37%;
+	height:500px;
 	float: left;
 }
 #file {
@@ -38,7 +48,8 @@ input:focus, select:focus, textarea:focus{
 }
 #preview{
 	width:100%;
-	height:auto;
+	height:100%;
+	object-fit: cover;
 }
 
 /*오른쪽 div(레시피 정보)-------------------------------------------*/
@@ -46,16 +57,17 @@ input:focus, select:focus, textarea:focus{
 	width:57%;
 	height:80%;
 	float:left;
-	margin-left:3%;
+	margin-left:6%;
 }
 #title>span{
 	text-align: center;
-	font-weight: bold;
 	height:35px;
 	line-height: 35px;
+	margin-right:10px;
+	margin-bottom:3%;
 }
 #title>input{	
-	width:89%;
+	width:90%;
 	height:35px;
 	padding:1%;
 	border-radius:10px;
@@ -79,7 +91,7 @@ input:focus, select:focus, textarea:focus{
 #content{
 	padding:2%;
 	width:100%;
-	height:250px;
+	height:200px;
 	border-radius:10px;
 	border:1px solid rgb(200,200,200);
 	resize: none;
@@ -89,8 +101,7 @@ input:focus, select:focus, textarea:focus{
 #ingredList{
 	overflow:auto;
 	width:100%;
-	height:170px;
-	max-height:250px;
+	height:150px;
 	margin-bottom:4%;
 	border:1px solid rgb(200,200,200);
 	border-radius: 10px;
@@ -295,4 +306,50 @@ input:focus, select:focus, textarea:focus{
 }
 #ingredBtn>input[type=reset]{
 	float:right;
+}
+
+@media ( min-width: 1800px ) {
+	#writeFrm{
+		padding:5%;
+		font-size:16pt;
+	}
+	#imgDiv{
+		height: 850px;
+	}
+	#recipeInfo{
+		height:850px;
+		font-size:18pt;
+	}
+	#title{
+		margin-bottom:4%;
+	}
+	#title>input{
+		width:91%;
+		height: 55px;
+	}
+	#boardInfo{
+		font-size:14pt;
+	}
+	#ingredList{
+		height:190px;
+	}
+	#recipeInfo>p>button{
+		width:7%;
+		height:40px;
+		line-height:43px;
+		font-size:16pt;
+	}
+	#content{
+		height:390px;
+	}
+	#totalKcal{
+		height:33px;
+		line-height:35px;
+	}
+	#recipeBtn>input[type=submit], #recipeBtn>input[type=reset]{
+		width:10%;
+		height:45px;
+		line-height:48px;
+		margin-top:1.5%;
+	}
 }

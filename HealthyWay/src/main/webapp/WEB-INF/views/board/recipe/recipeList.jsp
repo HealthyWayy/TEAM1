@@ -5,49 +5,66 @@
 a:link { color: black; text-decoration: none;}
 a:visited { color: black; text-decoration: none;}
 a:hover { color: black; text-decoration: none;}
+@font-face {
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 400;
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+}
 
+body{
+	font-family: "NanumBarunGothic";
+}
 ul,li{
 	margin:0;
 	padding:0;
 	list-style: none;
 }
+
 #topImg{
 	position:relative;
 	width:100%;
-	height:260px;
-	margin-bottom:50px;
+	height:230px;
+	margin-top:4%;
+	margin-bottom:3%;
 }
 #topImg>img{
 	position:absolute;
-	width:90%;
+	width:85%;
 	height:100%;
-	margin-left:5%;
+	margin-left:7.5%;
 }
 #topImg>h1{
 	position:absolute;
-	top:75px;
+	top: 25%;
 	width:100%;
 	heihgt:50px;
 	text-align: center;
 	line-height:50px;
-	font-size:30pt;
+	font-size:25pt;
 }
 #topImg>p{
 	position:absolute;
-	top:140px;
+	top:50%;
 	width:100%;
 	text-align: center;
-	font-size:11pt;
+	font-size:12pt;
 }
-
+/*검색, 글쓰기 div*/
+#top{
+	width:100%;
+	margin-bottom:4%;
+	background-color: pink;
+}
 /*검색폼*/
 #searchFrm{
 	float:left;
+	width:40%;
 	margin:0;
-	margin-right:10px;
 }
 #searchFrm>input[type=text]{
-	width:210px;
+	width:60%;
 	height:27px;
 	border-radius:10px;
 	border:1px solid rgb(200,200,200);
@@ -56,8 +73,8 @@ ul,li{
 	outline-color: #FF5454;
 }
 #searchFrm>input[type=submit]{
-	width:50px;
-	height:27px;
+	width:10%;
+	height:30px;
 	border:none;
 	border-radius:30px;
 	background-color: #FF5454;
@@ -67,8 +84,9 @@ ul,li{
 /*글쓰기 버튼*/
 #writeBtn{
 	float:right;
-	width:75px;
-	height:27px;
+	margin-right:2%;
+	width:7%;
+	height:30px;
 	border-radius: 30px;
 	border:none;
 	background-color: #FF5454;
@@ -79,64 +97,77 @@ ul,li{
 /*레시피 글 목록*/
 #recipe_list{
 	margin:0 auto;
-	margin-bottom:50px;
-	width:1160px;
+	width:85%;
+	height:45%;
 	overflow:auto;
+	margin-bottom:2%;
+	padding-left:2%;
 }
 /*레시피 목록*/
 .recipe_div{
 	position:relative;
-	width:260px;
-	height:275px;
+	width:23%;
+	height:300px;
 	float:left;
-	margin-right:30px;
+	margin-right:2%;
 	border-radius:15px;
-}
-/*수정,삭제*/
-#editDelete{
-	position:absolute;
-	bottom:-12px;
-	left:190px;
-}
-#editDelete>a{
-	font-size:11pt;
-}
-#editDelete>a:hover{
-	font-weight:bold;
-	color:gray;
-}
-#top{
-	overflow: auto;
-	width:1130px;
-	margin-bottom:20px;
 }
 .recipe_img{
 	width:100%;
-	height:95%;
+	height:100%;
 	border-radius:15px;
 }
-.recipe_div>p{
-	margin:0;
+.title{
+	position:absolute;
+	width:100%;
+	height:40px;
+	line-height:45px;
+	top:35%;
+	font-size:13pt;
 	text-align:center;
+	background-color: white;
+	opacity: 0;
+	/*줄바꿈*/
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow: ellipsis;
+	cursor: pointer;
+}
+.recipe_div:hover .title{
+	opacity:0.8;
+	transition: 0.4s;
+}
+.recipe_div:hover{
+	transform: scale(1.02);
+	transition : transform 0.4s;
 }
 .heart1, .heart2{
 	position:absolute;
-	left:223px;
-	top:7px;
-	width:28px;
+	left:86%;
+	top:1.7%;
+	width:11%;
+	cursor: pointer;
 }
+.heart2{
+	display:none;
+}
+
 /*페이징*/
 .paging{
 	text-align: center;
+	margin:0 auto;
+	margin-bottom:3%;
+	width:85%;
+	height:27px;
 }
 .paging>a>li{
 	display:inline-block;
-	width:25px;
-	height:25px;
-	line-height:24px;
+	width:1.7%;
+	line-height:30px;
+	height:100%;
 	text-align:center;
 	font-size:10pt;
-	margin-right:5px;
+	margin-right:0.1%;
 	border-radius:10px;
 	background-color: rgb(235,235,235);
 }
@@ -144,30 +175,127 @@ ul,li{
 	color:white;
 	background-color:#FF5454 !important;
 }
-/*rgb(226,224,250):보라색*/
+#nullCheck{
+	font-size:22px;
+	text-align: center;
+	margin-top:10%;;
+}
+
+@media ( min-width: 1800px ) {
+  	#topImg{
+		height:350px;
+	}
+	#topImg>h1{
+		top: 30%;
+		width:100%;
+		font-size:33pt;
+	}
+	#topImg>p{
+		top: 50%;
+		width:100%;
+		font-size:20pt;
+	}
+	.recipe_div{
+		height:550px;
+	}
+	#searchFrm>input[type=submit]{
+		width:10%;
+		height:45px;
+		font-size:12pt;
+	}
+	/*글쓰기 버튼*/
+	#writeBtn{
+		width:6%;
+		height:45px;
+		font-size:12pt;
+	}
+	.title{
+		height:55px;
+		line-height:60px;
+		top:40%;
+		font-size:22pt;
+	}
+}
 </style>
 
 <script>
-function deleteRecipe(boardNum){
-	if(confirm("레시피를 삭제하시겠습니까?")==false){
+$(function(){
+	$(document).ready(function(){
+		setHeart();
+	});
+	
+	$(".heart1").click(function(){
+		var num = $(this).attr("id").substring(2);
+		insertHeart(num);
 		return false;
-	}
+	});
+	
+	$(".heart2").click(function(){
+		var num = $(this).attr("id").substring(2);
+		deleteHeart(num);
+		return false;
+	});
+	
+	$("#searchFrm").submit(function(){
+		if($("#searchFrm>input[type=text]").val()==""){
+			alert("검색어를 입력해 주세요.");
+			return false;
+		}
+	});
+});
+function setHeart(){
 	
 	$.ajax({
-		url: "/recipe/delete",
-		data : "board_num="+boardNum,
+		url: "/recipe/selectHeart",
 		type: "post",
 		success: function(result){
-			if(result>0){
-				alert("레시피가 삭제되었습니다.");
-				location="/recipe/list";
+			if(result.length>0){
+				$(result).each(function(){
+					var boardNum = this.board_num;
+					$("#e_"+boardNum).css("display", "none");
+					$("#f_"+boardNum).css("display", "block");
+				});
 			}
 		},
 		error: function(e){
 			console.log(e.responseText);
-			alert("레시피 삭제 실패하였습니다.");
 		}
 	});
+}
+
+function insertHeart(boardNum){
+	
+	$.ajax({
+		url: "/recipe/insertHeart",
+		type: "post",
+		data: "board_num="+boardNum,
+		success: function(result){
+			$("#e_"+boardNum).css("display", "none");
+			$("#f_"+boardNum).css("display", "block");
+		},
+		error: function(e){
+			console.log(e.responseText);
+		}
+	});
+	
+	return false;
+}
+function deleteHeart(boardNum){
+	
+	$.ajax({
+		url: "/recipe/deleteHeart",
+		type: "post",
+		data: "board_num="+boardNum,
+		success: function(result){
+			$("#e_"+boardNum).css("display", "block");
+			$("#f_"+boardNum).css("display", "none");
+		},
+		error: function(e){
+			console.log(e.responseText);
+		}
+	});
+	
+	return false;
 }
 </script>
 <!-- <a href='https://kr.freepik.com/psd/banner'>Banner psd는 freepik - kr.freepik.com가 제작함</a>-->
@@ -182,73 +310,77 @@ function deleteRecipe(boardNum){
 	<div id="recipe_list">
 		<!-- 등록/검색 -->
 		<div id="top">
-			<a href="/recipe/write"><button id="writeBtn">글쓰기</button></a>
-			<form id="searchFrm">
-				<input type="text"/>
+			<c:if test="${logId!=null}">
+				<a href="/recipe/write"><button id="writeBtn">글쓰기</button></a>
+			</c:if>
+			<form id="searchFrm" action="/recipe/list">
+				<input type="hidden" name="searchKey" value="all"/>
+				<input type="text" name="searchValue"/>
 				<input type="submit" value="검색"/>
 			</form>
 		</div>
-		<c:forEach var="vo" items="${vo}">
-			<div class="recipe_div" style="margin-bottom:30px;">
-				<a href="/recipe/view?board_num=${vo.board_num}"><img src="/recipeImg/upload/${vo.recipe_img_file}" class="recipe_img"/></a>
-				<a href="javascript:void(0);"><img src="/recipeImg/heart1.png" class="heart1"/></a>
-				<c:if test="${logId==vo.user_id}">
-					<div id="editDelete">
-						<a href="/recipe/edit?board_num=${vo.board_num}">수정</a>/<a href="javascript:deleteRecipe(${vo.board_num});">삭제</a>
-					</div>
-				</c:if>
-				<p>${vo.title}</p>
-			</div>
-		</c:forEach>
-		
-		<!-- <a href="javascript:void(0);"><img src="/recipeImg/heart2.png" class="heart2"/></a> -->
-		
-	</div>
-	
-	<!-- 페이징 -->
-	<ul class="paging">
-		<!-- prev -->
-		<c:if test="${pVO.pageNum==1}">
-			<a href="javascript:alert('이전 페이지가 존재하지 않습니다');"><li>◀</li></a>
+		<c:if test="${not empty vo}">
+			<c:forEach var="vo" items="${vo}">
+				<div class="recipe_div" style="margin-bottom:30px;">
+					<a href="/recipe/view?board_num=${vo.board_num}"><img src="/recipeImg/upload/${vo.recipe_img_file}" class="recipe_img"/></a>
+					<c:if test="${logId!=null}">	<!-- 로그인 한 경우만 찜하기 가능 -->
+						<img src="/recipeImg/heart1.png" class="heart1" id="e_${vo.board_num}"/>
+						<img src="/recipeImg/heart2.png" class="heart2" id="f_${vo.board_num}"/>
+					</c:if>
+					<p class="title">${vo.title}<br/>${vo.total_kcal}kcal</p>
+				</div>
+			</c:forEach>
+		<c:if test="${empty vo}">
+			<p id="nullCheck">검색하신 레시피가 존재하지 않습니다.</p>
 		</c:if>
-		<c:if test="${pVO.pageNum>1}">
-    		<a href="/recipe/list?pageNum=${pVO.pageNum-1}
-    			<c:if test='${pVO.searchValue!=null}'>
-    				&searchKey=${pVO.searchKey}&searchValue=${pVO.searchValue}
-    			</c:if>
-    		"><li>◀</li></a>
-    	</c:if>
-    	
-    	<!-- page -->
-    	<c:forEach var="i" begin="${pVO.startPage}" end="${pVO.startPage+pVO.onePageCount-1}">
-	    	<c:if test="${i<=pVO.totalPage}">
-	    		<a href="/recipe/list?pageNum=${i}
-	    			<c:if test='${pVO.searchValue!=null}'>
-		    			&searchKey=${pVO.searchKey}
-		    			&searchValue=${pVO.searchValue}
-		    		</c:if>
-		    	">
-	    		<c:if test="${i==pVO.pageNum}">
-	    			<li class="active_list">
-	    		</c:if>
-	    		<c:if test="${i!=pVO.pageNum}">
-	    			<li>
-	    		</c:if>
-	    		${i}</li></a>
-	    	</c:if>
-    	</c:forEach>
-    	
-    	<!-- next -->
-    	<c:if test="${pVO.pageNum==pVO.totalPage}">
-    		<a href="javascript:alert('다음 페이지가 존재하지 않습니다');"><li>▶</li></a>
-    	</c:if>
-    	<c:if test="${pVO.pageNum<pVO.totalPage}">
-    		<a href="/recipe/list?pageNum=${pVO.pageNum+1}
-    		<c:if test='${pVO.searchValue!=null}'>
-		  		&searchKey=${pVO.searchKey}
-		    	&searchValue=${pVO.searchValue}
-		    </c:if>
-		    "><li>▶</li></a>
-    	</c:if>
-	</ul>
+	</div>
+	<c:if test="${not empty vo}">
+			<!-- 페이징 -->
+			<ul class="paging">
+				<!-- prev -->
+				<c:if test="${pVO.pageNum==1}">
+					<a href="javascript:alert('이전 페이지가 존재하지 않습니다');"><li>◀</li></a>
+				</c:if>
+				<c:if test="${pVO.pageNum>1}">
+		    		<a href="/recipe/list?pageNum=${pVO.pageNum-1}
+		    			<c:if test='${pVO.searchValue!=null}'>
+		    				&searchKey=${pVO.searchKey}&searchValue=${pVO.searchValue}
+		    			</c:if>
+		    		"><li>◀</li></a>
+		    	</c:if>
+		    	
+		    	<!-- page -->
+		    	<c:forEach var="i" begin="${pVO.startPage}" end="${pVO.startPage+pVO.onePageCount-1}">
+			    	<c:if test="${i<=pVO.totalPage}">
+			    		<a href="/recipe/list?pageNum=${i}
+			    			<c:if test='${pVO.searchValue!=null}'>
+				    			&searchKey=${pVO.searchKey}
+				    			&searchValue=${pVO.searchValue}
+				    		</c:if>
+				    	">
+			    		<c:if test="${i==pVO.pageNum}">
+			    			<li class="active_list">
+			    		</c:if>
+			    		<c:if test="${i!=pVO.pageNum}">
+			    			<li>
+			    		</c:if>
+			    		${i}</li></a>
+			    	</c:if>
+		    	</c:forEach>
+		    	
+		    	<!-- next -->
+		    	<c:if test="${pVO.pageNum==pVO.totalPage}">
+		    		<a href="javascript:alert('다음 페이지가 존재하지 않습니다');"><li>▶</li></a>
+		    	</c:if>
+		    	<c:if test="${pVO.pageNum<pVO.totalPage}">
+		    		<a href="/recipe/list?pageNum=${pVO.pageNum+1}
+		    		<c:if test='${pVO.searchValue!=null}'>
+				  		&searchKey=${pVO.searchKey}
+				    	&searchValue=${pVO.searchValue}
+				    </c:if>
+				    "><li>▶</li></a>
+		    	</c:if>
+			</ul>
+		</c:if>
+	</c:if>
 </div>
