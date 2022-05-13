@@ -39,10 +39,11 @@ $(function() {
 	 });
    });
  $(function() {
-    $("#btn_delete").on("click",function() {
+    console.log($)
+	 $("#btn_delete").on("click",function() {
         $(function(){
             var url = "${url}/board/boardList";
-            var data = $("#suggestFrm").serialize()
+            var data = $("#boardFrm").serialize()
          $.ajax({
             url : url,
             type : "DELETE",
@@ -55,7 +56,8 @@ $(function() {
             error : function(error){
                console.log(error.responseJSON);
                alert(error.responseJSON.msg);
-               window.location.href = error.responseJSON.redirect;
+               
+              //window.location.href = error.responseJSON.redirect;
             }
             
         }) ; 
@@ -68,7 +70,7 @@ $(function() {
 <div id="#b__table">
         <h1 class="bf__title">👇 공지사항 👇</h1>
         <form id="boardFrm" name="boardFrm" class="bf__container">
-        	<input type="hidden" value=${bvo.board_num} name="board_num">
+        	<input type="hidden" value="${bvo.board_num}" name="board_num">
         	<input type="hidden" value="boardwrite" name="command">
             <table>
                 <tr>

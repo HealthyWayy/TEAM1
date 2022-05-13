@@ -39,6 +39,6 @@
 		update board set title=#{title}, content=#{content} where board_num=${board_num} and user_id=#{user_id}
 	</update>
 	<delete id="boardDelete">
-		delete from board where user_id=#{param1} and board_num=${param2}
+		delete from board where board_num=#{param1} and user_id=#{param2}
 	</delete>
 </mapper>

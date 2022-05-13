@@ -1,10 +1,8 @@
 package com.team1.health.controller;
 
 
-
 import java.util.HashMap;
-import java.nio.charset.Charset;
-import java.util.List;
+
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +36,7 @@ public class BoardController {
 	@Inject 
 	BoardService service;
 	
-  @Inject
+	@Inject
 	MemberService memberService;
 	
 	//건의할래요 뷰 1
@@ -70,7 +68,6 @@ public class BoardController {
 		}
 	
 	
-
 	
 	
 	//공지사항 등록 뷰 2
@@ -104,10 +101,8 @@ public class BoardController {
 		try {
 			service.boardInsert(vo);
 			String msg = "<script>";
-
 				   msg += "alert('등록이 성공했습니다');";
-				   msg += "location.href='/board/boardList';";
-
+				   msg += "location.href='/boardList';";
 				   msg += "</script>";
 				   
 			System.out.println("write");
@@ -123,16 +118,17 @@ public class BoardController {
 		
 		return entity;
 	}
-
 	//공지 삭제요청 3
 	@DeleteMapping("/board/boardList")
-    public ResponseEntity<HashMap<String,String>> suggestionDelete(int board_num, HttpServletRequest request, HttpSession session){
+	
+    public ResponseEntity<HashMap<String,String>> suggestionDelete(BoardVO vo, HttpServletRequest request, HttpSession session){
     	ResponseEntity<HashMap<String,String>> entity = null;
     	HashMap<String,String> result = new HashMap<String,String>();
     	String user_id = (String)session.getAttribute("logId");
     	System.out.println("delete");
+    	
     	try {
-    		BoardVO bvo = service.boardSelectByNo(board_num);
+    		BoardVO bvo = service.boardSelectByNo(vo.getBoard_num());
     		//작성자가 다를 경우
     		if(bvo.getUser_id().equals(user_id)== false) {
     			result.put("status", "200");
@@ -141,7 +137,7 @@ public class BoardController {
     			entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.OK);
     		}
     		else {
-    			service.boardDelete(bvo.getBoard_num(), bvo.getUser_id());
+    			service.boardDelete(vo.getBoard_num(), vo.getUser_id());
     			result.put("status", "200");
     			result.put("msg", "글 삭제 완료.");
     			result.put("redirect", "/boardList");
@@ -204,7 +200,6 @@ public class BoardController {
 	    	}
 	    	return mav;
 	    }  
-
 		
 	    
 	    
@@ -249,5 +244,4 @@ public class BoardController {
 	    	return entity;
 	    }
 		
-
 }
