@@ -12,7 +12,9 @@ public interface MemberService {
 	public String checkTel(String tel);
 	public String checkEmail(String user_email);
 
-	public String findId(String user_id);
-	public String findPw(String user_pw);
-	public String updatePw(String user_id);
+	public MemberVO findId(MemberVO vo);
+	public MemberVO findPw(MemberVO vo);
+	
+	public int memberQuestion(MemberVO vo);
+	public int weightInsert(MemberVO vo);
 }

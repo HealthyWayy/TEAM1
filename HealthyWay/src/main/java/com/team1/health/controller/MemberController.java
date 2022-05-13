@@ -97,17 +97,59 @@ public class MemberController {
     }
     // ---중복검사 끝
 	    
-	// 아이디 찾기
-    @GetMapping("idSearch")
-    public String idSearch() {
-        return "member/idSearch";
+	// 아이디 찾기 뷰페이지
+    @GetMapping("findId")
+    public String findId() {
+    	return "member/findId";
     }
+    // 아이디 찾기 실행
+	@RequestMapping(value="findUserId", method=RequestMethod.POST)
+	public String findIdAction(MemberVO vo, Model model) {
+		MemberVO user_id = service.findId(vo);
+		if(user_id == null) { 
+			model.addAttribute("check", 1);
+		} else { 
+			model.addAttribute("check", 0);
+			model.addAttribute("user_id", user_id.getUser_id());
+		}	
+		return "member/findId";
+	}
     
- // 비밀번호 찾기
-    @GetMapping("pwSearch")
-    public String pwSearch() {
-        return "member/pwSearch";
+	// 비밀번호 찾기
+    @GetMapping("findPw")
+    public String findPw() {
+        return "member/findPw";
     }
+    // 비밀번호 찾기 실행
+    @RequestMapping(value="findUserPw", method=RequestMethod.POST)
+	public String findPwAction(MemberVO vo, Model model) {
+		MemberVO user_pw = service.findPw(vo);
+		if(user_pw == null) { 
+			model.addAttribute("check", 1);
+		} else { 
+			model.addAttribute("check", 0);
+			model.addAttribute("user_pw", user_pw.getUser_pw());
+		}	
+		return "member/findPw";
+	}
     
+	// 설문조사 폼
+	@GetMapping("question")
+	public String question() {
+		return "member/question";
+	}
+	
+	// 설문조사 확인
+	@PostMapping("QuestionOk")
+	public String QuestionOk(MemberVO vo, Model model, HttpSession session) {
+		vo.setUser_id((String)session.getAttribute("logId"));
+		System.out.println(vo.getUser_id());
+		int cnt = service.memberQuestion(vo);
+		int cnt2 = service.weightInsert(vo);
+		System.out.println(cnt);
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("cnt2", cnt2);
+		return "member/questionResult";
+	}
 }
  
