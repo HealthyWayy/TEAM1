@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+
 import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.PagingVO;
 
@@ -20,11 +21,16 @@ public interface BoardDAO {
 	
 	public int totalRecord(PagingVO pVO);
 	
-	public BoardVO boardSelect(int no);
+	public BoardVO boardSelect(int board_num);
 	
-	public void hitCount(int no);
+	public void hitCount(int board_num);
 	
 	public int boardUpdate(BoardVO vo);
 	
-	public int boardDelete(int no, String userid);
+	public int boardDelete(int board_num, String user_id);
+	
+	public BoardVO boardSelectByNo(int board_num);
+	
+	public BoardVO boardView(int board_num);
+	
 }

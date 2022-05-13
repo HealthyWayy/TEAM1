@@ -8,7 +8,7 @@ public class BoardVO {
 	private String title;
 	private String content;
 	private int hit;
-	private String writedate;
+	private String write_date;
 	private String mod_date;
 	private int type_num;
 	
@@ -19,29 +19,14 @@ public class BoardVO {
 	private int max_user;
 	private int pt_count;
 	private String pt_img_file;
-	
+	private String keyword;
+
 
 	//recipe_board 좋아요 테이블
 	private String recipe_img_file;
 	private double total_kcal;
-	
-	public double getTotal_kcal() {
-		return total_kcal;
-	}
-	public void setTotal_kcal(double total_kcal) {
-		this.total_kcal = total_kcal;
-	}
-	public String getRecipe_img_file() {
-		return recipe_img_file;
-	}
-	public void setRecipe_img_file(String recipe_img_file) {
-		this.recipe_img_file = recipe_img_file;
-	}
 
-	//recipe_board
-	private String recipe_img_file;
-	private double total_kcal;
-	
+
 
 	public int getBoard_num() {
 		return board_num;
@@ -73,11 +58,11 @@ public class BoardVO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	public String getWritedate() {
-		return writedate;
+	public String getWrite_date() {
+		return write_date;
 	}
-	public void setWritedate(String writedate) {
-		this.writedate = writedate;
+	public void setWrite_date(String write_date) {
+		this.write_date = write_date;
 	}
 	public String getMod_date() {
 		return mod_date;
@@ -127,6 +112,15 @@ public class BoardVO {
 	public void setPt_img_file(String pt_img_file) {
 		this.pt_img_file = pt_img_file;
 	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+
 	public String getRecipe_img_file() {
 		return recipe_img_file;
 	}
@@ -139,6 +133,7 @@ public class BoardVO {
 	public void setTotal_kcal(double total_kcal) {
 		this.total_kcal = total_kcal;
 	}
+
 
 }
 
