@@ -23,6 +23,7 @@ import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.IngredientVO;
 import com.team1.health.vo.RecipePagingVO;
 import com.team1.health.vo.Recipe_IngredVO;
+import com.team1.health.vo.ReplyVO;
 
 @Controller
 public class RecipeController {
@@ -54,7 +55,7 @@ public class RecipeController {
 		ModelAndView mav = new ModelAndView();
 		pVO.setTotalRecord(service.totalRecord(pVO));
 		mav.addObject("pVO", pVO);
-		mav.addObject("vo", service.boardList(pVO));
+		mav.addObject("vo", service.recipeList(pVO));
 		mav.setViewName("board/recipe/recipeList");
 		return mav;
 	}
@@ -97,8 +98,8 @@ public class RecipeController {
 	//추가된 재료 개별 삭제
 	@PostMapping("/recipe/deleteIngred")
 	@ResponseBody
-	public int deleteIngred(String gred_num, int board_num) {
-		return service.deleteIngred(gred_num, board_num);
+	public int deleteIngred(String gred_num, int board_num, double gred_gram) {
+		return service.deleteIngred(gred_num, board_num, gred_gram);
 	}
 
 	//추가된 재료 모두 삭제
@@ -155,6 +156,7 @@ public class RecipeController {
 		// service.hitCount(board_num);
 		mav.addObject("vo", service.recipeView(board_num));
 		mav.addObject("gredList", service.ingredList(board_num));
+		//mav.addObject("rVO", service.replyList(board_num));
 		mav.setViewName("board/recipe/recipeView");
 		return mav;
 	}
@@ -173,24 +175,24 @@ public class RecipeController {
 	@PostMapping("/recipe/update")
 	@ResponseBody
 	public int recipeUpdate(BoardVO vo, HttpSession session, HttpServletRequest request, MultipartHttpServletRequest mr) {
-/*
-		// 파일 업로드
+
+		String newImg = vo.getRecipe_img_file();
+		String originImg = vo.getOriginRecipeImg();
+		System.out.println(newImg);
+		System.out.println(originImg);
+		
 		mr = (MultipartHttpServletRequest) request;
 		MultipartFile file = mr.getFile("file");
+		System.out.println(!newImg.equals(originImg));
 		
-		System.out.println(mr.getFileNames());
-		//이미지 새로 업로드했을 때(업로드 전은 none으로 설정해둠)
-		if(file.getOriginalFilename()!="none") {
+		//이미지 수정된 경우
+		if(!newImg.equals(originImg)){
+			System.out.println("d");
+			//이전 이름으로 덮어쓰기
+			vo.setRecipe_img_file(vo.getOriginRecipeImg());
 			
-			//파일명 중복되지 않게 처리하는 코드
-			UUID uuid = UUID.randomUUID();
-			String filename = uuid.toString()+"_"+file.getOriginalFilename();
-			vo.setRecipe_img_file(filename);
-			
-			//이름 덮어쓰기 코드 작성해야 함!
-			//String filename= vo.getRecipe_img_file();
 			String path = request.getSession().getServletContext().getRealPath("/recipeImg/upload");
-			File uploadFile = new File(path, filename);
+			File uploadFile = new File(path, vo.getRecipe_img_file());
 			
 			// 덮어쓰기
 			try {
@@ -201,7 +203,7 @@ public class RecipeController {
 				System.out.println("파일 업로드 실패");
 			}
 		}
-*/		
+	
 		String logId = (String)session.getAttribute("logId");
 		vo.setUser_id(logId);
 		int result = service.recipeUpdate(vo);
@@ -214,9 +216,68 @@ public class RecipeController {
 	//레시피 삭제(DB)
 	@PostMapping("/recipe/delete")
 	@ResponseBody
-	public int recipeDelete(int board_num) {
-		//이미지 파일 삭제 코드 작성하기
+	public int recipeDelete(int board_num, String recipe_img_file, HttpSession session, HttpServletRequest request) {
+		//이미지 파일 삭제
+		String path = request.getSession().getServletContext().getRealPath("/recipeImg/upload");
+		File file = new File(path, recipe_img_file);
 		
+		// 실제 파일 삭제
+		try {
+			file.delete();
+			System.out.println("파일 삭제 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("파일 삭제 실패");
+		}
 		return service.recipeDelete(board_num);
+	}
+	
+	//찜 목록
+	@PostMapping("/recipe/selectHeart")
+	@ResponseBody
+	public List<BoardVO> selectHeart(HttpSession session){
+		String user_id = (String)session.getAttribute("logId");
+		return service.selectHeart(user_id);
+	}
+	//찜 등록
+	@PostMapping("/recipe/insertHeart")
+	@ResponseBody
+	public int insertHeart(int board_num, HttpSession session) {
+		String user_id = (String)session.getAttribute("logId");
+		return service.insertHeart(user_id, board_num);
+	}
+	//찜 삭제
+	@PostMapping("/recipe/deleteHeart")
+	@ResponseBody
+	public int deleteHeart(int board_num) {
+		return service.deleteHeart(board_num);
+	}
+	
+	//댓글 등록
+	@PostMapping("/reply/insertReply")
+	@ResponseBody
+	public String insertReply(ReplyVO vo, HttpSession session) {
+		String user_id = (String)session.getAttribute("logId");
+		vo.setUser_id(user_id);
+		service.insertReply(vo);
+		return "/recipe/view?board_num="+vo.getBoard_num();
+	}
+	//댓글 삭제
+	@PostMapping("/reply/deleteReply")
+	@ResponseBody
+	public int deleteReply(int reply_num) {
+		return service.deleteReply(reply_num);
+	}
+	//댓글 수정
+	@PostMapping("/reply/updateReply")
+	@ResponseBody
+	public int updateReply(ReplyVO vo) {
+		return service.updateReply(vo);
+	}
+	//댓글 목록
+	@PostMapping("/reply/replyList")
+	@ResponseBody
+	public List<ReplyVO> replyList(int board_num){
+		return service.replyList(board_num);
 	}
 }

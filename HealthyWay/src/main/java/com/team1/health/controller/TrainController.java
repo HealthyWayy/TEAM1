@@ -1,15 +1,21 @@
 package com.team1.health.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.team1.health.vo.MemberVO;
 
 @Controller
 public class TrainController {
 	//트레이닝 홈페이지
 	@GetMapping("/trainning/trainningHome")
-	public ModelAndView trainningHome() {
+	public ModelAndView trainningHome(HttpSession session) {
+		MemberVO vo = new MemberVO();
 		ModelAndView mav = new ModelAndView();
+		session.getAttribute(vo.getUser_id());
 		mav.setViewName("/trainning/trainningHome");
 		return mav;
 	}

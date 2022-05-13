@@ -11,12 +11,13 @@ public class MemberVO {
 	private String user_authority;
 	private String profie_img;
 	private int report_hit;
-	private double  height;
+	private double height;
 	private String join_date;
 	private String gender;
 	private int age;
 	private double weight;
-	
+	private String strength;
+	private String favorite;
 	private String write_date;
 	
 	public double getWeight() {
@@ -109,4 +110,23 @@ public class MemberVO {
 	public void setAge(int age) {
 		this.age = age;
 	}
+	public String getStrength() {
+		return strength;
+	}
+	public void setStrength(String strength) {
+		this.strength = strength;
+	}
+	public String getFavorite() {
+		return favorite;
+	}
+	public void setFavorite(String favorite) {
+		this.favorite = favorite;
+	}
+	public double getWeight() {
+		return weight;
+	}
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+	
 }

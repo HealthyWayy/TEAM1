@@ -9,8 +9,8 @@
 	</select>
 
 	<insert id="memberInsert">
-		insert into user(user_id, user_pw, user_name, tel, user_email, age, user_nickname, gender, height, weight)
-		values(#{user_id}, #{user_pw}, #{user_name}, #{tel}, #{user_email}, #{age}, #{user_nickname}, #{gender}, #{height}, #{weight})
+		insert into user(user_id, user_pw, user_name, tel, user_email, age, user_nickname, gender)
+		values(#{user_id}, #{user_pw}, #{user_name}, #{tel}, #{user_email}, #{age}, #{user_nickname}, #{gender})
 	</insert>
 	<select id="checkId" resultType="String">
 		select user_id from user 
@@ -30,13 +30,19 @@
 	</select>
 	
 	<!-- 아이디/비밀번호 찾기 -->
-	<select id="findId" resultType="String">
-		select * from user where user_name=#{user_name}, and tel=#{tel}
+	<select id="findId" resultType="com.team1.health.vo.MemberVO">
+		select user_id from user where user_name=#{user_name} and user_email=#{user_email}
 	</select>
-	<select id="findPw" resultType="String">
-		select * from user where user_id=#{user_id} and user_name=#{user_name} and tel=#{tel}
+	<select id="findPw" resultType="com.team1.health.vo.MemberVO">
+		select user_pw from user where user_id=#{user_id} and user_name=#{user_name} and user_email=#{user_email} and tel=#{tel}
 	</select>
-	<update id="updatePw">
-		update user set user_pw=#{user_pw} where user_id=#{user_id}
+	
+	<!-- 설문조사 -->
+	<update id="memberQuestion">
+		update user set height=#{height}, strength=#{strength}, favorite=#{favorite} where user_id=#{user_id}
 	</update>
+	<insert id="weightInsert">
+		insert into weigth (user_id, weight)
+		values (#{user_id}, #{weight})
+	</insert>
 </mapper>

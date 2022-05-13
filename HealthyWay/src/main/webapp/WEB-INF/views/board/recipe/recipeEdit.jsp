@@ -73,6 +73,7 @@
 		<div id="imgDiv">
 			<!-- 이미지 첨부 -->
 			<input type="file" name="file" id ="file" value="none"/>
+			<input type="hidden" name="originRecipeImg" value="${vo[0].recipe_img_file}" id="originRecipeImg"/>
 			<input type="hidden" name="recipe_img_file" value="${vo[0].recipe_img_file}" id="imgFile"/>
 			<a href="javascript:void(0);"><img src="/recipeImg/upload/${vo[0].recipe_img_file}" id="preview"/></a>
 		</div>
@@ -90,7 +91,7 @@
 			</p>
 			<ul id="ingredList">
 				<c:forEach var="list" items="${gredList}">
-					<li id="${list.gred_num}" onclick="deleteIngred(${list.gred_num}, ${list.board_num});">
+					<li id="${list.gred_num}" onclick="deleteIngred(${list.gred_num}, ${list.board_num}, ${list.gred_gram});">
 						${list.gred_name}&nbsp;${list.gred_gram}g
 						<span class="times">&times;</span>
 					</li>

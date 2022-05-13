@@ -40,21 +40,25 @@ public class MemberServiceImpl implements MemberService {
 	public String checkEmail(String user_email) {
 		return dao.checkEmail(user_email);
 	}
-
+	
 	// 찾기
 	@Override
-	public String findId(String user_id) {
-		return dao.findId(user_id);
+	public MemberVO findId(MemberVO vo) {
+		return dao.findId(vo);
 	}
 
 	@Override
-	public String findPw(String user_pw) {
-		return dao.findPw(user_pw);
+	public MemberVO findPw(MemberVO vo) {
+		return dao.findPw(vo);
 	}
 
 	@Override
-	public String updatePw(String user_id) {
-		return dao.updatePw(user_id);
+	public int memberQuestion(MemberVO vo) {
+		return dao.memberQuestion(vo);
 	}
 
+	@Override
+	public int weightInsert(MemberVO vo) {
+		return dao.weightInsert(vo);
+	}
 }

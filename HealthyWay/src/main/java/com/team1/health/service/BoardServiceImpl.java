@@ -1,3 +1,4 @@
+
 package com.team1.health.service;
 
 import java.util.List;
@@ -16,7 +17,6 @@ public class BoardServiceImpl implements BoardService {
 	//2
 	@Inject
 	BoardDAO dao;
-	
 	//3
 	@Override
 	public int boardInsert(BoardVO vo) {
@@ -25,7 +25,6 @@ public class BoardServiceImpl implements BoardService {
 	//4
 	@Override
 	public List<BoardVO> boardList(PagingVO pVO) {
-		System.out.println("dao : " + dao.boardList(pVO).get(0).getBoard_num());
 		return dao.boardList(pVO);
 	}
 	//5
@@ -35,13 +34,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 	//6
 	@Override
-	public BoardVO boardSelect(int no) {
-		return dao.boardSelect(no);
+	public BoardVO boardSelect(int board_num) {
+		return dao.boardSelect(board_num);
 	}
 	//7
 	@Override
-	public void hitCount(int no) {
-		dao.hitCount(no);
+	public void hitCount(int board_num) {
+		dao.hitCount(board_num);
 	}
 	//8
 	@Override
@@ -50,13 +49,19 @@ public class BoardServiceImpl implements BoardService {
 	}
 	//9
 	@Override
-	public int boardDelete(int no, String userid) {
-		return dao.boardDelete(no, userid);
+	public int boardDelete(int board_num, String user_id) {
+		return dao.boardDelete(board_num, user_id);
 	}
 	@Override
-	public int boardDelete(String userid, int no) {
-		return dao.boardDelete(no, userid);
+	public BoardVO boardSelectByNo(int board_num) {
+		return dao.boardSelectByNo(board_num);
+		
+	}
+	@Override
+	public BoardVO boardView(int board_num) {
+		return dao.boardView(board_num);
 	}
 
 
 }
+

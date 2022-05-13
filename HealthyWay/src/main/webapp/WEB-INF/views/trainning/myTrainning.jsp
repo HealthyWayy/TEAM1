@@ -18,11 +18,11 @@
             <h3>가슴운동</h3><p>등록 날짜 : 22.05.04</p>
             <p><button>삭제하기</button></p>
             <ul>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex2.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex2.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex2.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex2.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex2.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
             </ul>
             <hr>
             
@@ -32,11 +32,11 @@
             <h3>하체운동</h3><p>등록 날짜 : 22.05.04</p>
             <p><button>삭제하기</button></p>
             <ul>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex3.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex3.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex3.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex3.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex3.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
             </ul>
         </div>
 
@@ -44,11 +44,11 @@
             <h3>전신운동</h3><p>등록 날짜 : 22.05.04</p>
             <p><button>삭제하기</button></p>
             <ul>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
             </ul>
         </div>
 
@@ -56,16 +56,5 @@
 
     </div>
     
-    <div style="background-color: pink;">
-        <br>
-        <h2>추천 운동</h2>
-        <div>
-            <ul>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-            </ul>
-        </div>
+    
     </div>

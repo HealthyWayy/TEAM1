@@ -9,24 +9,24 @@
 		select b.board_num, b.user_id, b.title, r.recipe_img_file, r.total_kcal
 		from board b join recipe_board r
 		on b.board_num = r.board_num
-		where b.type_num=1 and b.board_num!=0
+		where b.type_num=1 and b.board_num!=0 and r.total_kcal>0
 	</select>
 	
-	<select id="boardList" resultType="com.team1.health.vo.BoardVO">
+	<select id="recipeList" resultType="com.team1.health.vo.BoardVO">
 		select b.board_num, b.user_id, b.title, b.type_num, r.recipe_img_file, r.total_kcal
 		from board b join recipe_board r
 		on b.board_num = r.board_num
 		where b.type_num=1 and b.board_num!=0
-		<if test='searchValue!=null'>
-			and ${searchKey} like '%${searchValue}%'
+		<if test='searchValue != null'>
+			and b.title like '%${searchValue}%' or b.content like '%${searchValue}%'
 		</if>
 		order by b.board_num desc limit ${onePageRecord} offset ${offsetIndex}
 	</select>
 	
 	<select id="totalRecord" resultType="int">
-		select count(board_num) from board where type_num=1
+		select count(board_num) from board where type_num=1 and board_num!=0
 		<if test='searchValue != null'>
-			and ${searchKey} like "%${searchValue}%"
+			and title like "%${searchValue}%" or content like '%${searchValue}%'
 		</if>
 	</select>
 	
@@ -57,7 +57,7 @@
 	</select>
 	
 	<delete id="deleteIngred">
-		delete from recipe_ingredient where gred_num=#{param1} and board_num=${param2}
+		delete from recipe_ingredient where gred_num=#{param1} and board_num=${param2} and gred_gram=${param3}
 	</delete>
 	
 	<delete id="deleteAllIngred">
@@ -81,8 +81,8 @@
 	</update>
 	
 	<select id="recipeView" resultType="com.team1.health.vo.BoardVO">
-		select b.board_num, b.user_id, b.title, b.content, b.hit, b.write_date, b.mod_date, b.type_num
-				, r.recipe_img_file, r.total_kcal
+		select b.board_num, b.user_id, b.title, b.content, b.hit, date_format(b.write_date, '%Y-%m-%d %H:%i') write_date,
+			b.mod_date, b.type_num , r.recipe_img_file, r.total_kcal
 		from board b join recipe_board r
 		on b.board_num = r.board_num
 		where b.board_num=${param1}
@@ -105,4 +105,33 @@
 	<delete id="recipeDelete">
 		delete from board where board_num=#{param1}
 	</delete>
+	
+	<insert id="insertHeart">
+		insert into heart(user_id, board_num) values(#{param1}, ${param2})
+	</insert>
+	
+	<delete id="deleteHeart">
+		delete from heart where board_num=${param1}
+	</delete>
+	
+	<select id="selectHeart" resultType="com.team1.health.vo.BoardVO">
+		select board_num from heart where user_id=#{param1}
+	</select>
+	
+	<insert id="insertReply">
+		insert into reply(user_id, board_num, content) values(#{user_id}, ${board_num}, #{content})
+	</insert>
+	
+	<delete id="deleteReply">
+		delete from reply where reply_num=${param1}
+	</delete>
+	
+	<update id="updateReply">
+		update reply set content=#{content} where reply_num=${reply_num} and board_num=${board_num}
+	</update>
+	
+	<select id="replyList" resultType="com.team1.health.vo.ReplyVO">
+		select reply_num, user_id, board_num, content, date_format(reply_date, '%Y-%m-%d %H:%i') reply_date
+		from reply where board_num=${param1}
+	</select>
 </mapper>
