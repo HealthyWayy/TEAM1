@@ -31,5 +31,16 @@ header a:first-of-type {
 header a:last-of-type {
 	padding-right: 30px;
 }
-
+@font-face{
+	src:url("/font/Binggrae-Bold.ttf");
+ 	font-family : "Binggrae";
+}
+@font-face{
+	src:url("/font/BMEULJIROTTF.ttf");
+ 	font-family : "Bemin";
+}
+@font-face{
+ 	src:url("/font/Binggrae.ttf");
+ 	font-family : "BinggraeReguler";
+}
 

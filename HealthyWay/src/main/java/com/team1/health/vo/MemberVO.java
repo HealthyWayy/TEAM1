@@ -15,8 +15,22 @@ public class MemberVO {
 	private String join_date;
 	private String gender;
 	private int age;
-	private String weight;
+	private double weight;
 	
+	private String write_date;
+	
+	public double getWeight() {
+		return weight;
+	}
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+	public String getWrite_date() {
+		return write_date;
+	}
+	public void setWrite_date(String write_date) {
+		this.write_date = write_date;
+	}
 	public String getUser_id() {
 		return user_id;
 	}
@@ -95,12 +109,4 @@ public class MemberVO {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public String getWeight() {
-		return weight;
-	}
-	public void setWeight(String weight) {
-		this.weight = weight;
-	}
-	
-
 }
