@@ -20,94 +20,91 @@ input:focus, select:focus, textarea:focus{
 
 /*왼쪽 div(제목, 이미지 추가)-------------------------------------------*/
 #writeFrm{
-	margin:85px;
-	padding:50px;
+	margin:5%;
+	padding:4%;
 	overflow:auto;
 	border-radius:20px;
 	border:1px solid #ddd;
 	background-color: white;
 	opacity: 0.9;
+	font-size: 11pt;
 }
 #imgDiv{
-	width:35%;
-	height:510px;
+	width:40%;
 	float: left;
-	margin-right:40px;
 }
 #file {
 	display: none
 }
 #preview{
 	width:100%;
-	height:100%;
-	margin-top:8px;
+	height:auto;
 }
 
 /*오른쪽 div(레시피 정보)-------------------------------------------*/
 #recipeInfo{
-	padding-top:10px;
-	padding-left:35px;
-	width:60%;
+	width:57%;
+	height:80%;
 	float:left;
+	margin-left:3%;
 }
-#title{
+#title>span{
 	text-align: center;
 	font-weight: bold;
-}
-#title>input{
-	width:88%;
 	height:35px;
-	padding:10px;
+	line-height: 35px;
+}
+#title>input{	
+	width:89%;
+	height:35px;
+	padding:1%;
 	border-radius:10px;
 	border:1px solid rgb(200,200,200);
-	font-size:12pt;
 }
 #recipeInfo>p{
-	text-align:left;
-	width:90%;
+	width:100%;
 	font-weight: bold;
 }
 #totalKcal{
-	padding-left:10px;
-	padding-right:10px;
-	margin-right:5px;
+	padding-left:1%;
+	padding-right:1%;
+	margin-right:0.5%;
 	height:25px;
 	line-height:25px;
 	float:right;
 	background-color: #474747;
 	color:white;
 	border-radius:5px;
-	font-size:11pt;
 }
-
 #content{
-	padding:15px;
-	width:90%;
-	height:270px;
+	padding:2%;
+	width:100%;
+	height:250px;
 	border-radius:10px;
 	border:1px solid rgb(200,200,200);
 	resize: none;
-	font-size:11pt;
 	margin:0 auto;
 }
 /*재료 리스트*/
 #ingredList{
 	overflow:auto;
-	width:90%;
-	height:70px;
-	margin-bottom:30px;
+	width:100%;
+	height:170px;
+	max-height:250px;
+	margin-bottom:4%;
 	border:1px solid rgb(200,200,200);
 	border-radius: 10px;
+	padding-bottom:1%;
 }
 #ingredList>li{
-	padding-left:10px;
-	font-size: 11pt;
+	padding-left:2%;
+	padding-top:1%;
 	cursor: pointer;
 }
 /*재료 추가,삭제 버튼*/
 #recipeInfo>p>button{
 	float:right;
-	width:55px;
+	width:7%;
 	height:25px;
 	line-height:25px;
 	border:none;
@@ -125,7 +122,7 @@ input:focus, select:focus, textarea:focus{
 }
 
 #recipeBtn{
-	width:90%;
+	width:100%;
 }
 #recipeBtn>input[type=submit], #recipeBtn>input[type=reset]{
 	width:75px;
@@ -222,7 +219,7 @@ input:focus, select:focus, textarea:focus{
 	height:25px;
 	line-height:24px;
 	text-align:center;
-	font-size:10pt;
+	font-size:10px;
 	margin-right:4px;
 	border-radius:10px;
 	background-color: rgb(235,235,235);

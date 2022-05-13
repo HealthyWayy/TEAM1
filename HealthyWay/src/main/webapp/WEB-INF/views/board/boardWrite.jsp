@@ -27,10 +27,10 @@
 </script>
 <div class="container">
 	<h1>글 등록 폼</h1>
-	<form method="post" action="/myapp/board/boardWriteOk" id="boardFrm">
+	<form method="post" action="/board/boardWriteOk" id="boardFrm">
 		<ul>
 			<li>제목</li>
-			<li><input type="text" name="subject" id="subject"/></li>
+			<li><input type="text" name="title" id="subject"/></li>
 			<li><textarea name="content" id="content"></textarea></li>
 			<li><input type="submit" value="등록"/></li>
 		</ul>

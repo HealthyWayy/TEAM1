@@ -25,46 +25,46 @@ textarea:focus{
 	outline:none;
 }
 #viewRecipe{
-	margin:85px;
-	padding:50px;
+	margin:5%;
+	padding:4%;
 	overflow:auto;
 	border-radius:20px;
 	border:1px solid #ddd;
 	background-color: white;
 	opacity: 0.9;
+	font-size:16px;
 }
 
 #imgDiv{
-	width:35%;
-	height:510px;
+	width:37%;
+	height:560px;
 	float: left;
-	margin-right:40px;
 }
 #recipe_img{
 	width:100%;
 	height:100%;
-	margin-top:10px;
+	object-fit: cover;
 }
 /*오른쪽 div(레시피 정보)-------------------------------------------*/
 #recipeInfo{
-	padding-left:35px;
-	width:60%;
-	float:left;
+	width:57%;
+	height:80%;
+	float:right;
+	margin-left:6%;
 }
 #title{
-	text-align: center !important;
-	font-size:17pt;
-	width:90%;
+	text-align: center;
+	font-size:1.5em;
+	margin-bottom:3%;
 }
 #recipeInfo>p{
-	text-align:left;
-	width:90%;
+	width:100%;
 	font-weight: bold;
 }
 #totalKcal{
-	padding-left:10px;
-	padding-right:10px;
-	margin-right:5px;
+	padding-left:1%;
+	padding-right:1%;
+	margin-right:0.5%;
 	height:25px;
 	line-height:25px;
 	float:right;
@@ -74,21 +74,21 @@ textarea:focus{
 	font-size:11pt;
 }
 #content{
-	padding:15px;
-	width:90%;
-	height:250px;
+	padding:2%;
+	width:100%;
+	height:200px;
+	overflow:auto;
 	border-radius:10px;
 	border:1px solid rgb(200,200,200);
 	resize: none;
-	font-size:11pt;
 	margin:0 auto;
 }
 /*재료 리스트*/
 #ingredList{
 	overflow:auto;
-	width:90%;
-	height:70px;
+	width:100%;
 	margin-bottom:30px;
+	max-height:250px;
 }
 #ingredList>li{
 	display:inline-block;
@@ -103,7 +103,7 @@ textarea:focus{
 
 /*신고, 댓글, 하트*/
 #subDiv{
-	width:90%;
+	width:100%;
 	vertical-align: bottom;
 }
 .warnIcon{
@@ -112,20 +112,20 @@ textarea:focus{
 	cursor: pointer;
 }
 .warnIcon>img{
-	width:27px;
+	width:7%;
 }
 .warnIcon>span{
+	font-size:0.9em;
 	vertical-align: bottom;
-	font-size:11pt;
 }
 .heart1, .heart2{
 	float:right;
-	width:28px;
+	width:4%;
 }
 .commentIcon{	/*댓글*/
 	float:right;
 	margin-right:10px;
-	width:25px;
+	width:3.5%;
 	cursor: pointer;
 }
 /*댓글창*/
@@ -152,7 +152,7 @@ $(function(){
 
 <div>
 	<div id="viewRecipe">
-		<a href="/recipe/list"><p>목록보기</p></a>
+		<a href="/recipe/list"><p>레시피 목록</p></a>
 		<div id="imgDiv">
 			<!-- 이미지 -->
 			<img src="/recipeImg/upload/${vo[0].recipe_img_file}" id="recipe_img"/>
