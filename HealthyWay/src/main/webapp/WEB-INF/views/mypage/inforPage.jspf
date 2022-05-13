@@ -108,7 +108,7 @@ function readURL() {
 #inforDiv ul{
 	width:350px;
 	float:left;
-	margin:0px 0px 0px 30px;
+	margin:0px 0px 0px 70px;
 }
 #inforDiv ul>li:nth-of-type(2n+1){
 	/*위 오른 아래 왼*/
@@ -169,7 +169,7 @@ function readURL() {
 	<form id='inforFrm' method='post'>
 		<div id="imgInforDiv">
 			<input type='file' accept='image/*' name='profile_img' id='profieImgChange' style='display:none;'/>
-			<label for='profieImgChange'><img src='/myPageImg/${userData.profie_img }' id='profieView'/></label>
+			<label for='profieImgChange'><img src='/img/${userData.profie_img }' id='profieView'/></label>
 			<input type="hidden" value="${userData.profie_img }" name="profie_img"/>
 		</div>
 		<ul>
@@ -240,4 +240,3 @@ function readURL() {
 		</ul>	
 	</form>
 </div>
-<div style='position:relative; height:760px; width:10px;'></div>

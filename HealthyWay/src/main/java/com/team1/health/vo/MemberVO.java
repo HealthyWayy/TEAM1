@@ -20,6 +20,18 @@ public class MemberVO {
 	private String favorite;
 	private String write_date;
 	
+	public double getWeight() {
+		return weight;
+	}
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+	public String getWrite_date() {
+		return write_date;
+	}
+	public void setWrite_date(String write_date) {
+		this.write_date = write_date;
+	}
 	public String getUser_id() {
 		return user_id;
 	}
@@ -116,12 +128,5 @@ public class MemberVO {
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-	public String getWrite_date() {
-		return write_date;
-	}
-	public void setWrite_date(String write_date) {
-		this.write_date = write_date;
-	}
-	
 	
 }

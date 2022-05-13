@@ -10,7 +10,6 @@ import com.team1.health.vo.MemberVO;
 
 @Controller
 public class TrainController {
-
 	//트레이닝 홈페이지
 	@GetMapping("/trainning/trainningHome")
 	public ModelAndView trainningHome(HttpSession session) {
@@ -18,7 +17,6 @@ public class TrainController {
 		ModelAndView mav = new ModelAndView();
 		session.getAttribute(vo.getUser_id());
 		mav.setViewName("/trainning/trainningHome");
-		
 		return mav;
 	}
 	
@@ -27,25 +25,20 @@ public class TrainController {
 	public ModelAndView myTrainning() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/trainning/myTrainning");
-		
 		return mav;
 	}
-	
 	//추천 트레이닝 홈페이지
 	@GetMapping("/trainning/recommendTrainning")
 	public ModelAndView recommendTrainning() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/trainning/recommendTrainning");
-		
 		return mav;
-	}
-	
+	}	
 	//테스트중
 	@GetMapping("/trainning/testTrain")
 	public ModelAndView testTrain() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/trainning/testTrain");
-		
 		return mav;
 	}
 }

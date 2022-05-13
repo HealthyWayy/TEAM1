@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!-- chart.js 플러그인 -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <!-- 도넛 그래프 -->
 <script>
 	$(()=>{	
+		Chart.register(ChartDataLabels);
 		const data = {
 				  datasets: [{
 				    label: '목표 달성량',
@@ -35,7 +38,7 @@
 </script>
 <!-- 막대 그래프 -->
 <script>
-$(()=>{	
+$(()=>{
 	const data = {
 	  labels: [
 		    '나의 루틴1',
@@ -58,7 +61,6 @@ $(()=>{
 	const config = {
 			  type: 'bar',
 			  data: data,
-			  
 			  options: {
 				  plugins: {
 		  	    	    legend: {
@@ -66,13 +68,6 @@ $(()=>{
 		  	    	    }
 		  	    	  },
 					responsive: false,
-					scales: {
-						yAxes: [{
-							ticks: {
-								beginAtZero: true
-							}
-						}]
-					},
 				},
 			};
 	  const myChart = new Chart(
@@ -83,58 +78,148 @@ $(()=>{
 </script>
 <!-- 선 그래프 -->
 <script>
-	$(()=>{
-	  	const labels = [
-	  	    'January',
-	  	    'February',
-	  	    'March',
-	  	    'April',
-	  	    'May',
-	  	    'June',
-	  	  ];
-	  	  const data = {
-	  	    labels: labels,
-	  	    datasets: [{
-	  	      label: '몸무게',
-	  	      backgroundColor: 'white',
-	  	      borderColor: 'rgb(81,81,81)',
-	  	      data: [0, 10, 11, 12, 13, 14, 15],
-	  	    }]
-	  	  };
-	  	  const config = {
-	  	    type: 'line',
-	  	    data: data,
-	  	    options: {
-	  	    	plugins: {
-	  	    	    legend: {
-	  	    	      display: false,
-	  	    	    }
-	  	    	  },
-	  			responsive: false
-	  			}
-	  	  };
-	  	  const myChart = new Chart(
-	  			    document.getElementById('weightGraph'),
-	  			    config
-	  			  );
-	});
+	//체중
+		$(()=>{
+			$.ajax({
+				url:'/mypage/weightAll',
+				type:"post",
+				success:function(r){
+					console.log('체중 그래프 실행')
+					console.log(r.writeDate);
+					console.log(r.weight);
+					const labels = r.writeDate;
+				  	  const data = {
+				  	    labels: labels,
+				  	    datasets: [{
+				  	      label: '몸무게',
+				  	   	  backgroundColor: 'rgba(203,206,145,.5)',
+				  	      borderColor: 'rgba(203,206,145)',
+				  	     fill:true,
+				  	      data: r.weight,
+				  	    pointBorderWidth: 2, //포인터 보더사이즈
+		                pointRadius:2, //포인터 반경 범위 
+		                pointBorderColor:'rgba(203,206,145)'//포인터 보더 색상
+				  	    }]
+				  	  };
+				  	  const config = {
+				  	    type: 'line',
+				  	    data: data,
+				  	    options: {
+				  	    	scales: {
+				  	          x: {
+				  	            grid: {
+				  	            	display: false,
+				  	              drawBorder: true,
+				  	              drawOnChartArea: true,
+				  	              drawTicks: true,
+				  	            }
+				  	          },
+				  	        y: {
+				  	        	min: 40,
+				  	        	ticks: {
+		                            display: false, //y축 텍스트 삭제
+		                        },
+				  	            grid: {
+				  	           		display: true,
+				  	              drawBorder: false,
+				  	              drawOnChartArea: true,
+				  	              drawTicks: true,
+				  	            },
+				  	          },
+				  	    	},
+				  	    	elements: {
+				  	            line: {
+				  	                tension: 0.4 // 베지어 곡선 비활성화
+				  	            }
+				  	        },
+				  	    	plugins: {
+				  	    	    legend: {
+				  	    	      display: false,
+				  	    	    },
+				  	    	  datalabels: {
+				  	    		align: function(context) {
+				  	              return 'end';
+				  	            },
+				  	            borderRadius: 4,
+				  	            color: function(context) {
+				  	              return context.dataset.borderColor;
+				  	            },
+				  	            font: {
+				  	              weight: 'bold'
+				  	            },
+				  	            formatter: Math.round,
+				  	            padding: 5
+				  	          }		  	        
+				  	    	  },
+				  	    	 aspectRatio: 5 / 2,
+				  	    	layout: {
+				  	          padding: {
+				  	            top: 40,
+				  	            right: 0,
+				  	            bottom: 0,
+				  	            left: 0
+				  	          }
+				  	        },
+				  		}
+				  	  };
+				  	  const myChart = new Chart(
+				  			    document.getElementById('weightGraph'),
+				  			    config
+				  			  );
+				}
+			})
+		});
 </script>
 <script>
-	//운동 모듈 스크롤 이벤트
+	//운동 루틴 불러오기
 	$(()=>{
-		$('.next').click(function(){
-			var $target = $(event.target).prev().children();
-			$target.css('left',-154*($target.length-5));
-			$(event.target).css('display','none');
-			$(event.target).prev().prev().css('display','inline-block');
+		let routinList
+		const routineUrl = "/mypage/routineListAll";
+		$.ajax({
+			url:routineUrl ,
+			type:"post",
+			success:function(r){
+				$module=$(r.module);
+				$userRList=$(r.userRList);
+				routinList = ""
+				console.log(r);
+				$userRList.each(function(idx,vo){
+					routinList += "<span>"+vo.train_title+"</span><br/>";
+					routinList += "<div class='routineDiv'>";
+					routinList += "<div class='prev' onclick='prev()'><</div>";
+					routinList += "<div class='modulList'>";
+					$module.each(function(midx,mvo){
+						if(mvo.train_num==vo.train_num){
+							routinList += "<div class='routinModule'>";
+							routinList += "<img src='/img/"+mvo.module_img+"' class='routinModuleImg'/>";
+							routinList += "</div>";
+						}
+					})
+					routinList += "</div>";
+					routinList += "<div class='next' onclick='next()'>></div>";
+					routinList += "</div>";
+				})
+				$('.routinList').html(routinList);
+			},
+			error(r){
+				console.log(r.responseText)
+			}
 		})
-		$('.prev').click(function(){
-			var $target = $(event.target).next().children();
-			$target.css('left',0);
-			$(event.target).css('display','none');
-			$(event.target).next().next().css('display','inline-block');
-		})
-	})
+	});
+	function next(){
+		console.log('next');
+		var $target = $(event.target).prev().children();
+		$target.css('left',-154*($target.length-5));
+		$(event.target).css('display','none');
+		$(event.target).prev().prev().css('display','inline-block');
+	}
+	function prev(){
+		var $target = $(event.target).next().children();
+		console.log('prev');
+		$target.css('left',0);
+		$(event.target).css('display','none');
+		$(event.target).next().next().css('display','inline-block');
+	}	
 </script>
 <style>
 	.healthDiv{
@@ -180,6 +265,14 @@ $(()=>{
 		padding:10px;
 		white-space:nowrap;	
 	}
+	.routinList>span{
+		display:inline-block;
+		margin-top:20px;
+		padding:10px;
+		background-color:rgb(86,86,86);
+		color:white;
+		border-radius:10px 10px 0px 0px;
+	}
 	.routinList>div{
 		position:relative;
 	}
@@ -187,7 +280,7 @@ $(()=>{
 		background-color:black;
 		position:absolute;
 		width:5%;
-		height:144px;
+		height:100%;
 		line-height:144px;
 		text-align:center;
 		opacity:0.7;
@@ -206,8 +299,10 @@ $(()=>{
 		display:inline-block;
 		position:relative;
 		width:100%;
-		height:144px;
+		height:100%;
 		overflow:hidden;
+		margin-top:10px;
+		padding-left:10px;
 	}
 	.modulList::-webkit-scrollbar{
 		display:none;
@@ -222,6 +317,7 @@ $(()=>{
 		height:140px;
 		overflow:hidden;
 		margin-right:10px;
+		border-radius:10px;
 	}
 	.routinModule>img{
 		height:100%;
@@ -229,6 +325,11 @@ $(()=>{
 	.graphSize{
 		margin:0 auto;
 		margin-top:20px;
+	}
+	.routineDiv{
+		overflow:hidden;
+		background-color:rgb(86,86,86);
+		border-radius:0px 10px 10px 10px;
 	}
 </style>
 
@@ -257,61 +358,7 @@ $(()=>{
 	<span>my Routin</span><br/>
 	<!-- 루틴 목록 -->
 	<div class='routinList'>
-		<span>운동제목</span><br/>
 		
-		<!-- 모듈 모음 -->
-		<div>
-			<div class="prev"><</div>
-			<div class='modulList'>
-				<!-- 모듈 -->
-				<div class='routinModule'>
-					<img src='/myPageImg/test1.jpg' class='routinModuleImg'/>
-				</div>
-				<div class='routinModule'>
-					<img src='/myPageImg/test2.jpg' class='routinModuleImg'/>
-				</div>
-				<div class='routinModule'>
-					<img src='/myPageImg/test1.jpg' class='routinModuleImg'/>
-				</div>
-				<div class='routinModule'>
-					<img src='/myPageImg/test2.jpg' class='routinModuleImg'/>
-				</div>
-				<div class='routinModule'>
-					<img src='/myPageImg/test1.jpg' class='routinModuleImg'/>
-				</div>
-				<div class='routinModule'>
-					<img src='/myPageImg/test2.jpg' class='routinModuleImg'/>
-				</div>
-				<div class='routinModule'>
-					<img src='/myPageImg/test1.jpg' class='routinModuleImg'/>
-				</div>
-				<div class='routinModule'>
-					<img src='/myPageImg/test2.jpg' class='routinModuleImg'/>
-				</div>
-			</div>
-			<div class="next">></div>
-		</div>
-		<span>운동제목</span><br/>
-		<!-- 모듈 모음 -->
-		<div>
-			<div class="prev"><</div>
-			<div class='modulList'>
-				<!-- 모듈 -->
-				<div class='routinModule'>
-					<img src='/myPageImg/test1.jpg' class='routinModuleImg'/>
-				</div>
-				<div class='routinModule'>
-					<img src='/myPageImg/test2.jpg' class='routinModuleImg'/>
-				</div>
-				<div class='routinModule'>
-					<img src='/myPageImg/test1.jpg' class='routinModuleImg'/>
-				</div>
-				<div class='routinModule'>
-					<img src='/myPageImg/test2.jpg' class='routinModuleImg'/>
-				</div>
-			</div>
-			<div class="next">></div>
-		</div>
 	</div>
 </div>
 <div style='position:relative; height:1300px; width:10px;'></div>

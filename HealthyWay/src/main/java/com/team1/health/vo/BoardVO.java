@@ -22,11 +22,29 @@ public class BoardVO {
 	private String pt_img_file;
 	private String keyword;
 
-
 	//recipe_board 좋아요 테이블
 	private String recipe_img_file;
 	private double total_kcal;
+
+	//acheive 성공 스토리 테이블
+	private String img_file1;
+	private String img_file2;
+	
+	public String getImg_file1() {
+		return img_file1;
+	}
+	public void setImg_file1(String img_file1) {
+		this.img_file1 = img_file1;
+	}
+	public String getImg_file2() {
+		return img_file2;
+	}
+	public void setImg_file2(String img_file2) {
+		this.img_file2 = img_file2;
+	}
+
 	private String originRecipeImg;
+
 
 
 	public int getBoard_num() {

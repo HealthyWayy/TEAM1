@@ -1,71 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <style>
+
 body,ul,li{
 	margin:0px;
 	padding:0px;
 	list-style:none;
 }
-body{
-	background-color:rgb(236,236,236);
-}
 #myPageBackground{
-	background-image:url(/myPageImg/myPageBackground.jpg);
+	margin-top:60px;
+	background-image:url(/img/myPageBackground.jpg);
 	background-repeat:no-repeat;
 	background-size:100%;
 	width:100%;
-	height:250px;
-}
-#myPageBackground::after{
-	font-weight: bold;
-	position:absolute;
-	top:10%;
-	left:50%;
-	transform:translate(-50%,0%);
-	text-align:center;
-	content:'myPage';
-	width:100%;
-	overflow:hidden;
-	height:100px;
-	line-height:100px;
-	font-size:3em;
-	white-space:nowrap;
-	animation-duration: 1s;
-	animation-name: textShow;  
-    animation-timing-function: ease-in-out;
-    background: linear-gradient(
-    		to right,
-            rgba(181, 179, 217, 1) 0%,
-            rgb(164,162,208) 20%,
-            rgba(117, 114, 184, 1) 100%
-            );
-    -webkit-background-clip: text;
-     color: transparent;
-    -webkit-text-stroke:1px black;
-}
-@keyframes textShow{
-	0%{
-		opacity:0;
-	}
-	100%{
-		opacity:1;
-	}
+	height:300px;
 }
 #myPageContainer{
 	position:relative;
 	top:0px;
+	left:-50px;
 	width:1200px;
 	margin:0 auto;
 }
+#myPageContainer *{
+	font-family:"BinggraeReguler";
+}
 #myPageContainer>section, #myPageContainer>nav{
 	float:left;
-	background-color:white;
+	background-color:white;	
 }
 #sidePage{
 	width:20%;
 	text-align:center;
-	position:relative;
-	top:-50px;
-	left:-30px;
+	position:sticky;
+	margin-top:-80px;
+	margin-right:20px;
+	top:20px;
 	/*탑 오른쪽 아래 왼쪽*/
 	padding:0px 0px 20px 0px;
 	box-sizing:border-box;
@@ -168,8 +137,9 @@ body{
 	opacity:0;
 }
 #mainPage{
-	position:relative;
-	width:80%;
+	position:absolute;
+	left:300px;
+	width:1200px;
 	z-index:0;
 }
 #mainPage>div{
@@ -182,49 +152,54 @@ body{
 	padding:0px 30px 40px 0px;
 	box-sizing:border-box;
 }
+.foodBtn+.writeBtn{
+	border-right:2px solid #ddd;
+}
 .pageBtn{
+	padding:0px;
 	background-color:rgb(240,240,240);
 	height:40px;
 	position:absolute;
 	border:none;
 	border-bottom:none;
-	top:-20px;
-	width:80px;
+	top:-40px;
+	width:250px;
+	border:2px solid #ddd;
+	border-right:none;
 }
 .inforBtn{
-	left:610px;
+	left:0px;
 	z-index:4;
 }
 .healthBtn{
-	left:690px;
+	left:250px;
 	z-index:3;
 }
 .foodBtn{
-	left:770px;
+	left:500px;
 	z-index:2;
 }
 .writeBtn{
-	left:850px;
+	left:750px;
 	z-index:1;
 }
 .clickUpClass{
 	background-color:white;
 	z-index:5;
-	border:none;
+	border-bottom:none;
 }
 .pageUpClass{
 	display:block !important;
 }
 .pageView{
+	border:none !important;
 	position:relative;
 	/*탑 오른쪽 아래 왼쪽*/
-	margin:20px 0px 0px 0px;
 	margin-bottom:30px;
 	padding:40px 40px 0px 40px;
 	box-sizing:border-box;
-	width:100%;
+	width:1000px;
 	display:none;
-	box-shadow:0px 15px 10px 5px rgb(196,196,196);
 }
 #sidePage>div:nth-of-type(1):after{
 	content : "";
@@ -276,9 +251,10 @@ $(()=> {
 		$(event.target).removeClass('btnClassHover')
 	})
 	//페이지 네이션 처리 이벤트
-	var indexPrev = 2;
+	var indexPrev = 0;
 	$('.pageBtn').eq(indexPrev).addClass('clickUpClass');
 	$('.pageView').eq(indexPrev).addClass('clickUpClass pageUpClass');
+	$('#myPageContainer').css('height','760px');
 	//console.log($('.pageView').eq(0).html())
 	//console.log($('.pageView').eq(1).html())
 	//console.log($('.pageView').eq(2).html())
@@ -291,10 +267,27 @@ $(()=> {
 			$('.pageView').eq(indexPrev).removeClass('clickUpClass pageUpClass');
 			indexPrev = index;
 		}
+		if(indexPrev==0){
+			$('#myPageContainer').css('height','760px');
+			console.log(indexPrev)
+		}else if(indexPrev==1){
+			$('#myPageContainer').css('height','1300px');
+			console.log(indexPrev)
+		}else if(indexPrev==2){
+			$('#myPageContainer').css('height','750px');
+			console.log(indexPrev)
+		}else{
+			$('#myPageContainer').css('height','760px');
+			console.log(indexPrev)
+		}
 	});
 });
+function logOut(){
+	location.href='/member/logout';
+}
 
-</script>	
+</script>
+
 <!-- 뒷 배경 -->
 <div id='myPageBackground'></div>
 <!-- 마이페이지 전체 컨트롤러 -->
@@ -303,22 +296,22 @@ $(()=> {
 	<nav id='sidePage'>
 		<div>
 			<div id="imgDiv">
-				<img src='/myPageImg/${userData.profie_img }' id='View'/>
+				<img src='/img/${userData.profie_img }' id='View'/>
 			</div>
 			<br/>
 			<span>${userData.user_id }</span><br/>
-			<button id='logout' class='btnClass'>로그아웃</button>
+			<button id='logout' class='btnClass' onclick='logOut()'>로그아웃</button>
 		</div>
 		<div>
 			<span>Group Page</span>
 			<br/>
-			<img src='/myPageImg/groupShow.png' id="groupShow"/>
+			<img src='/img/groupShow.png' id="groupShow"/>
 			<br/>
 			<div id="groupPageDiv">
 				<c:forEach items="${PTboardData}" var="item">
 					<div class="groupPage">
 						<div>
-							<img src='/myPageImg/${item.pt_img_file }'/>
+							<img src='/img/${item.pt_img_file }'/>
 						</div>
 						<span>${item.title }</span>
 						<span>${item.content }</span>

@@ -43,6 +43,18 @@ header {
 .nav-bar>ul:last-of-type>li {
 	margin-left:0.8vw;
 }
+@font-face{
+	src:url("/font/Binggrae-Bold.ttf");
+ 	font-family : "Binggrae";
+}
+@font-face{
+	src:url("/font/BMEULJIROTTF.ttf");
+ 	font-family : "Bemin";
+}
+@font-face{
+ 	src:url("/font/Binggrae.ttf");
+ 	font-family : "BinggraeReguler";
+}
 .profile-container {
 	background-color:beige;
 	margin-top:0.6vh;
@@ -55,7 +67,4 @@ header {
 .dropdown-content {
 	display:none;
 }
-
-
-
 

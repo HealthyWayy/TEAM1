@@ -1,7 +1,9 @@
 package com.team1.health.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team1.health.service.MyPageService;
 import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.MemberVO;
+import com.team1.health.vo.MyPagePagingVO;
+import com.team1.health.vo.PagingVO;
+import com.team1.health.vo.TrainVO;
 
 @Controller
 public class MyPageController {
@@ -31,8 +36,8 @@ public class MyPageController {
 	public ModelAndView myPage(HttpSession session) {
 		ModelAndView mav = new ModelAndView ();
 		//임시 데이터 입력
-		String user = "test";
-		//String user_id = (String)session.getAttribute("logId");
+		
+		String user = (String)session.getAttribute("logId");
 		MemberVO userData = service.userData(user);
 		List<BoardVO> PTboardData = service.PTboard(user);
 		//pt그룹 데이터
@@ -47,12 +52,85 @@ public class MyPageController {
 	public int reciepeHeartDel(int board_num) {
 		return service.reciepeHeartDel(board_num);
 	}
+	@PostMapping("/mypage/weightAll")
+	@ResponseBody
+	public Map<String,Object> weightAll(MemberVO vo, HttpSession session) {
+		String user = (String)session.getAttribute("logId");
+		List<MemberVO> list = service.weightAll(user);
+		double [] weight = new double [list.size()]; 
+		String [] write_date = new String [list.size()];
+		Map<String,Object>map=new HashMap<String,Object>();
+		for(int i=0; i<list.size();i++) {
+			weight[i] = list.get(i).getWeight();
+			write_date[i] = list.get(i).getWrite_date();
+		}
+		System.out.println(weight[0]);
+		System.out.println(write_date[0]);
+		map.put("weight", weight);
+		map.put("writeDate", write_date);
+		return map;
+	}
+	@GetMapping("/mypage/groupPageNagion")
+	@ResponseBody
+	public MyPagePagingVO groupPageNagion(MyPagePagingVO vo, HttpSession session) {
+		String user = (String)session.getAttribute("logId");
+		vo.setTotalRecord(service.groupCount(user));
+		return vo;
+	}
+	@PostMapping("/mypage/routineListAll")
+	@ResponseBody
+	public Map<String,Object> routineListAll(HttpSession session){
+		String user = (String)session.getAttribute("logId");
+		List<TrainVO> userRList = service.userRoutineListAll(user);
+		List<TrainVO> module;
+		int [] trainNum = new int[userRList.size()];
+		for(int i=0; i<userRList.size(); i++) {
+			trainNum[i] = userRList.get(i).getTrain_num();
+		}
+		Map<String,Object>map=new HashMap<String,Object>();
+		module = service.trainModuleListAll(trainNum);
+		map.put("userRList", userRList);
+		map.put("module", module);
+		return map;
+	}
+	@GetMapping("/mypage/groupListAll")
+	@ResponseBody
+	public List<BoardVO> groupListAll(MyPagePagingVO vo, HttpSession session){
+		//임시 데이터 입력
+		String user = (String)session.getAttribute("logId");
+		return service.groupListAll(user, vo);
+	}
+	@GetMapping("/mypage/achieveList")
+	@ResponseBody
+	public List<BoardVO> achieveList(MyPagePagingVO vo, HttpSession session){
+		String user = (String)session.getAttribute("logId");
+		return service.achieveListAll(user, vo);
+	}
+	@GetMapping("/mypage/achievePageNagion")
+	@ResponseBody
+	public MyPagePagingVO achievePageNagion(MyPagePagingVO vo, HttpSession session) {
+		String user = (String)session.getAttribute("logId");
+		vo.setTotalRecord(service.achieveCount(user));
+		return vo;
+	}
+	@GetMapping("/mypage/foodListAll")
+	@ResponseBody
+	public List<BoardVO> foodListAll(MyPagePagingVO vo, HttpSession session){
+		String user = (String)session.getAttribute("logId");
+		return service.foodListAll(user,vo);
+	}
+	@GetMapping("/mypage/foodPageNation")
+	@ResponseBody
+	public MyPagePagingVO foodPageNation(MyPagePagingVO vo,HttpSession session) {
+		String user = (String)session.getAttribute("logId");
+		vo.setTotalRecord(service.foodCount(user));
+		return vo;
+	}
 	@PostMapping("/mypage/reciepeHeart")
 	@ResponseBody
 	public List<BoardVO> reciepeHeart(HttpSession session){
 		//임시 데이터 입력
-		String user = "test";
-		//String user_id = (String)session.getAttribute("logId");
+		String user = (String)session.getAttribute("logId");
 		return service.recipeHeart(user);
 	}
 	@PostMapping("/mypage/reciepeInfor")
