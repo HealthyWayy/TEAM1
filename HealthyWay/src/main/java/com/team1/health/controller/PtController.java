@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team1.health.service.BoardService;
+import com.team1.health.service.PtService;
 import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.PagingVO;
 
@@ -21,9 +22,8 @@ import com.team1.health.vo.PagingVO;
 @RequestMapping("/board/*")
 public class PtController {
 	@Inject
-	BoardService service;
-	
-	
+	PtService service;
+
 	// pt 글 리스트
 	@GetMapping("ptList")
 	public ModelAndView ptList() {

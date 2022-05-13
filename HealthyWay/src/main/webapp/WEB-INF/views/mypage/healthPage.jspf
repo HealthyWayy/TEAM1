@@ -151,7 +151,7 @@ $(()=>{
 				  	            padding: 5
 				  	          }		  	        
 				  	    	  },
-				  	    	 aspectRatio: 5 / 2,
+				  	    	responsive: false,
 				  	    	layout: {
 				  	          padding: {
 				  	            top: 40,
@@ -162,10 +162,10 @@ $(()=>{
 				  	        },
 				  		}
 				  	  };
-				  	  const myChart = new Chart(
-				  			    document.getElementById('weightGraph'),
-				  			    config
-				  			  );
+				  	const myChart = new Chart(
+						    document.getElementById('weightGraph'),
+						    config
+						  );
 				}
 			})
 		});
@@ -346,12 +346,12 @@ $(()=>{
 </div>
 <div id='heathHistory' class='healthDiv'>
 	<span>health history</span><br/>
-	<canvas id="barGraph" class='graphSize' width="800px" height="200"></canvas>
+	<canvas id="barGraph" class='graphSize' width="800px" height="300"></canvas>
 </div>
 <div id='changeWeight' class='healthDiv'>
 	<span>change weight</span><br/>
 	<div>
-  		<canvas id="weightGraph" class='graphSize' width="800px" height="200"></canvas>
+  		<canvas id="weightGraph" class='graphSize' width="800px" height="300"></canvas>
 	</div>
 </div>
 <div id='myRoutin' class='healthDiv'>

@@ -150,7 +150,7 @@ public class MyPageController {
 	@ResponseBody
 	public int updateUser(MemberVO vo,HttpServletRequest request) {
 		//나중에 배포를 위해서라도 링크 외부 파일로 돌리기!
-		String path = request.getSession().getServletContext().getRealPath("/myPageImg");
+		String path = request.getSession().getServletContext().getRealPath("/img");
 		System.out.println(path);
 		String orgFileName = "";
 		try {
@@ -183,7 +183,9 @@ public class MyPageController {
 						try {
 							System.out.println("파일 업로드 실행");
 							mf.transferTo(f);//실제 업로드됨
-							fileDelete(path,vo.getProfie_img());
+							if(!vo.getProfie_img().equals("noprofile.png")) {
+								fileDelete(path,vo.getProfie_img());
+							}
 							vo.setProfie_img(orgFileName);
 						}catch(Exception e) {
 							e.printStackTrace();
@@ -193,7 +195,9 @@ public class MyPageController {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
-			fileDelete(path,orgFileName);
+			if(!orgFileName.equals("noprofile.png")) {
+				fileDelete(path,orgFileName);
+			}
 			System.out.println("삭제 실행");
 		}
 		//수정 DAO작성

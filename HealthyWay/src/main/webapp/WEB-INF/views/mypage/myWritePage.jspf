@@ -47,7 +47,6 @@
 	}
 	.writeLiInforDiv{
 		width:180px;
-		height:200px;
 		padding:5px;
 		box-sizing:border-box;
 		border:1px solid #ddd;
@@ -57,16 +56,24 @@
 	.writeLiInfor{
 		width:170px;
 		height:140px;
-		margin-right:20px;
-		background-size: cover;
-		background-repeat:no-repeat;
-		background-position:center center;
+		text-align:left;
+		overflow:hidden;
+	}
+	.writeLiInfor img{
+		position:relative;
+		left:50%;
+		top:50%;
+		transform:translate(-50%,-50%);
+		width:100%;
 	}
 	.writeLiInforTitle{
 		width:170px;
 		height:50px;
 		text-align:center;
 		line-height:50px;
+		overflow:hidden;
+		text-overflow:ellipsis;
+		white-space:nowrap;
 	}
 </style>
 <script>
@@ -136,11 +143,11 @@ function groupListAll(pageNum) {
 		success: function(result) {				
 			var $result = $(result);
 			var tag = "";
-			
 			$result.each(function(idx, vo){
 				tag += "<div class='writeInfor' onclick='movePage(2,"+vo.board_num+")'>";
 				tag += "<div class='writeLiInforDiv'>";
-				tag += "<div class='writeLiInfor' style='background-image:url(/img/"+vo.pt_img_file+");'>";
+				tag += "<div class='writeLiInfor'>";
+				tag += "<img src='/ptImg/"+vo.pt_img_file+"'/>"
 				tag += "</div>";
 				tag += "<div class='writeLiInforTitle'>"+vo.title+"</div>";
 				tag += "</div>";
@@ -168,11 +175,11 @@ function achieveListAll(pageNum) {
 		success: function(result) {				
 			var $result = $(result);
 			var tag = "";
-			
 			$result.each(function(idx, vo){
 				tag += "<div class='writeInfor' onclick='movePage(3,"+vo.board_num+")'>";
 				tag += "<div class='writeLiInforDiv'>";
-				tag += "<div class='writeLiInfor' style='background-image:url(/img/"+vo.img_file1+");'>";
+				tag += "<div class='writeLiInfor'>";
+				tag += "<img src='/img/"+vo.img_file1+"'/>"
 				tag += "</div>";
 				tag += "<div class='writeLiInforTitle'>"+vo.title+"</div>";
 				tag += "</div>";
@@ -232,13 +239,14 @@ function foodListAll(pageNum) {
 			//'searchWord':$('#searchWord').val()
 		},
 		type:"get",
-		success: function(result) {				
+		success: function(result) {
 			var $result = $(result);
 			var tag = "";
 			$result.each(function(idx, vo){
 				tag += "<div class='writeInfor' onclick='movePage(1,"+vo.board_num+")'>";
 				tag += "<div class='writeLiInforDiv'>";
-				tag += "<div class='writeLiInfor' style='background-image:url(/img/"+vo.recipe_img_file+");'>";
+				tag += "<div class='writeLiInfor'>";
+				tag += "<img src='/recipeImg/upload/"+vo.recipe_img_file+"'/>"
 				tag += "</div>";
 				tag += "<div class='writeLiInforTitle'>"+vo.title+"</div>";
 				tag += "</div>";
@@ -263,6 +271,7 @@ function foodPageNation(pageNum){
 			//'searchWord':$('#').val()
 		},
 		success:function(result){
+			console.log(result);
 			var tag = "<ul class='pageNation'>"
 			if(result.pageNum==1){
 				tag+="<li>prev</li>";

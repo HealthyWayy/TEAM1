@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.MemberVO;
 
-public interface ptService {
+public interface PtService {
 	// 그룹pt 글작성(board)
 	public int ptBoardInsert(BoardVO vo);
 	
