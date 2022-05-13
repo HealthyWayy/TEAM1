@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-*{
-	font-family: 'Noto Sans KR', sans-serif;
-	font-family: 'Open Sans', sans-serif;
-}
-
 body, ul, li{
 	margin: 0;
 	padding: 0;
@@ -217,6 +212,10 @@ body, ul, li{
 	margin: 0px 20px;
 }
 
+.manage_list{
+	overflow: auto;
+}
+
 .manage_list li{
 	float: left;
 	width: 10.5%;
@@ -237,7 +236,28 @@ body, ul, li{
 	background-color: #F5F5F5;
 }
 
+.edit_del_btn_wrap{
+	margin-top: 30px;
+    text-align: right;
+    margin-right: 10px;
+}
 
+#editBtn{
+	border: 1px solid #bdbdbd;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#delBtn{
+	border: 1px solid #bdbdbd;
+    border-radius: 5px;
+    background-color: #F5F5F5;
+    padding: 5px 10px;
+    cursor: pointer;
+}
 
 
 /****************************************************************/
