@@ -4,9 +4,17 @@
 <link rel="stylesheet" href="${url}/css/board/pt/ptView.css" type="text/css" />
 <link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
 <script src="${url}/js/board/pt/ptView.js"></script>
+<script>
+function del(){
+	if(confirm("삭제하시겠습니까?")){
+			// 확인버튼 선택시
+			location.href = "${url}/board/ptDel?board_num=${vo.board_num}";
+		}
+}
+
+</script>
+
 
 <!-- 임시로 해둔 탑입니다 -->
 <div class="top"></div>
@@ -54,13 +62,25 @@
 				<div class="main_member_leader_wrap">
 					<div class="member_profile">
 						<ul>
-							<li class="main_member_img_wrap"><img src="${url}/img/pt_recu.jpeg"></li>
-							<li>김헬짱 (aaaaaa)</li>
+							<li class="main_member_img_wrap"><img src="${lVO.profie_img}"></li>
+							<li>${lVO.user_nickname} (${lVO.user_id})</li>
 							<li>고수</li>
-							<li>나이 : 22</li>
-							<li>Height : 165</li>
-							<li>성별 : 여자</li>
-							<li>Weight : 비공개</li>
+							<li>나이 : ${lVO.age}</li>
+							<li>
+								Height : 
+								<c:if test="${lVO.height == null or lVO.height == 0.0}">비공개</c:if>
+								<c:if test="${lVO.height != null and lVO.height != 0.0}">${lVO.height}</c:if> 
+							</li>
+							<li>
+								성별 : 
+								<c:if test="${lVO.gender == 'W'}">여자</c:if>
+								<c:if test="${lVO.gender == 'M'}">남자</c:if>
+							</li>
+							<li>
+								Weight : 
+								<c:if test="${lVO.weight == null}">비공개</c:if>
+								<c:if test="${lVO.weight != null}">${lVO.weight}</c:if> 
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -130,7 +150,13 @@
 					<li><button>수락</button></li>
 					<li><button>거절</button></li>
 				</ul>
-			
+				
+				<c:if test="${vo.user_id == logId}">
+					<div class="edit_del_btn_wrap">
+						<button id="editBtn" onclick="location='/board/ptEdit?board_num=${vo.board_num}'">수정하기</button>
+						<button id="delBtn" onclick="location='javascript:del()'">삭제하기</button>
+					</div>
+				</c:if>
 			</div>
 			
 		</div>
@@ -139,14 +165,14 @@
 		<div class="leader_profile_wrap">
 			<div class="profile_info_wrap">
 				<h4>리더정보</h4>
-				<div class="leader_img_wrap"><img src="${url}/img/pt_recu.jpeg"></div>
+				<div class="leader_img_wrap"><img src="${lVO.profie_img}"></div>
 				<div class="leader_name_wrap">
-					김헬짱 (${vo.user_id})
+					${lVO.user_nickname} (${lVO.user_id})
 				</div>
 			</div>
 			<div class="profile_info_wrap">
 				<h4>활동 기간</h4>
-				${vo.start_date} ~ ${vo.end_date} (185일)
+				${vo.start_date} ~ ${vo.end_date} (${vo.datecal}일)
 			</div>
 			<div>
 				<h4>그룹 멤버 (2명)</h4>

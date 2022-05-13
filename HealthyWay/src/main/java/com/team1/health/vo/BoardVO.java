@@ -20,6 +20,8 @@ public class BoardVO {
 	private int pt_count;
 	private String pt_img_file;
 	private String keyword;
+	
+	private int datecal;
 
 
 	//recipe_board 좋아요 테이블
@@ -132,6 +134,13 @@ public class BoardVO {
 	}
 	public void setTotal_kcal(double total_kcal) {
 		this.total_kcal = total_kcal;
+	}
+	
+	public int getDatecal() {
+		return datecal;
+	}
+	public void setDatecal(int datecal) {
+		this.datecal = datecal;
 	}
 
 
