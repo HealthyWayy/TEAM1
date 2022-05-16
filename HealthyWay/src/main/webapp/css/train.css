@@ -42,12 +42,22 @@ li a {
   width: 180px;
 }
 
-li a.active {
+.active {
   background-color: #4d77ff;
   color: white;
 }
 
-li a:hover:not(.active) {
+/* a:hover:not(.active) {
   background-color: #8fa8fc;
+  color: white;
+} */
+
+#list_menu:hover{
+  background-color: #8fa8fc;
+  color: white;
+}
+
+#train_yoso:hover{
+  background-color: #efe3fc;
   color: white;
 }
