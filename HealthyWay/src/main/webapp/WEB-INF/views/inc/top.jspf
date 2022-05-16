@@ -12,25 +12,33 @@
 <link href="/css/top.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<header class="nav-bar">
-  <ul>
-  	<li><a href="/">Logo</a></li>
-  </ul>
-  <ul>
-  	<c:if test="${logStatus != 'Y' }">
-  		<li><a href="/member/loginForm">Login</a></li>	
-  	</c:if>
-  	<c:if test="${logStatus == 'Y' }">
-  		<li><div class="profile-container dropbtn"></div></li>
-	  	<li><a href="/member/logout">Logout</a></li>
-  	</c:if>
-  </ul>
-</header>
-<nav class="dropdown-content">
-	 <ul>
-	 	<li>menu1</li>
-	 	<li>menu2</li>
-	 	<li>menu3</li>
-	 	<li>menu4</li>
+	<nav class="top">
+		<ul class="logo-container">
+			<li>logo</li>
+		</ul>
+		<ul class="menu-container">
+			<li><span>Home</span></li>
+			<li><span>AI Traing</span></li>
+			<li><span>Training group</span></li>
+			<li><span>Recipe</span></li>
+			<li><span>Notes</span></li>
+		</ul>
+		<ul class="login-container">
+			<c:if test="${logStatus == 'Y' }">
+				<li><div class="profile-container dropbtn1"></div></li>
+				<li>Logout</li>
+			</c:if>
+			<c:if test="${logStatus != 'Y' }">
+  				<li><a href="/member/loginForm">Login</a></li>	
+			</c:if>
+		</ul>
+	</nav>
+	<nav class="dropdown-content1">
+	 <ul class="gnb">
+	 	<li class="submenu1"><span>mypage1</span></li>
+	 	<li class="submenu1"><span>mypage2</span></li>
+	 	<li class="submenu1"><span>mypage3</span></li>
+	 	<li class="submenu1"><span>mypage4</span></li>
 	 </ul>
 </nav>
+	

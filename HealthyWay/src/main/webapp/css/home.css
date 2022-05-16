@@ -1,17 +1,138 @@
+/*======= top =======*/
 * {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	font-family: sans-serif;
+}
+a {
+	color:white;
 }
 
-body {
-	margin: 0;
+a:hover {
+	color: orange;
 }
-ul, li {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+header {
+	position: absolute;
+	left:0;
+	top:0;
+	width: 100vw;
+	height: 6vh;
+	z-index: 100000;
+	font-size: 17px;
+	display: flex;
+	justify-content: space-between;
+	align-items:center;
+	color:white;
 }
+.nav-bar {
+	margin-top:1vh;
+}
+.nav-bar>ul {
+	display:flex;
+	align-items: center;
+}
+.nav-bar>ul:first-of-type {
+	margin-left:1.5vw;
+}
+.nav-bar>ul:last-of-type {
+	margin-right:1.5vw;
+}
+.nav-bar>ul:last-of-type>li {
+	margin-left:0.8vw;
+}
+.profile-container {
+	background-color:beige;
+	margin-top:0.6vh;
+	width: 5vh;
+	height: 5vh;
+	border-radius: 50%;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.dropdown-content2 {
+	/*콘텐츠 정렬*/
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	
+	/*박스 설정*/
+	overflow: hidden;
+	box-sizing:border-box;
+	border-radius: 5%;
+	border: 1px solid rgba(5,5,5, 0.2);
+	box-shadow: 0px 0px 10px 0px rgba(5, 5, 5, 0.3);
+	background-color: white;
+	width: 7.5vw;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	
+	/*애니메이션 효과설정*/
+	opacity:0;
+	transform:scale(0);
+	transform-origin: 100% 0;
+	transition-property:transform, opacity;
+	transition-duration:300ms;
+	position:absolute;
+	transition-timing-function:ease;
+	z-index:100000000;
+		
+}
+.display-show {
+	opacity:1;
+	transform:scale(1);	
+}
+.gnb {
+	width:100%;
+	text-align: center;
+	margin-top:1vh;
+	margin-bottom:1vh;
+}
+.gnb li {
+	position: relative;
+	width:100%;
+	cursor:pointer;
+	color: rgb(10,10,10);
+	font-size:16px;	
+	/*텍스트에서 밑줄 간격 띄우기*/
+	padding-bottom: 6px;
+	margin-bottom: 4px;	
+}
+
+.gnb li:last-of-type {
+	position: relative;
+	width:100%;
+	cursor:pointer;
+	color: rgb(10,10,10);
+	font-size:16px;	
+	/*텍스트에서 밑줄 간격 띄우기*/
+	padding-bottom: 6px;
+	margin-bottom: 0;
+	
+}
+
+.gnb li:before {
+	content:"";
+	position: absolute; /*부모 요소에는 position: relative를 주어야 한다.*/
+	background-color: crimson;
+	height: 0.35vh; /*밑줄 굴기*/
+	
+	width: 0; /*초기에 보이지 않도록*/
+	bottom: 0; /*a태그 아래에 위치 시키기*/
+	transition: 0.5s; /*애니메이션 동작 실행 시간 정의*/
+	/*가상 요소를 가운데로 이동시키기*/
+	left:50%;
+	transform:translateX(-50%);
+}
+
+/*태그가 호버링 되면 가상 요소의 크기를 100%로 키우기*/
+.gnb li:hover:before {
+	width:65%;
+}
+/*===================== 본문 =====================*/
+
+
 .container {
 	transition: all 0.5s ease-in-out;
 }
@@ -397,7 +518,7 @@ iteration-count | direction | fill-mode | play-state | name */
 }
 
 .form-move-3 {
-	transform:translate(44vw, 2vh);
+	transform:translate(43vw, 2vh);
 }
 
 .form-move-4 {

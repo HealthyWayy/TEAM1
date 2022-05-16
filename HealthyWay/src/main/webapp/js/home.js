@@ -1,4 +1,70 @@
+/*=============== top =================*/
+
+
+
+
+
+/*=============== main =================*/
 $(document).ready(function() {
+	$('.top').hide();
+	/*$('.dropdown-content').hide();*/
+	/*============== top ============== */
+	/*$('.dropbtn').on('click',function(){
+		console.log('position',$(this).position());
+		console.log('offset',$(this).offset());
+	 	let p = $(this).offset();
+	 	$('.dropdown-content').css({
+			'z-index':'100000000',	
+			'left':p.left-$('.dropdown-content').width()*0.9,
+			'top':p.top+20,
+			'position':'absolute',
+			'background':'white',
+			'box-shadow': 'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px'
+	}).fadeToggle();
+	});*/
+	$('.dropbtn2').on('click', function(){	
+		let p = $(this).offset();
+	 	$('.dropdown-content2').css({
+			'left':p.left-$('.dropdown-content2').width()*0.9,
+			'top':p.top+20	
+		});
+		$('.dropdown-content2').toggleClass('display-show');
+	});
+	
+	$('.submenu2').on('click',function(){
+		if($('.submenu2').index(this)==0) {
+			location.href="#";
+		}
+		else if($('.submenu2').index(this)==1) {
+			location.href="#";
+		}
+		else if($('.submenu2').index(this)==2) {
+			location.href="#";
+		}
+		else if($('.submenu2').index(this)==3) {
+			location.href="#";
+		}
+		else {
+			alert('잘못 입력되었습니다.');
+		}
+	});
+	
+	/*=========== button ==============*/
+	$('.blob-btn').on('click', function(){
+		if($('.blob-btn').index(this)==0) {
+			location.href="/board/ptList";
+		}else if($('.blob-btn').index(this)==1) {
+			location.href="/recipe/main";
+		}else if($('.blob-btn').index(this)==2) {
+			location.href="/trainning/trainningHome";
+		}else if($('.blob-btn').index(this)==3) {
+			location.href="#";
+		}else {
+			alert($('.blob-btn').index(this)+'해당클릭은 아무것도 연결되어있지 않습니다.');
+		}
+	});
+	
+	/*============== main ==============*/
 	let d_width = 0; // 브라우저 가로
 	let d_height = 0; // 문서 전체의 높이
 
@@ -39,7 +105,6 @@ $(document).ready(function() {
 			// 휠 방향 감지(아래: -120, 위: 120)
 			let w_delta = event.wheelDelta / 120;
 			console.log('w_delta', w_delta);
-
 			// 휠 아래로
 			if (w_delta < 0 && $(this).next().length > 0) {
 				$('.container').animate({
@@ -88,7 +153,9 @@ $(document).ready(function() {
 		} 
 		tmp();
 	});
+	
+	
 });
 
 
-/*================ 타자기 효과 =================*/
+
