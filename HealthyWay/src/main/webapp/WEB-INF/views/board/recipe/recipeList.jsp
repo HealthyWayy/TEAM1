@@ -27,7 +27,7 @@ ul,li{
 	width:100%;
 	height:230px;
 	margin-top:4%;
-	margin-bottom:3%;
+	margin-bottom:5%;
 }
 #topImg>img{
 	position:absolute;
@@ -53,9 +53,21 @@ ul,li{
 }
 /*검색, 글쓰기 div*/
 #top{
-	width:100%;
-	margin-bottom:4%;
-	background-color: pink;
+	width:98%;
+	margin-bottom:5%;
+}
+#top>ul{
+	float:right;
+	text-align: center;
+	margin-right: 1%;
+}
+#top>ul>li{
+	display: inline-block;
+	height:30px;
+	line-height: 30px;
+}
+#top>ul>li:hover{
+	font-weight: bold;
 }
 /*검색폼*/
 #searchFrm{
@@ -84,7 +96,6 @@ ul,li{
 /*글쓰기 버튼*/
 #writeBtn{
 	float:right;
-	margin-right:2%;
 	width:7%;
 	height:30px;
 	border-radius: 30px;
@@ -195,19 +206,24 @@ ul,li{
 		width:100%;
 		font-size:20pt;
 	}
+	#top>ul>li{
+		height: 45px;
+		line-height: 45px;
+		font-size:18pt;
+	}
 	.recipe_div{
 		height:550px;
 	}
 	#searchFrm>input[type=submit]{
 		width:10%;
 		height:45px;
-		font-size:12pt;
+		font-size:18pt;
 	}
 	/*글쓰기 버튼*/
 	#writeBtn{
 		width:6%;
 		height:45px;
-		font-size:12pt;
+		font-size:18pt;
 	}
 	.title{
 		height:55px;
@@ -224,6 +240,16 @@ $(function(){
 		setHeart();
 	});
 	
+	var href = window.location.href;//현재 url 주소
+	//주소에 따라 해당 메뉴 밑줄 css 적용
+	if(href=="https://localhost:8088/recipe/list?searchKey=%EC%B9%BC%EB%A1%9C%EB%A6%AC"){
+		$("#top>ul>li").eq(0).css("border-bottom", "3px solid #FF5454");	//저칼로리순
+	}else if(href=="https://localhost:8088/recipe/list?searchKey=%EC%A1%B0%ED%9A%8C"){
+		$("#top>ul>li").eq(1).css("border-bottom", "3px solid #FF5454");	//조회순
+	}else if(href=="https://localhost:8088/recipe/list?searchKey=%EB%8C%93%EA%B8%80"){
+		$("#top>ul>li").eq(2).css("border-bottom", "3px solid #FF5454");	//댓글순
+	}
+	
 	$(".heart1").click(function(){
 		var num = $(this).attr("id").substring(2);
 		insertHeart(num);
@@ -239,6 +265,7 @@ $(function(){
 	$("#searchFrm").submit(function(){
 		if($("#searchFrm>input[type=text]").val()==""){
 			alert("검색어를 입력해 주세요.");
+			location="/recipe/list";
 			return false;
 		}
 	});
@@ -305,7 +332,7 @@ function deleteHeart(boardNum){
 		<h1>SHARE YOUR RECIPES</h1>
 		<p>당신의 레시피를 공유하세요</p>
 	</div>
-	
+
 	<!-- 글 목록 -->
 	<div id="recipe_list">
 		<!-- 등록/검색 -->
@@ -318,6 +345,11 @@ function deleteHeart(boardNum){
 				<input type="text" name="searchValue"/>
 				<input type="submit" value="검색"/>
 			</form>
+			<ul>
+				<li><a href="/recipe/list?searchKey=칼로리">저칼로리순</a></li>
+				<li><a href="/recipe/list?searchKey=조회">조회순</a></li>
+				<li><a href="/recipe/list?searchKey=댓글">댓글순</a></li>
+			</ul>
 		</div>
 		<c:if test="${not empty vo}">
 			<c:forEach var="vo" items="${vo}">
@@ -327,7 +359,7 @@ function deleteHeart(boardNum){
 						<img src="/recipeImg/heart1.png" class="heart1" id="e_${vo.board_num}"/>
 						<img src="/recipeImg/heart2.png" class="heart2" id="f_${vo.board_num}"/>
 					</c:if>
-					<p class="title">${vo.title}<br/>${vo.total_kcal}kcal</p>
+					<p class="title"><a href="/recipe/view?board_num=${vo.board_num}">${vo.title}<br/>${vo.total_kcal}kcal</a></p>
 				</div>
 			</c:forEach>
 		<c:if test="${empty vo}">

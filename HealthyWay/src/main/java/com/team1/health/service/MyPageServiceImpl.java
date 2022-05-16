@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.team1.health.dao.MyPageDAO;
 import com.team1.health.vo.BoardVO;
+import com.team1.health.vo.CountVO;
 import com.team1.health.vo.MemberVO;
 import com.team1.health.vo.MyPagePagingVO;
 import com.team1.health.vo.TrainVO;
@@ -95,5 +96,10 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public List<MemberVO> weightAll(String user) {
 		return dao.weightAll(user);
+	}
+
+	@Override
+	public List<CountVO> barListAll(String user, int year) {
+		return dao.barListAll(user, year);
 	}
 }

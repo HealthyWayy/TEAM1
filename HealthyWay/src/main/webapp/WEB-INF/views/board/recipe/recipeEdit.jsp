@@ -48,7 +48,7 @@
 					<li onclick="mesureClick('200');"><img src="/recipeImg/mesure.png"><p class="g2">200g</p></li>
 					<li onclick="mesureClick('300');"><img src="/recipeImg/mesure.png"><p class="g3">300g</p></li>
 				</ul>
-				<p style="font-size:9pt; margin:0; color:gray;">*정확한 칼로리 계산을 위해 <br/>직접 입력하시는 것을 추천드립니다.</p>
+				<p style="font-size:0.8em; margin:0; color:gray;">*정확한 칼로리 계산을 위해 <br/>직접 입력하시는 것을 추천드립니다.</p>
 	    		<div id="ingredInfo">
 	    			<input type="number" name="gred_gram" id="ingredGram" placeholder="직접입력"/>&nbsp;g
 	    			<p id="gKcal">kcal: <p/>

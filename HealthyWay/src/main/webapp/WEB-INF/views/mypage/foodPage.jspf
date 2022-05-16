@@ -18,11 +18,16 @@
 	}
 	#recipeImage{
 		border-radius:20px;
-		background-size: cover;
-		background-repeat:no-repeat;
-		background-position:center center;
 		height:550px;
 		width:480px;
+		overflow:hidden;
+	}
+	#recipeImage img{
+		position:relative;
+		left:50%;
+		top:50%;
+		transform:translate(-50%,-50%);
+		height:100%;
 	}
 	.foodDiv{
 		display:inline-block;
@@ -40,6 +45,13 @@
 		background-position:center center;
 		transition-duration:0.5s;
 		overflow:hidden;
+	}
+	.foodDiv img{
+		position:relative;
+		left:50%;
+		top:50%;
+		transform:translate(-50%,-50%);
+		height:100%;
 	}
 	.changeSize{
 		width:100px;
@@ -400,7 +412,7 @@
 				reciepeInforHtml+="<li><button onclick='modalIn()'>칼로리 체크!</button><button onclick='delHeart()'>삭제</button></li>"
 				reciepeInforHtml+="</ul>";
 				$("#recipeInfor").html(reciepeInforHtml);
-				$('#recipeImage').css('background-image',"url(/img/"+r.recipe_img_file+")")
+				$('#recipeImage img').attr('src',"/recipeImg/upload/"+r.recipe_img_file)
 				document.getElementById("recipeImage").addEventListener('click',function(){
 					location.href="/recipe/view?board_num="+r.board_num;
 				});
@@ -414,8 +426,7 @@
 				reciepeInforHtml+="<li><button>칼로리 체크!</button><button>삭제</button></li>"
 				reciepeInforHtml+="</ul>";
 				$("#recipeInfor").html(reciepeInforHtml);
-				$('#recipeImage').css('background-image',"url(/img/no.PNG)");
-
+				$('#recipeImage img').attr('src',"/img/no.PNG");
 				$('#reciepeLeft, #reciepeRight').css('display','none');
 			}
 		})
@@ -428,11 +439,13 @@
 			url:"/mypage/reciepeHeart",
 			type:'post',
 			success:function(result){
+				console.log(result);
 				$('#reciepeLeft, #reciepeRight').css('display','block');
 				var reciepeHtml="";
 				reciepeHtml+="<button onclick='reciepeMove("+left+")' id='reciepeLeft'><</button>";
 				$(result).each(function(idx,vo){
-					reciepeHtml+="<div onclick='reciepeClick("+idx+")' class='foodDiv' id='foodDiv"+idx+"' style='background-image:url(/img/"+vo.recipe_img_file+");'>";
+					reciepeHtml+="<div onclick='reciepeClick("+idx+")' class='foodDiv' id='foodDiv"+idx+"'>";
+					reciepeHtml+="<img src='/recipeImg/upload/"+vo.recipe_img_file+"'/>";
 					reciepeHtml+="<input type='hidden' id='foodNum"+idx+"' value='"+vo.board_num+"'/>"
 					reciepeHtml+="<div class='hoverEventDiv'></div>";
 					reciepeHtml+="<div><div><span>"+vo.title+"</span></div>";
@@ -453,7 +466,9 @@
 	<!-- 좋아요 레시피 목록 표기 -->
 	<div></div>
 	<div id='kcalDiv'>
-		<div id='recipeImage' style='cursor:pointer;'></div>
+		<div id='recipeImage' style='cursor:pointer;'>
+			<img src=''/>
+		</div>
 		<div id='recipeInfor'></div>
 	</div>
 </div>

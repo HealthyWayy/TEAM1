@@ -153,10 +153,9 @@ public class RecipeController {
 	@GetMapping("/recipe/view")
 	public ModelAndView recipeView(int board_num) {
 		ModelAndView mav = new ModelAndView();
-		// service.hitCount(board_num);
+		service.hitCount(board_num);
 		mav.addObject("vo", service.recipeView(board_num));
 		mav.addObject("gredList", service.ingredList(board_num));
-		//mav.addObject("rVO", service.replyList(board_num));
 		mav.setViewName("board/recipe/recipeView");
 		return mav;
 	}

@@ -7,15 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team1.health.vo.MemberVO;
+import com.team1.health.vo.TrainVO;
 
 @Controller
 public class TrainController {
 	//트레이닝 홈페이지
 	@GetMapping("/trainning/trainningHome")
 	public ModelAndView trainningHome(HttpSession session) {
-		MemberVO vo = new MemberVO();
+		MemberVO mvo = new MemberVO();
+		TrainVO vo = new TrainVO();
+				
 		ModelAndView mav = new ModelAndView();
-		session.getAttribute(vo.getUser_id());
+		session.getAttribute(mvo.getUser_id());
+		mav.addObject("vo", vo);
 		mav.setViewName("/trainning/trainningHome");
 		return mav;
 	}
