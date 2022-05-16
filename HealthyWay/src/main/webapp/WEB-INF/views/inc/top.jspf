@@ -17,16 +17,16 @@
 			<li>logo</li>
 		</ul>
 		<ul class="menu-container">
-			<li><span>Home</span></li>
-			<li><span>AI Traing</span></li>
-			<li><span>Training group</span></li>
-			<li><span>Recipe</span></li>
-			<li><span>Notes</span></li>
+			<li><a href="/">Home</a></li>
+			<li><a href="/trainning/trainningHome">AI Traing</a></li>
+			<li><a href="/board/ptList">PT group</a></li>
+			<li><a href="/recipe/main">Recipe</a></li>
+			<li><a href="/boardList">Notesmypage</a></li>
 		</ul>
 		<ul class="login-container">
 			<c:if test="${logStatus == 'Y' }">
 				<li><div class="profile-container dropbtn1"></div></li>
-				<li>Logout</li>
+				<li><a href="/member/logout">Logout</a></li>
 			</c:if>
 			<c:if test="${logStatus != 'Y' }">
   				<li><a href="/member/loginForm">Login</a></li>	
