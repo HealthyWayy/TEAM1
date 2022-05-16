@@ -66,9 +66,6 @@ ul,li{
 	height:30px;
 	line-height: 30px;
 }
-#top>ul>li:hover{
-	font-weight: bold;
-}
 /*검색폼*/
 #searchFrm{
 	float:left;

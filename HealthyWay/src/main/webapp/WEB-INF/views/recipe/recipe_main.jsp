@@ -19,52 +19,41 @@ body{
 #recipe_banner{
 	position:relative;
 	width:100%;
-	height:750px;
+	height:800px;
 	margin-top:4%;
 	margin-bottom:3%;
 }
-#recipe_banner>h1{
+#head1{
 	position:absolute;
 	top:40%;
-	width:100%;
+	left:36%;
+	height:50px;
+	line-height:50px;
 	text-align: center;
 	color:white;
 }
+
 #video{
 	width:100%;
 	height:100%;
 }
-.recipeList{
-	position:absolute;
-	top:78%;
-	text-align: center;
-	background-color: rgba(255,255,255,0.5);
-	width:100%;
-	height:200px;
-}
-.recipeList>li{
-	display: inline-block;
-	margin-right:2%;
-}
-.recipeList>li>img{
-	width:200px;
-	height:200px;
-}
 
-/*추천 레시피 리스트
+/*추천 레시피 리스트*/
 #recipe_list{
-	margin:0 auto;
-	margin-bottom:50px;
-	width:90%;
-	overflow:auto;
+	position:absolute;
+	top:80%;
+	left:3%;
+	background-color: pink;
+	text-align: center;
+	margin-left:
 }
-.recipe_div{
+.recipe_item{
+	display:inline-block;
 	position:relative;
-	width:23%;
+	width:20%;
 	height:340px;
 	float:left;
-	border-radius:15px;
-	margin-left:1.6%;
+	margin-left:2%;
 }
 .recipe_img{
 	position:relative;
@@ -80,11 +69,10 @@ body{
 	width:100%;
 	height:100%;
 	border-radius:15px;
-	background-color: white;
+	background-color: rgba(255,255,255,0.7);
 	opacity: 0;
 	cursor : pointer;
 }
-
 .title, .kcal{
 	font-size:20px;
 	text-align: center;
@@ -98,8 +86,8 @@ body{
 	position:absolute;
 	top:45%;
 }
-.recipe_div:hover .recipe_info{
-	opacity:0.75;
+.recipe_item:hover .recipe_info{
+	opacity:1;
 	transition:0.4s;
 }
 .heart1, .heart2{
@@ -111,7 +99,7 @@ body{
 .heart2{
 	display:none;
 }
-*/
+
 @media ( min-width: 1800px ) {
 	#recipe_banner{
 		height:1400px;
@@ -220,20 +208,14 @@ function deleteHeart(boardNum){
 		<video muted autoplay loop id="video">
 	    	<source src="/recipeImg/video.mp4" type="video/mp4">
 	  	</video>
-	  
+	  	<h1 id="head1">오늘의 추천 레시피를 확인하세요!</h1>
 	</div>
-	<ul class="recipeList">
-		<c:forEach var="vo" items="${vo}">
-		  	<li>
-		  		<img src="/recipeImg/upload/${vo.recipe_img_file}"/>
-		  	</li>
-		</c:forEach>
-	</ul>
-	<!-- 레시피 목록 
-	<div id="recipe_list">
+	
+	<!-- 레시피 목록 -->
+	<ul id="recipe_list">
 		<c:if test="${not empty vo}">
 			<c:forEach var="vo" items="${vo}">
-				<div class="recipe_div">
+				<li class="recipe_item">
 					<img src="/recipeImg/upload/${vo.recipe_img_file}" class="recipe_img"/>
 					<c:if test="${logId!=null}">
 						<img src="/recipeImg/heart1.png" class="heart1" id="e_${vo.board_num}"/>
@@ -247,9 +229,8 @@ function deleteHeart(boardNum){
 						<p class="title">${vo.title}</p>
 						<p class="kcal">${vo.total_kcal}kcal</p>
 		            </div>
-				</div>
+				</li>
 			</c:forEach>
 		</c:if>
-	</div>
-	-->
+	</ul>
 </div>
