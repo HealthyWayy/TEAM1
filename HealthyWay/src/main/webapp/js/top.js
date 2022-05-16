@@ -10,7 +10,7 @@ $(function(){
 	
 	$('.submenu1').on('click',function(){
 		if($('.submenu1').index(this)==0) {
-			location.href="#";
+			location.href="/mypage";
 		}
 		else if($('.submenu1').index(this)==1) {
 			location.href="#";
