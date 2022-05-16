@@ -1,6 +1,5 @@
 
 $(function(){	
-	console.log($("#writeFrm").serialize());
 	//이미지 첨부되면 실행
 	$("#file").change(function() {
 		setImage(this, "#preview");
@@ -322,13 +321,13 @@ function deleteIngred(gredNum, boardNum, gredGram){
 		type: "post",
 		success: function(result){
 			if(result<0){
-				console.log("재료 삭제 실패");
+				("재료 삭제 실패");
 			}
-			console.log("재료 삭제 성공");
+			("재료 삭제 성공");
 			ingredList(boardNum);
 		},
 		error: function(e){
-			console.log(e.responseText);
+			(e.responseText);
 		}
 	});
 }
@@ -344,14 +343,14 @@ function deleteAllIngred(boardNum){
 		type: "post",
 		success: function(result){
 			if(result<0){
-				console.log("재료 삭제 실패");
+				("재료 삭제 실패");
 			}
 			$("#totalKcal").text("Total : 0kcal");
 			$("#ingredList").html("");	//재료 리스트 초기화
 			ingredList(boardNum);
 		},
 		error: function(e){
-			console.log(e.responseText);
+			(e.responseText);
 		}
 	});
 }

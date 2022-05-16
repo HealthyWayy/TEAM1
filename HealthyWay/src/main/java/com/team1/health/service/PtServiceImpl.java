@@ -11,7 +11,7 @@ import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.MemberVO;
 
 @Service
-public class ptServiceImpl implements ptService {
+public class PtServiceImpl implements PtService {
 	@Inject
 	PtDAO dao;
 	
