@@ -49,12 +49,12 @@ textarea:focus{
 #boardInfo{
 	border-bottom:1px solid rgb(200,200,200);
 	margin-bottom:3%;
-	font-size:10pt;
 	text-align: left;
 }
 #info{
 	display:inline-block;
 	padding-right:7px;
+	font-size:0.85em;
 }
 #info>li{
 	display:inline-block;
@@ -64,13 +64,20 @@ textarea:focus{
 	position: absolute;
 	top:16.5%;
 	right:5%;
-	font-size:10.5pt;
+	font-size:11pt;
 }
 #editDelete>li{
 	display: inline-block;
 }
 #editDelete>li:hover{
 	text-decoration: underline;
+}
+/*게시판 목록 아이콘*/
+#listBtn{
+	position:absolute;
+	top:3%;
+	right:2%;
+	width:3%;
 }
 
 /*이미지 div*/
@@ -90,11 +97,12 @@ textarea:focus{
 	height:80%;
 	float:right;
 	margin-left:6%;
+	font-size:12pt;
 }
 
 #title{
 	text-align: center;
-	font-size:1.5em;
+	font-size:1.3em;
 	margin-bottom:2%;
 }
 
@@ -132,7 +140,7 @@ textarea:focus{
 }
 #ingredList>li{
 	display:inline-block;
-	font-size: 11pt;
+	font-size: 0.9em;
 	padding-left:8px;
 	padding-right:8px;
 	margin-right:5px;
@@ -156,6 +164,7 @@ textarea:focus{
 }
 .warnIcon>span{
 	vertical-align: bottom;
+	font-size:1em;
 }
 .heart1, .heart2{
 	float:right;
@@ -189,7 +198,7 @@ textarea:focus{
 #commentDiv>p{
 	position:relative;
 	text-align: center;
-	font-size:1.3em;
+	font-size:1.2em;
 	margin-top: 3%;
 }
 #replyClose{
@@ -281,31 +290,33 @@ textarea:focus{
 @media ( min-width: 1800px ) {
 	#viewRecipe{
 		padding:6%;
+		font-size:20pt;
 	}
 	#imgDiv{
 		height:850px;
 	}
 	#recipeInfo{
 		height:850px;
-		font-size:16pt;
+		font-size:20pt;
 	}
 	#ingredList{
 		height:20%;
 	}
+	#editDelete{
+		top:21%;
+		right:7%;
+		font-size:20pt;
+	}
 	#title{
 		text-align: center;
-		font-size:30pt;
-		margin-bottom:3%;
-	}
-	#boardInfo{
-		font-size:14pt;
+		font-size:1.5em;
+		margin-bottom:5%;
 	}
 	#ingredList{
 		max-height:300px;
 	}
 	#ingredList>li{
 		display:inline-block;
-		font-size: 15pt;
 		padding-left:1.5%;
 		padding-right:1.5%;
 		margin-right:1%;
@@ -432,6 +443,7 @@ function deleteHeart(boardNum){
 
 //댓글 set
 function setReply(){
+	var logId = '${logId}';
 
 	$.ajax({
 		url: "/reply/replyList",
@@ -444,7 +456,11 @@ function setReply(){
 					var tag=""
 					tag = '<li><label>'+this.user_id+'</label>';
 					tag += '<label>'+this.reply_date+'</label>';
-					tag += '<p id="rContent'+this.reply_num+'">'+this.content+'<label onclick="deleteReply('+this.reply_num+');">삭제</label><label onclick="editClick('+this.reply_num+');">수정</label></p>';
+					tag += '<p id="rContent'+this.reply_num+'">'+this.content;
+					if(logId==this.user_id){
+						tag += '<label onclick="deleteReply('+this.reply_num+');">삭제</label><label onclick="editClick('+this.reply_num+');">수정</label>';
+					}
+					tag += '</p>';
 					tag += '<form method="post" action="/recipe/updateReply" id="editFrm'+this.reply_num+'"class="replyEditFrm" onsubmit="return false;">';
 					tag += '<input type="hidden" name="board_num" value="'+this.board_num+'"/>';
 					tag += '<input type="hidden" name="reply_num" value="'+this.reply_num+'"/>';
@@ -453,6 +469,7 @@ function setReply(){
 					
 					$("#replyList").append(tag);
 				});
+				$("#replyCount").html("<li>댓글수:&nbsp;"+result.length+"</li>");
 			}
 		},
 		error: function(e){
@@ -546,13 +563,15 @@ function editReply(reply_num){
 			<input type="hidden" name="board_num" id="board_num" value="${vo[0].board_num}"/>
 			<!-- title -->
 			<p id="title">${vo[0].title}</p>
-			
+			<!-- 글 목록 아이콘 -->
+			<a href="/recipe/list"><img src="/recipeImg/list.png" id="listBtn" title="게시판 이동"/></a>
 			<!-- 작성자, 등록일, 수정, 삭제 등 정보 -->
 			<div id="boardInfo">
 				<ul id="info">
 					<li>작성자:&nbsp;${vo[0].user_id}</li>
 					<li>작성일:&nbsp;${vo[0].write_date}</li>
 					<li>조회수:&nbsp;${vo[0].hit}</li>
+					<li id="replyCount"></li>
 				</ul>
 				<c:if test="${logId==vo[0].user_id}">
 					<ul id="editDelete">
