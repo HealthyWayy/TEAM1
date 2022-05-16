@@ -16,13 +16,15 @@
 	</insert>
 	
 	<select id="ptList" resultType="BoardVO">
-		select b.board_num, user_id, title, hit, date_format(write_date, '%Y-%m-%d') writedate, state, start_date, end_date, max_user, keyword, pt_img_file
+		select b.board_num, user_id, title, hit, date_format(write_date, '%Y-%m-%d') write_date, state, start_date, end_date, max_user, keyword, pt_img_file, pNum
 		from board b inner join PT_group p on b.board_num=p.board_num
+		left join (select board_num, count(*) pNum from apply_user where user_state="참여중" group by board_num) n on b.board_num=n.board_num
 		where type_num=2
 		<if test="searchWord != null">
-			and (title like '%${searchWord}%' or keyword like '%${searchWord}%' or content like '%${searchWord}%' or user_id like '%${searchWord}%')
+			and (title like '%${searchWord}%' or content like '%${searchWord}%' or user_id like '%${searchWord}%')
 		</if>
 		order by b.board_num desc
+		limit ${onePageRecord} offset ${offsetIndex}
 	</select>
 	
 	<select id="ptBoardSelect" resultType="BoardVO">
@@ -61,4 +63,56 @@
 		keyword=#{keyword}, start_date=#{start_date}, end_date=#{end_date}, max_user=#{max_user}, pt_img_file=#{pt_img_file}
 		where board_num=#{board_num}
 	</update>
+	
+	<insert id="ptApplyInsert">
+		insert into apply_user(board_num, user_id)
+		values(#{param1}, #{param2})
+	</insert>
+	
+	<select id="apply_list" resultType="Apply_userVO">
+		select a.user_id, board_num, user_state, user_name, gender, age, height, w.weight 
+		from apply_user a 
+		left join user u on a.user_id=u.user_id
+		left join (
+			select user_id ,weight 
+			from weigth where (user_id, write_date) in (
+				select user_id, max(write_date) as write_date 
+				from weigth group by user_id
+				)
+			) w on a.user_id=w.user_id
+		where board_num=#{param1}
+	</select>
+	
+	<update id="applyAccept">
+		update apply_user set user_state="참여중" 
+		where board_num=#{param1} and user_id=#{param2}
+	</update>
+	
+	<delete id="applyDeny">
+		delete from apply_user
+		where board_num=#{param1} and user_id=#{param2}
+	</delete>
+	
+	<select id="applySelect" resultType="Apply_userVO">
+		select a.user_id, user_nickname, board_num, user_state, gender, age, height, w.weight, profie_img
+		from apply_user a 
+		left join user u on a.user_id=u.user_id
+		left join (
+			select user_id ,weight 
+			from weigth where (user_id, write_date) in (
+				select user_id, max(write_date) as write_date 
+				from weigth group by user_id
+				)
+			) w on a.user_id=w.user_id
+		where board_num=#{param1} and user_state="참여중";
+	</select>
+	
+	<select id="totalRecord" resultType="int">
+		select count(board_num) cnt
+		from board
+		where type_num = 2
+		<if	test='searchWord != null'>
+			and (title like '%${searchWord}%' or content like '%${searchWord}%' or user_id like '%${searchWord}%')
+		</if>
+	</select>
 </mapper>

@@ -96,8 +96,8 @@
 			</li>
 			<li id="img_file_li">
 				<h3>대표 사진</h3>
-				<input type="file" name="file" value="" id="file">
-				<input type="hidden" name="pt_img_file" value="" id="imgFile"/>
+				<input type="file" name="file" value="${vo.pt_img_file}" id="file">
+				<input type="hidden" name="pt_img_file" value="${vo.pt_img_file}" id="imgFile"/>
 			</li>
 			<li id="start_date_li">
 				<h3>시작일</h3>

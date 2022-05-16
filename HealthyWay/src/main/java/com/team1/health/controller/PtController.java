@@ -2,6 +2,7 @@ package com.team1.health.controller;
 
 import java.io.File;
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -20,22 +21,28 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.team1.health.service.ptService;
+import com.team1.health.service.PtService;
+import com.team1.health.vo.Apply_userVO;
 import com.team1.health.vo.BoardVO;
+import com.team1.health.vo.PtPagingVO;
 
 @RestController
 @RequestMapping("/board/*")
 public class PtController {
 	@Inject
-	ptService service;
+	PtService service;
 	
 	
 	// pt 글 리스트
 	@GetMapping("ptList")
-	public ModelAndView ptList() {
+	public ModelAndView ptList(PtPagingVO pVO) {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("ptList", service.ptList());
+		pVO.setTotalRecord(service.totalRecord(pVO));
+		
+		mav.addObject("ptList", service.ptList(pVO));
+		mav.addObject("pVO", pVO);
+		
 		mav.setViewName("board/pt/ptList");
 		return mav;
 	}
@@ -91,6 +98,8 @@ public class PtController {
 		// 조회수 증가
 		service.hitCount(board_num);
 		
+		mav.addObject("pCount", service.applySelect(board_num).size());
+		mav.addObject("pList", service.applySelect(board_num));
 		mav.addObject("lVO", service.leaderSelect(board_num));
 		mav.addObject("vo", service.ptBoardSelect(board_num));
 		mav.setViewName("board/pt/ptView");
@@ -144,10 +153,16 @@ public class PtController {
 	
 	// pt글삭제(DB)
 	@GetMapping("ptDel")
-	public ResponseEntity<String> ptDel(int board_num, HttpSession session) {
+	public ResponseEntity<String> ptDel(int board_num, String pt_img_file, HttpSession session, HttpServletRequest request) {
 		ResponseEntity<String> entity = null;
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(new MediaType("text", "html", Charset.forName("UTF-8")));
+		System.out.print(pt_img_file);
+		// 이미지 파일 삭제
+		String path = request.getSession().getServletContext().getRealPath("/ptImg");
+		File file = new File(path, pt_img_file);
+		
+		file.delete();
 		
 		String id = (String) session.getAttribute("logId");
 		int result = service.ptDel(board_num, id);
@@ -165,6 +180,34 @@ public class PtController {
 			entity = new ResponseEntity<String>(msg, headers, HttpStatus.BAD_REQUEST);
 		}
 		return entity;
+	}
+	
+	// pt그룹 참가신청(DB)
+	@GetMapping("ptApply")
+	public int ptApplyAdd(int board_num, HttpSession session) {
+
+		String id = (String) session.getAttribute("logId");
+		int result = service.ptApplyInsert(board_num, id);
+		return result;
+	}
+	
+	@RequestMapping("apply_list")
+	public List<Apply_userVO> apply_list(int board_num){
+		return service.apply_list(board_num);
+	}
+	
+	// pt그룹 참가 수락
+	@GetMapping("applyAccept")
+	public int applyAccept(int board_num, String user_id) {
+		int result = service.applyAccept(board_num, user_id);
+		return result;	
+	}
+	
+	// pt그룹 참가 거절
+	@GetMapping("applyDeny")
+	public int applyDeny(int board_num, String user_id) {
+		int result = service.applyDeny(board_num, user_id);
+		return result;
 	}
 
 }

@@ -1,3 +1,4 @@
+
 package com.team1.health.vo;
 
 
@@ -8,7 +9,7 @@ public class BoardVO {
 	private String title;
 	private String content;
 	private int hit;
-	private String writedate;
+	private String write_date;
 	private String mod_date;
 	private int type_num;
 	
@@ -20,13 +21,33 @@ public class BoardVO {
 	private int pt_count;
 	private String pt_img_file;
 	private String keyword;
-	
 	private int datecal;
-
+	
+	// pt참여자 수
+	private int pNum;
 
 	//recipe_board 좋아요 테이블
 	private String recipe_img_file;
 	private double total_kcal;
+
+	//acheive 성공 스토리 테이블
+	private String img_file1;
+	private String img_file2;
+	
+	public String getImg_file1() {
+		return img_file1;
+	}
+	public void setImg_file1(String img_file1) {
+		this.img_file1 = img_file1;
+	}
+	public String getImg_file2() {
+		return img_file2;
+	}
+	public void setImg_file2(String img_file2) {
+		this.img_file2 = img_file2;
+	}
+
+	private String originRecipeImg;
 
 
 
@@ -60,11 +81,11 @@ public class BoardVO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	public String getWritedate() {
-		return writedate;
+	public String getWrite_date() {
+		return write_date;
 	}
-	public void setWritedate(String writedate) {
-		this.writedate = writedate;
+	public void setWrite_date(String write_date) {
+		this.write_date = write_date;
 	}
 	public String getMod_date() {
 		return mod_date;
@@ -135,13 +156,25 @@ public class BoardVO {
 	public void setTotal_kcal(double total_kcal) {
 		this.total_kcal = total_kcal;
 	}
-	
+	public String getOriginRecipeImg() {
+		return originRecipeImg;
+	}
+	public void setOriginRecipeImg(String originRecipeImg) {
+		this.originRecipeImg = originRecipeImg;
+	}
 	public int getDatecal() {
 		return datecal;
 	}
 	public void setDatecal(int datecal) {
 		this.datecal = datecal;
 	}
+	public int getpNum() {
+		return pNum;
+	}
+	public void setpNum(int pNum) {
+		this.pNum = pNum;
+	}
+
 
 
 }
