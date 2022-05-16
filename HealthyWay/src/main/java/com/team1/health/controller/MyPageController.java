@@ -1,6 +1,8 @@
 package com.team1.health.controller;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team1.health.service.MyPageService;
 import com.team1.health.vo.BoardVO;
+import com.team1.health.vo.CountVO;
 import com.team1.health.vo.MemberVO;
 import com.team1.health.vo.MyPagePagingVO;
 import com.team1.health.vo.PagingVO;
@@ -46,6 +49,37 @@ public class MyPageController {
 		mav.addObject("userData",userData);
 		mav.setViewName("/mypage/myPage");
 		return mav;
+	}
+	@PostMapping("/mypage/barListAll")
+	@ResponseBody
+	public Map<String,Object> barListAll(CountVO vo, HttpSession session){
+		Map<String,Object> map = new HashMap<String,Object>();
+		Calendar cal = Calendar.getInstance();
+		Calendar cal2 = Calendar.getInstance();
+		String user = (String)session.getAttribute("logId");
+		List<CountVO> lst = service.barListAll(user,cal.get(Calendar.YEAR));
+		String [] dayList = new String [cal.getActualMaximum(Calendar.DAY_OF_MONTH)];
+		for(int i=0; i<cal.getActualMaximum(Calendar.DAY_OF_MONTH);i++) {
+			dayList[i]=(i+1)+"일";
+		}
+		int [] monthDatas = new int [12];
+		int [] dayDatas = new int [cal.getActualMaximum(Calendar.DAY_OF_MONTH)];
+		Arrays.fill(monthDatas, 0);
+		Arrays.fill(dayDatas, 0);
+		for(int i=0; i<lst.size(); i++) {
+			cal2.set(Calendar.DAY_OF_YEAR, lst.get(i).getTrain_month());
+			monthDatas[cal2.get(Calendar.MONTH)]+=lst.get(i).getTrain_count();
+			if(cal.get(Calendar.MONTH)==cal2.get(Calendar.MONTH)) {
+				dayDatas[cal2.get(Calendar.DATE)-1]+=lst.get(i).getTrain_count();
+			}
+		}
+		map.put("monthDatas", monthDatas);
+		map.put("dayDatas", dayDatas);
+		map.put("dayList", dayList);
+//		System.out.println(Arrays.toString(monthDatas)+"월데이터");
+//		System.out.println(Arrays.toString(dayDatas)+"일 데이터");
+//		System.out.println(Arrays.toString(dayList)+"일 수");
+		return map;
 	}
 	@DeleteMapping("/mypage/heart")
 	@ResponseBody

@@ -57,7 +57,7 @@
 					<li>${vo.keyword}</li>
 					<li>${vo.title}</li>
 					<li>조회수 ${vo.hit}</li>
-					<li>${vo.writedate }</li>
+					<li>${vo.write_date }</li>
 					<li>모집 중&nbsp;&nbsp;0 / ${vo.max_user}</li>
 					<li><span style="color: red;" class="material-symbols-outlined">favorite</span></li>
 					<li style="display: none;">${vo.board_num}</li>

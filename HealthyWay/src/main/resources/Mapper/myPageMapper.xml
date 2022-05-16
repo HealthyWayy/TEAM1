@@ -70,4 +70,7 @@
 	<select id='weightAll' resultType='MemberVO'>
 		select weight,DATE_FORMAT(write_date,'%y.%m.%d') as write_date from weigth where user_id=#{param1} order by write_date desc limit 10;
 	</select>
+	<select id='barListAll' resultType='CountVO'>
+		select user_id,train_year,train_month,train_count,train_num,write_date from user_training_count where user_id=#{param1} and train_year=#{param2};
+	</select>
 </mapper>

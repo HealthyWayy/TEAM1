@@ -210,12 +210,11 @@ body,ul,li{
 	width   : 90%;  /* or 100px */
 	border-bottom:1px solid #ddd;
 }
-#groupShow{
+
+#groupShow {
 	margin:10px 0 10px 0;
 	width:10%;
 	cursor:pointer;
-}
-#groupShow {
 	animation-duration: 0.5s;
 	animation-name: imgUpDown;
 	animation-iteration-count: infinite;
@@ -251,7 +250,7 @@ $(()=> {
 		$(event.target).removeClass('btnClassHover')
 	})
 	//페이지 네이션 처리 이벤트
-	var indexPrev = 0;
+	var indexPrev = 1;
 	$('.pageBtn').eq(indexPrev).addClass('clickUpClass');
 	$('.pageView').eq(indexPrev).addClass('clickUpClass pageUpClass');
 	$('#myPageContainer').css('height','760px');
@@ -287,7 +286,6 @@ function logOut(){
 }
 
 </script>
-
 <!-- 뒷 배경 -->
 <div id='myPageBackground'></div>
 <!-- 마이페이지 전체 컨트롤러 -->
