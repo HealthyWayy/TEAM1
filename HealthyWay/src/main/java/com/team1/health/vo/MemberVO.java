@@ -20,7 +20,7 @@ public class MemberVO {
 	private String favorite;
 	private String write_date;
 	
-	
+
 	public String getWrite_date() {
 		return write_date;
 	}

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div>사이드 레터럴 레이즈</div>
-<button type="button" onclick="init()">시작하기</button>
+<!-- <button type="button" onclick="init()">시작하기</button> -->
 <div><canvas id="canvas"></canvas></div>
 <div id="label-container"></div>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
@@ -61,7 +61,6 @@
 
         let movement = prediction[1].probability
         
-        setInterval(() => {
             if (movement >= 0.99){
             console.log('잘하셨습니다!');
             document.getElementById('display').innerHTML = '잘하셨습니다!' + count;
@@ -70,12 +69,11 @@
             
             console.log(count);
             
-        }else if(movement>=0.6){
-            console.log('조금더 정확한 자세를 취해주세요!');
-            document.getElementById('display').innerHTML = '조금더 정확한 자세를 취해주세요!';
-            count = count;
-        }
-        }, 4000);
+            }else if(movement>=0.6){
+                console.log('조금더 정확한 자세를 취해주세요!');
+                document.getElementById('display').innerHTML = '조금더 정확한 자세를 취해주세요!';
+                count = count;
+            }
         
 
         for (let i = 0; i < maxPredictions; i++) {
