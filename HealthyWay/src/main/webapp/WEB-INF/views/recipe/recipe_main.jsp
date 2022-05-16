@@ -16,38 +16,42 @@ a:hover { color: black; text-decoration: none;}
 body{
 	font-family: "NanumBarunGothic";
 }
-/*메인 배너*/
 #recipe_banner{
 	position:relative;
 	width:100%;
-	height:250px;
+	height:750px;
 	margin-top:4%;
 	margin-bottom:3%;
 }
-#bannerImg{
+#recipe_banner>h1{
 	position:absolute;
-	width:90%;
-	height:90%;
-	margin-left:5%;
-	margin-right:5%;
-}
-#headText{
-	position:absolute;
-	top:27%;
-	width:100%;
-	heihgt:50px;
-	text-align: center;
-	line-height:50px;
-	font-size:30pt;
-}
-#recipe_banner>a>p{
-	position:absolute;
-	top:54%;
+	top:40%;
 	width:100%;
 	text-align: center;
-	font-size:11pt;
+	color:white;
 }
-/*추천 레시피 리스트*/
+#video{
+	width:100%;
+	height:100%;
+}
+.recipeList{
+	position:absolute;
+	top:78%;
+	text-align: center;
+	background-color: rgba(255,255,255,0.5);
+	width:100%;
+	height:200px;
+}
+.recipeList>li{
+	display: inline-block;
+	margin-right:2%;
+}
+.recipeList>li>img{
+	width:200px;
+	height:200px;
+}
+
+/*추천 레시피 리스트
 #recipe_list{
 	margin:0 auto;
 	margin-bottom:50px;
@@ -107,21 +111,17 @@ body{
 .heart2{
 	display:none;
 }
-
+*/
 @media ( min-width: 1800px ) {
 	#recipe_banner{
+		height:1400px;
+	}
+	.recipeList{
+		top:70%;
+	}
+	.recipeList>li>img{
+		width:400px;
 		height:400px;
-	}
-	#headText{
-		top:30%;
-		font-size:35pt;
-	}
-	#recipe_banner>a>p{
-		top:53%;
-		font-size:13pt;
-	}
-	.recipe_div{
-		height:580px;
 	}
 }
 </style>
@@ -215,16 +215,21 @@ function deleteHeart(boardNum){
 
 </script>
 <div>
-	<!-- 배너 이미지 -->
+	<!-- 배너-->
 	<div id="recipe_banner">
-		<a href="/recipe/list">
-			<img src="/recipeImg/banner2.jpg" id="bannerImg"/>
-			<h1 id="headText">MORE RECIPES</h1>
-			<p>더 많은 레시피를 확인하세요!</p>
-		</a>
+		<video muted autoplay loop id="video">
+	    	<source src="/recipeImg/video.mp4" type="video/mp4">
+	  	</video>
+	  
 	</div>
-	
-	<!-- 레시피 목록 -->
+	<ul class="recipeList">
+		<c:forEach var="vo" items="${vo}">
+		  	<li>
+		  		<img src="/recipeImg/upload/${vo.recipe_img_file}"/>
+		  	</li>
+		</c:forEach>
+	</ul>
+	<!-- 레시피 목록 
 	<div id="recipe_list">
 		<c:if test="${not empty vo}">
 			<c:forEach var="vo" items="${vo}">
@@ -246,4 +251,5 @@ function deleteHeart(boardNum){
 			</c:forEach>
 		</c:if>
 	</div>
+	-->
 </div>
