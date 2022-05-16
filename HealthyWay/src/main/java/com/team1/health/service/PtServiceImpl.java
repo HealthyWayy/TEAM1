@@ -1,14 +1,17 @@
 package com.team1.health.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import com.team1.health.dao.PtDAO;
+import com.team1.health.vo.Apply_userVO;
 import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.MemberVO;
+import com.team1.health.vo.PtPagingVO;
 
 @Service
 public class PtServiceImpl implements PtService {
@@ -24,8 +27,8 @@ public class PtServiceImpl implements PtService {
 		return dao.ptGroupInsert(vo);
 	}
 	@Override
-	public ArrayList<BoardVO> ptList() {
-		return dao.ptList();
+	public ArrayList<BoardVO> ptList(PtPagingVO pVO) {
+		return dao.ptList(pVO);
 	}
 	@Override
 	public BoardVO ptBoardSelect(int no) {
@@ -50,6 +53,30 @@ public class PtServiceImpl implements PtService {
 	@Override
 	public MemberVO leaderSelect(int board_num) {
 		return dao.leaderSelect(board_num);
+	}
+	@Override
+	public int ptApplyInsert(int board_num, String user_id) {
+		return dao.ptApplyInsert(board_num, user_id);
+	}
+	@Override
+	public List<Apply_userVO> apply_list(int board_num) {
+		return dao.apply_list(board_num);
+	}
+	@Override
+	public int applyAccept(int board_num, String user_id) {
+		return dao.applyAccept(board_num, user_id);
+	}
+	@Override
+	public ArrayList<Apply_userVO> applySelect(int board_num) {
+		return dao.applySelect(board_num);
+	}
+	@Override
+	public int applyDeny(int board_num, String user_id) {
+		return dao.applyDeny(board_num, user_id);
+	}
+	@Override
+	public int totalRecord(PtPagingVO pVO) {
+		return dao.totalRecord(pVO);
 	}
 
 }

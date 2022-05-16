@@ -13,6 +13,12 @@ public class BoardVO {
 	private String mod_date;
 	private int type_num;
 	
+	
+	
+	
+	
+
+
 	//PT_group 테이블
 	private String state;
 	private String start_date;
@@ -50,9 +56,7 @@ public class BoardVO {
 	public int getBoard_num() {
 		return board_num;
 	}
-	public void setBoard_num(int board_num) {
-		this.board_num = board_num;
-	}
+	
 	public String getUser_id() {
 		return user_id;
 	}

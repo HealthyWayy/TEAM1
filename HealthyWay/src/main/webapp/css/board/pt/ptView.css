@@ -209,7 +209,7 @@ body, ul, li{
 }
 /****************************************************************/
 .manage_wrap{
-	margin: 0px 20px;
+	margin: 0px 10px 0px 20px;
 }
 
 .manage_list{
@@ -218,17 +218,12 @@ body, ul, li{
 
 .manage_list li{
 	float: left;
-	width: 10.5%;
-    height: 40px;
-    line-height: 40px;
+	width: 12%;
+    height: 30px;
+    line-height: 30px;
     text-align: center;
     border-bottom: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-}
-
-.manage_list li:nth-child(9n+1){
-	width: 12%;
-	border-left: 1px solid #ddd;
+    font-size: 14px;
 }
 
 .manage_list li:nth-child(-n+9){
@@ -236,29 +231,32 @@ body, ul, li{
 	background-color: #F5F5F5;
 }
 
+.manage_list li:nth-child(9n+8),
+.manage_list li:nth-child(9n+9){
+	background-color: #fff;
+	border: none;
+	width: 8%;
+	height: 32px;
+}
+
+.manage_list li button{
+	border: 1px solid #bdbdbd;
+    border-radius: 3px;
+    padding: 4px 16px;
+    background-color: #F5F5F5;
+    cursor: pointer;
+}
+
+.manage_list li:nth-child(9n+8) button{
+	background-color: #fff;
+}
+
+
 .edit_del_btn_wrap{
 	margin-top: 30px;
     text-align: right;
     margin-right: 10px;
 }
-
-#editBtn{
-	border: 1px solid #bdbdbd;
-    border-radius: 5px;
-    background-color: #fff;
-    padding: 5px 10px;
-    margin-right: 5px;
-    cursor: pointer;
-}
-
-#delBtn{
-	border: 1px solid #bdbdbd;
-    border-radius: 5px;
-    background-color: #F5F5F5;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
 
 /****************************************************************/
 .leader_profile_wrap{
@@ -336,4 +334,24 @@ body, ul, li{
     border: none;
     border-radius: 5px;
     margin-top: 10px;
+    cursor: pointer;
+}
+
+.leader_profile_wrap #editBtn{
+	border: 1px solid #bdbdbd;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 5px 10px;
+    margin-right: 5px;
+    width: 49%;
+    float: left;
+    color: #000;
+}
+
+.leader_profile_wrap #delBtn{
+    border-radius: 5px;
+    padding: 5px 10px;
+    width: 49%;
+    background-color: #f05a5d;
+    border: 1px solid #f05a5d;
 }

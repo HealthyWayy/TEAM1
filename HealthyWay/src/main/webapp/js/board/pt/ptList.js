@@ -32,9 +32,9 @@ $(function(){
 	
 	
 	$(".pt_post_wrap").hover(function(){
-		$(this).css("border", "1px solid gray");
+		$(this).css("border", "1px solid #a9a9a9");
 	}, function(){
-		$(this).css("border", "1px solid #bdbdbd");
+		$(this).css("border", "1px solid #e9e9e9");
 	});
 	
 	$("#searchBtn").click(function(){

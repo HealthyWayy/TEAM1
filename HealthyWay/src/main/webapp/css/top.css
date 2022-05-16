@@ -1,59 +1,83 @@
-@charset "UTF-8";
 a {
 	text-decoration: none;
-	color:white;
-	transition: all 300ms ease;
+	color:rgb(50,50,50);
 }
 
-* {
-	font-family: sans-serif;
-}
-ul, li {
-	margin:0;
+body {
+	margin: 0;
 	padding:0;
+}
+
+ul, li {
+	margin: 0;
+	padding: 0;
 	list-style-type: none;
 }
-a:hover {
-	color: orange;
-}
-header {
-	position: absolute;
-	left:0;
-	top:0;
-	width: 100vw;
-	height: 6vh;
-	/*background-color: rgba(0,0,0,0.4);*/
-	z-index: 1000;
-	font-size: 17px;
+.top {
 	display: flex;
 	justify-content: space-between;
-	align-items:center;
+	color: rgb(50,50,50);
+	align-items: center;
+	height: 9vh;
+	border-bottom: 1px solid #ddd;
+	background-color: white; 
+	z-index:10000000;
 }
-
-.nav-bar>ul {
-	display:flex;
+.top>ul  {
+	display: flex;
 	align-items: center;
 }
-.nav-bar>ul:first-of-type {
-	margin-left:1.5vw;
+.logo-container {
+	margin-left:1vw;
+	background: blue;
 }
-.nav-bar>ul:last-of-type {
-	margin-right:1.5vw;
+.logo-container>li {
+	text-align: center;
 }
-.nav-bar>ul:last-of-type>li {
-	margin-left:0.8vw;
+/*===== menu-container=====*/
+.menu-container {
+	display: flex;
+	justify-content:space-around;
+	align-items: center;
+	width:65%;
+	height:100%;
 }
-@font-face{
-	src:url("/font/Binggrae-Bold.ttf");
- 	font-family : "Binggrae";
+.menu-container>li {
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	height: 100%;
 }
-@font-face{
-	src:url("/font/BMEULJIROTTF.ttf");
- 	font-family : "Bemin";
+.menu-container a  {
+	position: relative;
+	padding-bottom: 8px;
 }
-@font-face{
- 	src:url("/font/Binggrae.ttf");
- 	font-family : "BinggraeReguler";
+.menu-container a:before {
+	content:'';
+	position: absolute;
+	background-color:crimson;
+	height: 3px;
+	
+	width:0;
+	bottom:0;
+	transition: 0.5s;
+	
+	left: 50%;
+	transform: translateX(-50%);	
+}
+.menu-container a:hover:before {
+	width: 100%;
+}
+
+
+/*====== login-container=======*/
+
+.login-container {
+	align-items:center;
+	margin-right:1vw;
+}
+.login-container>li:last-of-type {
+	margin-left:0.5vw;
 }
 .profile-container {
 	background-color:beige;
@@ -64,7 +88,86 @@ header {
 	overflow: hidden;
 	cursor: pointer;
 }
-.dropdown-content {
+
+.dropdown-content1 {
+	/*콘텐츠 정렬*/
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	
+	/*박스 설정*/
+	overflow: hidden;
+	box-sizing:border-box;
+	border-radius: 5%;
+	border: 1px solid rgba(5,5,5, 0.2);
+	box-shadow: 0px 0px 5px 0px rgba(5, 5, 5, 0.1);
+	background-color: white;
+	width: 7.5vw;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	
+	/*애니메이션 효과설정*/
+	opacity:0;
+	transform:scale(0);
+	transform-origin: 100% 0;
+	transition-property:transform, opacity;
+	transition-duration:300ms;
+	position:absolute;
+	transition-timing-function:ease;
+	z-index:100000000;
+		
+}
+.display-show {
+	opacity:1;
+	transform:scale(1);	
+}
+.logStatus {
 	display:none;
 }
+.gnb {
+	width:100%;
+	text-align: center;
+	margin-top:1vh;
+	margin-bottom:1vh;
+}
+.gnb li {
+	position: relative;
+	width:100%;
+	cursor:pointer;
+	color: rgb(10,10,10);
+	font-size:16px;	
+	/*텍스트에서 밑줄 간격 띄우기*/
+	padding-bottom: 6px;
+	margin-bottom: 4px;	
+}
 
+.gnb li:last-of-type {
+	position: relative;
+	width:100%;
+	cursor:pointer;
+	color: rgb(10,10,10);
+	font-size:16px;	
+	/*텍스트에서 밑줄 간격 띄우기*/
+	padding-bottom: 6px;
+	margin-bottom: 0;
+	
+}
+
+.gnb li:before {
+	content:"";
+	position: absolute; /*부모 요소에는 position: relative를 주어야 한다.*/
+	background-color: crimson;
+	height: 0.35vh; /*밑줄 굴기*/
+	
+	width: 0; /*초기에 보이지 않도록*/
+	bottom: 0; /*a태그 아래에 위치 시키기*/
+	transition: 0.5s; /*애니메이션 동작 실행 시간 정의*/
+	/*가상 요소를 가운데로 이동시키기*/
+	left:50%;
+	transform:translateX(-50%);
+}
+
+/*태그가 호버링 되면 가상 요소의 크기를 100%로 키우기*/
+.gnb li:hover:before {
+	width:65%;
+}
