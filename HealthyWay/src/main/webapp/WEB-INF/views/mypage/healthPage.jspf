@@ -6,75 +6,27 @@
 <!-- 도넛 그래프 -->
 <script>
 	$(()=>{	
-		Chart.register(ChartDataLabels);
 		const data = {
-				  datasets: [{
-				    label: '목표 달성량',
-				    data: [80,20],
-				    backgroundColor: [
-				      'rgb(255, 99, 132)',
-				      '#ddd'
-				    ],
-				    hoverOffset: 3
-				  }]
-				};
+			datasets: [{
+				data: [2,5,5,5],
+				backgroundColor: ['rgb(255, 99, 132)','#ddd'],
+				hoverOffset: 3
+			}]
+		};
 		const config = {
-				  type: 'doughnut',
-				  data: data,
-				  options: {
-					  plugins: {
-		  	    	    legend: {
-			  	    	      display: false,
-			  	    	    }
-			  	    	  },
-			  			responsive: false
-			  			}
-				};
-		const myChart = new Chart(
-  			    document.getElementById('circleGraph'),
-  			    config
-  			  );
-	})
-</script>
-<!-- 막대 그래프 -->
-<script>
-$(()=>{
-	const data = {
-	  labels: [
-		    '나의 루틴1',
-		    '나의 루틴2',
-		    '나의 루틴3',
-		    '나의 루틴4'
-		  ],
-	  datasets: [{
-	    label: '운동 횟수',
-	    data: [65, 59, 80, 81, 56, 55, 40],
-	    backgroundColor: [
-	    	'rgba(172, 167, 241, 0.5)'
-	    ],
-	    borderColor: [
-	    	'rgba(226, 224, 250, 1)'
-	    ],
-	    borderWidth: 1
-	  }]
-	};
-	const config = {
-			  type: 'bar',
-			  data: data,
-			  options: {
-				  plugins: {
-		  	    	    legend: {
-		  	    	      display: false,
-		  	    	    }
-		  	    	  },
-					responsive: false,
-				},
-			};
-	  const myChart = new Chart(
-			    document.getElementById('barGraph'),
-			    config
-			  );
-})
+			type: 'doughnut',
+			data: data,
+			options: {
+				plugins: {
+		  	    	legend: {
+			  	    	display: false,
+			  	    }
+			  	},
+			  	responsive: false
+			}
+		};
+		const myChart = new Chart(document.getElementById('circleGraph'),config);
+		})
 </script>
 <!-- 선 그래프 -->
 <script>
@@ -88,87 +40,92 @@ $(()=>{
 					console.log(r.writeDate);
 					console.log(r.weight);
 					const labels = r.writeDate;
-				  	  const data = {
-				  	    labels: labels,
-				  	    datasets: [{
-				  	      label: '몸무게',
-				  	   	  backgroundColor: 'rgba(203,206,145,.5)',
-				  	      borderColor: 'rgba(203,206,145)',
-				  	     fill:true,
-				  	      data: r.weight,
-				  	    pointBorderWidth: 2, //포인터 보더사이즈
-		                pointRadius:2, //포인터 반경 범위 
-		                pointBorderColor:'rgba(203,206,145)'//포인터 보더 색상
+				  	const data = {
+				  		labels: labels,
+				  		datasets: [{
+				  	    	label: '몸무게',
+				  	   		backgroundColor: 'rgba(203,206,145,.5)',
+				  	    	borderColor: 'rgba(203,206,145)',
+				  	     	fill:true,
+				  	      	data: r.weight,
+				  	    	pointBorderWidth: 2, //포인터 보더사이즈
+		                	pointRadius:2, //포인터 반경 범위 
+		                	pointBorderColor:'rgba(203,206,145)'//포인터 보더 색상
 				  	    }]
-				  	  };
-				  	  const config = {
-				  	    type: 'line',
-				  	    data: data,
-				  	    options: {
-				  	    	scales: {
-				  	          x: {
-				  	            grid: {
-				  	            	display: false,
-				  	              drawBorder: true,
-				  	              drawOnChartArea: true,
-				  	              drawTicks: true,
-				  	            }
-				  	          },
-				  	        y: {
-				  	        	min: 40,
-				  	        	ticks: {
-		                            display: false, //y축 텍스트 삭제
-		                        },
-				  	            grid: {
-				  	           		display: true,
-				  	              drawBorder: false,
-				  	              drawOnChartArea: true,
-				  	              drawTicks: true,
-				  	            },
-				  	          },
-				  	    	},
-				  	    	elements: {
-				  	            line: {
-				  	                tension: 0.4 // 베지어 곡선 비활성화
-				  	            }
-				  	        },
-				  	    	plugins: {
-				  	    	    legend: {
-				  	    	      display: false,
-				  	    	    },
-				  	    	  datalabels: {
-				  	    		align: function(context) {
-				  	              return 'end';
-				  	            },
-				  	            borderRadius: 4,
-				  	            color: function(context) {
-				  	              return context.dataset.borderColor;
-				  	            },
-				  	            font: {
-				  	              weight: 'bold'
-				  	            },
-				  	            formatter: Math.round,
-				  	            padding: 5
-				  	          }		  	        
-				  	    	  },
-				  	    	 aspectRatio: 5 / 2,
-				  	    	layout: {
-				  	          padding: {
-				  	            top: 40,
-				  	            right: 0,
-				  	            bottom: 0,
-				  	            left: 0
-				  	          }
-				  	        },
-				  		}
-				  	  };
-				  	  const myChart = new Chart(
-				  			    document.getElementById('weightGraph'),
-				  			    config
-				  			  );
-				}
-			})
-		});
+				 	};
+				  		const config = {
+				  	    	type: 'line',
+				  	    	data: data,
+				  	    	plugins:[ChartDataLabels],
+				  	    	options: {
+				  	    		scales: {
+				  	          		x: {
+				  	            		grid: {
+				  	            			display: false,
+				  	              			drawBorder: true,
+				  	              			drawOnChartArea: true,
+				  	              			drawTicks: true,
+				  	            		}
+				  	          		},
+				  	        		y: {
+				  	        			min: 40,
+				  	        			ticks: {
+		                            		display: false, //y축 텍스트 삭제
+		                        		},
+				  	            		grid: {
+				  	           				display: true,
+				  	              			drawBorder: false,
+				  	              			drawOnChartArea: true,
+				  	              			drawTicks: true,
+				  	            		},
+				  	          		},
+				  	    		},
+				  	    		elements: {
+				  	            	line: {
+				  	                	tension: 0.4 // 베지어 곡선 비활성화
+				  	            	}
+				  	        	},
+				  	    		plugins: {
+				  	    		    legend: {
+				  	    		      display: false,
+				  	    	    	},
+				  	    	  	datalabels: {
+				  	    			align: function(context) {
+				  	              		return 'end';
+				  	            	},
+				  	            	opacity:1,
+				  	            	borderRadius: 4,
+				  	            	color: function(context) {
+				  	            		return context.dataset.borderColor;
+				  	            	},
+				  	            	font: {
+				  	            		weight: 'bold'
+				  	            	},
+				  	            	formatter: Math.round,
+				  	            	padding: 5
+				  	          		}		  	        
+				  	    	  	},
+				  	    		responsive: false,
+				  	    		layout: {
+				  	          		padding: {
+				  	           			top: 40,
+				  	            		right: 0,
+				  	            		bottom: 0,
+				  	            		left: 0
+				  	          		}
+				  	        	},
+				  			}
+				  	  	};
+				  		const myChart = new Chart(
+						    document.getElementById('weightGraph'),
+						    config
+						);
+					},
+					error:function(){
+						console.log('체중 에러 실행')
+					}
+				})
+			});
 </script>
 <script>
 	//운동 루틴 불러오기
@@ -182,7 +139,7 @@ $(()=>{
 				$module=$(r.module);
 				$userRList=$(r.userRList);
 				routinList = ""
-				console.log(r);
+				
 				$userRList.each(function(idx,vo){
 					routinList += "<span>"+vo.train_title+"</span><br/>";
 					routinList += "<div class='routineDiv'>";
@@ -207,7 +164,7 @@ $(()=>{
 		})
 	});
 	function next(){
-		console.log('next');
+		
 		var $target = $(event.target).prev().children();
 		$target.css('left',-154*($target.length-5));
 		$(event.target).css('display','none');
@@ -215,11 +172,98 @@ $(()=>{
 	}
 	function prev(){
 		var $target = $(event.target).next().children();
-		console.log('prev');
+		
 		$target.css('left',0);
 		$(event.target).css('display','none');
 		$(event.target).next().next().css('display','inline-block');
 	}	
+</script>
+<!-- 막대 그래프 -->
+<script>
+$(()=>{
+	const monthList=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+	let monthDatas = [];
+	let dayList=[];
+	let dayDatas=[];
+	$.ajax({
+		url:"/mypage/barListAll",
+		type:"post",
+		success:function(r){
+			console.log(r);
+			monthDatas=r.monthDatas;
+			dayList=r.dayList;
+			dayDatas=r.dayDatas;
+			barGrap(monthList,monthDatas,'no');
+		},
+		error(r){
+			alert('실패');
+			console.log(r.responseText)
+		}
+	})
+	
+	$('#dayBtn').click(function(){
+		console.log('일 실행');
+		barGrap(dayList,dayDatas,'yes');
+	});
+	$('#monthBtn').click(function(){
+		console.log('월 실행');
+		barGrap(monthList,monthDatas,'yes');		
+	});
+})
+function barGrap(labels,datas,destroy){
+	const data = {
+		labels: labels,
+		datasets: [{
+			data: datas,
+		    backgroundColor: [
+		    	'rgba(172, 167, 241, 0.5)'
+		    ],
+		    borderColor: [
+		    	'rgba(226, 224, 250, 1)'
+		    ],
+		    borderWidth: 1
+		}]
+	};
+	const config = {
+		type: 'bar',
+		data: data,
+		options: {
+			scales: {
+	          	x: {
+	            	grid: {
+	            	display: true,
+	            	drawBorder: true,
+	            	drawOnChartArea: true,
+	            	drawTicks: true,
+	            	}
+	          	},
+	        	y: {
+	        		ticks: {
+                	display: false, //y축 텍스트 삭제
+            		},
+	            	grid: {
+	           			display: false,
+	             		drawBorder: false,
+	            		drawOnChartArea: true,
+	              		drawTicks: true,
+	            	},
+	          	},
+	    	},
+			plugins: {
+				legend: {
+					display: false,
+				}
+			},
+			responsive: false,
+		},
+	};
+	console.log(destroy=='yes');
+	if(destroy=='yes'){
+		$('#barGraph').remove();
+        $('#heathHistory').append('<canvas id="barGraph"  class="graphSize" width="800px" height="300"></canvas>');
+	}
+	const myChart = new Chart(document.getElementById('barGraph'),config);
+}
 </script>
 <style>
 	.healthDiv{
@@ -234,25 +278,27 @@ $(()=>{
 	}
 	.healthDiv>span:nth-of-type(1){
 		font-weight:bold;
+		margin-left:40px;
 	}
 	#healthPlanDiv{
 		width:73%;
 		margin-right:2%;
+		height:200px;
+		overflow:auto;
+		position:relative;
 	}
 	#healthPlanDiv>div{
 		float:left;
 	}
 	#healthPlanDiv>div:nth-of-type(1){
 		width:70%;
-	}
-	#healthPlanDiv>div:nth-of-type(2){
-		width:30%;
-		height:90%;
-		position:relative;
+		background-color:pink;
+		margin-left:40px;
 	}
 	#toDayHealth{
 		width:25%;
 		text-align:center;
+		height:200px;
 	}
 	#circleGraph{
 		margin:0 auto;
@@ -331,27 +377,47 @@ $(()=>{
 		background-color:rgb(86,86,86);
 		border-radius:0px 10px 10px 10px;
 	}
+	.hBtn{
+		width:70px;
+		height:30px;
+		border-radius:15px;
+		cursor:pointer;
+		border:none;
+		color:white;
+		background-color:rgba(172, 100, 241,1);
+		margin:0 10px 0 0px;
+	}.hBtn:active{
+		border:1px solid rgba(172, 100, 241,1);
+		color:black;
+		background-color:white;		
+	}
+	#heathHistory span{
+		margin-right:520px;
+	}
 </style>
 
 <div id='healthPlanDiv' class='healthDiv'>
 	<span>DailyPlan</span><br/>
 	<div>
-		<div>박스 내용</div>
-		<button>목표 설정</button>
+		<div>
+			<span>test 1: </span><span>2</span><span>회</span>
+			<br/>
+			<span>test 2: </span><span>5</span><span>회</span>
+		</div>
 	</div>
 </div>
 <div id='toDayHealth' class='healthDiv'>
-	<span>todayHealth</span>
 	<canvas id="circleGraph" width="150" height="150"></canvas>
 </div>
 <div id='heathHistory' class='healthDiv'>
-	<span>health history</span><br/>
-	<canvas id="barGraph" class='graphSize' width="800px" height="200"></canvas>
+	<span>2022년</span>
+	<button class='hBtn' id='dayBtn'>일별</button><button class='hBtn' id='monthBtn'>월별</button>
+	<canvas id="barGraph" class='graphSize' width="800px" height="300"></canvas>
 </div>
 <div id='changeWeight' class='healthDiv'>
 	<span>change weight</span><br/>
 	<div>
-  		<canvas id="weightGraph" class='graphSize' width="800px" height="200"></canvas>
+  		<canvas id="weightGraph" class='graphSize' width="800px" height="300"></canvas>
 	</div>
 </div>
 <div id='myRoutin' class='healthDiv'>

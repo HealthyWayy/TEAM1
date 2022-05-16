@@ -16,7 +16,7 @@
 	</insert>
 	
 	<select id="ptList" resultType="BoardVO">
-		select b.board_num, user_id, title, hit, date_format(write_date, '%Y-%m-%d') writedate, state, start_date, end_date, max_user, keyword, pt_img_file
+		select b.board_num, user_id, title, hit, date_format(write_date, '%Y-%m-%d') write_date, state, start_date, end_date, max_user, keyword, pt_img_file
 		from board b inner join PT_group p on b.board_num=p.board_num
 		where type_num=2
 		<if test="searchWord != null">
