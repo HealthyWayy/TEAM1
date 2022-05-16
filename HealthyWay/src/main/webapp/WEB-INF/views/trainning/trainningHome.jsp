@@ -3,10 +3,10 @@
 <link rel="stylesheet" type="text/css" href="/css/train.css">
     
     <ul id="menu">
-        <li><a href="/home/">홈</a></li>
+        <li><a id="list_menu" href="/home/">홈</a></li>
         <li><a class="active" href="/trainning/trainningHome">트레이닝 센터</a></li>
-        <li><a  href="/trainning/myTrainning">나만의 운동</a></li>
-        <li><a href="/trainning/recommendTrainning">추천 운동 목록</a></li>
+        <li><a id="list_menu" href="/trainning/myTrainning">나만의 운동</a></li>
+        <li><a id="list_menu" href="/trainning/recommendTrainning">추천 운동 목록</a></li>
     </ul>
     
     <div>
@@ -33,12 +33,14 @@
             </select></li>
             <li id="train_menu"><button>검색</button></li>
         </ul>
+        <br><br><br>
         <ul>
-            <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-            <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-            <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-            <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-            <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+            <li id="train_yoso"><a href="/trainning/testTrain"><img src="/my_model/힙으뜸/hip.png" alt=""><p>프론트 레이즈</p><p>전면 어깨운동</p></a>
+                <button>추가하기</button></li>
+            <li><a href="#"><img src="/img/train_boy.jpg" alt=""><p>${vo.module_title}</p><p>운동설명</p></a></li>
+            <li><a href="#"><img src="/img/train_girl.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+            <li><a href="#"><img src="/img/train_boy.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+            <li><a href="#"><img src="/img/train_girl.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
         </ul>
 
 <hr>
@@ -53,13 +55,13 @@
         </select>
         <div>
             <ul>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
             </ul>
-            <input type="text"  value="저장할 운동 루틴 이름을 입력하세요." style="width: 300px; text-align: center;">
+            <input type="text"  placeholder="저장할 운동 루틴 이름을 입력하세요." style="width: 300px; text-align: center;">
             <button>저장하기</button>
         </div>
         
@@ -70,11 +72,11 @@
         <h2>추천 운동</h2>
         <div>
             <ul>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
+                <li><a href="#"><img src="/img/이미지 없음.png" alt=""><p>운동이름</p><p>운동설명</p></a></li>
             </ul>
         </div>
     </div>

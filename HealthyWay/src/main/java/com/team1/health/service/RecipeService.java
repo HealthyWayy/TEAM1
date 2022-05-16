@@ -6,6 +6,7 @@ import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.IngredientVO;
 import com.team1.health.vo.RecipePagingVO;
 import com.team1.health.vo.Recipe_IngredVO;
+import com.team1.health.vo.ReplyVO;
 
 public interface RecipeService {
 	
@@ -13,7 +14,7 @@ public interface RecipeService {
 	public List<BoardVO> mainList();
 	
 	//게시판 목록
-	public List<BoardVO> boardList(RecipePagingVO vo);
+	public List<BoardVO> recipeList(RecipePagingVO vo);
 	//totalRecord
 	public int totalRecord(RecipePagingVO vo);
 	
@@ -26,9 +27,10 @@ public interface RecipeService {
 	//재료 추가 목록
 	public List<Recipe_IngredVO> ingredList(int board_num);
 	//재료 삭제
-	public int deleteIngred(String gred_num, int board_num);
+	public int deleteIngred(String gred_num, int board_num, double gred_gram);
 	//재료 모두 삭제
 	public int deleteAllIngred(int board_num);
+
 	
 	//글 등록
 	public int recipeInsert(BoardVO vo);
@@ -49,4 +51,21 @@ public interface RecipeService {
 	
 	//글 삭제
 	public int recipeDelete(int board_num);
+	
+	//찜 등록
+	public int insertHeart(String user_id, int board_num);
+	//찜 삭제
+	public int deleteHeart(int board_num);
+	//찜 목록
+	public List<BoardVO> selectHeart(String user_id);
+	
+	
+	//댓글 추가
+	public int insertReply(ReplyVO vo);
+	//댓글 삭제
+	public int deleteReply(int reply_num);
+	//댓글 수정
+	public int updateReply(ReplyVO vo);
+	//댓글 목록
+	public List<ReplyVO> replyList(int board_num);
 }

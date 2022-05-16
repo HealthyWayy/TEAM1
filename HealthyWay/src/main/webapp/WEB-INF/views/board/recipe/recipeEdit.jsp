@@ -48,7 +48,7 @@
 					<li onclick="mesureClick('200');"><img src="/recipeImg/mesure.png"><p class="g2">200g</p></li>
 					<li onclick="mesureClick('300');"><img src="/recipeImg/mesure.png"><p class="g3">300g</p></li>
 				</ul>
-				<p style="font-size:9pt; margin:0; color:gray;">*정확한 칼로리 계산을 위해 <br/>직접 입력하시는 것을 추천드립니다.</p>
+				<p style="font-size:0.8em; margin:0; color:gray;">*정확한 칼로리 계산을 위해 <br/>직접 입력하시는 것을 추천드립니다.</p>
 	    		<div id="ingredInfo">
 	    			<input type="number" name="gred_gram" id="ingredGram" placeholder="직접입력"/>&nbsp;g
 	    			<p id="gKcal">kcal: <p/>
@@ -73,6 +73,7 @@
 		<div id="imgDiv">
 			<!-- 이미지 첨부 -->
 			<input type="file" name="file" id ="file" value="none"/>
+			<input type="hidden" name="originRecipeImg" value="${vo[0].recipe_img_file}" id="originRecipeImg"/>
 			<input type="hidden" name="recipe_img_file" value="${vo[0].recipe_img_file}" id="imgFile"/>
 			<a href="javascript:void(0);"><img src="/recipeImg/upload/${vo[0].recipe_img_file}" id="preview"/></a>
 		</div>
@@ -90,7 +91,7 @@
 			</p>
 			<ul id="ingredList">
 				<c:forEach var="list" items="${gredList}">
-					<li id="${list.gred_num}" onclick="deleteIngred(${list.gred_num}, ${list.board_num});">
+					<li id="${list.gred_num}" onclick="deleteIngred(${list.gred_num}, ${list.board_num}, ${list.gred_gram});">
 						${list.gred_name}&nbsp;${list.gred_gram}g
 						<span class="times">&times;</span>
 					</li>

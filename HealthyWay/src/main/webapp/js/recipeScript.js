@@ -1,6 +1,5 @@
 
 $(function(){	
-	
 	//이미지 첨부되면 실행
 	$("#file").change(function() {
 		setImage(this, "#preview");
@@ -288,7 +287,6 @@ function paging(pageNum, totalRecord){
 
 //재료 리스트 출력
 function ingredList(boardNum){
-	$("#ingredList").html("");
 	$.ajax({
 		url: "/recipe/ingredList",
 		type: "post",
@@ -298,7 +296,7 @@ function ingredList(boardNum){
 			var kcal=0;
 			$("#ingredList").html("");
 			$(result).each(function(){
-				tag += '<li id="'+this.gred_num+'"onclick="deleteIngred(\''+this.gred_num+'\', \''+this.board_num+'\');">'+this.gred_name+'&nbsp;'+this.gred_gram+'g&nbsp;<span class="times">&times;</span></li>';
+				tag += '<li id="'+this.gred_num+'"onclick="deleteIngred(\''+this.gred_num+'\', \''+this.board_num+'\', \''+this.gred_gram+'\');">'+this.gred_name+'&nbsp;'+this.gred_gram+'g&nbsp;<span class="times">&times;</span></li>';
 				kcal+=this.gred_kcal;
 			});
 			
@@ -312,33 +310,24 @@ function ingredList(boardNum){
 	});
 }
 
-function deleteIngred(gredNum, boardNum){
+function deleteIngred(gredNum, boardNum, gredGram){
 	
 	if(confirm("재료를 삭제하시겠습니까?")==false){
 		return false;
 	}
-	
 	$.ajax({
 		url: "/recipe/deleteIngred",
-		data: "gred_num="+gredNum+"&board_num="+boardNum,
+		data: "gred_num="+gredNum+"&board_num="+boardNum+"&gred_gram="+gredGram,
 		type: "post",
 		success: function(result){
 			if(result<0){
-				alert("재료 삭제 실패");
+				("재료 삭제 실패");
 			}
-			alert("재료 삭제 완료");
-			/*$("#gredNum").html("");
-			var kcal = $("#totalKcal").text();
-			var idx =  kcal.lastIndexOf(":")+2;
-			var idx2 = kcal.indexOf("kcal");
-			kcal = kcal.substring(idx,idx2);
-			kcal -= gredkcal;
-			$("#totalKcal").text("Total : "+kcal+"kcal");
-			*/
-			ingredList(boardNum);//재료 리스트 설정
+			("재료 삭제 성공");
+			ingredList(boardNum);
 		},
 		error: function(e){
-			console.log(e.responseText);
+			(e.responseText);
 		}
 	});
 }
@@ -354,14 +343,14 @@ function deleteAllIngred(boardNum){
 		type: "post",
 		success: function(result){
 			if(result<0){
-				alert("재료 삭제 실패");
+				("재료 삭제 실패");
 			}
 			$("#totalKcal").text("Total : 0kcal");
 			$("#ingredList").html("");	//재료 리스트 초기화
 			ingredList(boardNum);
 		},
 		error: function(e){
-			console.log(e.responseText);
+			(e.responseText);
 		}
 	});
 }

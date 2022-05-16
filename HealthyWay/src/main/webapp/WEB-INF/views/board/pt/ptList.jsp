@@ -25,7 +25,7 @@
 				</div>
 			</form>
 			<!-- 글쓰기 -->
-			<button id="write_btn" onclick="location.href='${url}/board/ptWrite'">글쓰기</button>
+			<c:if test="${logStatus == 'Y'}"><button id="write_btn" onclick="location.href='${url}/board/ptWrite'">글쓰기</button></c:if>
 		</div>
 	</div>
 	<div class="head_img">
@@ -53,12 +53,12 @@
 		<div class="pt_list_wrap">
 			<c:forEach var="vo" items="${ptList}">
 				<ul class="pt_post_wrap ${vo.state}" onclick="location.href='${url}/board/ptView?board_num=${vo.board_num}'">
-					<li class="main_img_wrap"><img src="${url}/img/pt_recu.jpeg"></li>
+					<li class="main_img_wrap"><img src="/ptImg/${vo.pt_img_file}"></li>
 					<li>${vo.keyword}</li>
 					<li>${vo.title}</li>
 					<li>조회수 ${vo.hit}</li>
-					<li>${vo.writedate }</li>
-					<li>모집 중&nbsp;&nbsp;3 / ${vo.max_user}</li>
+					<li>${vo.write_date }</li>
+					<li>모집 중&nbsp;&nbsp;0 / ${vo.max_user}</li>
 					<li><span style="color: red;" class="material-symbols-outlined">favorite</span></li>
 					<li style="display: none;">${vo.board_num}</li>
 				</ul>

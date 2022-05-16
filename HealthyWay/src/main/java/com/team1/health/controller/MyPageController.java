@@ -1,7 +1,11 @@
 package com.team1.health.controller;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +25,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team1.health.service.MyPageService;
 import com.team1.health.vo.BoardVO;
+import com.team1.health.vo.CountVO;
 import com.team1.health.vo.MemberVO;
+import com.team1.health.vo.MyPagePagingVO;
+import com.team1.health.vo.PagingVO;
+import com.team1.health.vo.TrainVO;
 
 @Controller
 public class MyPageController {
@@ -31,8 +39,8 @@ public class MyPageController {
 	public ModelAndView myPage(HttpSession session) {
 		ModelAndView mav = new ModelAndView ();
 		//임시 데이터 입력
-		String user = "test";
-		//String user_id = (String)session.getAttribute("logId");
+		
+		String user = (String)session.getAttribute("logId");
 		MemberVO userData = service.userData(user);
 		List<BoardVO> PTboardData = service.PTboard(user);
 		//pt그룹 데이터
@@ -42,17 +50,121 @@ public class MyPageController {
 		mav.setViewName("/mypage/myPage");
 		return mav;
 	}
+	@PostMapping("/mypage/barListAll")
+	@ResponseBody
+	public Map<String,Object> barListAll(CountVO vo, HttpSession session){
+		Map<String,Object> map = new HashMap<String,Object>();
+		Calendar cal = Calendar.getInstance();
+		Calendar cal2 = Calendar.getInstance();
+		String user = (String)session.getAttribute("logId");
+		List<CountVO> lst = service.barListAll(user,cal.get(Calendar.YEAR));
+		String [] dayList = new String [cal.getActualMaximum(Calendar.DAY_OF_MONTH)];
+		for(int i=0; i<cal.getActualMaximum(Calendar.DAY_OF_MONTH);i++) {
+			dayList[i]=(i+1)+"일";
+		}
+		int [] monthDatas = new int [12];
+		int [] dayDatas = new int [cal.getActualMaximum(Calendar.DAY_OF_MONTH)];
+		Arrays.fill(monthDatas, 0);
+		Arrays.fill(dayDatas, 0);
+		for(int i=0; i<lst.size(); i++) {
+			cal2.set(Calendar.DAY_OF_YEAR, lst.get(i).getTrain_month());
+			monthDatas[cal2.get(Calendar.MONTH)]+=lst.get(i).getTrain_count();
+			if(cal.get(Calendar.MONTH)==cal2.get(Calendar.MONTH)) {
+				dayDatas[cal2.get(Calendar.DATE)-1]+=lst.get(i).getTrain_count();
+			}
+		}
+		map.put("monthDatas", monthDatas);
+		map.put("dayDatas", dayDatas);
+		map.put("dayList", dayList);
+//		System.out.println(Arrays.toString(monthDatas)+"월데이터");
+//		System.out.println(Arrays.toString(dayDatas)+"일 데이터");
+//		System.out.println(Arrays.toString(dayList)+"일 수");
+		return map;
+	}
 	@DeleteMapping("/mypage/heart")
 	@ResponseBody
 	public int reciepeHeartDel(int board_num) {
 		return service.reciepeHeartDel(board_num);
 	}
+	@PostMapping("/mypage/weightAll")
+	@ResponseBody
+	public Map<String,Object> weightAll(MemberVO vo, HttpSession session) {
+		String user = (String)session.getAttribute("logId");
+		List<MemberVO> list = service.weightAll(user);
+		double [] weight = new double [list.size()]; 
+		String [] write_date = new String [list.size()];
+		Map<String,Object>map=new HashMap<String,Object>();
+		for(int i=0; i<list.size();i++) {
+			weight[i] = list.get(i).getWeight();
+			write_date[i] = list.get(i).getWrite_date();
+		}
+		System.out.println(weight[0]);
+		System.out.println(write_date[0]);
+		map.put("weight", weight);
+		map.put("writeDate", write_date);
+		return map;
+	}
+	@GetMapping("/mypage/groupPageNagion")
+	@ResponseBody
+	public MyPagePagingVO groupPageNagion(MyPagePagingVO vo, HttpSession session) {
+		String user = (String)session.getAttribute("logId");
+		vo.setTotalRecord(service.groupCount(user));
+		return vo;
+	}
+	@PostMapping("/mypage/routineListAll")
+	@ResponseBody
+	public Map<String,Object> routineListAll(HttpSession session){
+		String user = (String)session.getAttribute("logId");
+		List<TrainVO> userRList = service.userRoutineListAll(user);
+		List<TrainVO> module;
+		int [] trainNum = new int[userRList.size()];
+		for(int i=0; i<userRList.size(); i++) {
+			trainNum[i] = userRList.get(i).getTrain_num();
+		}
+		Map<String,Object>map=new HashMap<String,Object>();
+		module = service.trainModuleListAll(trainNum);
+		map.put("userRList", userRList);
+		map.put("module", module);
+		return map;
+	}
+	@GetMapping("/mypage/groupListAll")
+	@ResponseBody
+	public List<BoardVO> groupListAll(MyPagePagingVO vo, HttpSession session){
+		//임시 데이터 입력
+		String user = (String)session.getAttribute("logId");
+		return service.groupListAll(user, vo);
+	}
+	@GetMapping("/mypage/achieveList")
+	@ResponseBody
+	public List<BoardVO> achieveList(MyPagePagingVO vo, HttpSession session){
+		String user = (String)session.getAttribute("logId");
+		return service.achieveListAll(user, vo);
+	}
+	@GetMapping("/mypage/achievePageNagion")
+	@ResponseBody
+	public MyPagePagingVO achievePageNagion(MyPagePagingVO vo, HttpSession session) {
+		String user = (String)session.getAttribute("logId");
+		vo.setTotalRecord(service.achieveCount(user));
+		return vo;
+	}
+	@GetMapping("/mypage/foodListAll")
+	@ResponseBody
+	public List<BoardVO> foodListAll(MyPagePagingVO vo, HttpSession session){
+		String user = (String)session.getAttribute("logId");
+		return service.foodListAll(user,vo);
+	}
+	@GetMapping("/mypage/foodPageNation")
+	@ResponseBody
+	public MyPagePagingVO foodPageNation(MyPagePagingVO vo,HttpSession session) {
+		String user = (String)session.getAttribute("logId");
+		vo.setTotalRecord(service.foodCount(user));
+		return vo;
+	}
 	@PostMapping("/mypage/reciepeHeart")
 	@ResponseBody
 	public List<BoardVO> reciepeHeart(HttpSession session){
 		//임시 데이터 입력
-		String user = "test";
-		//String user_id = (String)session.getAttribute("logId");
+		String user = (String)session.getAttribute("logId");
 		return service.recipeHeart(user);
 	}
 	@PostMapping("/mypage/reciepeInfor")
@@ -72,7 +184,7 @@ public class MyPageController {
 	@ResponseBody
 	public int updateUser(MemberVO vo,HttpServletRequest request) {
 		//나중에 배포를 위해서라도 링크 외부 파일로 돌리기!
-		String path = request.getSession().getServletContext().getRealPath("/myPageImg");
+		String path = request.getSession().getServletContext().getRealPath("/img");
 		System.out.println(path);
 		String orgFileName = "";
 		try {
@@ -105,7 +217,9 @@ public class MyPageController {
 						try {
 							System.out.println("파일 업로드 실행");
 							mf.transferTo(f);//실제 업로드됨
-							fileDelete(path,vo.getProfie_img());
+							if(!vo.getProfie_img().equals("noprofile.png")) {
+								fileDelete(path,vo.getProfie_img());
+							}
 							vo.setProfie_img(orgFileName);
 						}catch(Exception e) {
 							e.printStackTrace();
@@ -115,7 +229,9 @@ public class MyPageController {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
-			fileDelete(path,orgFileName);
+			if(!orgFileName.equals("noprofile.png")) {
+				fileDelete(path,orgFileName);
+			}
 			System.out.println("삭제 실행");
 		}
 		//수정 DAO작성

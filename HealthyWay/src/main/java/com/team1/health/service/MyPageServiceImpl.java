@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.team1.health.dao.MyPageDAO;
 import com.team1.health.vo.BoardVO;
+import com.team1.health.vo.CountVO;
 import com.team1.health.vo.MemberVO;
+import com.team1.health.vo.MyPagePagingVO;
+import com.team1.health.vo.TrainVO;
 
 @Service
 public class MyPageServiceImpl implements MyPageService{
@@ -48,5 +51,55 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public int reciepeHeartDel(int board_num) {
 		return dao.reciepeHeartDel(board_num);
+	}
+
+	@Override
+	public List<BoardVO> groupListAll(String user,MyPagePagingVO vo) {
+		return dao.groupListAll(user, vo);
+	}
+
+	@Override
+	public int groupCount(String user) {
+		return dao.groupCount(user);
+	}
+
+	@Override
+	public int achieveCount(String user) {
+		return dao.achieveCount(user);
+	}
+
+	@Override
+	public List<BoardVO> achieveListAll(String user, MyPagePagingVO vo) {
+		return dao.achieveListAll(user, vo);
+	}
+
+	@Override
+	public int foodCount(String user) {
+		return dao.foodCount(user);
+	}
+
+	@Override
+	public List<BoardVO> foodListAll(String user, MyPagePagingVO vo) {
+		return dao.foodListAll(user, vo);
+	}
+
+	@Override
+	public List<TrainVO> userRoutineListAll(String user) {
+		return dao.userRoutineListAll(user);
+	}
+
+	@Override
+	public List<TrainVO> trainModuleListAll(int [] trainNum) {
+		return dao.trainModuleListAll(trainNum);
+	}
+
+	@Override
+	public List<MemberVO> weightAll(String user) {
+		return dao.weightAll(user);
+	}
+
+	@Override
+	public List<CountVO> barListAll(String user, int year) {
+		return dao.barListAll(user, year);
 	}
 }

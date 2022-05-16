@@ -18,11 +18,16 @@
 	}
 	#recipeImage{
 		border-radius:20px;
-		background-size: cover;
-		background-repeat:no-repeat;
-		background-position:center center;
 		height:550px;
 		width:480px;
+		overflow:hidden;
+	}
+	#recipeImage img{
+		position:relative;
+		left:50%;
+		top:50%;
+		transform:translate(-50%,-50%);
+		height:100%;
 	}
 	.foodDiv{
 		display:inline-block;
@@ -40,6 +45,13 @@
 		background-position:center center;
 		transition-duration:0.5s;
 		overflow:hidden;
+	}
+	.foodDiv img{
+		position:relative;
+		left:50%;
+		top:50%;
+		transform:translate(-50%,-50%);
+		height:100%;
 	}
 	.changeSize{
 		width:100px;
@@ -132,7 +144,7 @@
 	}
 	.reciepeInforUl{
 		margin:0px 0px 0px 30px;
-		width:300px;
+		width:400px;
 	}
 	.reciepeInforUl li{
 		width:100%;
@@ -159,7 +171,6 @@
 	.reciepeInforUl li:nth-of-type(4){
 		height:60px;
 		line-height:60px;
-		text-align:right;
 	}
 	.reciepeInforUl li:nth-of-type(4) button{
 		border:none;
@@ -393,8 +404,7 @@
 				'board_num':$('#foodNum'+recipeIdx).attr('value')
 			},
 			success:function(r){
-				let reciepeInforHtml="";
-				console.log(r);
+				var reciepeInforHtml="";
 				reciepeInforHtml+="<ul class='reciepeInforUl'>";
 				reciepeInforHtml+="<li>"+r.title+"</li>";
 				reciepeInforHtml+="<li>"+r.content+"</li>";
@@ -402,8 +412,22 @@
 				reciepeInforHtml+="<li><button onclick='modalIn()'>칼로리 체크!</button><button onclick='delHeart()'>삭제</button></li>"
 				reciepeInforHtml+="</ul>";
 				$("#recipeInfor").html(reciepeInforHtml);
-				$('#recipeImage').css('background-image',"url(/myPageImg/"+r.recipe_img_file+")")
+				$('#recipeImage img').attr('src',"/recipeImg/upload/"+r.recipe_img_file)
+				document.getElementById("recipeImage").addEventListener('click',function(){
+					location.href="/recipe/view?board_num="+r.board_num;
+				});
 				foodKcal=r.total_kcal;
+			},error:function(){
+				var reciepeInforHtml="";
+				reciepeInforHtml+="<ul class='reciepeInforUl'>";
+				reciepeInforHtml+="<li>없어요</li>";
+				reciepeInforHtml+="<li>아니 없다구요</li>";
+				reciepeInforHtml+="<li><span>칼로리: </span>맛있게 먹으면 0Kcal~</li>"
+				reciepeInforHtml+="<li><button>칼로리 체크!</button><button>삭제</button></li>"
+				reciepeInforHtml+="</ul>";
+				$("#recipeInfor").html(reciepeInforHtml);
+				$('#recipeImage img').attr('src',"/img/no.PNG");
+				$('#reciepeLeft, #reciepeRight').css('display','none');
 			}
 		})
 	}	
@@ -415,10 +439,13 @@
 			url:"/mypage/reciepeHeart",
 			type:'post',
 			success:function(result){
+				console.log(result);
+				$('#reciepeLeft, #reciepeRight').css('display','block');
 				var reciepeHtml="";
 				reciepeHtml+="<button onclick='reciepeMove("+left+")' id='reciepeLeft'><</button>";
 				$(result).each(function(idx,vo){
-					reciepeHtml+="<div onclick='reciepeClick("+idx+")' class='foodDiv' id='foodDiv"+idx+"' style='background-image:url(/myPageImg/"+vo.recipe_img_file+");'>";
+					reciepeHtml+="<div onclick='reciepeClick("+idx+")' class='foodDiv' id='foodDiv"+idx+"'>";
+					reciepeHtml+="<img src='/recipeImg/upload/"+vo.recipe_img_file+"'/>";
 					reciepeHtml+="<input type='hidden' id='foodNum"+idx+"' value='"+vo.board_num+"'/>"
 					reciepeHtml+="<div class='hoverEventDiv'></div>";
 					reciepeHtml+="<div><div><span>"+vo.title+"</span></div>";
@@ -430,17 +457,6 @@
 				foodDivLength=result.length-1;
 				reciepeInfor(recipeIdx);
 				$("#foodDiv"+recipeIdx).addClass('changeSize');
-				document.querySelectorAll('.hoverEventDiv').forEach(function(e){
-					//호버 이벤트 추가
-					e.addEventListener('mouseover',function(){
-						$(event.target).next().children().eq(0).children().css('top','0px');
-						$(event.target).next().next().css('opacity','1');
-					});
-					e.addEventListener('mouseleave',function(){
-						$(event.target).next().children().eq(0).children().css('top','30px');
-						$(event.target).next().next().css('opacity','0');
-					});
-				});
 			}
 		})
 	}
@@ -450,7 +466,9 @@
 	<!-- 좋아요 레시피 목록 표기 -->
 	<div></div>
 	<div id='kcalDiv'>
-		<div id='recipeImage'></div>
+		<div id='recipeImage' style='cursor:pointer;'>
+			<img src=''/>
+		</div>
 		<div id='recipeInfor'></div>
 	</div>
 </div>
