@@ -1,12 +1,15 @@
 package com.team1.health.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.team1.health.vo.Apply_userVO;
 import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.MemberVO;
+import com.team1.health.vo.PtPagingVO;
 
 @Mapper
 @Repository
@@ -19,7 +22,7 @@ public interface PtDAO {
 	public int ptGroupInsert(BoardVO vo);
 	
 	// 그룹pt 글목록
-	public ArrayList<BoardVO> ptList();
+	public ArrayList<BoardVO> ptList(PtPagingVO pVO);
 	
 	// 그룹pt 뷰페이지 선택
 	public BoardVO ptBoardSelect(int no);
@@ -38,4 +41,22 @@ public interface PtDAO {
 	
 	// 리더정보 선택
 	public MemberVO leaderSelect(int board_num);
+	
+	// 그룹pt 참가신청
+	public int ptApplyInsert(int board_num, String user_id);
+	
+	// 그룹pt 참가자 리스트
+	public List<Apply_userVO> apply_list(int board_num);
+	
+	// 그룹pt 참가 승인
+	public int applyAccept(int board_num, String user_id);
+	
+	// 그룹pt 참가 거절
+	public int applyDeny(int board_num, String user_id);
+	
+	// 참여중인 멤버 선택
+	public ArrayList<Apply_userVO> applySelect(int board_num);
+	
+	// 총레코드 수
+	public int totalRecord(PtPagingVO pVO);
 }
