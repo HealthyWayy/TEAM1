@@ -20,14 +20,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.team1.health.service.ptService;
+import com.team1.health.service.PtService;
 import com.team1.health.vo.BoardVO;
 
 @RestController
 @RequestMapping("/board/*")
 public class PtController {
 	@Inject
-	ptService service;
+	PtService service;
 	
 	
 	// pt 글 리스트
