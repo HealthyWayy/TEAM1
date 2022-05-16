@@ -3,8 +3,8 @@
 
 <script>
 $(function() {
-	console.log('찍힘')
-    $("#btn_submist").on("click",function() {
+	console.log('실행')
+    $("#btn_submit").on("submit",function() {
        if ($("#title").val() == "") {
           alert("글 제목을 입력하세요");
           return false;
@@ -19,7 +19,7 @@ $(function() {
         }
        
        $(function(){
-         var url = "${url}/boardWrite";
+         var url = "${url}/suggestionWrite";
          var data = $("#boardFrm").serialize();
          
           $.ajax({
@@ -44,7 +44,7 @@ $(function() {
   
    <div id="#b__table" >
         <h1 class="bf__title">👇 게시글 작성 👇</h1>
-       <form id="boardFrm" class="bf__container" method="post" action="/boardWrite">
+       <form id="boardFrm" class="bf__container" method="post" action="/suggestionWrite">
         	<input type="hidden" value="suggestWrite" name="command">
         
             <table class="bf__table">
@@ -65,4 +65,3 @@ $(function() {
             <input class="bo__btn__wa" type="button" value="취소" onclick="javascript:history.back()">
     	</form>
     </div>
-

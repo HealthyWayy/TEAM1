@@ -24,8 +24,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import com.team1.health.vo.PagingVO;
+import com.team1.health.vo.SuggestionPagingVO;
 import com.team1.health.vo.BoardVO;
 import com.team1.health.service.MemberService;
+
 import com.team1.health.service.BoardService;
 
 
@@ -39,7 +41,7 @@ public class BoardController {
 	@Inject
 	MemberService memberService;
 	
-	//건의할래요 뷰 1
+	//공지사항 뷰 1
 		@GetMapping("boardList")
 		public ModelAndView boardList(@RequestParam(value="pageNum",required = false, defaultValue = "1")int pageNum, @RequestParam(value="pageCount",required = false, defaultValue = "5")int pageCount, @RequestParam(value="searchWord",required = false, defaultValue = "")String searchWord){
 			ModelAndView mav = new ModelAndView();
@@ -93,7 +95,7 @@ public class BoardController {
 		System.out.println("wirte start");
 		 
 		vo.setUser_id((String)request.getSession().getAttribute("logId"));
-		
+		vo.setType_num(4);
 		ResponseEntity<String> entity = null;
 		MultiValueMap<String, String> header = new HttpHeaders();
 		header.add("Content-Type", "text/html; charset=utf-8");
@@ -121,7 +123,7 @@ public class BoardController {
 	//공지 삭제요청 3
 	@DeleteMapping("/board/boardList")
 	
-    public ResponseEntity<HashMap<String,String>> suggestionDelete(BoardVO vo, HttpServletRequest request, HttpSession session){
+    public ResponseEntity<HashMap<String,String>> boardDelete(BoardVO vo, HttpServletRequest request, HttpSession session){
     	ResponseEntity<HashMap<String,String>> entity = null;
     	HashMap<String,String> result = new HashMap<String,String>();
     	String user_id = (String)session.getAttribute("logId");
@@ -156,7 +158,7 @@ public class BoardController {
     }
 		//공지사항 상세보기 5 
 	@GetMapping("/board/boardList/{board_num}")
-    public ModelAndView suggestionInfoView(@PathVariable(value="board_num")int board_num) {
+    public ModelAndView boardInfoView(@PathVariable(value="board_num")int board_num) {
     	ModelAndView mav  = new ModelAndView();
     	System.out.println("출력");
     	try {
@@ -180,7 +182,7 @@ public class BoardController {
 
 		//수정 뷰 7
 	    @PostMapping("board/boardList/edit/{board_num}")
-	    public ModelAndView suggestionEditView(@PathVariable(value="board_num")int board_num, HttpSession session) {
+	    public ModelAndView boardEditView(@PathVariable(value="board_num")int board_num, HttpSession session) {
 	    	ModelAndView mav = new ModelAndView();
 	    	try {
 		    	String user_id = (String)session.getAttribute("logId"); 
@@ -244,4 +246,200 @@ public class BoardController {
 	    	return entity;
 	    }
 		
+//자유게시판 9
+	    @GetMapping("board/suggestionList")
+		public ModelAndView suggestionList(@RequestParam(value="pageNum",required = false, defaultValue = "1")int pageNum, @RequestParam(value="pageCount",required = false, defaultValue = "5")int pageCount, @RequestParam(value="searchWord",required = false, defaultValue = "")String searchWord){
+			ModelAndView mav = new ModelAndView();
+			
+			
+			SuggestionPagingVO spvo = new SuggestionPagingVO();
+	        //검색어가 있을 경우
+	        if(!searchWord.equals("")) 
+	        	spvo.setSearchWord(searchWord);
+	        //전체 게시글 업데이트
+	        spvo.setOnePageRecord(pageCount);
+	        spvo.setSuggestionTotalRecord(service.suggestiontotalRecord(spvo));
+	        spvo.setPageNum(pageNum);
+	        
+			//총 페이지 수
+	        spvo.setSuggestionTotalRecord(service.suggestiontotalRecord(spvo));
+			
+			//DB연결
+			mav.addObject("suggestionList", service.suggestionList(spvo));
+			
+			//페이지 정보
+			mav.addObject("spvo", spvo);
+			
+			mav.setViewName("board/suggestionList"); 
+			return mav;
+		}
+
+//자유게시판 상세 뷰 10
+
+	@GetMapping("/board/suggestionList/{board_num}")
+  public ModelAndView suggestionInfoView(@PathVariable(value="board_num")int board_num) {
+  	ModelAndView mav  = new ModelAndView();
+  	System.out.println("출력");
+  	try {
+  		BoardVO bvo = service.suggestionSelectByNo(board_num);
+  		if(bvo != null) {
+  			mav.addObject("bvo",bvo);
+  			mav.setViewName("board/suggestionView");
+  		}
+  		else {
+  			//게시물이 존재 하지 않을 경우
+  			System.out.println("존재하지 않는 게시물");
+  			mav.setViewName("redirect:/board/suggestionList");
+  		}
+  		
+  	}catch(Exception e) {
+  		e.printStackTrace();
+  		mav.setViewName("redirect:/board/suggestionList");
+  	}
+  	return mav;
+  	
+  }
+	
+	//자유게시판 생성 뷰
+		@GetMapping("suggestionWrite")
+		public ModelAndView suggestionWrite() {
+			ModelAndView mav = new ModelAndView();
+			
+			
+			
+			mav.setViewName("board/suggestionWrite");
+			return mav;
+		
+		
+		}
+	
+	//자유게시판 게시글 생성 요청 11
+		@PostMapping("/suggestionWrite")
+		public ResponseEntity<String> suggestionWrite(BoardVO vo, HttpServletRequest request){
+			System.out.println("자유글 게시");
+			 
+			vo.setUser_id((String)request.getSession().getAttribute("logId"));
+			vo.setType_num(5);
+			ResponseEntity<String> entity = null;
+			MultiValueMap<String, String> header = new HttpHeaders();
+			header.add("Content-Type", "text/html; charset=utf-8");
+			
+			try {
+				service.boardInsert(vo);
+				String msg = "<script>";
+					   msg += "alert('등록이 성공했습니다');";
+					   msg += "location.href='/board/suggestionList';";
+					   msg += "</script>";
+					   
+				System.out.println("글쓰기");
+				entity = new ResponseEntity<String>(msg, header, HttpStatus.OK);
+			}catch(Exception e) {
+				e.printStackTrace();
+				String msg = "<script>";
+					   msg += "alert('등록이 실패하였습니다');";
+					   msg += "history.back();";
+					   msg += "</script>";
+				entity = new ResponseEntity<String>(msg, header, HttpStatus.BAD_REQUEST);
+			}
+			
+			return entity;
+		}
+//자유게시판 수정 뷰 12
+@PostMapping("/board/suggestionList/{board_num}/edit")
+public ModelAndView suggestionEditView(@PathVariable(value="board_num")int board_num, HttpSession session) {
+	ModelAndView mav = new ModelAndView();
+	try {
+    	String user_id = (String)session.getAttribute("logId"); 
+    	BoardVO bvo = service.suggestionSelectByNo(board_num);
+    	//작성자 본인 확인
+    	if(user_id != null && bvo.getUser_id().equals(user_id) == true){
+    		mav.setViewName("board/suggestionEdit");
+    		mav.addObject("bvo",service.suggestionSelectByNo(board_num));
+    	}
+    	else {
+    		mav.setViewName("redirect:/board/suggestionList");
+    	}
+	}catch(Exception e) {
+		e.printStackTrace();
+		mav.setViewName("redirect:/board/suggestionList");
+	}
+	return mav;
+}  
+
+//13 자유게시판 수정 요청
+@PutMapping("/board/suggestionList")
+public ResponseEntity<HashMap<String,String>> suggestionUpdate(BoardVO bvo, HttpServletRequest request, HttpSession session){
+	ResponseEntity<HashMap<String,String>> entity = null;
+	HashMap<String,String> result = new HashMap<String,String>();
+	String user_id = (String)session.getAttribute("logId");
+	
+	try { 	
+		if(service.suggestionSelectByNo(bvo.getBoard_num()) == null) {
+			//수정할 게시글이 존재하지 않는 경우
+			result.put("status", "200");
+			result.put("msg", "존재하지 않는 게시물 입니다.");
+			result.put("redirect", "/board/suggestionList");
+			entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.OK);
+		}
+		//작성자가 다른경우
+		if(bvo.getUser_id().equals(user_id)== false) {
+			result.put("status", "200");
+			result.put("msg", "잘못된 접근입니다");
+			result.put("redirect", "/board/suggestionList");
+			entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.OK);
+		}
+		else {
+			
+			service.suggestionUpdate(bvo);
+			result.put("status", "200");
+			result.put("msg", "글 수정 완료.");
+			result.put("redirect", "/board/suggestionList/"+bvo.getBoard_num());
+			entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.OK);
+		}
+	}catch(Exception e) {
+		result.put("status", "400");
+		result.put("msg", "글 수정 요청 Error...");
+		result.put("redirect", "/board/suggestionList");
+		entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.BAD_REQUEST);	
+	}
+	
+	
+	return entity;
+}
+
+//자유게시판 삭제 14
+@DeleteMapping("/board/suggestionList")
+public ResponseEntity<HashMap<String,String>> suggestionDelete(int board_num, HttpServletRequest request, HttpSession session){
+	ResponseEntity<HashMap<String,String>> entity = null;
+	HashMap<String,String> result = new HashMap<String,String>();
+	String user_id = (String)session.getAttribute("logId");
+	
+	try {
+		BoardVO bvo = service.suggestionSelectByNo(board_num);
+		//작성자가 다른경우
+		if(bvo.getUser_id().equals(user_id)== false) {
+			result.put("status", "200");
+			result.put("msg", "잘못된 접근입니다");
+			result.put("redirect", "/board/suggestionList");
+			entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.OK);
+		}
+		else {
+			service.suggestionDelete(bvo.getBoard_num(), bvo.getUser_id());
+			result.put("status", "200");
+			result.put("msg", "글 삭제 완료.");
+			result.put("redirect", "/board/suggestionList");
+			entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.OK);
+		}
+	}catch(Exception e) {
+		//삭제할 게시글이 존재하지 않을 경우
+		//user_id가 null일 경우 
+		e.printStackTrace();
+		result.put("status", "400");
+		result.put("msg", "글 삭제 요청 Error...");
+		result.put("redirect", "/board/suggestionList");
+		entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.BAD_REQUEST);	
+	}
+	return entity;
+}
+
 }

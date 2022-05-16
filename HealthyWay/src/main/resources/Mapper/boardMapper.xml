@@ -5,13 +5,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team1.health.dao.BoardDAO">
 	<insert id="boardInsert">
-		insert into board(user_id, title, content)
-		values(#{user_id}, #{title}, #{content})
+		insert into board(user_id, title, content, type_num)
+		values(#{user_id}, #{title}, #{content}, #{type_num});
 
+		 
 	</insert>
 	<select id="boardList" resultType="com.team1.health.vo.BoardVO">
 		select board_num, user_id, title, hit, date_format(write_date,'%m-%d %H:%i') write_date
-		from board
+		from board where type_num=3
 		
 		<if test="searchWord != null">
 		where title like '%${searchWord}%'
@@ -21,7 +22,7 @@
 
 	<select id="totalRecord" resultType="int">
 
-		select count(board_num) cnt from board
+		select count(board_num) cnt from board where type_num=4
 		<if test="searchWord != null">
 			where title like '%${searchWord}%'
 		</if>
@@ -39,6 +40,46 @@
 		update board set title=#{title}, content=#{content} where board_num=${board_num} and user_id=#{user_id}
 	</update>
 	<delete id="boardDelete">
+		delete from board where board_num=#{param1} and user_id=#{param2}
+	</delete>
+	
+	
+	
+	
+
+	
+	
+	<select id="suggestionList" resultType="com.team1.health.vo.BoardVO">
+		select board_num, user_id, title, hit, date_format(write_date,'%m-%d %H:%i') write_date
+		from board where type_num=4
+		
+		<if test="searchWord != null">
+		where title like '%${searchWord}%'
+		</if>
+		order by board_num desc limit ${onePageRecord} offset ${offsetIndex}
+	</select>
+	
+	<select id="SuggestiontotalRecord" resultType="int">
+
+		select count(board_num) cnt from board where type_num=4
+		<if test="searchWord != null">
+			where title like '%${searchWord}%'
+		</if>
+	</select>
+	
+	<select id="suggestionSelectByNo" resultType="com.team1.health.vo.BoardVO">
+  		select board_num, user_id, title, content, date_format(write_date,'%y-%m-%d %H:%i') write_date
+  		from board where board_num=${board_num}
+  	</select>
+	<select id="suggestionSelect" resultType="com.team1.health.vo.BoardVO">
+		select board_num, user_id, title, content, hit, write_date
+		from board where board_num=${param1}
+		
+	</select>
+	<update id="suggestionUpdate">
+		update board set title=#{title}, content=#{content} where board_num=${board_num} and user_id=#{user_id}
+	</update>
+	<delete id="suggestionDelete">
 		delete from board where board_num=#{param1} and user_id=#{param2}
 	</delete>
 </mapper>

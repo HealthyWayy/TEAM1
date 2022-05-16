@@ -5,14 +5,18 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+
 import org.springframework.stereotype.Service;
 
 import com.team1.health.dao.BoardDAO;
 import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.PagingVO;
+import com.team1.health.vo.SuggestionPagingVO;
+
 
 //1
 @Service
+
 public class BoardServiceImpl implements BoardService {
 	//2
 	@Inject
@@ -62,6 +66,52 @@ public class BoardServiceImpl implements BoardService {
 		return dao.boardView(board_num);
 	}
 
+	//자유게시판
+	@Override
+	public int suggestionInsert(BoardVO vo) {
+		return dao.suggestionInsert(vo);
+		
+	}
+	
+	@Override
+	public int suggestiontotalRecord(SuggestionPagingVO spVO) {
+		return dao.SuggestiontotalRecord(spVO);
+	}
+	
+	//4
+	@Override
+	public List<BoardVO> suggestionList(SuggestionPagingVO pVO) {
+		return dao.suggestionList(pVO);
+	}
+	
+	
+	@Override
+	public BoardVO suggestionSelect(int board_num) {
+		return dao.suggestionSelect(board_num);
+	}
+	
 
+	@Override
+	public int suggestionUpdate(BoardVO vo) {
+		return dao.suggestionUpdate(vo);
+	}
+	
+	@Override
+	public int suggestionDelete(int board_num, String user_id) {
+		return dao.suggestionDelete(board_num, user_id);
+	}
+	@Override
+	public BoardVO suggestionSelectByNo(int board_num) {
+		return dao.suggestionSelectByNo(board_num);
+		
+	}
+	@Override
+	public BoardVO suggestionView(int board_num) {
+		return dao.suggestionView(board_num);
+	}
+
+	
+	
+	
 }
 
