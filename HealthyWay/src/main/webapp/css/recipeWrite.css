@@ -221,8 +221,8 @@ input:focus, select:focus, textarea:focus{
 /*페이징*/
 .paging{
 	text-align: center;
-	margin-left:4px;
-	margin-top:10px;
+	margin-left:1.5%;
+	margin-top:2.5%;
 }
 .paging>a>li{
 	display:inline-block;
@@ -230,8 +230,8 @@ input:focus, select:focus, textarea:focus{
 	height:25px;
 	line-height:24px;
 	text-align:center;
-	font-size:10px;
-	margin-right:4px;
+	font-size:11pt;
+	margin-right:1.5%;
 	border-radius:10px;
 	background-color: rgb(235,235,235);
 }
@@ -257,33 +257,37 @@ input:focus, select:focus, textarea:focus{
 /*계량 아이콘 div*/
 #measurement{
 	text-align: center;
-	padding-left:16px;
- 	margin-top:40px;
+	padding-left:7%;
+ 	margin-top:10%;
 }
 #measurement>li{
 	display:inline-block;
-	margin-right:15px;
+	margin-right:7%;
 	cursor: pointer;
-	margin-bottom:10px;
+	margin-bottom:5%;
 }
 #measurement>li>img{
 	width:70px;
+	height:10%;
 }
 
 /*gram 입력 div*/
 #ingredInfo{
-	width:145px;
+	width:50%;
 	margin:0 auto;
-	margin-top:20px;
+	margin-top:4%;
+	text-align: center;
 }
 #ingredInfo>p{
 	text-align: center;
 }
+#ingredName{
+	font-size:1.3em !important;
+}
 #ingredGram{
-	width:130px;
-	height:27px;
-	line-height:27px;
-	font-size:11pt;
+	width:70%;
+	height:30px;
+	line-height:33px;
 	text-align: center;
 	border-radius:30px;
 	border:none;	
@@ -291,13 +295,14 @@ input:focus, select:focus, textarea:focus{
 }
 #ingredBtn{
 	width:50%;
+	height:30px;
 	margin:0 auto;
-	margin-top:30px;
+	margin-top:10%;
 }
 #ingredBtn>input[type=submit],#ingredBtn>input[type=reset]{
 	float:left;
 	width:43%;
-	height:30px;
+	height:100%;
 	border:none;
 	border-radius:30px;
 	background-color: #FFA733;
@@ -328,7 +333,7 @@ input:focus, select:focus, textarea:focus{
 		height: 55px;
 	}
 	#boardInfo{
-		font-size:14pt;
+		font-size:15pt;
 	}
 	#ingredList{
 		height:190px;
@@ -336,20 +341,66 @@ input:focus, select:focus, textarea:focus{
 	#recipeInfo>p>button{
 		width:7%;
 		height:40px;
-		line-height:43px;
+		line-height:40px;
 		font-size:16pt;
 	}
 	#content{
 		height:390px;
 	}
 	#totalKcal{
-		height:33px;
-		line-height:35px;
+		height:40px;
+		line-height:40px;
 	}
 	#recipeBtn>input[type=submit], #recipeBtn>input[type=reset]{
 		width:10%;
 		height:45px;
-		line-height:48px;
+		line-height:45px;
 		margin-top:1.5%;
 	}
+	/*모달창*/
+	.modal-body{
+		height:700px;
+		font-size:15pt;
+	}
+	#ingredSearch>select{/*카테고리*/
+		height:50px;
+		font-size:15pt;
+	}
+	#ingredSearch>input[type=text]{
+		height:50px;
+	}
+	#ingredSearch>input[type=submit]{/*검색 버튼*/
+		height:50px;
+	}
+	.list-group-item{
+		height:60px;
+		line-height:63px;
+		font-size:15pt;
+		padding:0;
+		padding-left:2%;
+	}
+	.paging>a>li{
+		width:35px;
+		height:40px;
+		line-height:40px;
+		font-size:15pt;
+	}
+	/*계량 아이콘*/
+	#measurement>li>img{
+		width:100px;
+	}
+	#ingredGram{
+		width:70%;
+		height:45px;
+		line-height:45px;
+	}
+	#ingredBtn{
+		height:45px;
+	}
+	/*모달창 닫기*/
+	#closeBtn{
+		width:6%;
+		height:40px;
+	}
+	
 }
