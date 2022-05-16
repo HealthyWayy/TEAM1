@@ -1,7 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link href="/css/home.css" rel="stylesheet" type="text/css"/>
 <script src="/js/home.js"></script>
+<header class="nav-bar">
+  <ul>
+  	<li><a href="/">Logo</a></li>
+  </ul>
+  <ul>
+  	<c:if test="${logStatus != 'Y' }">
+  		<li><a href="/member/loginForm">Login</a></li>		
+  	</c:if>
+  	<c:if test="${logStatus == 'Y' }">
+  		<li><div class="profile-container dropbtn2"></div></li>
+	  	<li><a href="/member/logout">Logout</a></li>
+  	</c:if>
+  
+  </ul>
+</header>
+<nav class="dropdown-content2">
+	 <ul class="gnb">
+	 	<li class="submenu2"><span>mypage1</span></li>
+	 	<li class="submenu2"><span>mypage2</span></li>
+	 	<li class="submenu2"><span>mypage3</span></li>
+	 	<li class="submenu2"><span>mypage4</span></li>
+	 </ul>
+</nav>
 <div class="container">
         <div class="box">
         	<div class="cover">

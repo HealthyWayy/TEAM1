@@ -13,14 +13,28 @@
 	</select>
 	
 	<select id="recipeList" resultType="com.team1.health.vo.BoardVO">
-		select b.board_num, b.user_id, b.title, b.type_num, r.recipe_img_file, r.total_kcal
-		from board b join recipe_board r
-		on b.board_num = r.board_num
+		select b.board_num, b.user_id, b.title, b.type_num, b.hit, r.recipe_img_file, r.total_kcal, count(reply_num) replycount
+		from board b
+        left join recipe_board r on b.board_num = r.board_num
+		left join reply re on b.board_num = re.board_num
 		where b.type_num=1 and b.board_num!=0
+		GROUP BY b.board_num
 		<if test='searchValue != null'>
 			and b.title like '%${searchValue}%' or b.content like '%${searchValue}%'
 		</if>
-		order by b.board_num desc limit ${onePageRecord} offset ${offsetIndex}
+		<if test="searchKey=='칼로리'">
+			 order by r.total_kcal asc limit ${onePageRecord} offset ${offsetIndex}
+		</if>
+		<if test="searchKey=='조회'">
+			order by b.hit desc limit ${onePageRecord} offset ${offsetIndex}
+		</if>
+		<if test="searchKey=='댓글'">
+			order by replycount desc limit ${onePageRecord} offset ${offsetIndex}
+		</if>
+		<if test="searchKey==null">
+			order by b.board_num desc limit ${onePageRecord} offset ${offsetIndex}
+		</if>
+		
 	</select>
 	
 	<select id="totalRecord" resultType="int">
