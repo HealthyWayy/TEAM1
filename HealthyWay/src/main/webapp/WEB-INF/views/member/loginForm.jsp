@@ -2,11 +2,33 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link href="${url}/css/member/loginForm.css" rel="stylesheet" type="text/css">
-
+<script>
+	$(function(){
+		/* var height = window.innerHeight- $("header").height()+"px"
+		console.log(height);
+		$(".wrap").css("height",height)
+		$(".wrap").css("background-size","100% "+height) */
+		$("#logFrm").submit(function(){
+			var id = document.getElementById("user_id");
+			if (id.value == "") {//아이디가 없을 때
+				alert("아이디를 입력하세요.");
+				id.focus();//focus : 커서를 해당 객체에 위치시킨다.
+				return false;
+			}
+			if (document.querySelector("#user_pw").value == "") {
+				alert("비밀번호를 입력하세요.");
+				document.querySelector("#user_pw").focus();
+				return false;
+			}
+			//아이디와 비밀번호가 모두 입력되었을 떄    
+			return true;
+		})
+	});
+</script>
 <div class="wrap">
 	<section class="loginForm">
 		<div id="log">
-			<form method="post" action="/member/loginOk" id="logFrm" onsubmit="return logFormCheck()">
+			<form method="post" action="/member/loginOk" id="logFrm">
 				<div class="logFrm_btn_wrap">
 					<div>	
 						<div class="input-id">
@@ -31,28 +53,11 @@
 					</div>
 				</div>
 				<div class="bottom-menu">
-
-					<div class="bottom-menu-left">Forgot?&nbsp;<a href="${url}/member/findId">ID</a></div>
-					<div class="bottom-menu-left">Forgot?&nbsp;<a href="${url}/member/findPw">PW</a></div>
+					<div class="bottom-menu-left">Forgot?&nbsp;&nbsp;<a href="${url}/member/findId">Find ID&nbsp;</a>/<a href="${url}/member/findPw">&nbsp;Find PW</a></div>
 					<div>Not a member?&nbsp;<a href="${url}/member/memberForm">Join Us</a></div>
 				</div>
 			</form>
 		</div>
 	</section>
 </div>
-<script>
-	var id = document.getElementById("user_id");
-	if (id.value == "") {//아이디가 없을 때
-		alert("아이디를 입력하세요.");
-		id.focus();//focus : 커서를 해당 객체에 위치시킨다.
-		return false;
-	}
-	if (document.querySelector("#user_pw").value == "") {
-		alert("비밀번호를 입력하세요.");
-		document.querySelector("#user_pw").focus();
-		return false;
-	}
-	//아이디와 비밀번호가 모두 입력되었을 떄    
-	return true;
-</script>
 
