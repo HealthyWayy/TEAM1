@@ -44,19 +44,24 @@ public interface PtDAO {
 	
 	// 그룹pt 참가신청
 	public int ptApplyInsert(int board_num, String user_id);
-	
 	// 그룹pt 참가자 리스트
 	public List<Apply_userVO> apply_list(int board_num);
-	
 	// 그룹pt 참가 승인
 	public int applyAccept(int board_num, String user_id);
-	
 	// 그룹pt 참가 거절
 	public int applyDeny(int board_num, String user_id);
-	
 	// 참여중인 멤버 선택
 	public ArrayList<Apply_userVO> applySelect(int board_num);
+	// 모집중 -> 모집완료 변경
+	public int ptStateUpdate(int board_num);
 	
 	// 총레코드 수
 	public int totalRecord(PtPagingVO pVO);
+	
+	// 찜 목록
+	public List<BoardVO> ptSelectHeart(String user_id);
+	// 찜 등록
+	public int ptInsertHeart(int board_num, String user_id);
+	// 찜 삭제
+	public int ptDeleteHeart(int board_num, String user_id);
 }
