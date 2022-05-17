@@ -115,4 +115,23 @@
 			and (title like '%${searchWord}%' or content like '%${searchWord}%' or user_id like '%${searchWord}%')
 		</if>
 	</select>
+	
+	<select id="ptSelectHeart" resultType="BoardVO">
+		select board_num from heart where user_id=#{param1}
+	</select>
+	
+	<insert id="ptInsertHeart">
+		insert into heart(board_num, user_id)
+		values (#{param1}, #{param2})
+	</insert>
+	
+	<delete id="ptDeleteHeart">
+		delete from heart
+		where board_num=#{param1} and user_id=#{param2}
+	</delete>
+	
+	<update id="ptStateUpdate">
+		update PT_group set state="모집완료"
+		where board_num=#{param1}
+	</update>
 </mapper>
