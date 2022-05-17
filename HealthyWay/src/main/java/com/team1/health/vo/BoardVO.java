@@ -30,9 +30,6 @@ public class BoardVO {
 	
 	// 좋아요 아이디
 	private String heartid;
-
-	// pt참여자 수
-	private int pNum;
 	
 	//recipe_board 좋아요 테이블
 	private String recipe_img_file;
@@ -184,27 +181,14 @@ public class BoardVO {
 	public void setOriginRecipeImg(String originRecipeImg) {
 		this.originRecipeImg = originRecipeImg;
 	}
-	public int getpNum() {
-		return pNum;
-	}
-	public void setpNum(int pNum) {
-		this.pNum = pNum;
-	}
-	public int getDatecal() {
-		return datecal;
-	}
-	public void setDatecal(int datecal) {
-		this.datecal = datecal;
-	}
+
 	public String getHeartid() {
 		return heartid;
 	}
 	public void setHeartid(String heartid) {
 		this.heartid = heartid;
 	}
-	public void setBoard_num(int board_num) {
-		this.board_num = board_num;
-	}
+
 
 	public String getOriginPtImg() {
 		return originPtImg;
