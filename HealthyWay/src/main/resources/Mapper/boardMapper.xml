@@ -6,13 +6,13 @@
 <mapper namespace="com.team1.health.dao.BoardDAO">
 	<insert id="boardInsert">
 		insert into board(user_id, title, content, type_num)
-		values(#{user_id}, #{title}, #{content}, #{type_num});
+		values(#{user_id}, #{title}, #{content}, #{type_num})
 
 		 
 	</insert>
 	<select id="boardList" resultType="com.team1.health.vo.BoardVO">
 		select board_num, user_id, title, hit, date_format(write_date,'%m-%d %H:%i') write_date
-		from board where type_num=3
+		from board where type_num=4
 		
 		<if test="searchWord != null">
 		where title like '%${searchWord}%'
@@ -46,12 +46,17 @@
 	
 	
 	
+	<insert id="suggestionInsert">
+		insert into board(user_id, title, content, type_num)
+		values(#{user_id}, #{title}, #{content}, 5);
 
+		 
+	</insert>
 	
 	
 	<select id="suggestionList" resultType="com.team1.health.vo.BoardVO">
 		select board_num, user_id, title, hit, date_format(write_date,'%m-%d %H:%i') write_date
-		from board where type_num=4
+		from board where type_num=5
 		
 		<if test="searchWord != null">
 		where title like '%${searchWord}%'
@@ -61,7 +66,7 @@
 	
 	<select id="SuggestiontotalRecord" resultType="int">
 
-		select count(board_num) cnt from board where type_num=4
+		select count(board_num) cnt from board where type_num=5
 		<if test="searchWord != null">
 			where title like '%${searchWord}%'
 		</if>

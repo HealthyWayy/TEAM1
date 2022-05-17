@@ -12,6 +12,15 @@
 	margin:auto;
 }
 
+.bo_table_top {
+	position: left;
+	top: 50px;
+    width: 1000px;
+	margin:auto;
+	
+}
+
+
 input{
 	border:none;
 	height:30px;
@@ -33,12 +42,14 @@ table td,th {
     font-family: var(--body-font);
 	border: 1px solid #bfbfbf;
     border-collapse: collapse;
-    text-align: center;
+    text-align: center ;
     padding: 10px;
     top:30px;
+	font: 15px tahoma;
+
 }
 th {
-	background: #e7e7e7;
+	background: #ff7f00;
 }
 a{
     text-decoration: none;
@@ -167,8 +178,11 @@ a:hover{
 .paging {
     text-align: center;
     margin: 35px;
-    left: 16px;
+    left: 12px;
     position: relative;
+	
+	font:bold 12px tahoma;
+
 }
 
 
@@ -223,7 +237,7 @@ a:hover{
 }
 /*---------- boardForm ---------*/
 .bf__container{
-	position: relative;
+	position: center;
     top: 100px;
     display: table;
     margin-left: auto;
