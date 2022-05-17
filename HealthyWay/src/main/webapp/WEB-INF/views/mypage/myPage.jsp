@@ -7,18 +7,18 @@ body,ul,li{
 	list-style:none;
 }
 #myPageBackground{
-	margin-top:60px;
 	background-image:url(/img/myPageBackground.jpg);
 	background-repeat:no-repeat;
-	background-size:100%;
+	background-size:cover;
+	background-attachment: fixed;
 	width:100%;
 	height:300px;
 }
 #myPageContainer{
 	position:relative;
 	top:0px;
-	left:-50px;
-	width:1200px;
+	left:0px;
+	width:1500px;
 	margin:0 auto;
 }
 #myPageContainer *{
@@ -29,11 +29,10 @@ body,ul,li{
 	background-color:white;	
 }
 #sidePage{
-	width:20%;
+	width:250px;
 	text-align:center;
 	position:sticky;
 	margin-top:-80px;
-	margin-right:20px;
 	top:20px;
 	/*탑 오른쪽 아래 왼쪽*/
 	padding:0px 0px 20px 0px;
@@ -147,7 +146,7 @@ body,ul,li{
 	width:100%;
 }
 #mainPage>div:nth-of-type(1){
-	width:100%;
+	width:1000px;
 	/*탑 오른쪽 아래 왼쪽*/
 	padding:0px 30px 40px 0px;
 	box-sizing:border-box;
@@ -177,7 +176,7 @@ body,ul,li{
 }
 .foodBtn{
 	left:500px;
-	z-index:2;
+	z-index002;
 }
 .writeBtn{
 	left:750px;
@@ -301,7 +300,7 @@ function logOut(){
 			<button id='logout' class='btnClass' onclick='logOut()'>로그아웃</button>
 		</div>
 		<div>
-			<span>Group Page</span>
+			<span>My Group</span>
 			<br/>
 			<img src='/img/groupShow.png' id="groupShow"/>
 			<br/>

@@ -27,9 +27,11 @@ $(function(){
 		$(this).css("background-color", "#fff").css("color","#000");
 		$("#menu_manage").children('span').text("lock");
 		$("#menu_qna").children('span').text("lock");
-	});
-	
-	
+	});	
+
+});
+
+function qnaClick(){
 	$("#menu_qna").click(function(){
 		$(".all_content").css("display", "none");
 		$(".comment_wrap").css("display", "block");
@@ -45,6 +47,4 @@ $(function(){
 		
 		$(this).children('span').text("lock_open");
 	});
-
-	
-});
+}

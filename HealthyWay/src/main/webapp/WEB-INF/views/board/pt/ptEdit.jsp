@@ -8,10 +8,34 @@
 <script src="${url}/js/board/pt/ptWrite.js"></script>
 
 <script>
+function imgDel(){
+	$("#originImgName").css("display", "none");
+	$("#file").css("display", "block");
+}
 	$(function(){
+		$(document).ready(function(){
+			var originImg = "${vo.pt_img_file}";
+			var originImgName = originImg.substring(originImg.lastIndexOf("_")+1);
+			var tag = originImgName + "&nbsp;&nbsp;<span id='imgDel' style='font-weight: bold; cursor: pointer;'>x</span>"
+			$("#originImgName").append(tag);
+		});
+		
+		$(document).on("click", "#imgDel", function(){
+			if(confirm("이미지를 삭제하시겠습니까?")){
+				imgDel();
+			}
+		});
+		
+		$("#file").change(function(){
+			var file = $("#file").val();
+			var idx = file.lastIndexOf("\\")+1;
+			$("#imgFile").val(file.substring(idx));
+			console.log($("#imgFile").val());
+		})
+		
 		CKEDITOR.replace("content");
 		
-		$("#ptEidtFrm").submit(function(){
+		$("#ptEditFrm").submit(function(){
 			event.preventDefault();
 			
 			// 유효성 검사
@@ -35,7 +59,7 @@
 				return false;
 			}
 			
-			if($("#file").val() == ''){
+			if($("#file").val() == 'none'){
 				alert("대표사진을 추가해주세요.");
 				return false;
 			}
@@ -44,14 +68,9 @@
 				alert("내용을 입력해주세요.");
 				return false;
 			}
-
-			/* var file = $("#file").val();
-			var idx = file.lastIndexOf("\\")+1;
-			var img = $("#imgFile").val(file.substring(idx));
-			$("#imgFile").val(file.substring(idx));
 			
 			var value = CKEDITOR.instances['content'].getData()
-			$("#content").text(value); */
+			$("#content").text(value);
 			
 			var params = new FormData($("#ptEditFrm")[0]);
 			
@@ -64,26 +83,22 @@
 				success: function(result){
 					if(result > 0){
 						alert("수정이 완료되었습니다.");
-						location = "/board/ptList";
+						location.href = "/board/ptView?board_num=${vo.board_num}";
 					}
 				},
 				error: function(e){
 					alert('PT그룹 수정에 실패했습니다.');
-					location = history.back();
+					location.href = history.back();
 				}
 			});
 			
 		});
-		
-		
 	});
 </script>
 
-<!-- 임시로 해둔 탑입니다 -->
-<div class="top"></div>
 <div class="main_wrap">
 	<h1>PT그룹 개설하기</h1>
-	<form action="${url}/board/ptEditOk" method="post" id="ptEditFrm">
+	<form action="${url}/board/ptEditOk" method="post" id="ptEditFrm" enctype="multipart/form-data">
 		<input type="hidden" value="${vo.board_num}" name="board_num">
 		<ul class="write_frm_wrap">
 			<li id="title_li">
@@ -93,11 +108,6 @@
 			<li id="keyword_li">
 				<h3>키워드</h3>
 				<input type="text" name="keyword" placeholder="예시) #스쿼트 #2주챌린지" id="keyword" value="${vo.keyword}">
-			</li>
-			<li id="img_file_li">
-				<h3>대표 사진</h3>
-				<input type="file" name="file" value="${vo.pt_img_file}" id="file">
-				<input type="hidden" name="pt_img_file" value="${vo.pt_img_file}" id="imgFile"/>
 			</li>
 			<li id="start_date_li">
 				<h3>시작일</h3>
@@ -118,6 +128,13 @@
 			<li id="content_li">
 				<h3>모집 내용</h3>
 				<textarea name="content" id="content">${vo.content}</textarea>
+			</li>
+			<li id="img_file_li">
+				<h3>대표 사진</h3>
+				<span id="originImgName"></span>
+				<input type="file" name="file" value="" id="file" style="display: none">
+				<input type="hidden" name="pt_img_file" value="${vo.pt_img_file}" id="imgFile"/>
+				<input type="hidden" name="originPtImg" value="${vo.pt_img_file}">
 			</li>
 			
 		</ul>

@@ -1,6 +1,7 @@
 package com.team1.health.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -14,9 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,7 +38,6 @@ public class MyPageController {
 	public ModelAndView myPage(HttpSession session) {
 		ModelAndView mav = new ModelAndView ();
 		//임시 데이터 입력
-		
 		String user = (String)session.getAttribute("logId");
 		MemberVO userData = service.userData(user);
 		List<BoardVO> PTboardData = service.PTboard(user);
@@ -66,13 +64,18 @@ public class MyPageController {
 		int [] dayDatas = new int [cal.getActualMaximum(Calendar.DAY_OF_MONTH)];
 		Arrays.fill(monthDatas, 0);
 		Arrays.fill(dayDatas, 0);
+		List<CountVO> lst2 = new ArrayList<CountVO>();
 		for(int i=0; i<lst.size(); i++) {
 			cal2.set(Calendar.DAY_OF_YEAR, lst.get(i).getTrain_month());
 			monthDatas[cal2.get(Calendar.MONTH)]+=lst.get(i).getTrain_count();
 			if(cal.get(Calendar.MONTH)==cal2.get(Calendar.MONTH)) {
 				dayDatas[cal2.get(Calendar.DATE)-1]+=lst.get(i).getTrain_count();
 			}
+			if(cal.get(Calendar.DAY_OF_YEAR)==lst.get(i).getTrain_month()) {
+				lst2.add(lst.get(i));
+			}
 		}
+		map.put("toDayData", lst2);
 		map.put("monthDatas", monthDatas);
 		map.put("dayDatas", dayDatas);
 		map.put("dayList", dayList);
@@ -83,8 +86,9 @@ public class MyPageController {
 	}
 	@DeleteMapping("/mypage/heart")
 	@ResponseBody
-	public int reciepeHeartDel(int board_num) {
-		return service.reciepeHeartDel(board_num);
+	public int reciepeHeartDel(int board_num, HttpSession session) {
+		String user=(String)session.getAttribute("logId");
+		return service.reciepeHeartDel(board_num,user);
 	}
 	@PostMapping("/mypage/weightAll")
 	@ResponseBody
@@ -98,8 +102,6 @@ public class MyPageController {
 			weight[i] = list.get(i).getWeight();
 			write_date[i] = list.get(i).getWrite_date();
 		}
-		System.out.println(weight[0]);
-		System.out.println(write_date[0]);
 		map.put("weight", weight);
 		map.put("writeDate", write_date);
 		return map;
@@ -169,8 +171,9 @@ public class MyPageController {
 	}
 	@PostMapping("/mypage/reciepeInfor")
 	@ResponseBody
-	public BoardVO reciepeInfor(int board_num) {
-		return service.reciepeInfor(board_num);
+	public BoardVO reciepeInfor(int board_num, HttpSession session) {
+		String user = (String)session.getAttribute("logId");
+		return service.reciepeInfor(board_num,user);
 	}
 	//마이페이지 개인정보 삭제
 	@DeleteMapping("/mypage/user")

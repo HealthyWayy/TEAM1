@@ -140,7 +140,7 @@ function groupListAll(pageNum) {
 			//'searchWord':$('#searchWord').val()
 		},
 		type:"get",
-		success: function(result) {				
+		success: function(result) {
 			var $result = $(result);
 			var tag = "";
 			$result.each(function(idx, vo){
@@ -158,6 +158,7 @@ function groupListAll(pageNum) {
 		},
 		error: function(e) {
 			console.log(e.responseText);
+			
 		}
 	});
 }

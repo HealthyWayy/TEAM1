@@ -25,7 +25,7 @@ ul,li{
 #topImg{
 	position:relative;
 	width:100%;
-	height:230px;
+	height:250px;
 	margin-top:4%;
 	margin-bottom:5%;
 }
@@ -42,7 +42,7 @@ ul,li{
 	heihgt:50px;
 	text-align: center;
 	line-height:50px;
-	font-size:25pt;
+	font-size:2em;
 }
 #topImg>p{
 	position:absolute;
@@ -66,9 +66,6 @@ ul,li{
 	height:30px;
 	line-height: 30px;
 }
-#top>ul>li:hover{
-	font-weight: bold;
-}
 /*검색폼*/
 #searchFrm{
 	float:left;
@@ -78,6 +75,7 @@ ul,li{
 #searchFrm>input[type=text]{
 	width:60%;
 	height:27px;
+	padding-left:1%;
 	border-radius:10px;
 	border:1px solid rgb(200,200,200);
 }
@@ -134,7 +132,7 @@ ul,li{
 	height:40px;
 	line-height:45px;
 	top:35%;
-	font-size:13pt;
+	font-size:20px;
 	text-align:center;
 	background-color: white;
 	opacity: 0;
@@ -177,7 +175,7 @@ ul,li{
 	line-height:30px;
 	height:100%;
 	text-align:center;
-	font-size:10pt;
+	font-size:16px;
 	margin-right:0.1%;
 	border-radius:10px;
 	background-color: rgb(235,235,235);
@@ -194,42 +192,44 @@ ul,li{
 
 @media ( min-width: 1800px ) {
   	#topImg{
-		height:350px;
+		height:380px;
 	}
 	#topImg>h1{
 		top: 30%;
 		width:100%;
-		font-size:33pt;
+		font-size:2.5em;
 	}
 	#topImg>p{
 		top: 50%;
 		width:100%;
-		font-size:20pt;
+		font-size:1.8em;
 	}
 	#top>ul>li{
 		height: 45px;
 		line-height: 45px;
-		font-size:18pt;
+		font-size:1.6em;
 	}
 	.recipe_div{
 		height:550px;
 	}
-	#searchFrm>input[type=submit]{
-		width:10%;
+	#searchFrm>input[type=text], #searchFrm>input[type=submit]{
 		height:45px;
-		font-size:18pt;
+		font-size:1.5em;
 	}
 	/*글쓰기 버튼*/
 	#writeBtn{
 		width:6%;
 		height:45px;
-		font-size:18pt;
+		font-size:1.5em;
 	}
 	.title{
 		height:55px;
 		line-height:60px;
 		top:40%;
 		font-size:22pt;
+	}
+	.paging>a>li{
+		font-size:1.5em;
 	}
 }
 </style>
@@ -328,9 +328,9 @@ function deleteHeart(boardNum){
 <!-- <a href='https://kr.freepik.com/psd/banner'>Banner psd는 freepik - kr.freepik.com가 제작함</a>-->
 <div style="margin-top:50px; margin-bottom:30px;">
 	<div id="topImg">
-		<img src="/recipeImg/banner.jpg"/>
+		<img src="/recipeImg/banner2.jpg"/>
 		<h1>SHARE YOUR RECIPES</h1>
-		<p>당신의 레시피를 공유하세요</p>
+		<p>당신의 레시피를 공유하세요!</p>
 	</div>
 
 	<!-- 글 목록 -->

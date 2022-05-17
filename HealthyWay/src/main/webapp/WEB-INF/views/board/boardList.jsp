@@ -19,7 +19,7 @@
 </script>
 
 <div class="bo__title">
-	<img src="/img/notice2.png">
+	<img src="/img/board2.jpg">
 </div>
 
 
@@ -40,11 +40,11 @@
 <table class="bo__table">
     <thead>
        <tr>
-            <th style="width:5%">No</th>
-            <th style="width:10%">작성자</th>
-            <th style="width:65%">제목</th>
-            <th>조회수</th>
-            <th>글쓴날짜</th>
+            <th style="font-weight:bold; font-style: tahoma; width:5%">No</th>
+            <th style="font-weight:bold; font-style: tahoma; width:10%">작성자</th>
+            <th style="font-weight:bold; font-style: tahoma; width:65%">제목</th>
+            <th style="font:bold 15px tahoma">조회수</th>
+            <th style="font-weight:bold; font-style: tahoma">날짜</th>
          </tr>
     </thead>
     <tbody class="bd_t" id="bd_t">
@@ -64,7 +64,7 @@
 <div class="bo__container">
 	
 	<div class="bo__n__page">
-		현재 페이지 ${pvo.pageNum}/ ${pvo.totalPage }
+		
 	</div>
 
 	

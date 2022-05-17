@@ -44,13 +44,13 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public BoardVO reciepeInfor(int board_num) {
-		return dao.reciepeInfor(board_num);
+	public BoardVO reciepeInfor(int board_num, String user) {
+		return dao.reciepeInfor(board_num,user);
 	}
 
 	@Override
-	public int reciepeHeartDel(int board_num) {
-		return dao.reciepeHeartDel(board_num);
+	public int reciepeHeartDel(int board_num, String user) {
+		return dao.reciepeHeartDel(board_num,user);
 	}
 
 	@Override
