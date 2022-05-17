@@ -79,8 +79,6 @@
 	});
 </script>
 
-<!-- 임시로 해둔 탑입니다 -->
-<div class="top"></div>
 <div class="main_wrap">
 	<h1>PT그룹 개설하기</h1>
 	<form action="${url}/board/ptWriteOk" method="post" id="ptWriteFrm">
@@ -93,11 +91,7 @@
 				<h3>키워드</h3>
 				<input type="text" name="keyword" placeholder="예시) #스쿼트 #2주챌린지" id="keyword">
 			</li>
-			<li id="img_file_li">
-				<h3>대표 사진</h3>
-				<input type="file" name="file" value="" id="file">
-				<input type="hidden" name="pt_img_file" value="" id="imgFile"/>
-			</li>
+			
 			<li id="start_date_li">
 				<h3>시작일</h3>
 				<input type="date" name="start_date" id="start_date">
@@ -117,6 +111,11 @@
 			<li id="content_li">
 				<h3>모집 내용</h3>
 				<textarea name="content" id="content"></textarea>
+			</li>
+			<li id="img_file_li">
+				<h3>대표 사진</h3>
+				<input type="file" name="file" value="" id="file">
+				<input type="hidden" name="pt_img_file" value="" id="imgFile"/>
 			</li>
 		</ul>
 		
