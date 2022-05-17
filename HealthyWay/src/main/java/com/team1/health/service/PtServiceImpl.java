@@ -78,5 +78,21 @@ public class PtServiceImpl implements PtService {
 	public int totalRecord(PtPagingVO pVO) {
 		return dao.totalRecord(pVO);
 	}
+	@Override
+	public List<BoardVO> ptSelectHeart(String user_id) {
+		return dao.ptSelectHeart(user_id);
+	}
+	@Override
+	public int ptInsertHeart(int board_num, String user_id) {
+		return dao.ptInsertHeart(board_num, user_id);
+	}
+	@Override
+	public int ptDeleteHeart(int board_num, String user_id) {
+		return dao.ptDeleteHeart(board_num, user_id);
+	}
+	@Override
+	public int ptStateUpdate(int board_num) {
+		return dao.ptStateUpdate(board_num);
+	}
 
 }

@@ -33,8 +33,10 @@ $(function(){
 	
 	$(".pt_post_wrap").hover(function(){
 		$(this).css("border", "1px solid #a9a9a9");
+		$(this).children('.post_bottom').css("border-top", "1px solid #a9a9a9");
 	}, function(){
 		$(this).css("border", "1px solid #e9e9e9");
+		$(this).children('.post_bottom').css("border-top", "1px solid #e9e9e9");
 	});
 	
 	$("#searchBtn").click(function(){
@@ -44,6 +46,5 @@ $(function(){
 		}
 		$("#searchFrm").submit();
 	});
-	
 	
 });

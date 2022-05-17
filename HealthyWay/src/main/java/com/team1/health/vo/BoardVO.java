@@ -12,12 +12,6 @@ public class BoardVO {
 	private String write_date;
 	private String mod_date;
 	private int type_num;
-	
-	
-	
-	
-	
-
 
 	//PT_group 테이블
 	private String state;
@@ -28,6 +22,10 @@ public class BoardVO {
 	private String pt_img_file;
 	private String keyword;
 	private int datecal;
+	private String originPtImg;
+	
+	// 좋아요 아이디
+	private String heartid;
 
 	// pt참여자 수
 	private int pNum;
@@ -166,26 +164,34 @@ public class BoardVO {
 	public void setOriginRecipeImg(String originRecipeImg) {
 		this.originRecipeImg = originRecipeImg;
 	}
-	public int getDatecal() {
-		return datecal;
-	}
-	public void setDatecal(int datecal) {
-		this.datecal = datecal;
-	}
 	public int getpNum() {
 		return pNum;
 	}
 	public void setpNum(int pNum) {
 		this.pNum = pNum;
 	}
+	public int getDatecal() {
+		return datecal;
+	}
+	public void setDatecal(int datecal) {
+		this.datecal = datecal;
+	}
+	public String getHeartid() {
+		return heartid;
+	}
+	public void setHeartid(String heartid) {
+		this.heartid = heartid;
+	}
 	public void setBoard_num(int board_num) {
 		this.board_num = board_num;
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> branch 'main' of https://github.com/DABIN222/TEAM1.git
+	public String getOriginPtImg() {
+		return originPtImg;
+	}
+	public void setOriginPtImg(String originPtImg) {
+		this.originPtImg = originPtImg;
+	}
 
 
 }
