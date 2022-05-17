@@ -181,7 +181,7 @@ public class BoardController {
     }
 
 		//수정 뷰 7
-	    @PostMapping("board/boardList/edit/{board_num}")
+	    @PostMapping("/board/boardList/edit/{board_num}")
 	    public ModelAndView boardEditView(@PathVariable(value="board_num")int board_num, HttpSession session) {
 	    	ModelAndView mav = new ModelAndView();
 	    	try {
@@ -345,7 +345,7 @@ public class BoardController {
 			return entity;
 		}
 //자유게시판 수정 뷰 12
-@PostMapping("/board/suggestionList/{board_num}/edit")
+@PostMapping("/board/suggestionList/edit/{board_num}")
 public ModelAndView suggestionEditView(@PathVariable(value="board_num")int board_num, HttpSession session) {
 	ModelAndView mav = new ModelAndView();
 	try {

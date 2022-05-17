@@ -3,9 +3,9 @@
 
 
 <div id="#b__table" >
-        <h1 class="bf__title">👇 공지사항 👇</h1>
+        <h1 class="bf__title">👇 자유게시판 👇</h1>
        <form id="boardFrm" class="bf__container" method="post" action="/board/suggestionList/edit/${bvo.board_num}" id="boardFrm" >
-           <input type="hidden" value="boardWrite" name="command">
+           <input type="hidden" value="suggestionWrite" name="command">
         
             <table class="bf__table">
                 <tr>
