@@ -181,7 +181,11 @@ public class BoardVO {
 	public void setBoard_num(int board_num) {
 		this.board_num = board_num;
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> branch 'main' of https://github.com/DABIN222/TEAM1.git
 
 
 }
