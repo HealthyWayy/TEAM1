@@ -16,50 +16,104 @@ a:hover { color: black; text-decoration: none;}
 body{
 	font-family: "NanumBarunGothic";
 }
-#recipe_banner{
+#top{
 	position:relative;
 	width:100%;
-	height:800px;
+	height:750px;
 	margin-top:4%;
 	margin-bottom:3%;
 }
-#head1{
+#listBtnText{
 	position:absolute;
-	top:40%;
-	left:36%;
-	height:50px;
-	line-height:50px;
+	top:58%;
+	right:12%;
+	padding:5px 10px;
 	text-align: center;
 	color:white;
+	font-size:1.2em;
+	background-color: rgba(0,0,0,0.6);
+	opacity:0;
+}
+#recomBtnText{
+	position:absolute;
+	top:58%;
+	left:13%;
+	padding:5px 10px;
+	text-align: center;
+	color:white;
+	font-size:1.2em;
+	background-color: rgba(0,0,0,0.6);
+	opacity:0;	
+}
+#listBtn {
+    position: absolute;
+    top:68%;
+    right:20%;
+    padding: 20px 40px;
+    text-align: center;
+    color: #FF5454;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px; 
+}
+#recomBtn{
+    position: absolute;
+    top:68%;
+    left:20%;
+    padding: 20px 40px;
+    text-align: center;
+    color: #FF5454;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px; 
 }
 
 #video{
-	width:100%;
+	width:95%;
+	margin-left:2.5%;
 	height:100%;
+	object-fit: cover;
 }
-
-/*추천 레시피 리스트*/
-#recipe_list{
-	position:absolute;
-	top:80%;
-	left:3%;
-	background-color: pink;
+/*레시피 추천 div*/
+#main{
+	overflow:auto;
+	margin-bottom:5%;
+}
+#head{
+	width:100%;
+	height:50px;
+	line-height:50px;
 	text-align: center;
-	margin-left:
+	font-size:1.2em;
+	margin-bottom:3%;
+}
+#recipe_list{
+	width:85%;
+	border-radius: 20px;
+	text-align: center;
+	margin-left:7%;
 }
 .recipe_item{
 	display:inline-block;
 	position:relative;
-	width:20%;
-	height:340px;
+	width:22.5%;
+	height:350px;
 	float:left;
 	margin-left:2%;
 }
 .recipe_img{
 	position:relative;
 	width:100%;
-	height:99%;
-	float:left;
+	height:100%;
+	object-fit: cover;
 	border-radius:15px;
 }
 .recipe_info{
@@ -101,30 +155,64 @@ body{
 }
 
 @media ( min-width: 1800px ) {
-	#recipe_banner{
-		height:1400px;
+	#top{
+		width:100%;
+		height:1450px;
 	}
-	.recipeList{
+	#recomBtnText, #listBtnText{
+		font-size:2em;
+	}
+	#recomBtn, #listBtn{
+		height:75px;
+		font-size:2em;
+	}
+	#head{
+		font-size:2em;
+		top:45%;
+		left:39%;
+	}
+	/*추천 레시피 리스트*/
+	#recipe_list{
 		top:70%;
+		left: 10%;
+		width:80%;
 	}
-	.recipeList>li>img{
-		width:400px;
-		height:400px;
+	.recipe_item{
+		height:650px;
 	}
 }
+
 </style>
 <script>
 $(function(){
-	$("#recipe_banner").mouseover(function(){
-		$("#headText").css("color","rgb(252,199,71)").css("transition","300ms");
-	});
-	
-	$("#recipe_banner").mouseout(function(){
-		$("#headText").css("color","black");
-	});
 	
 	$(document).ready(function(){
 		setHeart();
+	});
+	
+	$("#listBtn").mouseover(function(){
+		$("#listBtnText").css("opacity", "1").css("transition-duration","200ms");
+		$(this).css("background-color", "#FF5454").css("color","white").css("transition-duration","300ms");
+	});
+	$("#listBtn").mouseout(function(){
+		$("#listBtnText").css("opacity", "0").css("transition-duration","200ms");
+		$(this).css("background-color", "white").css("color","#FF5454").css("transition-duration","300ms");
+	});
+	
+	$("#recomBtn").mouseover(function(){
+		$("#recomBtnText").css("opacity", "1").css("transition-duration","200ms");
+		$(this).css("background-color", "#FF5454").css("color","white").css("transition-duration","300ms");
+	});
+	$("#recomBtn").mouseout(function(){
+		$("#recomBtnText").css("opacity", "0").css("transition-duration","200ms");
+		$(this).css("background-color", "white").css("color","#FF5454").css("transition-duration","300ms");
+	});
+	
+	//추천 버튼 클릭 이벤트(스크롤 이동)
+	$("#recomBtn").click(function(){
+		var offset = $('#recipe_list').offset(); //선택한 태그의 위치를 반환
+        $('html').animate({scrollTop : offset.top}, 500);
+
 	});
 	
 	$(".heart1").click(function(){
@@ -204,33 +292,39 @@ function deleteHeart(boardNum){
 </script>
 <div>
 	<!-- 배너-->
-	<div id="recipe_banner">
+	<div id="top">
 		<video muted autoplay loop id="video">
 	    	<source src="/recipeImg/video.mp4" type="video/mp4">
 	  	</video>
-	  	<h1 id="head1">오늘의 추천 레시피를 확인하세요!</h1>
+	  	<p id="listBtnText">다양한 레시피를 확인하고 나만의 레시피를 공유하세요!</p>
+		<button id="listBtn" onclick="location='/recipe/list';">MORE RECIPES</button>
+		
+		<p id="recomBtnText">매번 먹던 레시피는 그만! 오늘의 추천 레시피로 해결하세요.</p>
+		<button id="recomBtn">TODAY'S RECIPES</button>
 	</div>
-	
-	<!-- 레시피 목록 -->
-	<ul id="recipe_list">
-		<c:if test="${not empty vo}">
-			<c:forEach var="vo" items="${vo}">
-				<li class="recipe_item">
-					<img src="/recipeImg/upload/${vo.recipe_img_file}" class="recipe_img"/>
-					<c:if test="${logId!=null}">
-						<img src="/recipeImg/heart1.png" class="heart1" id="e_${vo.board_num}"/>
-						<img src="/recipeImg/heart2.png" class="heart2" id="f_${vo.board_num}"/>
-					</c:if>
-					<div class="recipe_info" onclick="javascript:location='/recipe/view?board_num=${vo.board_num}';">
-					<c:if test="${logId!=null}">
-						<img src="/recipeImg/heart1.png" class="heart1" id="e-${vo.board_num}"/>
-						<img src="/recipeImg/heart2.png" class="heart2" id="f-${vo.board_num}"/>
-					</c:if>
-						<p class="title">${vo.title}</p>
-						<p class="kcal">${vo.total_kcal}kcal</p>
-		            </div>
-				</li>
-			</c:forEach>
-		</c:if>
-	</ul>
+	<div id="main">
+		<p id="head">▼ 오늘의 추천 레시피를 확인하세요! ▼</p>
+		<!-- 레시피 목록 -->
+		<ul id="recipe_list">
+			<c:if test="${not empty vo}">
+				<c:forEach var="vo" items="${vo}">
+					<li class="recipe_item">
+						<img src="/recipeImg/upload/${vo.recipe_img_file}" class="recipe_img"/>
+						<c:if test="${logId!=null}">
+							<img src="/recipeImg/heart1.png" class="heart1" id="e_${vo.board_num}"/>
+							<img src="/recipeImg/heart2.png" class="heart2" id="f_${vo.board_num}"/>
+						</c:if>
+						<div class="recipe_info" onclick="javascript:location='/recipe/view?board_num=${vo.board_num}';">
+						<c:if test="${logId!=null}">
+							<img src="/recipeImg/heart1.png" class="heart1" id="e-${vo.board_num}"/>
+							<img src="/recipeImg/heart2.png" class="heart2" id="f-${vo.board_num}"/>
+						</c:if>
+							<p class="title">${vo.title}</p>
+							<p class="kcal">${vo.total_kcal}kcal</p>
+			            </div>
+					</li>
+				</c:forEach>
+			</c:if>
+		</ul>
+	</div>
 </div>

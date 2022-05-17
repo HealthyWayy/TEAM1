@@ -43,7 +43,6 @@ public class RecipeController {
 		for (int i = 0; i < 4; i++) {
 			newVO.add(vo.get(i));
 		}
-
 		mav.addObject("vo", newVO);
 		mav.setViewName("/recipe/recipe_main");
 		return mav;
@@ -278,5 +277,30 @@ public class RecipeController {
 	@ResponseBody
 	public List<ReplyVO> replyList(int board_num){
 		return service.replyList(board_num);
+	}
+	
+	//레시피 관리자 페이지
+	@GetMapping("/master/recipe")
+	public String masterRecipe() {
+		return "/recipe/recipe_master";
+	}
+	
+	//재료 추가
+	@PostMapping("/master/ingredInsert")
+	public String ingredInsert(IngredientVO vo) {
+		
+		//마지막 gred_num id값
+		String id = service.lastIngred();
+		
+		//id값에서 숫자만 뽑아온 후 1증가(새로 추가될 아이디 값)
+		int num = Integer.parseInt(id.substring(1))+1;
+		
+		//R로 시작하고 6자리 공백은 0으로 채우는 자릿수 세팅
+		String gred_num = String.format("R%06d", num);
+		vo.setGred_num(gred_num);
+		
+		int i = service.ingredInsert(vo);
+		System.out.println(i);
+		return "/recipe/recipe_master";
 	}
 }
