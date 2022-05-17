@@ -3,6 +3,7 @@
 <link rel="stylesheet" type="text/css" href="/css/train.css">
 
     
+
     <ul id="menu">
         <li><a href="/home/">홈</a></li>
         <li><a  href="/trainning/trainningHome">트레이닝 센터</a></li>
