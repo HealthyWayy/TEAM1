@@ -6,7 +6,6 @@
 
 /*=============== main =================*/
 $(document).ready(function() {
-	$('.top').hide();
 	/*$('.dropdown-content').hide();*/
 	/*============== top ============== */
 	/*$('.dropbtn').on('click',function(){

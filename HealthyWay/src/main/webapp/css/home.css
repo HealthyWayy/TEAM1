@@ -8,7 +8,9 @@
 a {
 	color:white;
 }
-
+.top {
+	display: none;
+}
 a:hover {
 	color: orange;
 }
@@ -60,16 +62,23 @@ header {
 .nav-bar>ul:last-of-type>li {
 	margin-left:0.8vw;
 }
-.profile-container {
-	background-color:beige;
+.bi-person-fill  {
+	transform:scale(1.6);
+	transform-origin: 50% 50%;
+}
+
+.profile-container2 {
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	border:2px solid white;
 	margin-top:0.6vh;
 	width: 5vh;
 	height: 5vh;
 	border-radius: 50%;
 	overflow: hidden;
-	cursor: pointer;
+	cursor: pointer
 }
-
 .dropdown-content2 {
 	/*ÄÜÅÙÃ÷ Á¤·Ä*/
 	display:flex;

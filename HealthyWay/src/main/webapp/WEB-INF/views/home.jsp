@@ -12,7 +12,7 @@
   		<li><a href="/member/loginForm">Login</a></li>		
   	</c:if>
   	<c:if test="${logStatus == 'Y' }">
-  		<li><div class="profile-container dropbtn2"></div></li>
+  		<li><div class="profile-container2 dropbtn2"><i class="bi bi-person-fill"></i></div></li>
 	  	<li><a href="/member/logout">Logout</a></li>
   	</c:if>  
   </ul>
