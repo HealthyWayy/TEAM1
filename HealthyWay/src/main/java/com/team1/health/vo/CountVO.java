@@ -8,6 +8,14 @@ public class CountVO {
 	private int train_num;
 	private String write_date;
 	
+	private String train_title;
+
+	public String getTrain_title() {
+		return train_title;
+	}
+	public void setTrain_title(String train_title) {
+		this.train_title = train_title;
+	}
 	public String getUser_id() {
 		return user_id;
 	}

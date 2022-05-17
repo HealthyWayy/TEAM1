@@ -19,8 +19,8 @@ public interface MyPageDAO {
 	public int userUpdate(MemberVO vo);
 	public int userDelete(String user);
 	public List<BoardVO> recipeHeart(String user);
-	public BoardVO reciepeInfor(int board_num);
-	public int reciepeHeartDel(int board_num);
+	public BoardVO reciepeInfor(int board_num, String user);
+	public int reciepeHeartDel(int board_num, String user);
 	public List<BoardVO> groupListAll(String user,MyPagePagingVO vo);
 	public int groupCount (String user);
 	public int achieveCount(String user);
