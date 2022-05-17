@@ -119,32 +119,37 @@ public class PtController {
 	
 	// pt글수정(DB)
 	@PostMapping("ptEditOk")
-	public int ptEditOk(BoardVO vo, HttpServletRequest request, MultipartHttpServletRequest mr) {
-		vo.setUser_id((String) request.getSession().getAttribute("logId"));
+	public int ptEditOk(BoardVO vo, HttpSession session, HttpServletRequest request, MultipartHttpServletRequest mr) {
 		
-//		// 파일 업로드
-//		mr = (MultipartHttpServletRequest) request;
-//		MultipartFile file = mr.getFile("file");
-//		System.out.println(file);
-//				
-//		String path = request.getSession().getServletContext().getRealPath("/ptImg");
-//			
-//		// 파일명 중복되지 않게 처리
-//		UUID uuid = UUID.randomUUID();
-//		String filename = uuid.toString()+"_"+file.getOriginalFilename();
-//		vo.setPt_img_file(filename);
-//		File uploadFile = new File(path, filename);
-//				
-//		// 파일 업로드		
-//		try {
-//			file.transferTo(uploadFile);
-//			System.out.println("성공");
-//
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//			System.out.println("실패!");
-//		}
+		String newImg = vo.getPt_img_file();
+		System.out.println("newImg = " + newImg);
+		String originImg = vo.getOriginPtImg();
+		System.out.println("originImg = " + originImg);
 		
+		mr = (MultipartHttpServletRequest) request;
+		MultipartFile file = mr.getFile("file");
+		System.out.println(!newImg.equals(originImg));
+		
+		// 이미지 수정된 경우
+		if(!newImg.equals(originImg)) {
+			// 이전 이름으로 덮어쓰기
+			vo.setPt_img_file(originImg);
+			
+			String path = request.getSession().getServletContext().getRealPath("ptImg");
+			File uploadFile = new File(path, vo.getPt_img_file());
+			
+			// 덮어쓰기
+			try {
+				file.transferTo(uploadFile);
+				System.out.println("성공");
+			} catch(Exception e) {
+				e.printStackTrace();
+				System.out.println("실패");
+			}
+		}
+		
+		String logId = (String)session.getAttribute("logId");
+		vo.setUser_id(logId);
 		service.ptBoardUpdate(vo);
 		int result = service.ptGroupUpdate(vo);
 		
@@ -198,8 +203,11 @@ public class PtController {
 	
 	// pt그룹 참가 수락
 	@GetMapping("applyAccept")
-	public int applyAccept(int board_num, String user_id) {
+	public int applyAccept(int board_num, String user_id, int max_user) {
 		int result = service.applyAccept(board_num, user_id);
+		if(service.apply_list(board_num).size() == max_user) {
+			service.ptStateUpdate(board_num);
+		}
 		return result;	
 	}
 	
@@ -209,5 +217,27 @@ public class PtController {
 		int result = service.applyDeny(board_num, user_id);
 		return result;
 	}
+	
+	// 찜 목록
+	@PostMapping("ptSelectHeart")
+	public List<BoardVO> selectHeart(HttpSession session){
+		String user_id = (String)session.getAttribute("logId");
+		return service.ptSelectHeart(user_id);
+	}
+	
+	// 찜 등록
+	@PostMapping("ptInsertHeart")
+	public int ptInsertHeart(int board_num, HttpSession session) {
+		String user_id = (String)session.getAttribute("logId");
+		return service.ptInsertHeart(board_num, user_id);
+	}
+	
+	// 찜 삭제
+	@PostMapping("ptDeleteHeart")
+	public int ptDeleteHeart(int board_num, HttpSession session) {
+		String user_id = (String)session.getAttribute("logId");
+		return service.ptDeleteHeart(board_num, user_id);
+	}
+	
 
 }

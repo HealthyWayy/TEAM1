@@ -59,6 +59,10 @@ $(function(){
 		});
 	}
 	
+	// 그룹멤버일 경우 소통방 메뉴 클릭가능
+	
+	
+	
 	// 참가자 목록 가져오는 함수
 	function apply_listAll(){
 		var url = "${url}/board/apply_list";
@@ -131,7 +135,7 @@ $(function(){
 	$(document).on("click", ".acceptBtn", function(){
 		if(confirm("수락하시겠습니까?")){
 			var url = "/board/applyAccept";
-			var params = "board_num=${vo.board_num}&user_id=" + $(this).parent().prev().prev().prev().prev().prev().prev().text();
+			var params = "board_num=${vo.board_num}&user_id=" + $(this).parent().prev().prev().prev().prev().prev().prev().text() + "&max_user=${vo.max_user}";
 
 			$.ajax({
 				url: url,
@@ -139,7 +143,6 @@ $(function(){
 				success: function(result){
 					$(".manage_list").empty();
 					apply_listAll();
-					
 				},
 				error: function(e){
 					console.log(e.responseText);
@@ -198,10 +201,6 @@ $(function(){
 
 </script>
 
-
-<!-- 임시로 해둔 탑입니다 -->
-<div class="top"></div>
-    
 <div class="wrap">
 	<div class="head_wrap">
 		<span id="keyword">${vo.keyword}</span>
@@ -214,8 +213,17 @@ $(function(){
 			<ul class="menu_list">
 				<li id="menu_info" class="all_menu">정보</li>
 				<li id="menu_member" class="all_menu">멤버</li>
-				<li id="menu_qna" class="all_menu">소통방 <span class="material-symbols-outlined" style="vertical-align: sub;">lock</span></li>
-				<li id="menu_manage" class="all_menu" <c:if test="${lVO.user_id != logId}">style="cursor: no-drop;</c:if>">관리 <span class="material-symbols-outlined" style="vertical-align: sub;">lock</span></li>
+				<li id="menu_qna" class="all_menu"
+					<c:if test="${empty pList}">
+						style="cursor: no-drop;"
+					</c:if>
+					<c:forEach var="pVO" items="${pList}">
+						<c:if test="${pVO.user_id != logId}">
+							style="cursor: no-drop;"
+						</c:if>		
+					</c:forEach>
+				>소통방 <span class="material-symbols-outlined" style="vertical-align: sub;">lock</span></li>
+				<li id="menu_manage" class="all_menu" <c:if test="${lVO.user_id != logId}">style="cursor: no-drop;"</c:if>>관리 <span class="material-symbols-outlined" style="vertical-align: sub;">lock</span></li>
 			</ul>
 			
 			<div class="recu_status_wrap all_content">
@@ -231,10 +239,10 @@ $(function(){
 						<li style="border: none;">&nbsp;</li>
 					</c:if>
 					<c:if test="${lVO.user_id != logId and pCount < vo.max_user}">
-						<li class="applyBtn">참여</li>
+						<li style="border: none;">&nbsp;</li>
 					</c:if>
 					<c:if test="${lVO.user_id != logId and pCount == vo.max_user}">
-						<li>모집완료</li>
+						<li style="border: none;">&nbsp;</li>
 					</c:if>
 					<li>&nbsp;</li>
 				</ul>
@@ -341,7 +349,9 @@ $(function(){
 					</div>
 				</c:forEach>
 			</div>
-			<button class="applyBtn"<c:if test="${lVO.user_id == logId}">style="display: none;"</c:if>>참여하기</button>
+			<c:if test="${vo.state != '모집완료'}">
+				<button class="applyBtn"<c:if test="${lVO.user_id == logId}">style="display: none;"</c:if>>참여하기</button>
+			</c:if>
 			<c:if test="${vo.user_id == logId}">
 				<button id="editBtn" onclick="location='/board/ptEdit?board_num=${vo.board_num}'">수정하기</button>
 				<button id="delBtn" onclick="location='javascript:del()'">삭제하기</button>
