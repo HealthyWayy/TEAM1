@@ -31,9 +31,6 @@ public class BoardVO {
 	// 좋아요 아이디
 	private String heartid;
 
-	// pt참여자 수
-	private int pNum;
-	
 	//recipe_board 좋아요 테이블
 	private String recipe_img_file;
 	private double total_kcal;
