@@ -1,7 +1,5 @@
 package com.team1.health.controller;
 
-import java.text.ParseException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -29,6 +27,7 @@ public class MemberController {
 	public String loginForm() {
 		return "member/loginForm";
 	}
+	
 	@PostMapping("loginOk")
 	public ModelAndView loginOk(MemberVO vo, HttpSession session) {
 		MemberVO vo2 = service.loginCheck(vo);
@@ -37,8 +36,10 @@ public class MemberController {
 			session.setAttribute("logId", vo2.getUser_id());
 			session.setAttribute("nickName", vo2.getUser_nickname());
 			session.setAttribute("logStatus", "Y");
+			String dest = (String)session.getAttribute("dest");
+	        String redirect = (dest == null) ? "/" : dest;
 			// 컨트롤러에서 다른 컨트롤러 매핑주소를 바로 호출한다.
-			mav.setViewName("redirect:/");
+			mav.setViewName("redirect:"+redirect);
 		} else {// 로그인 실패
 			mav.setViewName("redirect:loginForm");
 		}
