@@ -5,7 +5,7 @@
 		height:100px;
 		border-radius:10px;
 		overflow:hidden;
-		width:100%;
+		width:50%;
 		margin-bottom:10px;
 		float:left;
 		display:inline-block;
@@ -15,6 +15,7 @@
 		padding-top:10px;
 		padding-left:10px;
 		padding-bottom:10px;
+		box-shadow:0px 0px 5px 0px;
 	}
 	#recipeImage{
 		border-radius:20px;
@@ -127,7 +128,7 @@
 	}
 	#reciepeRight,#reciepeLeft{
 		position:absolute;
-		height:50%;
+		height:100%;
 		z-index:4;
 		width:25px;
 		border:none;
@@ -135,12 +136,15 @@
 		color:white;
 		opacity:0.5;
 		left:0px;
+		cursor:pointer;
 	}
 	#reciepeRight{
 		top:0%;
+		
 	}
 	#reciepeLeft{
-		top:50%;
+		top:0%;
+		left:95%;
 	}
 	.reciepeInforUl{
 		margin:0px 0px 0px 30px;
@@ -359,6 +363,7 @@
 					if(r>=1){
 						alert('좋아요 취소!!!!');
 						calKcal();
+						recipeIdx=0;
 						reciepeHeart();
 					}
 				}
@@ -420,9 +425,9 @@
 			},error:function(){
 				var reciepeInforHtml="";
 				reciepeInforHtml+="<ul class='reciepeInforUl'>";
-				reciepeInforHtml+="<li>없어요</li>";
-				reciepeInforHtml+="<li>아니 없다구요</li>";
-				reciepeInforHtml+="<li><span>칼로리: </span>맛있게 먹으면 0Kcal~</li>"
+				reciepeInforHtml+="<li>등록된 정보가 없습니다.</li>";
+				reciepeInforHtml+="<li><a href='/recipe/main'>레시피 구경하러 가기</a></li>";
+				reciepeInforHtml+="<li><span>칼로리: </span>0Kcal~</li>"
 				reciepeInforHtml+="<li><button>칼로리 체크!</button><button>삭제</button></li>"
 				reciepeInforHtml+="</ul>";
 				$("#recipeInfor").html(reciepeInforHtml);
@@ -442,7 +447,7 @@
 				console.log(result);
 				$('#reciepeLeft, #reciepeRight').css('display','block');
 				var reciepeHtml="";
-				reciepeHtml+="<button onclick='reciepeMove("+left+")' id='reciepeLeft'><</button>";
+				reciepeHtml+="<button onclick='reciepeMove("+left+")' id='reciepeLeft'>></button>";
 				$(result).each(function(idx,vo){
 					reciepeHtml+="<div onclick='reciepeClick("+idx+")' class='foodDiv' id='foodDiv"+idx+"'>";
 					reciepeHtml+="<img src='/recipeImg/upload/"+vo.recipe_img_file+"'/>";
@@ -452,7 +457,7 @@
 					reciepeHtml+="</div>";
 					reciepeHtml+="<div class='foodDivBack'></div></div>";
 				});
-				reciepeHtml+="<button onclick='reciepeMove("+right+")' id='reciepeRight'>></button>";
+				reciepeHtml+="<button onclick='reciepeMove("+right+")' id='reciepeRight'><</button>";
 				$("#foodFavorDiv>div:nth-of-type(1)").html(reciepeHtml);
 				foodDivLength=result.length-1;
 				reciepeInfor(recipeIdx);
