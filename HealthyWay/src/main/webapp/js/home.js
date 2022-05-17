@@ -22,6 +22,59 @@ $(document).ready(function() {
 			'box-shadow': 'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px'
 	}).fadeToggle();
 	});*/
+	
+	
+	for(var i=0; i<$('.box').length;i++) {
+		$('.quick>ul').append('<li></li>');
+	}
+	let $width = $(document).width()*0.549-$('.quick').width();
+	$('.quick').css('left', $width+"px");
+	$('.quick li').eq(0).addClass('on');
+	
+	function quick_button(idx) {
+		$('.quick li').eq(idx).addClass('on').siblings(".on").removeClass("on");
+	}
+	
+	function quick_click(idx) {
+		$('.quick li').on('click', function(e) {
+			e.preventDefault();
+			idx = $(this).index();
+			quick_button(idx);
+			$('.container').animate({
+				left: -array[idx]
+			}, 500);
+			ani_setTime(idx);
+		});
+	}
+	function ani_setTime(idx) {
+		if(idx==0) {
+				$('.copywrite-first>span').removeClass('fade-in-box');
+				setTimeout(function() {
+	  	 		$('.copywrite-first>span').addClass('fade-in-box');
+				},1);
+			}else if(idx==1){
+				$('.copywrite-second>li').removeClass('slideUp');
+				setTimeout(function() {
+	  	 		$('.copywrite-second>li').addClass('slideUp');
+				},1);
+			}else if(idx==2){
+				$('.copywrite-third>div>p').removeClass("slide-up");
+				setTimeout(function() {
+	  	 		$('.copywrite-third>div>p').addClass("slide-up");
+				},1);
+			}else if(idx==3){
+				$('.copywrite-fourth>span').removeClass("blur-animation");
+				setTimeout(function() {
+	  	 		$('.copywrite-fourth>span').addClass("blur-animation");
+				},1);
+			}else {
+				alert('해당 페이지 인덱스는 사용할 수 없습니다.');
+			}		
+	}
+	
+	
+/*===================================================================*/
+	console.log($('.quick').outerWidth());
 	$('.dropbtn2').on('click', function(){	
 		let p = $(this).offset();
 	 	$('.dropdown-content2').css({
@@ -93,7 +146,7 @@ $(document).ready(function() {
 		 array[i] = $('.box').eq(i).offset().left; 
 	}
 	
-	let idx = 1;
+	let idx = 0;
 	let chk = true;
 	$('.box').on('mousewheel DOMMouseScroll', function() {
 		// 휠 일정시간동안 막기
@@ -110,7 +163,7 @@ $(document).ready(function() {
 				$('.container').animate({
 					left: -array[$(this).index() + 1]
 				}, 500)
-				idx++;
+				idx=$(this).index() + 1;
 			}
 
 			// 휠 위로
@@ -118,32 +171,15 @@ $(document).ready(function() {
 				$('.container').animate({
 					left: -array[$(this).index() - 1]
 				}, 500)
-				idx--;
+				idx = $(this).index() - 1;
 			}
 			console.log('idx',idx);
-			if(idx==1) {
-				$('.copywrite-first>span').removeClass('fade-in-box');
-				setTimeout(function() {
-	  	 		$('.copywrite-first>span').addClass('fade-in-box');
-				},1);
-			}else if(idx==2){
-				$('.copywrite-second>li').removeClass('slideUp');
-				setTimeout(function() {
-	  	 		$('.copywrite-second>li').addClass('slideUp');
-				},1);
-			}else if(idx==3){
-				$('.copywrite-third>div>p').removeClass("slide-up");
-				setTimeout(function() {
-	  	 		$('.copywrite-third>div>p').addClass("slide-up");
-				},1);
-			}else if(idx==4){
-				$('.copywrite-fourth>span').removeClass("blur-animation");
-				setTimeout(function() {
-	  	 		$('.copywrite-fourth>span').addClass("blur-animation");
-				},1);
-			}
+			quick_button(idx);
+			ani_setTime(idx)
 		}
 	});
+	
+	quick_click(idx);
 	
 	
 	//브라우저를 resize했을시를 대비해 박스의 크기는 다시 구해준다.
@@ -151,7 +187,7 @@ $(document).ready(function() {
 		for (let i = 0; i < $('.box').length; i++) {
 			array[i] = $('.box').eq(i).offset().left
 		} 
-		tmp();
+		tmp();		
 	});
 	
 	

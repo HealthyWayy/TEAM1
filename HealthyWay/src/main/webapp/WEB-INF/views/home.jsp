@@ -14,10 +14,12 @@
   	<c:if test="${logStatus == 'Y' }">
   		<li><div class="profile-container dropbtn2"></div></li>
 	  	<li><a href="/member/logout">Logout</a></li>
-  	</c:if>
-  
+  	</c:if>  
   </ul>
 </header>
+<!-- quick button -->
+<div class="quick"><ul></ul></div>
+
 <nav class="dropdown-content2">
 	 <ul class="gnb">
 	 	<li class="submenu2"><span>mypage1</span></li>
@@ -178,6 +180,6 @@
 				    </svg>
 				</section>
 			</div>
-	        <div class="box"><img alt="" src="/img/exercise04.jpg"></div>
+	        <img alt="" src="/img/exercise04.jpg">
         </div>
 </div>

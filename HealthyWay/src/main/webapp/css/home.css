@@ -25,6 +25,25 @@ header {
 	align-items:center;
 	color:white;
 }
+.quick {
+	z-index: 1000000000;
+	position: fixed;
+	bottom:5vh;	
+	cursor: pointer;
+}	
+.quick>ul {
+	display: flex;
+}
+.quick>ul>li {
+	width:1.5vh;
+	height: 1.5vh;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	margin-right: 0.5vw;
+}
+.on {
+	background-color: #fff;
+}
 .nav-bar {
 	margin-top:1vh;
 }
@@ -254,15 +273,15 @@ iteration-count | direction | fill-mode | play-state | name */
 
 
 /*================= 두번쨰 페이지 ======================*/
-.cover>ul {
+.copywrite-second {
 	position:absolute;	
 	width: 1000px;
 	height: 300px;
-	left: 200px;
+	left: 10vw;
 	overflow: hidden;	
 }
 
-.cover>ul>li {
+.copywrite-second li {
 	position: relative;
 	top: 180px;
 	float:left; 
@@ -345,7 +364,7 @@ iteration-count | direction | fill-mode | play-state | name */
 	display: flex;
 	flex-direction: row;
 	position: absolute;
-	left: 20vw;
+	left: 19vw;
 	top:  -5vh;
 }
 
@@ -518,7 +537,7 @@ iteration-count | direction | fill-mode | play-state | name */
 }
 
 .form-move-3 {
-	transform:translate(43vw, 2vh);
+	transform:translate(42.3vw, 2vh);
 }
 
 .form-move-4 {
