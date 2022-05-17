@@ -147,4 +147,17 @@ public class RecipeServiceImpl implements RecipeService {
 	public List<ReplyVO> replyList(int board_num) {
 		return dao.replyList(board_num);
 	}
+
+	//관리자-------------------------------------
+	//마지막 id값 구하기
+	@Override
+	public String lastIngred() {
+		return dao.lastIngred();
+	}
+	//재료 db에 추가
+	@Override
+	public int ingredInsert(IngredientVO vo) {
+		return dao.ingredInsert(vo);
+	}
+	
 }

@@ -46,7 +46,7 @@
 	
 	<select id="searchIngred" resultType="com.team1.health.vo.IngredientVO">
 		select gred_num, gred_kcal, gred_name, gred_type from ingredient where
-		<if test="searchKey=='음식명'">
+		<if test="searchKey=='재료명'">
 			gred_name like '%${searchValue}%'
 		</if>
 		<if test="searchKey=='분류'">
@@ -148,4 +148,13 @@
 		select reply_num, user_id, board_num, content, date_format(reply_date, '%Y-%m-%d %H:%i') reply_date
 		from reply where board_num=${param1}
 	</select>
+	
+	<select id="lastIngred" resultType="String">
+		select gred_num from ingredient order by gred_num desc limit 1;
+	</select>
+
+	<insert id="ingredInsert">
+		insert into ingredient(gred_num, gred_type, gred_kcal, gred_name)
+		values(#{gred_num}, #{gred_type}, ${gred_kcal}, #{gred_name})
+	</insert>
 </mapper>
