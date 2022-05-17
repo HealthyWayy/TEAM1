@@ -33,7 +33,7 @@ $(document).ready(function() {
 	
 	$('.submenu2').on('click',function(){
 		if($('.submenu2').index(this)==0) {
-			location.href="#";
+			location.href="/mypage";
 		}
 		else if($('.submenu2').index(this)==1) {
 			location.href="#";

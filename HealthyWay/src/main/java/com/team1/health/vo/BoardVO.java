@@ -28,12 +28,18 @@ public class BoardVO {
 	private String pt_img_file;
 	private String keyword;
 	private int datecal;
+<<<<<<< HEAD
 
 	// pt참여자 수
 	private int pNum;
 	
 	
+=======
+>>>>>>> branch 'main' of https://github.com/tigre911/TEAM1.git
 
+	// pt참여자 수
+	private int pNum;
+	
 	//recipe_board 좋아요 테이블
 	private String recipe_img_file;
 	private double total_kcal;
@@ -184,7 +190,22 @@ public class BoardVO {
 	public void setOriginRecipeImg(String originRecipeImg) {
 		this.originRecipeImg = originRecipeImg;
 	}
-
+	public int getDatecal() {
+		return datecal;
+	}
+	public void setDatecal(int datecal) {
+		this.datecal = datecal;
+	}
+	public int getpNum() {
+		return pNum;
+	}
+	public void setpNum(int pNum) {
+		this.pNum = pNum;
+	}
+	public void setBoard_num(int board_num) {
+		this.board_num = board_num;
+	}
+	
 
 
 }
