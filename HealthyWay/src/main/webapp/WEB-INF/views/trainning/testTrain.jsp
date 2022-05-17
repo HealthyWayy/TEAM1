@@ -11,7 +11,7 @@
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
 
     // the link to your model provided by Teachable Machine export panel
-    const URL = "/my_model/힙으뜸/";
+    const URL = "/train_model/module05/";
     let model, webcam, ctx, labelContainer, maxPredictions;
 
     async function init() {
@@ -48,34 +48,32 @@
         window.requestAnimationFrame(loop);
     }
     var count = 0;
+    var status = "one";
     async function predict() {
         // Prediction #1: run input through posenet
         // estimatePose can take in an image, video or canvas html element
-        // 예측 #1: 포즈넷을 통해 입력 실행
-        // 추정 포즈는 이미지, 비디오 또는 캔버스 html 요소를 가져올 수 있습니다.
         const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
         // Prediction 2: run input through teachable machine classification model
-        // 예측 2: 학습 가능한 기계 분류 모델을 통해 입력 실행
         const prediction = await model.predict(posenetOutput);
-        // console.log(prediction[0].probability); // 확률을 나타내주는 것 prediction[0].probability
 
-        let movement = prediction[1].probability
+        var p1 = prediction[0].probability.toFixed(2);
+        var p2 = prediction[1].probability.toFixed(2);
+        var p3 = prediction[2].probability.toFixed(2);
         
-            if (movement >= 0.99){
-            console.log('잘하셨습니다!');
-            document.getElementById('display').innerHTML = '잘하셨습니다!' + count;
-                count = count + 1;
-            
-            
-            console.log(count);
-            
-            }else if(movement>=0.6){
-                console.log('조금더 정확한 자세를 취해주세요!');
-                document.getElementById('display').innerHTML = '조금더 정확한 자세를 취해주세요!';
-                count = count;
-            }
+       //two에서 one이 돼야 운동 한 거
+        if (p1 == 1.0){   //어깨접기
+           if(status=="two"){
+              count++;
+              console.log(count);
+           }
+              status = "one";
+        }else if(p2==1.0){//앞으로
+           status = "two";
+        }else if(p3==1.0){
+           status = "three";
+           console.log("자세 제대로 해");
+        }
         
-
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
@@ -83,7 +81,6 @@
         }
 
         // finally draw the poses
-        // 마침내 자세를 취하다
         drawPose(pose);
     }
 
@@ -104,9 +101,9 @@
     // init();
 </script>
     <P id="display"></P>
-	<video src="/my_model/countdown5s.mp4" autoplay muted style="width:100%; heigth:100%; margin: 0 auto;"></video>
+	<video src="/train_model/countdown5s.mp4" autoplay muted style="width:100%; heigth:100%; margin: 0 auto;"></video>
     영상 띄워 놓는곳
-    <video src="/my_model/힙으뜸/프론트컬.mp4" autoplay controls loop muted style="float:left">
+    <video src="/train_model/module05/pront_raise.mp4" autoplay controls loop muted style="float:left">
         tmp
     </video>
     

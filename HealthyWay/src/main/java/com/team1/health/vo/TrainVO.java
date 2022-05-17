@@ -15,6 +15,9 @@ public class TrainVO {
 	private String module_content;
 	private String module_vod_file;
 	private String module_write_date;
+	private String module_type;
+	private String module_part;
+	private String module_difficulty;
 	
 	public int getTrain_num() {
 		return train_num;
@@ -87,5 +90,23 @@ public class TrainVO {
 	}
 	public void setModule_write_date(String module_write_date) {
 		this.module_write_date = module_write_date;
+	}
+	public String getModule_type() {
+		return module_type;
+	}
+	public void setModule_type(String module_type) {
+		this.module_type = module_type;
+	}
+	public String getModule_part() {
+		return module_part;
+	}
+	public void setModule_part(String module_part) {
+		this.module_part = module_part;
+	}
+	public String getModule_difficulty() {
+		return module_difficulty;
+	}
+	public void setModule_difficulty(String module_difficulty) {
+		this.module_difficulty = module_difficulty;
 	}
 }

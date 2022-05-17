@@ -27,6 +27,12 @@ public class BoardVO {
 	private int pt_count;
 	private String pt_img_file;
 	private String keyword;
+	private int datecal;
+
+	// pt참여자 수
+	private int pNum;
+	
+	
 
 	//recipe_board 좋아요 테이블
 	private String recipe_img_file;
@@ -35,6 +41,22 @@ public class BoardVO {
 	//acheive 성공 스토리 테이블
 	private String img_file1;
 	private String img_file2;
+	
+	public int getDatecal() {
+		return datecal;
+	}
+	public void setDatecal(int datecal) {
+		this.datecal = datecal;
+	}
+	public int getpNum() {
+		return pNum;
+	}
+	public void setpNum(int pNum) {
+		this.pNum = pNum;
+	}
+	public void setBoard_num(int board_num) {
+		this.board_num = board_num;
+	}
 	
 	public String getImg_file1() {
 		return img_file1;
