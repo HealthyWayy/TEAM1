@@ -17,7 +17,14 @@ public class TrainVO {
 	private String module_type;
 	private String module_part;
 	private String module_difficulty;
+	private int tnum;
 	
+	public int getTnum() {
+		return tnum;
+	}
+	public void setTnum(int tnum) {
+		this.tnum = tnum;
+	}
 	public int getTrain_num() {
 		return train_num;
 	}
