@@ -11,7 +11,7 @@
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
 
     // the link to your model provided by Teachable Machine export panel
-    const URL = "/train_model/module05/";
+    const URL = "/train_model/moduleImg/";
     let model, webcam, ctx, labelContainer, maxPredictions;
 
     async function init() {
@@ -103,7 +103,7 @@
     <P id="display"></P>
 	<video src="/train_model/countdown5s.mp4" autoplay muted style="width:100%; heigth:100%; margin: 0 auto;"></video>
     영상 띄워 놓는곳
-    <video src="/train_model/module05/pront_raise.mp4" autoplay controls loop muted style="float:left">
+    <video src="/train_model/moduleImg/pront_raise.mp4" autoplay controls loop muted style="float:left">
         tmp
     </video>
     

@@ -55,19 +55,26 @@
     </div>
     <div>
         <h2>나만의 운동</h2>
-        <select name="" id="" style="width: 300px; text-align: center;">
-            <option value="">내가 저장한 운동 목록 ▼</option>
-            <option value="">가슴 운동 루틴</option>
-            <option value="" style="border: 1px #4d77ff;">나만의 운동 추가하기</option>
+        <select name="" id="selectMyTrain" style="width: 300px; text-align: center;">
+        	<option value="">내가 저장한 운동 목록 ▼</option>
+        	<c:forEach var='selectvo' items='${selectvo}'>
+        		<option value="${selectvo.train_num}">${selectvo.train_title}</option>
+        	</c:forEach>
+        	<option value="0">나만의 운동 추가하기</option>
         </select>
-        <div>
-            <ul id="my_train">
-                <!-- <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li> -->
-            </ul>
-            <input type="text"  placeholder="저장할 운동 루틴 이름을 입력하세요." style="width: 300px; text-align: center;">
-            <button onclick='save_train()'>저장하기</button>
-        </div>
-        
+        <form action="/trainning/add_mytrain_list" method="post" id="mytrainFrm">
+        	<div>
+        		<!-- 운동 담은 리스트 -->
+       		    <ul id="my_train">
+	                <!-- <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li> -->
+	            </ul>
+	            <input type="text" name="train_title" placeholder="저장할 운동 루틴 이름을 입력하세요." style="width: 300px; text-align: center;">
+	            <input type="submit" value="저장하기">
+	        	<ul id="my_train2">
+	        	
+	        	</ul>
+        	</div>
+        </form>
     </div>
 
 <hr>
@@ -102,4 +109,30 @@ function add_train(module_num){
         }
     });
 }
+
+$(function(){   
+	 $("#selectMyTrain").on('change',function() {
+       //옵션 value 가져오기
+       var data = "train_num="+$("#selectMyTrain").val();
+       $("#my_train2").html("")
+       $.ajax({
+          url: '/trainning/get_train_list',
+          data: data,
+          type: 'post',
+          
+          success: function(result){
+        	  	var tag="";
+        	  	
+             	$(result).each(function(){
+                tag = '<li><p></p><img src="/train_model/moduleImg/'+ this.module_img +'"><p>' + this.module_title + '</p><p>'+this.module_content+'</p></li>';
+                $("#my_train2").append(tag);
+             });
+             	
+          },
+          error: function(e){
+             console.log(e.responseText);
+          }
+       })
+     });
+});  
 </script>
