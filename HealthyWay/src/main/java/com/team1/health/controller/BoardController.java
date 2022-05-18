@@ -29,7 +29,7 @@ import com.team1.health.vo.ReplyVO;
 import com.team1.health.vo.SuggestionPagingVO;
 import com.team1.health.vo.BoardVO;
 import com.team1.health.service.MemberService;
-
+import com.team1.health.service.ReplyService;
 import com.team1.health.service.BoardService;
 
 
@@ -42,6 +42,9 @@ public class BoardController {
 	
 	@Inject
 	MemberService memberService;
+	
+	@Inject
+	ReplyService replyService;
 	
 	//공지사항 뷰 1
 		@GetMapping("boardList")

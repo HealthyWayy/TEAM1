@@ -161,12 +161,13 @@ $(function(){
             <input class="bo__btn__m" type="submit" id="btn_submit" value="수정">
             <input class="bo__btn__wa" type="button" value="삭제" onclick="javascript:delCheck()">
             <input class="bo__btn__mb" type="button" value="목록" onclick="javascript:history.back()">
+            <input type="submit" value="댓글등록"/>
             <!-- 댓글쓰기 -->
 	<c:if test="${logStatus=='Y'}">
 		<form method="post" id="replyFrm">
 			<input type="hidden" name="reply_num" value="${vo.reply_num}"/>
 			<textarea name="coment" id="coment" style="width:500px; height:100px;"></textarea>
-			<input type="submit" value="댓글등록"/>
+			
 		</form>
 	</c:if>
 	<!-- 댓글 목록이 나올 자리 -->
