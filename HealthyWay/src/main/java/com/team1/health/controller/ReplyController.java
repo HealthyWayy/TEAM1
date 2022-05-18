@@ -33,14 +33,14 @@ public class ReplyController {
 		vo.setUser_id((String)session.getAttribute("logId"));
 		
 		return service.replyWrite(vo);
-
+	}
 	// 댓글삭제
 	@RequestMapping("del")
 	public int delOk(int reply_num, HttpSession session) {
 		String id = (String)session.getAttribute("logId");
 		return service.replyDel(reply_num, id);
 	}
-}
+
 
 	
 	@PostMapping("editOk")
@@ -49,4 +49,4 @@ public class ReplyController {
 		return service.replyEdit(vo);
 	}
 	
-
+}
