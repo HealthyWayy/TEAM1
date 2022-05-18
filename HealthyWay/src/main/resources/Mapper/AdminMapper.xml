@@ -19,7 +19,7 @@
 	<select id="totalRecord" resultType="int">
 		select count(user_id) from user
 		<if test='searchWord != null'>
-			where user_id like '%${searchWord}%' or user_pw like '%${searchWord}%' or user_emial like '%${searchWord}%'
+			where user_ id like '%${searchWord}%' or user_pw like '%${searchWord}%' or user_emial like '%${searchWord}%'
 			or user_name like '%${searchWord}%' or user_nickname like '%${searchWord}%' or tel like '%${searchWord}%'
 			or gender like '%${searchWord}%' or age like '%${searchWord}%'
 		</if>
@@ -29,15 +29,15 @@
 	
 	</delete>
 	
-		<select id="lastIngred" resultType="String">
-		select gred_num from ingredient order by gred_num desc limit 1;
-	</select>
 
 	<!-- 운동 관리 -->
 	
 	
 	
 	<!-- 레시피 관리 -->
+	<select id="lastIngred" resultType="String">
+		select gred_num from ingredient order by gred_num desc limit 1;
+	</select>
 	<insert id="ingredInsert">
 		insert into ingredient(gred_num, gred_type, gred_kcal, gred_name)
 		values(#{gred_num}, #{gred_type}, ${gred_kcal}, #{gred_name})
