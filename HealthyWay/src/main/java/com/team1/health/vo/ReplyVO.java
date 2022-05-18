@@ -6,6 +6,7 @@ public class ReplyVO {
 	private int board_num;
 	private String content;
 	private String reply_date;
+	private String user_nickname;
 	
 	
 	public int getReply_num() {
@@ -37,6 +38,12 @@ public class ReplyVO {
 	}
 	public void setReply_date(String reply_date) {
 		this.reply_date = reply_date;
+	}
+	public String getUser_nickname() {
+		return user_nickname;
+	}
+	public void setUser_nickname(String user_nickname) {
+		this.user_nickname = user_nickname;
 	}
 	
 }

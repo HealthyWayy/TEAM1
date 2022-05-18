@@ -32,7 +32,6 @@ public class PtController {
 	@Inject
 	PtService service;
 	
-	
 	// pt 글 리스트
 	@GetMapping("ptList")
 	public ModelAndView ptList(PtPagingVO pVO) {
@@ -98,6 +97,7 @@ public class PtController {
 		// 조회수 증가
 		service.hitCount(board_num);
 		
+		mav.addObject("aList", service.apply_list(board_num));
 		mav.addObject("pCount", service.applySelect(board_num).size());
 		mav.addObject("pList", service.applySelect(board_num));
 		mav.addObject("lVO", service.leaderSelect(board_num));

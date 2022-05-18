@@ -12,10 +12,14 @@ body, ul, li{
 	margin-bottom: 3px;
 }
 
+.wrap{
+	width: 80%;
+	margin: 0 auto;
+}
+
 .pt_top_btn_wrap{
 	display: flex;
-	width: 1200px;
-	margin: 0 auto;
+	margin: 0px 15px;
 	padding: 10px 0px;
 }
 
@@ -29,13 +33,17 @@ body, ul, li{
 }
 
 .pt_top_btn_wrap button{
-	border: 1px solid #000;
-    background-color: #000;
+	border: 1px solid #A18ACB;
+    background-color: #A18ACB;
     color: #fff;
     padding: 5px 15px;
     border-radius: 30px;
     cursor: pointer;
     margin-top: 3px;
+}
+
+.pt_top_btn_wrap #completed_btn{
+	border: 1px solid #ddd;
 }
 
 .pt_top_btn_wrap #completed_btn{
@@ -46,11 +54,11 @@ body, ul, li{
 .search_box{
 	border: 1px solid #cecece;
     border-radius: 5px;
-    width: 300px;
+    width: 50%;
     float: left;
     height: 35px;
     padding: 0px 5px;
-    margin-left: 200px;
+    margin-left: 35%;
 }
 
 .search_box input{
@@ -74,20 +82,42 @@ body, ul, li{
 	margin: 0;
 }
 
-#write_btn{
-	margin-right: 10px;
+
+.head_img{
+	margin-bottom: 2%;
+    position: relative;
+    top: -3px;
+    width: 100%;
+    height: 750px;
 }
 
-.head_img img{
+#video{
 	width: 100%;
-	height: 350px;
+	height: 100%;
+	object-fit: fill;
+}
+
+.head_img h1{
+	text-align: center;
+    position: absolute;
+    top: 35%;
+    width: 100%;
+    color: #fff;
+    font-size: 3em;
+}
+.head_img p{
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+	color: #fff;
+    font-size: 1.5em;
 }
 
 /*******************************************/
 
 
 .main_wrap{
-	width: 1200px;
 	margin: 0 auto;
 	padding: 0;
 	overflow: auto;
@@ -104,34 +134,34 @@ body, ul, li{
 }
 
 .pt_post_wrap{
-	width: 23%;
+	width: 22.5%;
     overflow: hidden;
     border: 1px solid #e9e9e9;
     border-radius: 10px;
     float: left;
-    margin-right: 20px;
-    margin-bottom: 30px;
     cursor: pointer;
-    height: 290px;
+    height: 330px;
+    margin: 20px 15px;
 }
 
 .pt_post_wrap li{
 	float: left;
+	width: 100%;
 }
 
 .main_img_wrap{
-    height: 120px;
+    height: 170px;
     overflow: hidden;
     border-bottom: 1px solid #e9e9e9;
 }
 
 .main_img_wrap img{
-    width: 280px;
-    height: 130px;
+    width: 100%;
+    height: 180px;
 }
 
 .pt_post_wrap li:nth-child(7n+2){
-	font-size: 13px;
+	font-size: 14px;
     margin: 10px;
     color: #929292;
     width: 93%;
@@ -141,7 +171,7 @@ body, ul, li{
 .pt_post_wrap li:nth-child(7n+3){
     font-size: 1.2em;
     font-weight: 500;
-    margin: 0px 10px 20px;
+    margin: 0px 10px 10px;
     width: 93%;
     height: 50px;
 }
@@ -149,7 +179,7 @@ body, ul, li{
 .pt_post_wrap li:nth-child(7n+4){
 	width: 45%;
     margin-left: 10px;
-    font-size: 13px;
+    font-size: 14px;
     color: gray;
     margin-bottom: 10px;
 }
@@ -158,7 +188,7 @@ body, ul, li{
 	width: 47%;
 	text-align: right;
 	margin-right: 10px;
-    font-size: 13px;
+    font-size: 14px;
     color: gray;
     margin-bottom: 10px;
 }
@@ -169,7 +199,7 @@ body, ul, li{
     margin-left: 10px;
     padding: 10px 0px;
     color: gray;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .pt_post_wrap li:nth-child(7n+7){
@@ -191,6 +221,7 @@ body, ul, li{
 
 .line_heart{
 	color: #a9a9a9;
+	font-size: 1.8em !important;
 }
 
 .fill_heart{
@@ -202,12 +233,14 @@ body, ul, li{
 }
 
 .fill_heart{
-	color: #F05A5D;
+	color: #FF5454;
+	font-size: 1.8em !important;
 }
 
 /******************************************/
 .paging_wrap{
 	display: flex;
+	margin-top: 20px;
 }
 
 .paging{
@@ -222,7 +255,7 @@ body, ul, li{
     width: 10px;
     height: 10px;
     line-height: 10px;
-    font-size: 14px;
+    font-size: 1.05em;
 }
 
 .paging li a{
