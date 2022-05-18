@@ -2,9 +2,57 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <link rel="stylesheet" href="${url}/css/board/board.css">
 
+<style>
+
+#topMenu {            
+                        height: 100x; 
+                        width: 1111px;
+                       
+                }
+                #topMenu ul li {                    
+                        list-style: none;
+                              
+                        background-color: #2d2d2d;  
+                        float: right;             
+                        line-height: 50px;          
+                        vertical-align: middle;   
+                        text-align: center;    
+                        border-right: 1px solid #CCC;    
+                }
+                #topMenu .menuLink {                              
+                        text-decoration:none;                      
+                        color: white;                              
+                        display: block;                             
+                        width: 300px;                              
+                        font-size: 30px;                           
+                        font-weight: bold;                         
+                        font-family: "Trebuchet MS", Dotum, Arial; 
+                }
+                #topMenu .menuLink:hover {            
+                        color: red;                  
+                        background-color: #4d4d4d;    
+                }
+  
 
 
 
+
+
+
+
+
+
+
+
+</style>
+
+
+
+
+
+
+
+ 
 
 <script>
 	$(function(){
@@ -22,7 +70,6 @@
 	<img src="/img/board2.jpg">
 </div>
 
-
 <!-- 검색 -->
 <div class="bo__tatble__top">
 	<form method="get" action="" id="searchFrm">
@@ -36,6 +83,11 @@
 		<button class="bo__btn__w" type="button" onclick="location.href='${url}/boardWrite'">글 작성</button>
 	</form>
 </div>
+
+ 
+
+
+
 
 <table class="bo__table">
     <thead>
@@ -72,7 +124,7 @@
 	<ul class="paging">
 		<!-- 이전페이지 -->
 		<c:if test="${pvo.pageNum==1 }">
-		<li>prev</li>
+		<li>이전</li>
 		</c:if>
 		<c:if test="${pvo.pageNum>1 }">
 		<li><a href="${url}/boardList?pageNum=${bvo.pageNum-1}<c:if test='${bvo.searchWord!=null}'>&searchWord=${bvo.searchWord}</c:if>">prev</a></li>
@@ -91,10 +143,10 @@
 		</c:forEach>
 		<!-- 다음 페이지  -->
 		<c:if test="${pvo.pageNum == pvo.totalPage }">
-			<li>next</li>
+			<li>다음</li>
 		</c:if>
 		<c:if test="${pvo.pageNum < pvo.totalPage }">
-			<li><a href="${url}/boardList?pageNum=${pvo.pageNum+1}<c:if test='${pvo.searchWord!=null}'>&searchWord=${pvo.searchWord}</c:if>">next</a></li>
+			<li><a href="${url}/boardList?pageNum=${pvo.pageNum+1}<c:if test='${pvo.searchWord!=null}'>&searchWord=${pvo.searchWord}</c:if>">다음</a></li>
 		</c:if>
 	</ul>
 </div>
