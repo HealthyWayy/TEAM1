@@ -23,6 +23,7 @@ public class AdminController {
 	public ModelAndView masterMember(PagingVO pvo) {
 		ModelAndView mav = new ModelAndView();
 		pvo.setTotalRecord(service.totalRecord(pvo));
+		System.out.println(pvo.getOnePageRecord()+"-"+pvo.getOffsetIndex());
 		mav.addObject("pVO", service.totalRecord(pvo));
 		mav.addObject("vo", service.memberList());
 		mav.setViewName("/admin/master_member");
