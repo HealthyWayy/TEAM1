@@ -162,7 +162,6 @@ public class BoardVO {
 		this.keyword = keyword;
 	}
 
-
 	public String getRecipe_img_file() {
 		return recipe_img_file;
 	}
@@ -188,7 +187,6 @@ public class BoardVO {
 	public void setHeartid(String heartid) {
 		this.heartid = heartid;
 	}
-
 
 	public String getOriginPtImg() {
 		return originPtImg;

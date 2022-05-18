@@ -19,7 +19,7 @@
 </script>
 
 <div class="bo__title">
-	
+<img src="/img/freedom.jpg">	
 </div>
 
 

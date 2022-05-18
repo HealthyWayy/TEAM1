@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.PagingVO;
+import com.team1.health.vo.ReplyVO;
 import com.team1.health.vo.SuggestionPagingVO;
 
 
@@ -34,6 +35,14 @@ public interface BoardDAO {
 	
 	public BoardVO boardView(int board_num);
 	
+	//댓글 추가
+		public int insertReply(ReplyVO vo);
+		//댓글 삭제
+		public int deleteReply(int reply_num);
+		//댓글 수정
+		public int updateReply(ReplyVO vo);
+		//댓글 목록
+		public List<ReplyVO> replyList(int board_num);
 	
 	
 	
