@@ -1,5 +1,36 @@
 package com.team1.health.service;
 
-public class ReplyServiceImpl implements ReplyService{
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.team1.health.dao.ReplyDAO;
+import com.team1.health.vo.ReplyVO;
+
+@Service
+public class ReplyServiceImpl implements ReplyService {
+	@Autowired
+	ReplyDAO dao;
+
+	@Override
+	public int replyWrite(ReplyVO vo) {
+		return dao.replyWrite(vo);
+	}
+
+	@Override
+	public List<ReplyVO> replyList(int no) {
+		return dao.replyList(no);
+	}
+
+	@Override
+	public int replyEdit(ReplyVO vo) {
+		return dao.replyEdit(vo);
+	}
+
+	@Override
+	public int replyDel(int replyno, String userid) {
+		return dao.replyDel(replyno, userid);
+	}
 
 }
