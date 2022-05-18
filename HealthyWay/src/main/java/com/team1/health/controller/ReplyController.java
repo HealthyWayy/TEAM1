@@ -27,26 +27,22 @@ public class ReplyController {
 	}
 	
 	// 댓글등록
-
 	@RequestMapping(value="/writeOk", method=RequestMethod.POST)
 	public int writeOk(ReplyVO vo, HttpSession session) {
 		vo.setUser_id((String)session.getAttribute("logId"));
 		
 		return service.replyWrite(vo);
-
+	}
 	// 댓글삭제
 	@RequestMapping("del")
 	public int delOk(int reply_num, HttpSession session) {
 		String id = (String)session.getAttribute("logId");
 		return service.replyDel(reply_num, id);
 	}
-}
 
-	
 	@PostMapping("editOk")
 	public int editOk(ReplyVO vo, HttpSession session) {
 		vo.setUser_id((String)session.getAttribute("logId"));
 		return service.replyEdit(vo);
 	}
-	
-
+}
