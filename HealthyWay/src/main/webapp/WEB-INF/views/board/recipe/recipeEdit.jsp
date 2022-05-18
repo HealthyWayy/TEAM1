@@ -22,7 +22,7 @@
 	    	<div id="ingredView">
 	    		<form method="post" action="/recipe/searchIngred" id="ingredSearch">
 		    		<select name="searchKey">
-		    			<option>음식명</option>
+		    			<option>재료명</option>
 		    			<option>분류</option>
 		    		</select>
 		    		<input type="text" name="searchValue" id="searchValue"/>

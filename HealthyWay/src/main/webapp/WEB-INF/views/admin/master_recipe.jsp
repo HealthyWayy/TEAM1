@@ -36,6 +36,9 @@ a:hover {
 
 body {
 	font-family: "NanumBarunGothic";
+	background-image:url('/recipeImg/recipe.jpg');
+	background-repeat : no-repeat;
+    background-size : cover;
 }
 
 ul, li {
@@ -49,6 +52,7 @@ ul, li {
 	height: 500px;
 	padding: 4%;
 	margin-top: 3%;
+	overflow:auto;
 }
 
 input, select:focus {
@@ -62,14 +66,14 @@ input, select:focus {
 	height: 450px;
 	margin-right: 4%;
 	border-radius: 15px;
-	background-color: pink;
+	background-color: rgba(255,255,255,0.93);
 }
 
 .head {
 	font-weight: normal;
 	text-align: center;
 	font-size: 1.4em;
-	margin-bottom: 8%;
+	margin-bottom: 6%;
 }
 
 #addIngred>p { /*텍스트*/
@@ -100,7 +104,7 @@ input, select:focus {
 	padding-left: 2%;
 	border-radius: 10px;
 	border: 1px solid rgb(200, 200, 200);
-	font-size: 1em;
+	font-size: 0.9em;
 }
 
 #btnDiv {
@@ -133,17 +137,13 @@ input, select:focus {
 	padding: 2%;
 	height: 450px;
 	border-radius: 15px;
-	background-color: lightblue;
+	background-color: rgba(255,255,255,0.93);
 	float: left;
-}
-#ingredView>hr{
-	margin-bottom:10px;
-	border:1px solid #ffd0d0;
-	opacity: 0.5;
 }
 #ingredView p{
 	text-align: center;
 	margin-bottom:7px;
+	font-size:1em;
 }
 #ingredSearch>select{/*카테고리*/
 	width:18%;
@@ -173,15 +173,26 @@ input, select:focus {
 	color:white;
 	cursor : pointer;
 }
+.list-group{
+	margin-top:2%;
+	margin-left:3.5%;
+}
 /*재료 리스트 출력*/
 .list-group>li{
-	width:90%;
-	height:32px;
+	width:85%;
+	height:37px;
 	line-height:30px;
 	padding:0;
 	padding-left:10px;
-	margin-left:5%;
-	background-color:  white;
+	margin-left:4%;
+	cursor: pointer;
+}
+.list-group>li>span{
+	margin-left:1%;
+	color:#FF5454;
+}
+.list-group>li:hover{
+	background-color: rgba(220,220,220,0.5);
 }
 /*페이징*/
 .paging{
@@ -204,10 +215,85 @@ input, select:focus {
 	color:white;
 	background-color:#FF5454 !important;
 }
+
+@media ( min-width: 1800px ) {
+	#mainDiv{
+		height: 700px;
+		margin-top:4%;
+	}
+	.head{
+		font-size:1.6em;
+	}
+	#addIngred {
+		height: 600px;
+	}
+	#addIngred>p>select{
+		width:30%;
+		height:40px;
+		font-size:1.2em;
+	}
+	#addIngred>p>input[type=text]{
+		width:80%;
+		height:40px;
+		font-size:1.2em;
+	}
+	#btnDiv>input[type=submit], #btnDiv>input[type=reset] {
+		height: 40px;
+		font-size:1.2em;
+	}
+	#ingredView{
+		height: 600px;
+	}
+	#ingredView p{
+		font-size:1.2em;
+	}
+	#ingredSearch>select, #ingredSearch>input[type=text], #ingredSearch>input[type=submit]{
+		height:40px;
+		font-size:1.2em;
+	}
+	.list-group>li{
+		height:40px;
+		font-size:1.1em;
+	}
+}
 </style>
 
 <script>
 	$(function(){
+		
+		//재료 등록
+		$("#addIngred").submit(function(){
+			event.preventDefault();
+			
+			if($("#gred_name").val()==""){
+				alert("재료명을 입력하세요.");
+				$("#gred_name").focus();
+				return false;
+			}
+			if($("#gred_kcal").val()==""){
+				alert("100g당 칼로리 값을 입력하세요.");
+				$("#gred_kcal").focus();
+				return false;
+			}
+			
+			var params = $("#addIngred").serialize();
+			$.ajax({
+				url: '/master/ingredInsert',
+				data: params,
+				type: 'post',
+				success: function(result){
+					if(result>0){
+						alert("재료가 추가되었습니다.");
+					}
+					$("#btnDiv>input[type=reset]").click();//초기화
+				},
+				error: function(e){
+					console.log(e.responseText);
+					alert("재료가 추가되지 않았습니다.");
+				}
+			});
+		});
+		
 		//재료 검색
 		$("#ingredSearch").submit(function(){
 			event.preventDefault();
@@ -241,7 +327,8 @@ input, select:focus {
 					//리스트 출력
 					for(var i=(pageNum-1)*onePageRecord; i<=(onePageRecord-1)+(pageNum-1)*onePageRecord; i++){
 						if(result[i]!=null){
-							tag = "<li onclick='deleteIngred("+result[i].gred_num+")'>"+result[i].gred_name+"</li>";
+							tag = "<li onclick='deleteIngred(&#39;"+result[i].gred_num+"&#39;);'>";
+							tag += result[i].gred_name+"<span>&times;</span></li>";
 							$(".list-group").append(tag);
 						}
 					}
@@ -253,11 +340,13 @@ input, select:focus {
 			});
 		});
 	});
+	
 	//페이지 클릭 이벤트
 	function setPageNum(num){
 		$("#pageNum").val(num);	//페이지 변수값 변경
 		$("#searchSubmit").trigger("click");	//검색 버튼 강제 클릭
 	}
+	
 	//페이징 설정
 	function paging(pageNum, totalRecord){
 		var pageNum = parseInt(pageNum);// 현재 페이지
@@ -303,6 +392,30 @@ input, select:focus {
 		}
 		$(".paging").html(pagingTag);
 		
+	}
+	
+	//재료 삭제
+	function deleteIngred(gred_num){
+	
+		if(!confirm("재료를 삭제하시겠습니까?")){
+			return false;
+		}
+		
+		$.ajax({
+			url: '/master/ingredDelete',
+			data: "gred_num="+gred_num,
+			type: 'post',
+			success: function(result){
+				if(result>0){
+					alert("재료가 삭제되었습니다.");
+				}
+				location="/master/recipe";
+			},
+			error: function(e){
+				console.log(e.responseText);
+				alert("재료가 삭제되지 않았습니다.");
+			}
+		});
 	}
 </script>
 
@@ -358,10 +471,9 @@ input, select:focus {
 				<input type="text" name="searchValue" id="searchValue" />
 				<input type="hidden" name="pageNum" id="pageNum" value="1" />
 				<input type="submit" value="검색" id="searchSubmit" />
-			</form><hr/>
-			<p>재료 선택</p>
+			</form>
 			<ul class="list-group">
-				<br/><p>재료를 검색하세요.</p><br/>
+				<br/><p>검색어를 입력해 재료를 검색하세요.<br/><br/>검색된 재료를 클릭하면 삭제됩니다.</p><br/>
 			</ul>
 			<!-- 페이징 -->
 			<ul class="paging">

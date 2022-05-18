@@ -73,10 +73,5 @@ public interface RecipeDAO {
 	//댓글 목록
 	public List<ReplyVO> replyList(int board_num);
 	
-	//관리자-----------------------------------------
-	//마지막 id값
-	public String lastIngred();
-	//재료 DB 추가
-	public int ingredInsert(IngredientVO vo);
 	
 }

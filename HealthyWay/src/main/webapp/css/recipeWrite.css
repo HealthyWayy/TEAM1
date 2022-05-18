@@ -257,12 +257,12 @@ input:focus, select:focus, textarea:focus{
 /*계량 아이콘 div*/
 #measurement{
 	text-align: center;
-	padding-left:7%;
+	padding-left:3%;
  	margin-top:10%;
 }
 #measurement>li{
 	display:inline-block;
-	margin-right:7%;
+	margin-right:3%;
 	cursor: pointer;
 	margin-bottom:5%;
 }

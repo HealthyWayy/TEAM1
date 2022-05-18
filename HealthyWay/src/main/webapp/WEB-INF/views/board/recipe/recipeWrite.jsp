@@ -20,6 +20,7 @@ $(function(){
 			location="/recipe/list";
 		}
     });
+	
   
 	//재료 검색
 	$("#ingredSearch").submit(function(){
@@ -326,7 +327,6 @@ function deleteIngred(gredNum, gredkcal){
 			if(result<0){
 				alert("재료 삭제 실패");
 			}
-			alert("재료 삭제 완료");
 			$("#gredNum").html("");
 			var kcal = $("#totalKcal").text();
 			var idx =  kcal.lastIndexOf(":")+2;
@@ -353,7 +353,6 @@ function deleteAllIngred(){
 			if(result<0){
 				alert("재료 삭제 실패");
 			}
-			alert("재료 삭제 완료");
 			$("#totalKcal").text("Total : 0kcal");
 			$("#ingredList").html("");
 		},

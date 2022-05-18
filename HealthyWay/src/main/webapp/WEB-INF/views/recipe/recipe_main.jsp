@@ -26,7 +26,7 @@ body{
 #listBtnText{
 	position:absolute;
 	top:58%;
-	right:12%;
+	right:11%;
 	padding:5px 10px;
 	text-align: center;
 	color:white;
@@ -37,7 +37,7 @@ body{
 #recomBtnText{
 	position:absolute;
 	top:58%;
-	left:13%;
+	left:11%;
 	padding:5px 10px;
 	text-align: center;
 	color:white;
@@ -48,7 +48,7 @@ body{
 #listBtn {
     position: absolute;
     top:68%;
-    right:20%;
+    right:18%;
     padding: 20px 40px;
     text-align: center;
     color: #FF5454;
@@ -63,7 +63,7 @@ body{
 #recomBtn{
     position: absolute;
     top:68%;
-    left:20%;
+    left:18%;
     padding: 20px 40px;
     text-align: center;
     color: #FF5454;
@@ -157,28 +157,43 @@ body{
 @media ( min-width: 1800px ) {
 	#top{
 		width:100%;
-		height:1450px;
+		height:1300px;
 	}
-	#recomBtnText, #listBtnText{
-		font-size:2em;
+	#recomBtnText{
+		top:58%;
+		left:13%;
+		font-size:1.4em;
+	}
+	#listBtnText{
+		top:58%;
+		right:13%;
+		font-size:1.4em;
 	}
 	#recomBtn, #listBtn{
-		height:75px;
-		font-size:2em;
+		top:63%;
+		height:65px;
+		font-size:1.5em;
 	}
 	#head{
-		font-size:2em;
+		font-size:1.7em;
 		top:45%;
 		left:39%;
 	}
 	/*추천 레시피 리스트*/
 	#recipe_list{
-		top:70%;
-		left: 10%;
 		width:80%;
+		margin-left:9%;
 	}
 	.recipe_item{
-		height:650px;
+		height:550px;
+	}
+	.title{
+		font-size:2em;
+		top:36%;
+	}
+	.kcal{
+		font-size:1.8em;
+		top:46%;
 	}
 }
 
@@ -186,26 +201,29 @@ body{
 <script>
 $(function(){
 	
+	//doucment가 ready되면 하트 세팅하기
 	$(document).ready(function(){
 		setHeart();
 	});
 	
+	//리스트 페이지로 이동하는 버튼 hover 효과
 	$("#listBtn").mouseover(function(){
 		$("#listBtnText").css("opacity", "1").css("transition-duration","200ms");
-		$(this).css("background-color", "#FF5454").css("color","white").css("transition-duration","300ms");
+		$(this).css("background-color", "#FF5454").css("color","white").css("transition-duration","400ms");
 	});
 	$("#listBtn").mouseout(function(){
 		$("#listBtnText").css("opacity", "0").css("transition-duration","200ms");
-		$(this).css("background-color", "white").css("color","#FF5454").css("transition-duration","300ms");
+		$(this).css("background-color", "white").css("color","#FF5454").css("transition-duration","400ms");
 	});
 	
+	//추천 레시피 스크롤 이동하는 버튼 hover 효과
 	$("#recomBtn").mouseover(function(){
 		$("#recomBtnText").css("opacity", "1").css("transition-duration","200ms");
-		$(this).css("background-color", "#FF5454").css("color","white").css("transition-duration","300ms");
+		$(this).css("background-color", "#FF5454").css("color","white").css("transition-duration","400ms");
 	});
 	$("#recomBtn").mouseout(function(){
 		$("#recomBtnText").css("opacity", "0").css("transition-duration","200ms");
-		$(this).css("background-color", "white").css("color","#FF5454").css("transition-duration","300ms");
+		$(this).css("background-color", "white").css("color","#FF5454").css("transition-duration","400ms");
 	});
 	
 	//추천 버튼 클릭 이벤트(스크롤 이동)
@@ -215,12 +233,14 @@ $(function(){
 
 	});
 	
+	//빈 하트 클릭했을 때(db 추가)
 	$(".heart1").click(function(){
 		var num = $(this).attr("id").substring(2);
 		insertHeart(num);
 		return false;
 	});
 	
+	//채워진 하트 클릭했을 때(db 삭제)
 	$(".heart2").click(function(){
 		var num = $(this).attr("id").substring(2);
 		deleteHeart(num);
@@ -228,6 +248,7 @@ $(function(){
 	});
 });
 
+//하트 세팅
 function setHeart(){
 	$.ajax({
 		url: "/recipe/selectHeart",
@@ -249,6 +270,7 @@ function setHeart(){
 	});
 }
 
+//하트 추가
 function insertHeart(boardNum){
 	
 	$.ajax({
@@ -256,10 +278,7 @@ function insertHeart(boardNum){
 		type: "post",
 		data: "board_num="+boardNum,
 		success: function(result){
-			$("#e_"+boardNum).css("display", "none");
-			$("#e-"+boardNum).css("display", "none");
-			$("#f_"+boardNum).css("display", "block");
-			$("#f-"+boardNum).css("display", "block");
+			setHeart();	//다시 하트 세팅
 		},
 		error: function(e){
 			console.log(e.responseText);
@@ -268,6 +287,7 @@ function insertHeart(boardNum){
 	
 	return false;
 }
+//하트 삭제
 function deleteHeart(boardNum){
 	
 	$.ajax({
@@ -275,10 +295,7 @@ function deleteHeart(boardNum){
 		type: "post",
 		data: "board_num="+boardNum,
 		success: function(result){
-			$("#e_"+boardNum).css("display", "block");
-			$("#e-"+boardNum).css("display", "block");
-			$("#f_"+boardNum).css("display", "none");
-			$("#f-"+boardNum).css("display", "none");
+			setHeart(); //다시 하트 세팅
 		},
 		error: function(e){
 			console.log(e.responseText);
