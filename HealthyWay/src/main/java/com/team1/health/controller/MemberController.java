@@ -35,6 +35,8 @@ public class MemberController {
 		if (vo2 != null) {// 로그인 성공
 			session.setAttribute("logId", vo2.getUser_id());
 			session.setAttribute("nickName", vo2.getUser_nickname());
+			session.setAttribute("profie_img", vo2.getProfie_img());
+			System.out.println(vo2.getProfie_img());
 			session.setAttribute("logStatus", "Y");
 			String dest = (String)session.getAttribute("dest");
 	        String redirect = (dest == null) ? "/" : dest;

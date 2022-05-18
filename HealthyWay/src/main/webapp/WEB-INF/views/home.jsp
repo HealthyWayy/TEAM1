@@ -5,43 +5,49 @@
 <script src="/js/home.js"></script>
 <header class="nav-bar">
   <ul>
-  	<li><a href="/">Logo</a></li>
+  	<li class="logo"><a href="/"><img src="/img/logo/logo7.png"/></a></li>
   </ul>
   <ul>
   	<c:if test="${logStatus != 'Y' }">
   		<li><a href="/member/loginForm">Login</a></li>		
   	</c:if>
-  	<c:if test="${logStatus == 'Y' }">
-  		<li><div class="profile-container dropbtn2"></div></li>
+  	<c:if test="${logStatus == 'Y' }">  		
+  		<li>
+  			<div class="profile-container2 dropbtn2">
+  			<c:if test="${profie_img != null }">
+  				<img src="/img/${profie_img }"/>
+  			</c:if>
+  			<c:if test="${profie_img == null }">
+  				<i class="bi bi-person-fill"></i>
+  			</c:if>
+  			</div>
+  		</li>
 	  	<li><a href="/member/logout">Logout</a></li>
   	</c:if>  
   </ul>
 </header>
+
 <!-- quick button -->
 <div class="quick"><ul></ul></div>
 
 <nav class="dropdown-content2">
 	 <ul class="gnb">
-	 	<li class="submenu2"><span>mypage1</span></li>
-	 	<li class="submenu2"><span>mypage2</span></li>
-	 	<li class="submenu2"><span>mypage3</span></li>
-	 	<li class="submenu2"><span>mypage4</span></li>
+	 	<li class="submenu2"><span>마이페이지</span></li>
+	 	<li class="submenu2"><span>운동 기록</span></li>
+	 	<li class="submenu2"><span>내 식단 목록</span></li>
+	 	<li class="submenu2"><span>내 글 관리</span></li>
 	 </ul>
 </nav>
+
 <div class="container">
         <div class="box">
         	<div class="cover">
-        		<div class="copywriteBox">
-        			<div class="copywrite-first">
-        				<span class="fade-in-box dFirst">color is beautiful</span><br/>
-        				<span class="fade-in-box dSecond">color is beautiful</span><br/>
-        				<span class="fade-in-box dThird">color is beautiful</span>
-        			</div>
-        			<div></div>
-        		</div>
-  			 	<section class="btn-container form-move-1">
+        		<ul class="copywrite first">
+        			<li class="Title-mask"><span class="Title-line Title-effect">AI-training</span></li>
+        		</ul>
+  			 	<section class="btn-container form-move">
 				    <button class="blob-btn">
-				        Start
+				        <span class="btn-text">Start</span>
 				        <span class="blob-btn__inner">
 				            <span class="blob-btn__blobs">
 				                <span class="blob-btn__blob"></span>
@@ -51,8 +57,7 @@
 				            </span>
 				        </span>
 				    </button>
-				    <br />
-				
+				    <br/>
 				    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
 				        <defs>
 				            <filter id="goo">
@@ -65,16 +70,14 @@
 				    </svg>
 				</section>
         	</div>
-        		<img alt="" src="/img/exercise01.jpg">
+        		<img alt="" src="/img/home/training04.jpg">
         </div>
         <div class="box">
         	<div class="cover">
-        		<ul class="copywrite-second">
-        			<li class="slideUp dFirst">Dream&nbsp;</li>
-        			<li class="slideUp dSecond">comes&nbsp;</li>
-        			<li class="slideUp dThird">true</li>
+        		<ul class="copywrite second">
+        			<li class="Title-mask"><span class="Title-line Title-effect">Recipe</span></li>
         		</ul>
-				<section class="btn-container form-move-2">
+				<section class="btn-container form-move">
 				    <button class="blob-btn">
 				        Start
 				        <span class="blob-btn__inner">
@@ -86,8 +89,7 @@
 				            </span>
 				        </span>
 				    </button>
-				    <br />
-				
+				    <br />				
 				    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
 				        <defs>
 				            <filter id="goo">
@@ -100,22 +102,14 @@
 				    </svg>
 				</section>	
 			</div>
-        	<img  id="image-back" alt="" src="/img/exercise02.jpg">
+        	<img alt="" src="/img/home/diet_true.jpg">
         </div>
         <div class="box">
         	<div class="cover">
-				<div class="copywrite-third">
-					<div>
-						<p class="slide-up dFirst">Hello there,</p>
-					</div>
-					<div>
-						<p class="slide-up dSecond">this is just</p>
-					</div>
-					<div>
-						<p class="slide-up dThird">a test.</p>
-					</div>
-				</div>
-				<section class="btn-container form-move-3">
+				<ul class="copywrite third">
+					<li class="Title-mask"><span class="Title-line Title-effect">Group</span></li>
+				</ul>
+				<section class="btn-container form-move">
 				    <button class="blob-btn">
 				        Start
 				        <span class="blob-btn__inner">
@@ -141,11 +135,14 @@
 				    </svg>
 				</section>
 			</div>
-        	<img alt="" src="/img/exercise03.jpg">
+        	<img alt="" src="/img/home/group01.jpg">
         </div>
         <div class="box">
 	        <div class="cover">
-				<p class="copywrite-fourth">
+	        	<ul class="copywrite fourth">
+        			<li class="Title-mask"><span class="Title-line Title-effect">Community</span></li>
+        		</ul>
+				<!-- <p class="copywrite fourth">
 					<span class="blur-animation">It's</span>
 					<span class="blur-animation">all</span>
 					<span class="blur-animation">becoming</span>
@@ -153,8 +150,8 @@
 					<span class="blur-animation">to</span>
 					<span class="blur-animation">me</span>
 					<span class="blur-animation">now</span>
-				</p>
-				<section class="btn-container form-move-4">
+				</p> -->
+				<section class="btn-container form-move">
 				    <button class="blob-btn">
 				        Start
 				        <span class="blob-btn__inner">
@@ -180,6 +177,6 @@
 				    </svg>
 				</section>
 			</div>
-	        <img alt="" src="/img/exercise04.jpg">
+	        <img alt="" src="/img/home/community04.jpg">
         </div>
 </div>

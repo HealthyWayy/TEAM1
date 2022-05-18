@@ -5,27 +5,49 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Healthy Way</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
 <script src="/js/top.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
 <link href="/css/top.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 	<nav class="top">
 		<ul class="logo-container">
-			<li><img src="../../../img/HealthyWayLogo"></li>
+
+			<li class="logo"><a href="/"><img src="/img/logo/logo6.png"/></a></li>
+
 		</ul>
 		<ul class="menu-container">
-			<li><a href="/">Home</a></li>
-			<li><a href="/trainning/trainningHome">AI Traing</a></li>
-			<li><a href="/board/ptList">PT group</a></li>
-			<li><a href="/recipe/main">Recipe</a></li>
-			<li><a href="/boardList">Notesmypage</a></li>
+			<c:if test="${logId == 'admin'}">
+				<li><a href="/master/member">Member</a></li>
+				<li><a href="/master/trainning">Training</a></li>
+				<li><a href="/master/recipe">Recipe</a></li>
+				<li><a href="/master/ptGroup">PT-Group</a></li>
+				<li><a href="/master/community">Community</a></li>			
+			</c:if>	
+			<c:if test="${logId != 'admin'}">
+				<li><a href="/trainning/trainningHome">AI-Training</a></li>
+				<li><a href="/recipe/main">Recipe</a></li>
+				<li><a href="/board/ptList">PT group</a></li>
+				<li><a href="/boardList">Community</a></li>		
+			</c:if>		
 		</ul>
 		<ul class="login-container">
 			<c:if test="${logStatus == 'Y' }">
-				<li><div class="profile-container dropbtn1"></div></li>
+				<c:if test="${logId != 'admin' }">
+					<li>
+						<div class="profile-container1 dropbtn1">
+							<c:if test="${profie_img != null }">
+								<img src="/img/${profie_img }" />
+							</c:if>
+							<c:if test="${profie_img == null }">
+								<i class="bi bi-person-fill"></i>
+							</c:if>
+						</div>
+					</li>
+				</c:if>
 				<li><a href="/member/logout">Logout</a></li>
 			</c:if>
 			<c:if test="${logStatus != 'Y' }">
@@ -35,9 +57,9 @@
 	</nav>
 	<nav class="dropdown-content1">
 	 <ul class="gnb">
-	 	<li class="submenu1"><span>mypage1</span></li>
-	 	<li class="submenu1"><span>mypage2</span></li>
-	 	<li class="submenu1"><span>mypage3</span></li>
-	 	<li class="submenu1"><span>mypage4</span></li>
+	 	<li class="submenu1"><span>마이페이지</span></li>
+	 	<li class="submenu1"><span>운동 기록</span></li>
+	 	<li class="submenu1"><span>내 식단 목록</span></li>
+	 	<li class="submenu1"><span>내 글 관리</span></li>
 	 </ul>
 </nav>
