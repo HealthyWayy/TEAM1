@@ -43,12 +43,11 @@ textarea:focus{
 	border:1px solid #ddd;
 	background-color: white;
 	opacity: 0.9;
-	font-size:11pt;
 }
 /*게시판 정보*/
 #boardInfo{
 	border-bottom:1px solid rgb(200,200,200);
-	margin-bottom:3%;
+	margin-bottom:4%;
 	text-align: left;
 }
 #info{
@@ -130,12 +129,13 @@ textarea:focus{
 	border:1px solid rgb(200,200,200);
 	resize: none;
 	margin:0 auto;
+	font-size:1em;
 }
 /*재료 리스트*/
 #ingredList{
 	overflow:auto;
 	width:100%;
-	margin-bottom:30px;
+	margin-bottom:4%;
 	max-height:250px;
 }
 #ingredList>li{
@@ -270,11 +270,13 @@ textarea:focus{
 	padding-left:1%;
 }
 #rContent{
-	width:86.5%;
+	width:85%;
 	height:100%;
 	border-radius: 10px;
 	border:1px solid rgb(200,200,200);
 	padding-left:2%;
+	margin-right:1%;
+	font-size:1em;
 }
 #rSubmit{
 	width:12%;
@@ -300,10 +302,10 @@ textarea:focus{
 		font-size:20pt;
 	}
 	#ingredList{
-		height:20%;
+		height:15%;
 	}
 	#editDelete{
-		top:21%;
+		top:23.5%;
 		right:7%;
 		font-size:20pt;
 	}
@@ -313,7 +315,7 @@ textarea:focus{
 		margin-bottom:5%;
 	}
 	#ingredList{
-		max-height:300px;
+		max-height:200px;
 	}
 	#ingredList>li{
 		display:inline-block;
@@ -325,11 +327,32 @@ textarea:focus{
 		border:1px solid rgb(200,200,200);
 	}
 	#content{
-		height:380px;
+		height:350px;
 	}
 	#totalKcal{
 		height:33px;
 		line-height:35px;
+	}
+	/*댓글*/
+	#commentDiv{
+		top:22%;
+		left:5%;
+		width:35%;
+		height:900px;
+	}
+	#rContent{
+		width:85%;
+		margin-right:1.6%;
+		font-size:1.3em;
+	}
+	#rSubmit{
+		font-size:1.3em;
+	}
+	#replyList>li>label{
+		font-size:1em;
+	}
+	#replyList>li{
+		font-size:1.3em;
 	}
 }
 </style>
@@ -343,6 +366,9 @@ $(function(){
 	$("#replyClose").click(function(){
 		$("#commentDiv").fadeToggle("100ms");
 	});
+	
+	$("#commentDiv").draggable();//댓글창 드래그 이동 가능
+
 	
 	//찜하기 셋팅
 	$(document).ready(function(){
@@ -470,6 +496,8 @@ function setReply(){
 					$("#replyList").append(tag);
 				});
 				$("#replyCount").html("<li>댓글수:&nbsp;"+result.length+"</li>");
+			}else{
+				$("#replyList").html("");
 			}
 		},
 		error: function(e){

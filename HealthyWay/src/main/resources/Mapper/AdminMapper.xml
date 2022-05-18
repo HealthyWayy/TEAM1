@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team1.health.dao.AdminDAO">
+	<!-- 회원 관리 -->
+	<select id="memberList" resultType="com.team1.health.vo.MemberVO">
+		select user_id, user_pw, user_email, user_name, user_nickname, tel, gender, age
+		from user
+		<if test="searchWord != null">
+			where user_id like '%${searchWord}%' or user_pw like '%${searchWord}%' or user_emial like '%${searchWord}%'
+			or user_name like '%${searchWord}%' or user_nickname like '%${searchWord}%' or tel like '%${searchWord}%'
+			or gender like '%${searchWord}%' or age like '%${searchWord}%'
+		</if>
+		order by join_date desc limit ${onePageRecord} offset ${offsetIndex}
+	</select>
+	
+	<select id="totalRecord" resultType="int">
+		select count(user_id) from user
+		<if test='searchWord != null'>
+			where user_ id like '%${searchWord}%' or user_pw like '%${searchWord}%' or user_emial like '%${searchWord}%'
+			or user_name like '%${searchWord}%' or user_nickname like '%${searchWord}%' or tel like '%${searchWord}%'
+			or gender like '%${searchWord}%' or age like '%${searchWord}%'
+		</if>
+	</select>
+	
+	<delete id="memberDelete">
+	
+	</delete>
+	
+
+	<!-- 운동 관리 -->
+	
+	
+	
+	<!-- 레시피 관리 -->
+	<select id="lastIngred" resultType="String">
+		select gred_num from ingredient order by gred_num desc limit 1;
+	</select>
+	<insert id="ingredInsert">
+		insert into ingredient(gred_num, gred_type, gred_kcal, gred_name)
+		values(#{gred_num}, #{gred_type}, ${gred_kcal}, #{gred_name})
+	</insert>
+	
+	<delete id="ingredDelete">
+		delete from ingredient where gred_num=#{param1}
+	</delete>
+	
+	
+	<!-- pt 그룹 관리 -->
+	
+	
+	
+	<!-- 커뮤니티 관리 -->
+	
+	
+</mapper>

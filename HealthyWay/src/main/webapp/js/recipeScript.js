@@ -119,7 +119,7 @@ $(function(){
 	//글 수정 submit 이벤트
 	$("#writeFrm").submit(function(){
 		event.preventDefault();
-		console.log($("#file").val());
+
 		//유효성 검사------------------------------
 		if($("#title>input").val()==""){//title
 			alert("레시피 제목을 입력하세요.");

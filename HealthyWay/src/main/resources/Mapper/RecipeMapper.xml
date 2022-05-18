@@ -149,12 +149,4 @@
 		from reply where board_num=${param1}
 	</select>
 	
-	<select id="lastIngred" resultType="String">
-		select gred_num from ingredient order by gred_num desc limit 1;
-	</select>
-
-	<insert id="ingredInsert">
-		insert into ingredient(gred_num, gred_type, gred_kcal, gred_name)
-		values(#{gred_num}, #{gred_type}, ${gred_kcal}, #{gred_name})
-	</insert>
 </mapper>
