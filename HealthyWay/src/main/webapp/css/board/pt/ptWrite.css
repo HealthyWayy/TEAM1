@@ -22,10 +22,11 @@ body, ul, li{
 	width: 700px;
     margin: 0 auto;
     overflow: auto;
-    background-color: #f3f3f3;
     padding: 30px 80px;
     border-radius: 20px;
     margin-top: 40px;
+    border: 1px solid #d1d1d1;
+    background: #fafafa;
 }
 
 .main_wrap h1{
@@ -126,8 +127,8 @@ select{
 }
 
 input[type=submit]{
-	border: 1px solid #000;
-    background-color: #000;
+	border: 1px solid #A18ACB;
+    background-color: #A18ACB;
     color: #fff;
     padding: 8px 20px;
     border-radius: 30px;

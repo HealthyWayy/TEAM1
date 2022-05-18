@@ -2,15 +2,21 @@ package com.team1.health.vo;
 
 public class SuggestionPagingVO {
 	
-	private int onePageRecord = 5; 
+	private int onePageRecord = 10; 
 	private int pageNum = 1; 
 	private int suggestiontotalRecord; 
 	private int totalPage; 
 	private int offsetIndex = 0;
-	private int onePageCount = 5;
+	private int onePageCount = 10;
 	private int startPage = 1;
+	private int pageSize = 10;
 
-
+	public int getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
 	private String searchKey;
 	private String searchWord;
 	

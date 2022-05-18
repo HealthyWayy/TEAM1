@@ -2,7 +2,7 @@ package com.team1.health.controller;
 
 
 import java.util.HashMap;
-
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -19,15 +19,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 
 import com.team1.health.vo.PagingVO;
+import com.team1.health.vo.ReplyVO;
 import com.team1.health.vo.SuggestionPagingVO;
 import com.team1.health.vo.BoardVO;
 import com.team1.health.service.MemberService;
-
+import com.team1.health.service.ReplyService;
 import com.team1.health.service.BoardService;
 
 
@@ -41,9 +43,12 @@ public class BoardController {
 	@Inject
 	MemberService memberService;
 	
+	@Inject
+	ReplyService replyService;
+	
 	//공지사항 뷰 1
 		@GetMapping("boardList")
-		public ModelAndView boardList(@RequestParam(value="pageNum",required = false, defaultValue = "1")int pageNum, @RequestParam(value="pageCount",required = false, defaultValue = "5")int pageCount, @RequestParam(value="searchWord",required = false, defaultValue = "")String searchWord){
+		public ModelAndView boardList(@RequestParam(value="pageNum",required = false, defaultValue = "1")int pageNum, @RequestParam(value="pageCount",required = false, defaultValue = "10")int pageCount, @RequestParam(value="searchWord",required = false, defaultValue = "")String searchWord){
 			ModelAndView mav = new ModelAndView();
 			
 			
@@ -123,14 +128,14 @@ public class BoardController {
 	//공지 삭제요청 3
 	@DeleteMapping("/board/boardList")
 	
-    public ResponseEntity<HashMap<String,String>> boardDelete(BoardVO vo, HttpServletRequest request, HttpSession session){
+    public ResponseEntity<HashMap<String,String>> boardDelete(int board_num, HttpServletRequest request, HttpSession session){
     	ResponseEntity<HashMap<String,String>> entity = null;
     	HashMap<String,String> result = new HashMap<String,String>();
     	String user_id = (String)session.getAttribute("logId");
     	System.out.println("delete");
     	
     	try {
-    		BoardVO bvo = service.boardSelectByNo(vo.getBoard_num());
+    		BoardVO bvo = service.boardSelectByNo(board_num);
     		//작성자가 다를 경우
     		if(bvo.getUser_id().equals(user_id)== false) {
     			result.put("status", "200");
@@ -139,7 +144,7 @@ public class BoardController {
     			entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.OK);
     		}
     		else {
-    			service.boardDelete(vo.getBoard_num(), vo.getUser_id());
+    			service.boardDelete(bvo.getBoard_num(), bvo.getUser_id());
     			result.put("status", "200");
     			result.put("msg", "글 삭제 완료.");
     			result.put("redirect", "/boardList");
@@ -245,10 +250,40 @@ public class BoardController {
 	    	
 	    	return entity;
 	    }
-		
+	  //댓글 등록
+		@PostMapping("/reply/insertBoardReply")
+		@ResponseBody
+		public String insertReply(ReplyVO vo, HttpSession session) {
+			String user_id = (String)session.getAttribute("logId");
+			vo.setUser_id(user_id);
+			service.insertReply(vo);
+			return "/boardList/view?board_num="+vo.getBoard_num();
+		}
+		//댓글 삭제
+		@PostMapping("/reply/deleteBoardReply")
+		@ResponseBody
+		public int deleteReply(int reply_num) {
+			return service.deleteReply(reply_num);
+		}
+		//댓글 수정
+		@PostMapping("/reply/updateBoardReply")
+		@ResponseBody
+		public int updateReply(ReplyVO vo) {
+			return service.updateReply(vo);
+		}
+		//댓글 목록
+		@PostMapping("/reply/replyBoardList")
+		@ResponseBody
+		public List<ReplyVO> replyList(int board_num){
+			return service.replyList(board_num);
+		}
+	    
+	    
+	    
+		    
 //자유게시판 9
 	    @GetMapping("board/suggestionList")
-		public ModelAndView suggestionList(@RequestParam(value="pageNum",required = false, defaultValue = "1")int pageNum, @RequestParam(value="pageCount",required = false, defaultValue = "5")int pageCount, @RequestParam(value="searchWord",required = false, defaultValue = "")String searchWord){
+		public ModelAndView suggestionList(@RequestParam(value="pageNum",required = false, defaultValue = "1")int pageNum, @RequestParam(value="pageCount",required = false, defaultValue = "10")int pageCount, @RequestParam(value="searchWord",required = false, defaultValue = "")String searchWord){
 			ModelAndView mav = new ModelAndView();
 			
 			

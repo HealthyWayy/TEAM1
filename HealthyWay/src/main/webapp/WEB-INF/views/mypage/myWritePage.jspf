@@ -75,6 +75,13 @@
 		text-overflow:ellipsis;
 		white-space:nowrap;
 	}
+	.wErrorPage{
+		position:absolute;
+		top:30%;
+		left:38%;
+		font-size:1.5em;
+		font-weight:bold;
+	}
 </style>
 <script>
 $(()=>{
@@ -104,6 +111,8 @@ function groupPageNation(pageNum){
 			//'searchWord':$('#').val()
 		},
 		success:function(result){
+			console.log('실행')
+			console.log(result);
 			var tag = "<ul class='pageNation'>"
 			if(result.pageNum==1){
 				tag+="<li>prev</li>";				
@@ -143,16 +152,21 @@ function groupListAll(pageNum) {
 		success: function(result) {
 			var $result = $(result);
 			var tag = "";
-			$result.each(function(idx, vo){
-				tag += "<div class='writeInfor' onclick='movePage(2,"+vo.board_num+")'>";
-				tag += "<div class='writeLiInforDiv'>";
-				tag += "<div class='writeLiInfor'>";
-				tag += "<img src='/ptImg/"+vo.pt_img_file+"'/>"
-				tag += "</div>";
-				tag += "<div class='writeLiInforTitle'>"+vo.title+"</div>";
-				tag += "</div>";
-				tag += "</div>";
-			});
+			if(result.length>0){
+				$result.each(function(idx, vo){
+					tag += "<div class='writeInfor' onclick='movePage(2,"+vo.board_num+")'>";
+					tag += "<div class='writeLiInforDiv'>";
+					tag += "<div class='writeLiInfor'>";
+					tag += "<img src='/ptImg/"+vo.pt_img_file+"'/>"
+					tag += "</div>";
+					tag += "<div class='writeLiInforTitle'>"+vo.title+"</div>";
+					tag += "</div>";
+					tag += "</div>";
+				});
+			}else{
+				tag += "<div class='wErrorPage'>가입한 그룹이 없습니다!!<div>";
+			}
+			
 			$("#groupList").html(tag);
 			groupPageNation(pageNum);
 		},
@@ -173,19 +187,23 @@ function achieveListAll(pageNum) {
 			//'searchWord':$('#searchWord').val()
 		},
 		type:"get",
-		success: function(result) {				
+		success: function(result) {
 			var $result = $(result);
 			var tag = "";
-			$result.each(function(idx, vo){
-				tag += "<div class='writeInfor' onclick='movePage(3,"+vo.board_num+")'>";
-				tag += "<div class='writeLiInforDiv'>";
-				tag += "<div class='writeLiInfor'>";
-				tag += "<img src='/img/"+vo.img_file1+"'/>"
-				tag += "</div>";
-				tag += "<div class='writeLiInforTitle'>"+vo.title+"</div>";
-				tag += "</div>";
-				tag += "</div>";
-			});
+			if(result.length>0){
+				$result.each(function(idx, vo){
+					tag += "<div class='writeInfor' onclick='movePage(3,"+vo.board_num+")'>";
+					tag += "<div class='writeLiInforDiv'>";
+					tag += "<div class='writeLiInfor'>";
+					tag += "<img src='/img/"+vo.img_file1+"'/>"
+					tag += "</div>";
+					tag += "<div class='writeLiInforTitle'>"+vo.title+"</div>";
+					tag += "</div>";
+					tag += "</div>";
+				});
+			}else{
+				tag += "<div class='wErrorPage'>작성한 글이 없습니다!!<div>";
+			}
 			$("#achieveList").html(tag);
 			achievePageNation(pageNum);
 		},
@@ -243,16 +261,20 @@ function foodListAll(pageNum) {
 		success: function(result) {
 			var $result = $(result);
 			var tag = "";
-			$result.each(function(idx, vo){
-				tag += "<div class='writeInfor' onclick='movePage(1,"+vo.board_num+")'>";
-				tag += "<div class='writeLiInforDiv'>";
-				tag += "<div class='writeLiInfor'>";
-				tag += "<img src='/recipeImg/upload/"+vo.recipe_img_file+"'/>"
-				tag += "</div>";
-				tag += "<div class='writeLiInforTitle'>"+vo.title+"</div>";
-				tag += "</div>";
-				tag += "</div>";
-			});
+			if(result.length>0){
+				$result.each(function(idx, vo){
+					tag += "<div class='writeInfor' onclick='movePage(1,"+vo.board_num+")'>";
+					tag += "<div class='writeLiInforDiv'>";
+					tag += "<div class='writeLiInfor'>";
+					tag += "<img src='/recipeImg/upload/"+vo.recipe_img_file+"'/>"
+					tag += "</div>";
+					tag += "<div class='writeLiInforTitle'>"+vo.title+"</div>";
+					tag += "</div>";
+					tag += "</div>";
+				});
+			}else{
+				tag += "<div class='wErrorPage'>작성한 레시피가 없습니다!!<div>";
+			}
 			$("#foodList").html(tag);
 			foodPageNation(pageNum);
 		},
@@ -272,7 +294,6 @@ function foodPageNation(pageNum){
 			//'searchWord':$('#').val()
 		},
 		success:function(result){
-			console.log(result);
 			var tag = "<ul class='pageNation'>"
 			if(result.pageNum==1){
 				tag+="<li>prev</li>";

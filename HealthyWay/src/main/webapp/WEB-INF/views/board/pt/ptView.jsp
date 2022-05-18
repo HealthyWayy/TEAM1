@@ -6,34 +6,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <script src="${url}/js/board/pt/ptView.js"></script>
 <script>
-// 글 삭제 확인
-function del(){
-	if(confirm("삭제하시겠습니까?")){
-			// 확인버튼 선택시
-			location.href = "${url}/board/ptDel?board_num=${vo.board_num}&pt_img_file=${vo.pt_img_file}";
-		}
-}
-
-// 그룹pt 참가신청
-function apply(){
-	if(confirm("참여하시겠습니까?")){
-		event.preventDefault();
-		
-		$.ajax({
-			url: "/board/ptApply?board_num=${vo.board_num}",
-			type: 'get',
-			success: function(result){
-				if(result > 0){
-					alert("참가 신청이 완료됐습니다. 리더의 승인이 필요합니다.");
-					location = "${url}/board/ptView?board_num=${vo.board_num}";
-				}	
-			},
-			error: function(e){
-				console.log(e.responseText);
-			}
-		});
-	}
-}
 
 $(function(){
 	// 그룹pt 참가신청
@@ -59,10 +31,6 @@ $(function(){
 		});
 	}
 	
-	// 그룹멤버일 경우 소통방 메뉴 클릭가능
-	
-	
-	
 	// 참가자 목록 가져오는 함수
 	function apply_listAll(){
 		var url = "${url}/board/apply_list";
@@ -76,11 +44,11 @@ $(function(){
 					var $result = $(result);
 					var tag = "<li>상태</li>";
 						tag += "<li>아이디</li>";
+						tag += "<li>닉네임</li>";
 						tag += "<li>성별</li>";
 						tag += "<li>나이</li>";
 						tag += "<li>키</li>";
 						tag += "<li>몸무게</li>";
-						tag += "<li>참여 횟수</li>";
 						tag += "<li>&nbsp;</li>";
 						tag += "<li>&nbsp;</li>";
 						
@@ -88,6 +56,7 @@ $(function(){
 					$result.each(function(idx, vo){
 						tag += "<li>" + vo.user_state + "</li>";
 						tag += "<li class='apply_id'>" + vo.user_id + "</li>";
+						tag += "<li>" + vo.user_nickname + "</li>";
 						if(vo.gender == "W"){
 							tag += "<li>여</li>";
 						}else{
@@ -104,7 +73,6 @@ $(function(){
 						}else{
 							tag += "<li>" + vo.weight + "kg</li>";
 						}
-						tag += "<li>00</li>";
 						
 						// status가 참여중이라면 숨기기
 						if(vo.user_state == "참여중"){
@@ -119,7 +87,7 @@ $(function(){
 				}else{
 					var tag = "아직 참여자가 없습니다.";
 				}
-				$(".manage_list").append(tag);
+				$(".manage_list").html(tag);
 				
 			},
 			error: function(e){
@@ -141,7 +109,6 @@ $(function(){
 				url: url,
 				data: params,
 				success: function(result){
-					$(".manage_list").empty();
 					apply_listAll();
 				},
 				error: function(e){
@@ -161,7 +128,6 @@ $(function(){
 				url: url,
 				data: params,
 				success: function(result){
-					$(".manage_list").empty();
 					apply_listAll();
 				},
 				error: function(e){
@@ -181,7 +147,6 @@ $(function(){
 				url: url,
 				data: params,
 				success: function(result){
-					$(".manage_list").empty();
 					apply_listAll();
 				},
 				error: function(e){
@@ -191,14 +156,163 @@ $(function(){
 		}
 	});
 	
+	// 댓글 목록
+	function replyListAll(){
+		var url = "${url}/reply/list";
+		var params = "board_num=" + ${vo.board_num};
+		
+		$.ajax({
+			url: url,
+			data: params,
+			success: function(result){
+				var $result = $(result);
+				
+				var tag = "<ul>";
+				$result.each(function(idx, vo){
+					tag += "<li class='reply_wrap'>";
+					tag += "<div class='id_date_wrap'>";
+					tag += "<div class='reply_id'>" + vo.user_nickname + " (" +vo.user_id + ")" + "</div>";
+					tag += "<div class='reply_date'>" + vo.reply_date + "</div>";
+					tag += "</div>";
+					tag += "<div class='reply_content'>" + vo.content + "</div>";
+					
+					/* 수정폼 */
+					tag += "<div class='reply_edit_input' style='display: none'>";
+					tag += "<form method='post' class='editFrm'>";
+					tag += "<input type='hidden' name='reply_num' value='"+vo.reply_num+"'>";
+					tag += "<input type='text' name='content' value='" + vo.content + "'>";
+					tag += "<input type='submit' value='수정'>";
+					tag += "</form></div>";
+
+					
+					if(vo.user_id == '${logId}'){
+						tag += "<div class='reply_btn_wrap'>";
+						
+						tag += "<button class='reply_edit_btn'>수정</button>";
+						tag += "<button class='reply_del_btn' title='" + vo.reply_num + "'>삭제</button>";
+						tag += "</div>";
+					}
+					tag += "</li>";
+				});
+				tag += "</ul>";
+				
+				$("#replyList").html(tag);
+			},
+			error: function(e){
+				console.log(e.responseText);
+			}
+		});
+	}
 	
+	// 댓글 등록
+	$("#replyFrm").submit(function(){
+		event.preventDefault();
+		
+		if($("#content").val() == ''){
+			alert("내용을 입력 후 등록해 주세요.");
+			return false;
+		}else{
+			var params = $("#replyFrm").serialize();
+			
+			$.ajax({
+				url : "${url}/reply/writeOk",
+				data : params,
+				type : "post",
+				success : function(result){
+					$("#content").val("");
+					
+					// 댓글 목록 초기화
+					replyListAll();
+				},
+				error : function(e){
+					console.log(e.responseText)
+				}
+			});
+		}
+	});
+	
+	// 댓글 수정 버튼 누르면 폼 노출
+	$(document).on("click", ".reply_edit_btn", function(){
+		$(this).parent().prev().prev().css("display", "none");
+		$(this).parent().prev().css("display", "block");
+		$(this).css("display", "none");
+	});
+	
+	// 댓글 수정(DB)
+	
+	
+	
+	
+	// 댓글 삭제(DB)
+	$(document).on("click", ".reply_del_btn", function(){
+		if(confirm("댓글을 삭제하시겠습까?")){
+			var params = "reply_num="+$(this).attr("title");
+			
+			$.ajax({
+				url : '${url}/reply/del',
+				data : params,
+				success : function(result){
+					replyListAll();
+				},
+				error : function(e){
+					console.log(e.responseText);
+				}
+			});
+		}
+	});
+	
+	
+	replyListAll();
 	apply_listAll();
-	
 	
 	
 });
 
+// 글 삭제 확인
+function del(){
+	if(confirm("삭제하시겠습니까?")){
+			// 확인버튼 선택시
+			location.href = "${url}/board/ptDel?board_num=${vo.board_num}&pt_img_file=${vo.pt_img_file}";
+		}
+}
+function qnaClick(){
+	$("#menu_qna").click(function(){
+		$(".all_content").css("display", "none");
+		$(".comment_wrap").css("display", "block");
 
+		$(".all_menu").css("background-color", "#FCFCFC");
+		$(".all_menu").css("color", "gray");
+		$(".all_menu").css("border", "1px solid #E4E5E5").css("border-bottom", "1px solid gray").css("border-left", "none");
+		$("#menu_info").css("border-left", "1px solid #E4E5E5");
+		
+		$(this).css("border", "1px solid gray").css("border-bottom", "none");
+		$(this).css("background-color", "#fff").css("color","#000");
+		$("#menu_manage").children('span').text("lock");
+		
+		$(this).children('span').text("lock_open");
+	});
+}
+
+// 그룹pt 참가신청
+function apply(){
+	if(confirm("참여하시겠습니까?")){
+		event.preventDefault();
+		
+		$.ajax({
+			url: "/board/ptApply?board_num=${vo.board_num}",
+			type: 'get',
+			success: function(result){
+				if(result > 0){
+					alert("참가 신청이 완료됐습니다. 리더의 승인이 필요합니다.");
+					location = "${url}/board/ptView?board_num=${vo.board_num}";
+				}	
+			},
+			error: function(e){
+				console.log(e.responseText);
+			}
+		});
+	}
+}
 </script>
 
 <div class="wrap">
@@ -218,9 +332,12 @@ $(function(){
 						style="cursor: no-drop;"
 					</c:if>
 					<c:forEach var="pVO" items="${pList}">
-						<c:if test="${pVO.user_id != logId}">
+						<c:if test="${pVO.user_id != logId and lVO.user_id != logId}">
 							style="cursor: no-drop;"
-						</c:if>		
+						</c:if>	
+						<c:if test="${pVO.user_id == logId or lVO.user_id == logId}">
+							onclick="qnaClick()";
+						</c:if>	
 					</c:forEach>
 				>소통방 <span class="material-symbols-outlined" style="vertical-align: sub;">lock</span></li>
 				<li id="menu_manage" class="all_menu" <c:if test="${lVO.user_id != logId}">style="cursor: no-drop;"</c:if>>관리 <span class="material-symbols-outlined" style="vertical-align: sub;">lock</span></li>
@@ -261,7 +378,7 @@ $(function(){
 				<div class="main_member_leader_wrap">
 					<div class="member_profile">
 						<ul>
-							<li class="main_member_img_wrap"><img src="${lVO.profie_img}"></li>
+							<li class="main_member_img_wrap"><img src="/img/${lVO.profie_img}"></li>
 							<li>${lVO.user_nickname} (${lVO.user_id})</li>
 							<li>고수</li>
 							<li>나이 : ${lVO.age}</li>
@@ -288,7 +405,7 @@ $(function(){
 					<c:forEach var="pVO" items="${pList}">
 						<div class="member_profile">
 							<ul>
-								<li class="main_member_img_wrap"><img src="${pVO.profie_img}"></li>
+								<li class="main_member_img_wrap"><img src="/img/${pVO.profie_img}"></li>
 								<li>${pVO.user_nickname} (${pVO.user_id})</li>
 								<li>고수</li>
 								<li>나이 : ${pVO.age}세</li>
@@ -314,9 +431,14 @@ $(function(){
 			</div>
 			
 			<div class="comment_wrap all_content" style="display: none">
-				<input type="text" name="comment" id="comment" placeholder="질문을 입력해주세요.">
-				<input type="submit" value="등록하기">
-			
+				<form method="post" id="replyFrm">
+					<input type="hidden" name="board_num" value="${vo.board_num}">
+					<input type="text" name="content" id="content" placeholder="질문을 입력해주세요.">
+					<input type="submit" value="등록하기">
+				</form>
+				<div id="replyList">
+				</div>
+				
 			</div>
 			
 			<div class="manage_wrap all_content" style="display: none;">
@@ -331,7 +453,7 @@ $(function(){
 		<div class="leader_profile_wrap">
 			<div class="profile_info_wrap">
 				<h4>리더정보</h4>
-				<div class="leader_img_wrap"><img src="${lVO.profie_img}"></div>
+				<div class="leader_img_wrap"><img src="/img/${lVO.profie_img}"></div>
 				<div class="leader_name_wrap">
 					${lVO.user_nickname} (${lVO.user_id})
 				</div>
@@ -344,22 +466,31 @@ $(function(){
 				<h4>그룹 멤버 (${pCount}명)</h4>
 				<c:forEach var="pVO" items="${pList}">
 					<div class="group_member_wrap">
-						<div class="member_img_wrap"><img src="${pVO.profie_img}"></div>
+						<div class="member_img_wrap"><img src="/img/${pVO.profie_img}"></div>
 						<div class="member_name_wrap">${pVO.user_nickname} (${lVO.user_id})</div>
 					</div>
 				</c:forEach>
 			</div>
+			
+
 			<c:if test="${vo.state != '모집완료'}">
-				<button class="applyBtn"<c:if test="${lVO.user_id == logId}">style="display: none;"</c:if>>참여하기</button>
+				<c:if test="${empty aList}">
+					<button class="applyBtn"<c:if test="${lVO.user_id == logId}">style="display: none;"</c:if>>참여하기</button>
+				</c:if>
+				<c:forEach var="aVO" items="${aList}">
+					<c:if test="${aVO.user_id == logId and aVO.user_state == '참여중'}">
+						<button style="cursor: initial;<c:if test="${lVO.user_id == logId}">display: none;</c:if>">참여중</button>
+					</c:if>
+					<c:if test="${aVO.user_id == logId and aVO.user_state == '대기중'}">
+						<button style="cursor: initial;<c:if test="${lVO.user_id == logId}">display: none;</c:if>">참여 대기중</button>
+					</c:if>
+				</c:forEach>
 			</c:if>
+			
 			<c:if test="${vo.user_id == logId}">
 				<button id="editBtn" onclick="location='/board/ptEdit?board_num=${vo.board_num}'">수정하기</button>
 				<button id="delBtn" onclick="location='javascript:del()'">삭제하기</button>
 			</c:if>
 		</div>
-	
-	
 	</div>
-
-
 </div>

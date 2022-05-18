@@ -2,13 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet" type="text/css" href="/css/train.css">
-
-    
     <ul id="menu">
-        <li><a id="list_menu" href="/">홈</a></li>
-        <li><a class="active" href="/trainning/trainningHome">트레이닝 센터</a></li>
-        <li><a id="list_menu" href="/trainning/myTrainning">나만의 운동</a></li>
-        <li><a id="list_menu" href="/trainning/recommendTrainning">추천 운동 목록</a></li>
+        <li><a id="list_menu" class="li-a" href="/">홈</a></li>
+        <li><a class="active" class="li-a" href="/trainning/trainningHome">트레이닝 센터</a></li>
+        <li><a id="list_menu" class="li-a" href="/trainning/myTrainning">나만의 운동</a></li>
+        <li><a id="list_menu" class="li-a" href="/trainning/recommendTrainning">추천 운동 목록</a></li>
     </ul>
     
     <div>
@@ -36,21 +34,21 @@
                 <option value="module_difficulty" name='module_difficulty'>중</option>
                 <option value="module_difficulty" name='module_difficulty'>하</option>
             </select></li>
-            <li id="train_menu"><button>검색</button></li>
+            <li id="train_menu"><button class="search-btn">검색</button></li>
         </ul>
         <br><br><br>
         <ul>
             <c:forEach var='vo' items="${vo}">
-      		    <li id="train_yoso"><a href="/trainning/testTrain">
-      		    <img name="module_img" src="/train_model/moduleImg/${vo.module_img}">
-                <p name="module_title">${vo.module_title}</p>
-                <p name="module_content">${vo.module_content }</p></a>
-                <button onclick="add_train(${vo.module_num})">추가하기</button></li>
+      		    <li id="train_yoso" class="train-frm"><a class="li-a" href="/trainning/testTrain">
+      		    <img class="train-img" name="module_img" src="/train_model/moduleImg/${vo.module_img}">
+                <p class="train-subject" name="module_title">${vo.module_title}</p>
+                <p class="train-keyword" name="module_content">${vo.module_content }</p></a>
+                <button class="add-btn" onclick="add_train(${vo.module_num})">담기</button></li>
             </c:forEach>
       	
         </ul>
 
-<hr>
+<br><br><br><hr><br>
 
     </div>
     <div>
@@ -62,6 +60,7 @@
         	</c:forEach>
         	<option value="0">나만의 운동 추가하기</option>
         </select>
+
         <form action="/trainning/add_mytrain_list" method="post" id="mytrainFrm">
         	<div>
         		<!-- 운동 담은 리스트 -->
@@ -75,9 +74,10 @@
 	        	</ul>
         	</div>
         </form>
-    </div>
+        
+<br><br><br><hr><br>
 
-<hr>
+    </div>
     <div>
         <h2>추천 운동</h2>
         <div>

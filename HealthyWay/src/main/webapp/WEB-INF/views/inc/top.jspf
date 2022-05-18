@@ -14,7 +14,7 @@
 <body>
 	<nav class="top">
 		<ul class="logo-container">
-			<li>logo</li>
+			<li><img src="../../../img/HealthyWayLogo"></li>
 		</ul>
 		<ul class="menu-container">
 			<li><a href="/">Home</a></li>
@@ -41,4 +41,3 @@
 	 	<li class="submenu1"><span>mypage4</span></li>
 	 </ul>
 </nav>
-	
