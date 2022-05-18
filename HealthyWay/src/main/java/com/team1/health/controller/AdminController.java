@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team1.health.service.AdminService;
-import com.team1.health.service.BoardService;
-import com.team1.health.service.MemberService;
-import com.team1.health.service.PtService;
-import com.team1.health.service.TrainService;
 import com.team1.health.vo.IngredientVO;
 import com.team1.health.vo.PagingVO;
 

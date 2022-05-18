@@ -13,7 +13,7 @@
 			or user_name like '%${searchWord}%' or user_nickname like '%${searchWord}%' or tel like '%${searchWord}%'
 			or gender like '%${searchWord}%' or age like '%${searchWord}%'
 		</if>
-		order by join_date desc
+		order by join_date desc limit ${onePageRecord} offset ${offsetIndex}
 	</select>
 	
 	<select id="totalRecord" resultType="int">
