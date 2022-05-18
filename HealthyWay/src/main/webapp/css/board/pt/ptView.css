@@ -13,7 +13,7 @@ body, ul, li{
 }
 
 .wrap{
-	width: 1200px;
+	width: 75%;
 	margin: 0 auto;
 }
 
@@ -186,16 +186,22 @@ body, ul, li{
 	margin: 30px 20px;
 }
 
-#comment{
-    width: 80%;
-    height: 50px;
+#replyFrm{
+    width: 100%;
+    display: flex;
+    margin-bottom: 30px;
+}
+
+#content{
+    width: 90%;
+    height: 70px;
     border: 1px solid #bdbdbd;
     border-radius: 5px;
     padding: 0px 10px;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
-#comment:focus{
+#content:focus{
 	outline: none;
 }
 
@@ -206,7 +212,80 @@ body, ul, li{
     padding: 8px 23px;
     border-radius: 5px;
     vertical-align: bottom;
+    width: 10%;
+    cursor: pointer;
 }
+
+.reply_wrap{
+	border-top: 1px solid #bdbdbd;
+	overflow: auto;
+	padding: 20px 10px;
+}
+
+.reply_wrap div{
+	float: left;
+}
+
+.reply_wrap .id_date_wrap{
+	width: 100%;
+	display: flex;
+}
+
+.reply_id{
+	width: 50%;
+	font-weight: 600;
+}
+
+.reply_date{
+	width: 50%;
+	text-align: right;
+	color: gray;
+	font-size: 14px;
+}
+
+.reply_content,
+.reply_edit_input{
+	width: 100%;
+	padding: 10px 0px;
+	font-size: 15px;
+}
+
+.reply_btn_wrap{
+	width: 100%;
+	text-align: right;
+}
+
+.reply_btn_wrap button{
+	background-color: #fff;
+	border: none;
+	cursor: pointer;
+}
+
+.reply_btn_wrap button:hover{
+	text-decoration: underline;
+}
+
+.editFrm{
+	display: flex;
+}
+
+.editFrm input[type=text]{
+	width: 90%;
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
+    padding: 0px 10px;
+    margin-right: 5px;
+}
+
+.editFrm input[type=text]:focus{
+	outline: none;
+}
+
+.editFrm input[type=submit]{
+	background-color: #FF5454;
+	border: 1px solid #FF5454;
+}
+
 /****************************************************************/
 .manage_wrap{
 	margin: 0px 10px 0px 20px;
@@ -328,7 +407,7 @@ body, ul, li{
 .leader_profile_wrap button{
 	width: 100%;
     height: 35px;
-    background-color: #F05A5D;
+    background-color: #FF5454;
     color: #fff;
     font-size: 15px;
     border: none;
@@ -352,6 +431,6 @@ body, ul, li{
     border-radius: 5px;
     padding: 5px 10px;
     width: 49%;
-    background-color: #f05a5d;
-    border: 1px solid #f05a5d;
+    background-color: #FF5454;
+    border: 1px solid #FF5454;
 }
