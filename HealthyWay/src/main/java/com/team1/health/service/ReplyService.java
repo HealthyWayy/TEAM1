@@ -14,5 +14,6 @@ public interface ReplyService {
 	// 댓글삭제
 	public int replyDel(int reply_num, String user_id);
 
-
+	// 댓글 수정
+	public int replyEdit(ReplyVO vo);
 }

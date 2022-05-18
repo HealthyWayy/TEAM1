@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.team1.health.dao.ReplyDAO">
@@ -20,4 +18,9 @@
 		delete from reply
 		where reply_num=#{param1} and user_id=#{user_id}
 	</delete>
+
+  <update id="replyEdit">
+  	update replyboard set content=#{content} where reply_num=${reply_num} and user_id=#{user_id}
+  </update>
+  	
 </mapper>

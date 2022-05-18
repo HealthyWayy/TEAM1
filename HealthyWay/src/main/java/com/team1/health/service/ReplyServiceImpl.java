@@ -1,11 +1,8 @@
 package com.team1.health.service;
 
 import java.util.List;
-
 import javax.inject.Inject;
-
 import org.springframework.stereotype.Service;
-
 import com.team1.health.dao.ReplyDAO;
 import com.team1.health.vo.ReplyVO;
 
@@ -28,5 +25,11 @@ public class ReplyServiceImpl implements ReplyService{
 	public int replyDel(int reply_num, String user_id) {
 		return dao.replyDel(reply_num, user_id);
 	}
+
+	@Override
+	public int replyEdit(ReplyVO vo) {
+		return dao.replyEdit(vo);
+	}
+
 
 }

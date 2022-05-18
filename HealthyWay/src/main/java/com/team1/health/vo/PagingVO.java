@@ -2,14 +2,22 @@ package com.team1.health.vo;
 
 public class PagingVO {
 	
-	private int onePageRecord = 5; 
+	private int onePageRecord = 10; 
 	private int pageNum = 1; 
 	private int totalRecord; 
 	private int totalPage; 
 	private int offsetIndex = 0;
-	private int onePageCount = 5;
+	private int onePageCount = 10;
 	private int startPage = 1;
-
+	private int pageSize = 10;
+	
+	
+	public int getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
 	// ptList paging
 	private int onePageRecord_PT = 16;
 

@@ -4,7 +4,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import com.team1.health.service.ReplyService;
 import com.team1.health.vo.ReplyVO;
 
 @RestController
+
 @RequestMapping("/reply/*")
 public class ReplyController {
 	@Inject 
@@ -25,13 +27,13 @@ public class ReplyController {
 	}
 	
 	// 댓글등록
-	@RequestMapping(value="/reply/writeOk", method=RequestMethod.POST)
+
+	@RequestMapping(value="/writeOk", method=RequestMethod.POST)
 	public int writeOk(ReplyVO vo, HttpSession session) {
 		vo.setUser_id((String)session.getAttribute("logId"));
 		
 		return service.replyWrite(vo);
-	}
-	
+
 	// 댓글삭제
 	@RequestMapping("del")
 	public int delOk(int reply_num, HttpSession session) {
@@ -39,3 +41,12 @@ public class ReplyController {
 		return service.replyDel(reply_num, id);
 	}
 }
+
+	
+	@PostMapping("editOk")
+	public int editOk(ReplyVO vo, HttpSession session) {
+		vo.setUser_id((String)session.getAttribute("logId"));
+		return service.replyEdit(vo);
+	}
+	
+
