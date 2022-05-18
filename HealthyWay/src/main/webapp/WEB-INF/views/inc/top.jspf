@@ -18,23 +18,34 @@
 			<li class="logo"><a href="/"><img src="/img/logo/logo6.png"/></a></li>
 		</ul>
 		<ul class="menu-container">
-			<li><a href="/trainning/trainningHome">AI-Training</a></li>
-			<li><a href="/recipe/main">Recipe</a></li>
-			<li><a href="/board/ptList">PT group</a></li>
-			<li><a href="/boardList">Community</a></li>
+			<c:if test="${logId == 'admin'}">
+				<li><a href="/master/member">Member</a></li>
+				<li><a href="/master/trainning">Training</a></li>
+				<li><a href="/master/recipe">Recipe</a></li>
+				<li><a href="/master/ptGroup">PT-Group</a></li>
+				<li><a href="/master/community">Community</a></li>			
+			</c:if>	
+			<c:if test="${logId != 'admin'}">
+				<li><a href="/trainning/trainningHome">AI-Training</a></li>
+				<li><a href="/recipe/main">Recipe</a></li>
+				<li><a href="/board/ptList">PT group</a></li>
+				<li><a href="/boardList">Community</a></li>		
+			</c:if>		
 		</ul>
 		<ul class="login-container">
 			<c:if test="${logStatus == 'Y' }">
-				<li>
-					<div class="profile-container1 dropbtn1">
-						<c:if test="${profie_img != null }">
-							<img src="/img/${profie_img }" />
-						</c:if>
-						<c:if test="${profie_img == null }">
-							<i class="bi bi-person-fill"></i>
-						</c:if>
-					</div>
-				</li>
+				<c:if test="${logId != 'admin' }">
+					<li>
+						<div class="profile-container1 dropbtn1">
+							<c:if test="${profie_img != null }">
+								<img src="/img/${profie_img }" />
+							</c:if>
+							<c:if test="${profie_img == null }">
+								<i class="bi bi-person-fill"></i>
+							</c:if>
+						</div>
+					</li>
+				</c:if>
 				<li><a href="/member/logout">Logout</a></li>
 			</c:if>
 			<c:if test="${logStatus != 'Y' }">
