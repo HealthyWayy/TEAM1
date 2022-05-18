@@ -87,4 +87,22 @@
 	<delete id="suggestionDelete">
 		delete from board where board_num=#{param1} and user_id=#{param2}
 	</delete>
+	
+	<insert id="insertBoardReply">
+		insert into reply(user_id, board_num, content) values(#{user_id}, ${board_num}, #{content})
+	</insert>
+	
+	<delete id="deleteBoardReply">
+		delete from reply where reply_num=${param1}
+	</delete>
+	
+	<update id="updateBoardReply">
+		update reply set content=#{content} where reply_num=${reply_num} and board_num=${board_num}
+	</update>
+	
+	<select id="replyBoardList" resultType="com.team1.health.vo.ReplyVO">
+		select reply_num, user_id, board_num, content, date_format(reply_date, '%Y-%m-%d %H:%i') reply_date
+		from reply where board_num=${param1}
+	</select>
+	
 </mapper>

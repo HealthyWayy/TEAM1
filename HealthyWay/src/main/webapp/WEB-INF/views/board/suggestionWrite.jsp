@@ -52,10 +52,7 @@ $(function() {
                     <th>제목</th>
                     <td><input type="text" name="title" id="title" placeholder="제목을 작성해주세요"></td>
                 </tr>
-                <tr>
-                    <th>아이디</th>
-                    <td><input type="text" name="user_id" value="${logId}"></td>
-                </tr>
+                
                 <tr>
                     <th>내용</th>
                     <td><textarea cols="100" rows="30"  name="content" id="content" style="padding: 10px"></textarea></td>

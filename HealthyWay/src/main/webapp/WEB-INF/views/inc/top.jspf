@@ -15,7 +15,9 @@
 <body>
 	<nav class="top">
 		<ul class="logo-container">
+
 			<li class="logo"><a href="/"><img src="/img/logo/logo6.png"/></a></li>
+
 		</ul>
 		<ul class="menu-container">
 			<c:if test="${logId == 'admin'}">
@@ -61,4 +63,3 @@
 	 	<li class="submenu1"><span>내 글 관리</span></li>
 	 </ul>
 </nav>
-	

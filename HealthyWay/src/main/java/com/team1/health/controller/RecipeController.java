@@ -108,6 +108,8 @@ public class RecipeController {
 		return service.deleteAllIngred(board_num);
 	}
 	
+	//레시피 글 관련 컨트롤러 ----------------------------------------
+	
 	//레시피 등록(DB)
 	@PostMapping("/recipe/addRecipe")
 	@ResponseBody
@@ -116,7 +118,6 @@ public class RecipeController {
 		// 파일 업로드
 		mr = (MultipartHttpServletRequest) request;
 		MultipartFile file = mr.getFile("file");
-		System.out.println(file);
 
 		String path = request.getSession().getServletContext().getRealPath("/recipeImg/upload");
 
@@ -174,14 +175,12 @@ public class RecipeController {
 	@ResponseBody
 	public int recipeUpdate(BoardVO vo, HttpSession session, HttpServletRequest request, MultipartHttpServletRequest mr) {
 
-		String newImg = vo.getRecipe_img_file();
-		String originImg = vo.getOriginRecipeImg();
-		System.out.println(newImg);
-		System.out.println(originImg);
+		String newImg = vo.getRecipe_img_file();	//새로 바뀐 이미지
+		String originImg = vo.getOriginRecipeImg();	//이전 이미지 
 		
 		mr = (MultipartHttpServletRequest) request;
 		MultipartFile file = mr.getFile("file");
-		System.out.println(!newImg.equals(originImg));
+
 		
 		//이미지 수정된 경우
 		if(!newImg.equals(originImg)){
@@ -230,6 +229,8 @@ public class RecipeController {
 		return service.recipeDelete(board_num);
 	}
 	
+	
+	//찜하기 관련 컨트롤러-----------------------------------------
 	//찜 목록
 	@PostMapping("/recipe/selectHeart")
 	@ResponseBody
@@ -251,6 +252,8 @@ public class RecipeController {
 		return service.deleteHeart(board_num);
 	}
 	
+	
+	//댓글 관련 컨트롤러-----------------------------------------
 	//댓글 등록
 	@PostMapping("/reply/insertReply")
 	@ResponseBody
@@ -279,28 +282,5 @@ public class RecipeController {
 		return service.replyList(board_num);
 	}
 	
-	//레시피 관리자 페이지
-	@GetMapping("/master/recipe")
-	public String masterRecipe() {
-		return "/recipe/recipe_master";
-	}
 	
-	//재료 추가
-	@PostMapping("/master/ingredInsert")
-	public String ingredInsert(IngredientVO vo) {
-		
-		//마지막 gred_num id값
-		String id = service.lastIngred();
-		
-		//id값에서 숫자만 뽑아온 후 1증가(새로 추가될 아이디 값)
-		int num = Integer.parseInt(id.substring(1))+1;
-		
-		//R로 시작하고 6자리 공백은 0으로 채우는 자릿수 세팅
-		String gred_num = String.format("R%06d", num);
-		vo.setGred_num(gred_num);
-		
-		int i = service.ingredInsert(vo);
-		System.out.println(i);
-		return "/recipe/recipe_master";
-	}
 }

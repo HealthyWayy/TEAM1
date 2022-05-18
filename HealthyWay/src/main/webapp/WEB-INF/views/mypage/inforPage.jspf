@@ -23,9 +23,7 @@ $(()=>{
 	//수정폼 서브밋 이벤트
 	$("#inforFrm").submit(function(){
 		event.preventDefault();
-		console.log("아무거나")
 		if(confirm("입력한 값으로 데이트를 수정 하시겠습니까?")){
-			console.log('실행')
 			$.ajax({
 				url:"/mypage/userUpdate",
 				processData : false,
@@ -47,7 +45,6 @@ $(()=>{
 	//데이터 세션 값으로 변경해야함!
 	$("#deleteBtn").click(function(){
 		if(confirm("정말 탈퇴 하시겠습니까?")){
-			console.log('실행')
 			$.ajax({
 				url:"/mypage/user",
 				data:{

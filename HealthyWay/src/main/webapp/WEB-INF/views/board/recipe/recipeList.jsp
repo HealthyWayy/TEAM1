@@ -49,7 +49,7 @@ ul,li{
 	top:50%;
 	width:100%;
 	text-align: center;
-	font-size:12pt;
+	font-size:1.2em;
 }
 /*검색, 글쓰기 div*/
 #top{
@@ -129,10 +129,10 @@ ul,li{
 .title{
 	position:absolute;
 	width:100%;
-	height:40px;
-	line-height:45px;
 	top:35%;
-	font-size:20px;
+	padding-top:2%;
+	padding-bottom:2%;
+	font-size:1.2em;
 	text-align:center;
 	background-color: white;
 	opacity: 0;
@@ -141,6 +141,9 @@ ul,li{
 	white-space:nowrap;
 	text-overflow: ellipsis;
 	cursor: pointer;
+}
+.title>span{
+	font-size:1em;
 }
 .recipe_div:hover .title{
 	opacity:0.8;
@@ -197,30 +200,30 @@ ul,li{
 	#topImg>h1{
 		top: 30%;
 		width:100%;
-		font-size:2.5em;
+		font-size:2em;
 	}
 	#topImg>p{
 		top: 50%;
 		width:100%;
-		font-size:1.8em;
+		font-size:1.6em;
 	}
 	#top>ul>li{
 		height: 45px;
 		line-height: 45px;
-		font-size:1.6em;
+		font-size:1.2em;
 	}
 	.recipe_div{
 		height:550px;
 	}
 	#searchFrm>input[type=text], #searchFrm>input[type=submit]{
 		height:45px;
-		font-size:1.5em;
+		font-size:1.2em;
 	}
 	/*글쓰기 버튼*/
 	#writeBtn{
 		width:6%;
 		height:45px;
-		font-size:1.5em;
+		font-size:1.2em;
 	}
 	.title{
 		height:55px;
@@ -229,7 +232,7 @@ ul,li{
 		font-size:22pt;
 	}
 	.paging>a>li{
-		font-size:1.5em;
+		font-size:1.2em;
 	}
 }
 </style>
@@ -359,7 +362,7 @@ function deleteHeart(boardNum){
 						<img src="/recipeImg/heart1.png" class="heart1" id="e_${vo.board_num}"/>
 						<img src="/recipeImg/heart2.png" class="heart2" id="f_${vo.board_num}"/>
 					</c:if>
-					<p class="title"><a href="/recipe/view?board_num=${vo.board_num}">${vo.title}<br/>${vo.total_kcal}kcal</a></p>
+					<p class="title"><a href="/recipe/view?board_num=${vo.board_num}">${vo.title}<br/><span>${vo.total_kcal}kcal</span></a></p>
 				</div>
 			</c:forEach>
 		<c:if test="${empty vo}">
