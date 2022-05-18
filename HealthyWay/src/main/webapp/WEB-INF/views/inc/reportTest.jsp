@@ -86,12 +86,13 @@ $(()=>{
 					reportCount++;
 					if(response>0){
 						alert('신고함');						
+					}else{
+						alert('response가 0이네유');
 					}
 				},error:function(error){
 					console.log(error.responseText)
 				}
 			})
-			return;
 		}else{
 			alert('신고 안함');
 			return;
@@ -113,8 +114,8 @@ function modalOut(){
 		<div>신고하기</div>
 		<form method='post' id='reportFrm'>
 			
-			<input type='hidden' name='board_num' value='99'/>
-			<input type='hidden' name='report_type' value='88'/>
+			<input type='hidden' name='board_num' value='258'/>
+			<input type='hidden' name='report_type' value='1'/>
 			
 			<input type="radio" name="report_title" value="게시판 이탈" id='reportRadio1' checked>
 			<label for="reportRadio1">게시판 이탈</label>
