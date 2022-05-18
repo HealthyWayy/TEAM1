@@ -37,7 +37,7 @@ body,ul,li{
 	/*탑 오른쪽 아래 왼쪽*/
 	padding:0px 0px 20px 0px;
 	box-sizing:border-box;
-	box-shadow:0px 0px 20px 0px rgb(196,196,196);
+	box-shadow:0px 0px 5px 0px rgb(196,196,196);
 }
 #sidePage>div:nth-of-type(2){
 	margin-top:20px;
@@ -57,26 +57,49 @@ body,ul,li{
 	border-radius:10px;
 	width:200px;
 	background-color:#ddd;
-	height:250px;
+	height:150px;
 	margin:0 auto;
 	margin-top:20px;
-	padding:10px;
 	box-sizing:border-box;
+	overflow:hidden;
+	position:relative;
 }
 .groupPage:hover{
 	box-shadow:1px 1px 10px 1px black;
 }
 .groupPage>div:nth-of-type(1){
-	margin:0 auto;
-	width:170px;
-	height:100px;
+	width:100%;
+	height:100%;
 	overflow:hidden;
-	background-color:green;
-	text-align:center;
-	border-radius:10px;
+	position:relative;
+	text-align:left;
 }
 .groupPage>div>img{
+	position:relative;
 	width:100%;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+}
+.groupPage>div:nth-of-type(2){
+	background-color:white;
+	position:absolute;
+	top:0px;
+	width:100%;
+	height:100%;
+	z-index:1;
+	text-align:center;
+	opacity:0;
+	transition-duration:0.5s;
+	line-height:130px;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	padding:10px;
+	box-sizing:border-box;
+}
+.groupPage>div:nth-of-type(2):hover{
+	opacity:0.7;
 }
 #imgDiv{
 	width:100%;
@@ -151,20 +174,23 @@ body,ul,li{
 	padding:0px 30px 40px 0px;
 	box-sizing:border-box;
 }
-.foodBtn+.writeBtn{
-	border-right:2px solid #ddd;
+.clickUpClass+.pageBtn{
+	border-left:none;
 }
 .pageBtn{
+	cursor:pointer;
 	padding:0px;
-	background-color:rgb(240,240,240);
-	height:40px;
+	background-color:#FCFCFC;
+	height: 50px;
 	position:absolute;
 	border:none;
-	border-bottom:none;
-	top:-40px;
+	top:-50px;
 	width:250px;
-	border:2px solid #ddd;
+	border:1px solid #ddd;
 	border-right:none;
+	border-bottom:1px solid black;
+	color: gray;
+	font-size:17px;
 }
 .inforBtn{
 	left:0px;
@@ -185,7 +211,9 @@ body,ul,li{
 .clickUpClass{
 	background-color:white;
 	z-index:5;
+	border:1px solid black;
 	border-bottom:none;
+	color: #000;
 }
 .pageUpClass{
 	display:block !important;
@@ -233,9 +261,8 @@ body,ul,li{
 $(()=> {
 	let groupShow=false;
 	$("#groupShow").click(function(){
-		console.log("실행");
-		if(groupShow==false){
-			$("#groupPageDiv").css("height","270px");
+		if(groupShow==false && "${PTboardData}".length!=2){
+			$("#groupPageDiv").css("height","170px");
 			groupShow=true;
 		}else{
 			$("#groupPageDiv").css("height","0px");
@@ -249,10 +276,10 @@ $(()=> {
 		$(event.target).removeClass('btnClassHover')
 	})
 	//페이지 네이션 처리 이벤트
-	var indexPrev = 1;
+	var indexPrev = ${indexPrev};
+	heightSize(indexPrev)
 	$('.pageBtn').eq(indexPrev).addClass('clickUpClass');
 	$('.pageView').eq(indexPrev).addClass('clickUpClass pageUpClass');
-	$('#myPageContainer').css('height','760px');
 	//console.log($('.pageView').eq(0).html())
 	//console.log($('.pageView').eq(1).html())
 	//console.log($('.pageView').eq(2).html())
@@ -265,21 +292,21 @@ $(()=> {
 			$('.pageView').eq(indexPrev).removeClass('clickUpClass pageUpClass');
 			indexPrev = index;
 		}
-		if(indexPrev==0){
-			$('#myPageContainer').css('height','760px');
-			console.log(indexPrev)
-		}else if(indexPrev==1){
-			$('#myPageContainer').css('height','1300px');
-			console.log(indexPrev)
-		}else if(indexPrev==2){
-			$('#myPageContainer').css('height','750px');
-			console.log(indexPrev)
-		}else{
-			$('#myPageContainer').css('height','760px');
-			console.log(indexPrev)
-		}
+		heightSize(index);
 	});
 });
+function heightSize(indexPrev){
+	if(indexPrev==0){
+		$('#myPageContainer').css('height','760px');
+	}else if(indexPrev==1){
+		$('#myPageContainer').css('height','1500px');
+	}else if(indexPrev==2){
+		$('#myPageContainer').css('height','750px');
+	}else{
+		$('#myPageContainer').css('height','760px');
+	}
+}
+
 function logOut(){
 	location.href='/member/logout';
 }
@@ -306,13 +333,16 @@ function logOut(){
 			<br/>
 			<div id="groupPageDiv">
 				<c:forEach items="${PTboardData}" var="item">
-					<div class="groupPage">
-						<div>
-							<img src='/img/${item.pt_img_file }'/>
+					<a href='/board/ptView?board_num=${item.board_num }'>
+						<div class="groupPage">
+							<div>
+								<img src='/ptImg/${item.pt_img_file }'/>
+							</div>
+							<div>
+								<span>${item.title }</span>
+							</div>
 						</div>
-						<span>${item.title }</span>
-						<span>${item.content }</span>
-					</div>
+					</a>
 				</c:forEach>
 			</div>
 		</div>

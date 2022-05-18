@@ -35,7 +35,7 @@ public class MyPageController {
 	@Inject
 	MyPageService service;
 	@GetMapping("/mypage")
-	public ModelAndView myPage(HttpSession session) {
+	public ModelAndView myPage(HttpSession session, int indexPrev) {
 		ModelAndView mav = new ModelAndView ();
 		//임시 데이터 입력
 		String user = (String)session.getAttribute("logId");
@@ -45,6 +45,7 @@ public class MyPageController {
 		mav.addObject("PTboardData",PTboardData);
 		//유저 데이터
 		mav.addObject("userData",userData);
+		mav.addObject("indexPrev",indexPrev);
 		mav.setViewName("/mypage/myPage");
 		return mav;
 	}
@@ -111,6 +112,7 @@ public class MyPageController {
 	public MyPagePagingVO groupPageNagion(MyPagePagingVO vo, HttpSession session) {
 		String user = (String)session.getAttribute("logId");
 		vo.setTotalRecord(service.groupCount(user));
+		System.out.println(service.groupCount(user));
 		return vo;
 	}
 	@PostMapping("/mypage/routineListAll")
