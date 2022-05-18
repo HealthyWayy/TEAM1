@@ -17,6 +17,7 @@ li {
 img {
     width: 180px;
     height: 150px;
+    margin-top: 5px;
 }
 
 #menu {
@@ -34,17 +35,21 @@ img {
     height: 10px;
 }
 
-li a {
-  display: block;
-  color: #000;
-  padding: 8px 16px;
-  text-decoration: none;
-  width: 180px;
+.li-a {
+	display: block;
+	color: #000;
+	padding: 8px 16px;
+	text-decoration: none;
+	width: 180px;
 }
 
-.active {
-  background-color: rgba(255, 75, 85);
-  color: white;
+.active  {
+	background-color: rgba(255, 75, 85);
+	color: white;
+	display: block;
+	padding: 8px 16px;
+	text-decoration: none;
+	width: 180px;
 }
 
 /* a:hover:not(.active) {
@@ -58,8 +63,9 @@ li a {
 }
 
 #train_yoso:hover{
-  background-color: #efe3fc;
-  color: white;
+	box-shadow: 0.5px 1px 0.5px 1px lightgray;
+	background-color: rgba(249, 247, 253);
+	border: 0.5px solid rgba(249, 247, 253);
 }
 
 select {
@@ -70,15 +76,28 @@ select {
 	text-align: center;
 	
 }
+.train-frm {
+	border: 0.5px solid lightgray;
+	border-radius: 4px;
+	max-height: 300px;
+}
+.train-subject {
+	font-size: 1em;
+	font-weight: bold;
+}
+.train-keyword {
+	font-size: 0.8em;
+}
+
 
 .add-btn {
 	height: 30px;
-	width: 30px;
+	width: 86%;
 	border-radius: 4px;
 	border: none;
 	background-color: rgba(255, 75, 85);
 	color: white;
-	margin: 0px 0px 0px 165px;
+	margin: 0px 0px 15px 15px;
 }
 
 .search-btn {
