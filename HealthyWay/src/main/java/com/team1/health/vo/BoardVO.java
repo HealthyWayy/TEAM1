@@ -30,7 +30,6 @@ public class BoardVO {
 	
 	// 좋아요 아이디
 	private String heartid;
-
 	
 	//recipe_board 좋아요 테이블
 	private String recipe_img_file;
