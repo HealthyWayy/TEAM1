@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet" type="text/css" href="/css/train.css">
 
-    
+ <section class="training-view">  
     <ul id="menu">
         <li><a id="list_menu" href="/">홈</a></li>
         <li><a class="active" href="/trainning/trainningHome">트레이닝 센터</a></li>
@@ -83,7 +83,7 @@
             </ul>
         </div>
     </div>
-    
+ </section>    
 <script>
 function add_train(module_num){
     $.ajax({

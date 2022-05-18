@@ -1,7 +1,31 @@
+@font-face {
+   font-family: 'NanumBarunGothic';
+   font-style: normal;
+   font-weight: 400;
+   src:
+      url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+   src:
+      url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix')
+      format('embedded-opentype'),
+      url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff')
+      format('woff'),
+      url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf')
+      format('truetype');
+}
+@media ( min-width: 1800px ) {
+	.top {
+   		font-family: "NanumBarunGothic";
+   		font-size:25px;
+	}
+			
+}
+
+
 a {
 	text-decoration: none;
 	color:rgb(50,50,50);
 }
+
 
 body {
 	margin: 0;
@@ -27,20 +51,23 @@ ul, li {
 	display: flex;
 	align-items: center;
 }
+.logo img {
+	width: 30vh;
+}
 .logo-container {
-	margin-left:1vw;
-	background: blue;
+	margin-left:2vw;
+	height: 100%;
 }
-.logo-container>li {
-	text-align: center;
-}
+
 /*===== menu-container=====*/
 .menu-container {
 	display: flex;
 	justify-content:space-around;
 	align-items: center;
-	width:65%;
+	width:53%;
 	height:100%;
+	padding-top:1vh;
+
 }
 .menu-container>li {
 	display:flex;
@@ -73,24 +100,38 @@ ul, li {
 /*====== login-container=======*/
 
 .login-container {
-	align-items:center;
-	margin-right:1vw;
+	height: 100%;
 }
+
+.login-container a:hover {
+	color:orange;
+}
+
 .login-container>li:last-of-type {
-	margin-left:0.5vw;
+	margin-right:2vw;
 }
-.profile-container {
-	border:2px solid rgb(5,5,5);
+
+
+.profile-container1 {
+	display:flex;
+	justify-content: center;
+	align-items: center;
 	margin-top:0.6vh;
 	width: 5vh;
 	height: 5vh;
 	border-radius: 50%;
 	overflow: hidden;
 	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	position: relative;	
 }
+.profile-container1 img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 100%;
+	transform: translate(-50%, -50%);
+}
+
 
 .bi-person-fill {
 	transform:scale(1.6);
@@ -98,12 +139,12 @@ ul, li {
 }
 
 .dropdown-content1 {
-	/*肄섑뀗痢� �젙�젹*/
+	/**/
 	display:flex;
 	justify-content:center;
 	align-items:center;
 	
-	/*諛뺤뒪 �꽕�젙*/
+	/**/
 	overflow: hidden;
 	box-sizing:border-box;
 	border-radius: 5%;
@@ -114,7 +155,7 @@ ul, li {
 	padding-top: 15px;
 	padding-bottom: 15px;
 	
-	/*�븷�땲硫붿씠�뀡 �슚怨쇱꽕�젙*/
+	/**/
 	opacity:0;
 	transform:scale(0);
 	transform-origin: 100% 0;
@@ -144,7 +185,7 @@ ul, li {
 	cursor:pointer;
 	color: rgb(10,10,10);
 	font-size:16px;	
-	/*�뀓�뒪�듃�뿉�꽌 諛묒쨪 媛꾧꺽 �쓣�슦湲�*/
+	/**/
 	padding-bottom: 6px;
 	margin-bottom: 4px;	
 }
@@ -155,7 +196,7 @@ ul, li {
 	cursor:pointer;
 	color: rgb(10,10,10);
 	font-size:16px;	
-	/*�뀓�뒪�듃�뿉�꽌 諛묒쨪 媛꾧꺽 �쓣�슦湲�*/
+	/**/
 	padding-bottom: 6px;
 	margin-bottom: 0;
 	
@@ -167,15 +208,15 @@ ul, li {
 	background-color: crimson;
 	height: 0.35vh; /*諛묒쨪 援닿린*/
 	
-	width: 0; /*珥덇린�뿉 蹂댁씠吏� �븡�룄濡�*/
-	bottom: 0; /*a�깭洹� �븘�옒�뿉 �쐞移� �떆�궎湲�*/
-	transition: 0.5s; /*�븷�땲硫붿씠�뀡 �룞�옉 �떎�뻾 �떆媛� �젙�쓽*/
-	/*媛��긽 �슂�냼瑜� 媛��슫�뜲濡� �씠�룞�떆�궎湲�*/
+	width: 0; /**/
+	bottom: 0; /**/
+	transition: 0.5s; /**/
+	/**/
 	left:50%;
 	transform:translateX(-50%);
 }
 
-/*�깭洹멸� �샇踰꾨쭅 �릺硫� 媛��긽 �슂�냼�쓽 �겕湲곕�� 100%濡� �궎�슦湲�*/
+/**/
 .gnb li:hover:before {
 	width:65%;
 }

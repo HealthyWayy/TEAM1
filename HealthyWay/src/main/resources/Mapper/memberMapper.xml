@@ -4,7 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "com.team1.health.dao.MemberDAO">
 	<select id="loginCheck" resultType="com.team1.health.vo.MemberVO">
-		select user_id, user_nickname from user
+		select user_id, user_nickname, profie_img from user
 		where user_id=#{user_id} and user_pw=#{user_pw}
 	</select>
 

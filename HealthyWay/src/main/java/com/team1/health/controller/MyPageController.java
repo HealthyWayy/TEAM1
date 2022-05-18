@@ -224,6 +224,7 @@ public class MyPageController {
 								fileDelete(path,vo.getProfie_img());
 							}
 							vo.setProfie_img(orgFileName);
+							request.getSession().setAttribute("profie_img", orgFileName);
 						}catch(Exception e) {
 							e.printStackTrace();
 						}

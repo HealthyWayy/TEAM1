@@ -1,25 +1,25 @@
-div {
+.training-view div {
     margin: 0px auto;
     padding-left: 50px;
     width: 1200px;
     height: 100%;
 }
 
-ul{
+.training-view ul{
     list-style: none;
     display: inline-block;
 }
 
-li {
+.training-view li {
     float: left;
     margin-left: 10px;
 }
-img {
+.training-view img {
     width: 180px;
     height: 150px;
 }
 
-#menu {
+.training-view #menu {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -30,11 +30,11 @@ img {
   overflow: auto;
 }
 
-#train_menu{
+.training-view #train_menu {
     height: 10px;
 }
 
-li a {
+.training-view li a {
   display: block;
   color: #000;
   padding: 8px 16px;
@@ -42,7 +42,7 @@ li a {
   width: 180px;
 }
 
-.active {
+.training-view .active {
   background-color: rgba(255, 75, 85);
   color: white;
 }
@@ -52,17 +52,17 @@ li a {
   color: white;
 } */
 
-#list_menu:hover{
+.training-view #list_menu:hover{
   background-color: rgba(255, 75, 85);
   color: white;
 }
 
-#train_yoso:hover{
+.training-view #train_yoso:hover{
   background-color: #efe3fc;
   color: white;
 }
 
-select {
+.training-view select {
 	height: 35px;
 	border-radius: 4px;
 	width: 150px;
@@ -71,7 +71,7 @@ select {
 	
 }
 
-.add-btn {
+.training-view .add-btn {
 	height: 30px;
 	width: 30px;
 	border-radius: 4px;
