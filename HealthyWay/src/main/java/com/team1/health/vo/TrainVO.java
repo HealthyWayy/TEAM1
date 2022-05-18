@@ -4,7 +4,6 @@ public class TrainVO {
 	//트레이닝 루틴
 	private int train_num;
 	private String train_title;
-	private String train_content;
 	private String train_write_date;
 	private String train_mod_date;
 	private String user_id;
@@ -18,7 +17,14 @@ public class TrainVO {
 	private String module_type;
 	private String module_part;
 	private String module_difficulty;
+	private int tnum;
 	
+	public int getTnum() {
+		return tnum;
+	}
+	public void setTnum(int tnum) {
+		this.tnum = tnum;
+	}
 	public int getTrain_num() {
 		return train_num;
 	}
@@ -30,12 +36,6 @@ public class TrainVO {
 	}
 	public void setTrain_title(String train_title) {
 		this.train_title = train_title;
-	}
-	public String getTrain_content() {
-		return train_content;
-	}
-	public void setTrain_content(String train_content) {
-		this.train_content = train_content;
 	}
 	public String getTrain_write_date() {
 		return train_write_date;

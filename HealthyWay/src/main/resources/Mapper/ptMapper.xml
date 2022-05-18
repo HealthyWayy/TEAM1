@@ -70,7 +70,7 @@
 	</insert>
 	
 	<select id="apply_list" resultType="Apply_userVO">
-		select a.user_id, board_num, user_state, user_name, gender, age, height, w.weight 
+		select a.user_id, board_num, user_state, user_name, gender, age, height, w.weight, user_nickname
 		from apply_user a 
 		left join user u on a.user_id=u.user_id
 		left join (

@@ -6,7 +6,6 @@
 
 /*=============== main =================*/
 $(document).ready(function() {
-	$('.top').hide();
 	/*$('.dropdown-content').hide();*/
 	/*============== top ============== */
 	/*$('.dropbtn').on('click',function(){
@@ -27,8 +26,8 @@ $(document).ready(function() {
 	for(var i=0; i<$('.box').length;i++) {
 		$('.quick>ul').append('<li></li>');
 	}
-	let $width = $(document).width()*0.549-$('.quick').width();
-	$('.quick').css('left', $width+"px");
+	/*let $width = $(document).width()*0.549-$('.quick').width();*/
+	/*$('.quick').css('left', $width+"px");*/
 	$('.quick li').eq(0).addClass('on');
 	
 	function quick_button(idx) {
@@ -48,24 +47,24 @@ $(document).ready(function() {
 	}
 	function ani_setTime(idx) {
 		if(idx==0) {
-				$('.copywrite-first>span').removeClass('fade-in-box');
+				$('.first .Title-line').removeClass('Title-effect');
 				setTimeout(function() {
-	  	 		$('.copywrite-first>span').addClass('fade-in-box');
+	  	 		$('.first .Title-line').addClass('Title-effect');
 				},1);
 			}else if(idx==1){
-				$('.copywrite-second>li').removeClass('slideUp');
+				$('.second .Title-line').removeClass('Title-effect');
 				setTimeout(function() {
-	  	 		$('.copywrite-second>li').addClass('slideUp');
+	  	 		$('.second .Title-line').addClass('Title-effect');
 				},1);
 			}else if(idx==2){
-				$('.copywrite-third>div>p').removeClass("slide-up");
+				$('.third .Title-line').removeClass('Title-effect');
 				setTimeout(function() {
-	  	 		$('.copywrite-third>div>p').addClass("slide-up");
+	  	 		$('.third .Title-line').addClass('Title-effect');
 				},1);
 			}else if(idx==3){
-				$('.copywrite-fourth>span').removeClass("blur-animation");
+				$('.fourth .Title-line').removeClass('Title-effect');
 				setTimeout(function() {
-	  	 		$('.copywrite-fourth>span').addClass("blur-animation");
+	  	 		$('.fourth .Title-line').addClass('Title-effect');
 				},1);
 			}else {
 				alert('해당 페이지 인덱스는 사용할 수 없습니다.');
@@ -86,16 +85,16 @@ $(document).ready(function() {
 	
 	$('.submenu2').on('click',function(){
 		if($('.submenu2').index(this)==0) {
-			location.href="/mypage";
+			location.href=" /mypage?indexPrev=0";
 		}
 		else if($('.submenu2').index(this)==1) {
-			location.href="#";
+			location.href="/mypage?indexPrev=1";
 		}
 		else if($('.submenu2').index(this)==2) {
-			location.href="#";
+			location.href="/mypage?indexPrev=2";
 		}
 		else if($('.submenu2').index(this)==3) {
-			location.href="#";
+			location.href="/mypage?indexPrev=3";
 		}
 		else {
 			alert('잘못 입력되었습니다.');
@@ -105,11 +104,11 @@ $(document).ready(function() {
 	/*=========== button ==============*/
 	$('.blob-btn').on('click', function(){
 		if($('.blob-btn').index(this)==0) {
-			location.href="/board/ptList";
+			location.href="/trainning/trainningHome";
 		}else if($('.blob-btn').index(this)==1) {
 			location.href="/recipe/main";
 		}else if($('.blob-btn').index(this)==2) {
-			location.href="/trainning/trainningHome";
+			location.href="/board/ptList";
 		}else if($('.blob-btn').index(this)==3) {
 			location.href="#";
 		}else {

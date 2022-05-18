@@ -10,7 +10,7 @@
 		from user where user_id=#{param1};
 	</select>
 	<select id='PTboard' resultType='BoardVO'>
-		select b.title,b.content,p.pt_img_file from board b 
+		select b.board_num, b.title,b.content,p.pt_img_file from board b 
 		join PT_group p on b.board_num=p.board_num 
 		join apply_user a on p.board_num=a.board_num 
 		where b.user_id=#{param1} and b.type_num=2;
@@ -34,14 +34,17 @@
 		delete from heart where board_num=${param1} and user_id=#{param2};
 	</delete>
 	<select id="groupListAll" resultType='BoardVO'>
-		select b.title,b.content,p.pt_img_file from board b 
+		select b.board_num,b.title,b.content,p.pt_img_file from board b 
 		join PT_group p on b.board_num=p.board_num 
 		join apply_user a on p.board_num=a.board_num 
-		where a.user_id=#{param1} and a.user_state='참여중' 
+		where (a.user_id=#{param1} and a.user_state='참여중') or (b.user_id=#{param1} and b.type_num='2')
 		limit ${param2.onePageRecord} offset ${param2.offsetIndex};
 	</select>
 	<select id='groupCount' resultType='int'>
-		select count(apply_user_num) from apply_user where user_id=#{param1} and user_state='참여중';
+		select count(b.board_num) from board b 
+		join PT_group p on b.board_num=p.board_num 
+		join apply_user a on p.board_num=a.board_num 
+		where (a.user_id=#{param1} and a.user_state='참여중') or (b.user_id=#{param1} and b.type_num='2');
 	</select>
 	<select id='achieveCount' resultType='int'>
 		select count(board_num) from board where user_id=#{param1} and type_num=3;
@@ -56,7 +59,7 @@
 		select r.recipe_img_file,b.board_num,b.title,b.content from board b join recipe_board r on b.board_num=r.board_num where b.user_id=#{param1} limit ${param2.onePageRecord} offset ${param2.offsetIndex};
 	</select>
 	<select id='userRoutineListAll' resultType='TrainVO'>
-		select ur.user_id,ur.train_num,tr.train_title,tr.train_content from user_routine ur join training_routine tr on tr.train_num=ur.train_num where ur.user_id=#{param1};
+		select ur.user_id,ur.train_num,tr.train_title from user_routine ur join training_routine tr on tr.train_num=ur.train_num where ur.user_id=#{param1};
 	</select>
 	<select id='trainModuleListAll' resultType='TrainVO'>
 		select m.module_img, tm.train_num,m.module_content,m.module_title from training_routine tr 
