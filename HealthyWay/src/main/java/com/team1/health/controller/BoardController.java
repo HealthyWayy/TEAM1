@@ -340,8 +340,6 @@ public class BoardController {
 		public ModelAndView suggestionWrite() {
 			ModelAndView mav = new ModelAndView();
 			
-			
-			
 			mav.setViewName("board/suggestionWrite");
 			return mav;
 		
@@ -354,7 +352,6 @@ public class BoardController {
 			System.out.println("자유글 게시");
 			 
 			vo.setUser_id((String)request.getSession().getAttribute("logId"));
-			vo.setType_num(5);
 			ResponseEntity<String> entity = null;
 			MultiValueMap<String, String> header = new HttpHeaders();
 			header.add("Content-Type", "text/html; charset=utf-8");

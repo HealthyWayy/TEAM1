@@ -9,7 +9,7 @@
   </ul>
   <ul>
   	<c:if test="${logStatus != 'Y' }">
-  		<li><a href="/member/loginForm">Login</a></li>		
+  		<li><a href="/member/loginForm">로그인</a></li>		
   	</c:if>
   	<c:if test="${logStatus == 'Y' }">  		
   		<li>
@@ -22,7 +22,6 @@
   			</c:if>
   			</div>
   		</li>
-	  	<li><a href="/member/logout">Logout</a></li>
   	</c:if>  
   </ul>
 </header>
@@ -33,9 +32,8 @@
 <nav class="dropdown-content2">
 	 <ul class="gnb">
 	 	<li class="submenu2"><span>마이페이지</span></li>
-	 	<li class="submenu2"><span>운동 기록</span></li>
-	 	<li class="submenu2"><span>내 식단 목록</span></li>
-	 	<li class="submenu2"><span>내 글 관리</span></li>
+	 	<li class="submenu2"><span>맞춤설정</span></li>
+	 	<li class="submenu2"><span>로그아웃</span></li>
 	 </ul>
 </nav>
 

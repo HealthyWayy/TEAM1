@@ -20,7 +20,8 @@
 	</delete>
 
   <update id="replyEdit">
-  	update replyboard set content=#{content} where reply_num=${reply_num} and user_id=#{user_id}
+  	update reply set content=#{content} 
+  	where reply_num=${reply_num} and user_id=#{user_id}
   </update>
   	
 </mapper>

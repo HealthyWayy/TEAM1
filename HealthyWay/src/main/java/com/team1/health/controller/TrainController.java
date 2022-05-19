@@ -55,20 +55,17 @@ public class TrainController {
 		mav.setViewName("/trainning/recommendTrainning");
 		return mav;
 	}	
-	//테스트중
-	@GetMapping("/trainning/testTrain")
-	public ModelAndView testTrain() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/trainning/testTrain");
-		return mav;
-	}
+	
 	
 	//나의 운동 리스트에 추가할 list
 	@PostMapping("/trainning/mytrain_list")
 	@ResponseBody
 	public List<TrainVO> mytrainList(TrainVO vo ,int module_num) {
 		vo.setTrain_num(0);
+		System.out.println(vo.getTrain_num());
+
 		service.mymodule_insert(vo);
+		System.out.println(vo.getModule_num());
 		return service.mytrain_list(module_num);
 	}
 	
@@ -82,6 +79,7 @@ public class TrainController {
 		System.out.println(vo.getTnum());
 		vo.setTrain_num(vo.getTnum());
 		service.update_train_num(vo);
+		service.user_routine_insert(vo);
 		
 		return "redirect:/trainning/trainningHome";
 	}
@@ -92,4 +90,37 @@ public class TrainController {
 	public List<TrainVO> get_train_list(TrainVO vo){
 		return service.get_train_list(vo);
 	}
+	
+	//나만의 운동 삭제
+	@GetMapping("/trainning/delete_mytrain")
+	public String delete_mytrain(TrainVO vo) {
+		service.delete_mytrain(vo);
+		return "redirect:/trainning/myTrainning";
+	}
+	
+	//나만의 운동 혹은 운동 시작
+	//테스트중
+		@GetMapping("/trainning/testTrain")
+		public ModelAndView testTrain(TrainVO vo) {
+			System.out.println("TEST TRAIN START!!!!!!!");
+//			String[] now_list = vo.getTrain_list();
+//			String module1 = service.module1_name(vo.getTrain_num());
+//			String module2 = service.module2_name(vo.getTrain_num());
+//			String module3 = service.module3_name(vo.getTrain_num());
+//			String module4 = service.module4_name(vo.getTrain_num());
+//			String module5 = service.module5_name(vo.getTrain_num());
+			
+//			now_list[0] = module1;
+//			now_list[1] = module2;
+//			now_list[2] = module3;
+//			now_list[3] = module4;
+//			now_list[4] = module5;
+			
+//			System.out.println(now_list[0] + now_list[1]);
+			
+			
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("/trainning/testTrain");
+			return mav;
+		}
 }

@@ -12,6 +12,7 @@ public class PtPagingVO {
 		
 	// 검색
 	private String searchWord;
+	private String state;
 	
 
 	public int getOnePageRecord() {
@@ -75,4 +76,11 @@ public class PtPagingVO {
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
 	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	
 }
