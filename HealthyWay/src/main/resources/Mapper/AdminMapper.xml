@@ -9,30 +9,27 @@
 		select user_id, user_pw, user_email, user_name, user_nickname, tel, gender, age
 		from user
 		<if test="searchWord != null">
-			where user_id like '%${searchWord}%' or user_pw like '%${searchWord}%' or user_emial like '%${searchWord}%'
-			or user_name like '%${searchWord}%' or user_nickname like '%${searchWord}%' or tel like '%${searchWord}%'
-			or gender like '%${searchWord}%' or age like '%${searchWord}%'
+			where user_id like '%${searchWord}%' || user_pw like '%${searchWord}%' || user_email like '%${searchWord}%'
+			|| user_name like '%${searchWord}%' || user_nickname like '%${searchWord}%' || tel like '%${searchWord}%'
+			|| gender like '%${searchWord}%' || age like '%${searchWord}%'
 		</if>
 		order by join_date desc limit ${onePageRecord} offset ${offsetIndex}
 	</select>
 	
-	<select id="totalRecord" resultType="int">
+	<select id="totalRecord1" resultType="int">
 		select count(user_id) from user
 		<if test='searchWord != null'>
-			where user_ id like '%${searchWord}%' or user_pw like '%${searchWord}%' or user_emial like '%${searchWord}%'
-			or user_name like '%${searchWord}%' or user_nickname like '%${searchWord}%' or tel like '%${searchWord}%'
-			or gender like '%${searchWord}%' or age like '%${searchWord}%'
+			where user_id like '%${searchWord}%' || user_pw like '%${searchWord}%' || user_email like '%${searchWord}%'
+			|| user_name like '%${searchWord}%' || user_nickname like '%${searchWord}%' || tel like '%${searchWord}%'
+			|| gender like '%${searchWord}%' || age like '%${searchWord}%'
 		</if>
 	</select>
 	
 	<delete id="memberDelete">
-	
+		delete from user where user_id=#{param1}
 	</delete>
 	
 
-	<!-- 운동 관리 -->
-	
-	
 	
 	<!-- 레시피 관리 -->
 	<select id="lastIngred" resultType="String">
@@ -48,11 +45,80 @@
 	</delete>
 	
 	
+	
+	
 	<!-- pt 그룹 관리 -->
+	<select id="ptList" resultType="com.team1.health.vo.BoardVO">
+		select b.board_num, user_id, title, date_format(write_date, '%Y-%m-%d') write_date, state, start_date, end_date, max_user, pNum
+		from board b inner join PT_group p on b.board_num=p.board_num
+		left join (select board_num, count(*) pNum from apply_user where user_state="참여중" group by board_num) n on b.board_num=n.board_num
+		where type_num=2
+		<if test="searchWord != null">
+			and ( b.board_num like '%${searchWord}%' || b.user_id like '%${searchWord}%' || b.title like '%${searchWord}%' || b.content like '%${searchWord}%'
+			|| p.state like '%${searchWord}%')
+		</if>
+		order by b.board_num desc limit ${onePageRecord} offset ${offsetIndex}
+	</select>
+	
+	<select id="totalRecord2" resultType="int">
+		select count(b.board_num) from board b inner join PT_group p on b.board_num=p.board_num
+		<if test='searchWord != null'>
+			and (board_num like '%${searchWord}%' || user_id like '%${searchWord}%' || titl like '%${searchWord}%'
+			|| content like '%${searchWord}%')
+		</if>
+	</select>
+	
+	
+	<!-- board관련 공통 코드 -->
+	<delete id="boardDelete">
+		delete from board where board_num=${param1}
+	</delete>
+	
 	
 	
 	
 	<!-- 커뮤니티 관리 -->
 	
+	
+	
+	
+	<!-- 신고 관리 -->
+	<select id="reportList" resultType="com.team1.health.vo.ReportVO">
+		select r.report_num, b.board_num, b.user_id as write_id, r.user_id, r.report_title, r.report_content, r.report_write_date, r.report_type
+		from board b inner join report r on b.board_num=r.board_num
+		<if test="searchKey=='레시피'">
+			where r.report_type = 1
+		</if>
+		<if test="searchKey=='PT그룹'">
+			where r.report_type = 2
+		</if>
+		<if test="searchKey=='성공스토리'">
+			where r.report_type = 3
+		</if>
+		<if test="searchKey=='자유게시판'">
+			where r.report_type = 5
+		</if>
+		order by r.report_write_date desc limit ${onePageRecord} offset ${offsetIndex}
+	</select>
+	
+	<select id="totalRecord4" resultType="int">
+		select count(report_num) from report
+		<if test="searchKey=='레시피'">
+			where report_type = 1
+		</if>
+		<if test="searchKey=='PT그룹'">
+			where report_type = 2
+		</if>
+		<if test="searchKey=='성공스토리'">
+			where report_type = 3
+		</if>
+		<if test="searchKey=='자유게시판'">
+			where report_type = 4
+		</if>
+	</select>
+	
+	<delete id="reportDelete">
+		delete from report where report_num=#{param1}
+	</delete>
 	
 </mapper>

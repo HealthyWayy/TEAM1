@@ -94,13 +94,28 @@ body {
 	background-color: #fff !important;
 	color: #000 !important;
 }
+#category_list{
+	text-align: right;
+}
+#category_list>li{
+	display:inline-block;
+	margin-left:0.6%;
+}
+#category_list>li:hover{
+	text-decoration: underline;
+}
 .table{
 	text-align: center;
 }
-.table>tbody>tr{
-	cursor: pointer;
+
+#reportBtn{
+	width:90%;
+	height:30px;
+	border-radius: 30px;
+	border: 1px solid rgb(200,191,231);
+	background-color:white;
 }
-#deletBtn{
+#deleteReport{
 	width:90%;
 	height:30px;
 	border-radius: 30px;
@@ -152,30 +167,57 @@ body {
 </style>
 
 <script>
-
-	//pt그룹 삭제
-	function deleteGroup(board_num){
-		event.stopPropagation();	//tr onclick 이벤트 막기
+	$(function(){
 		
-		if(!confirm("그룹을 삭제하시겠습니까?")){
+	});
+	
+	//신고처리
+	function reportProcess(board_num, write_id){
+		
+		if(!confirm("신고 처리를 진행하시겠습니까?")){
 			return false;
 		}
 		
 		$.ajax({
-			url: '/master/boardDelete',
-			data: 'board_num='+board_num,
+			url: '/master/reportProcess',
+			data: 'board_num='+board_num+'&write_id='+write_id,
 			type: 'post',
 			success: function(result){
 				if(result>0){
-					alert("그룹이 삭제되었습니다.");
+					alert("신고 처리가 완료되었습니다.");
 				}
 				location.reload();
 			},
 			error: function(e){
 				console.log(e.responseText);
-				alert("그룹 삭제 실패하였습니다.");
+				alert("신고 처리 실패하였습니다.");
 			}
 		});
+	}
+	
+	//신고글 삭제
+	function deleteReport(report_num){
+
+		if(!confirm("신고글을 삭제하시겠습니까?")){
+			return false;
+		}
+		
+		$.ajax({
+			url: '/master/reportDelete',
+			data: 'report_num='+report_num,
+			type: 'post',
+			success: function(result){
+				if(result>0){
+					alert("신고글 삭제되었습니다.");
+				}
+				location.reload();
+			},
+			error: function(e){
+				console.log(e.responseText);
+				alert("신고글 삭제 실패하였습니다.");
+			}
+		});
+		
 	}
 </script>
 
@@ -183,36 +225,39 @@ body {
 
 	<!-- 메뉴 -->
 	<ul class="menu_list">
-		<li id="menu_ptGroup" class="menu_active">PT 그룹관리</li>
+		<li class="menu_active">신고관리</li>
 	</ul>
-	<form method="get" action="/master/ptGroup" id="searchFrm">
-		<input type="text" name="searchWord"/>
-		<input type="submit" value="검색"/>
-	</form>
+	<ul id="category_list">
+		<li><a href="/master/report?" class="category">전체</a></li>
+		<li><a href="/master/report?searchKey=레시피" class="category">레시피</a></li>
+		<li><a href="/master/report?searchKey=PT그룹" class="category">PT그룹</a></li>
+		<li><a href="/master/report?searchKey=성공스토리" class="category">성공스토리</a></li>
+		<li><a href="/master/report?searchKey=자유게시판" class="category">자유게시판</a></li>
+	</ul>
 	<!-- 회원 관리 -->
 	<div id="manageDiv">
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>번호</th>
-					<th>그룹명</th>
-					<th>리더</th>
-					<th>참여인원</th>
-					<th>생성일</th>		
-					<th>모집현황</th>	
-					<th>삭제</th>
+					<th>신고번호</th>
+					<th>신고자</th>
+					<th>작성자</th>
+					<th>분류</th>
+					<th style="width:50%;">내용</th>	
+					<th>신고처리</th>
+					<th>삭제</th>	
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="vo" items="${vo}">
-					<tr onclick="location='/board/ptView?board_num=${vo.board_num}';">
+					<tr>
 						<td>${vo.board_num}</td>
-						<td>${vo.title}</td>
 						<td>${vo.user_id}</td>
-						<td>${vo.pNum}/${vo.max_user}</td>
-						<td>${vo.write_date}</td>
-						<td>${vo.state}</td>
-						<td><button id="deletBtn" onclick="deleteGroup('${vo.board_num}');">삭제</button></td>
+						<td>${vo.write_id}</td>
+						<td>${vo.report_title}</td>
+						<td style="width:50%;">${vo.report_content}</td>
+						<td><button id="reportBtn" onclick="reportProcess('${vo.board_num}','${vo.write_id}');">신고처리</button></td>
+						<td><button id="deleteReport" onclick="deleteReport('${vo.report_num}');">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -220,11 +265,11 @@ body {
 			 <!-- 페이징 -->
 	    <ul class="paging">
 	    	<!-- prev -->
-	    	<c:if test="${pVO.pageNum==1}">
+	    	<c:if test="${pVO.pageNum==1&&pVO.totalRecord>0}">
 	    		<li>◀</li>
 	    	</c:if>
 	    	<c:if test="${pVO.pageNum>1}">
-	    		<li><a href="/master/ptGroup?pageNum=${pVO.pageNum-1}
+	    		<li><a href="/master/report?pageNum=${pVO.pageNum-1}
 	    		<c:if test='${pVO.searchWord!=null}'>
 	    			&searchKey=${pVO.searchKey}&searchWord=${pVO.searchWord}
 	    		</c:if>">◀</a></li>
@@ -239,7 +284,7 @@ body {
 	    			<c:if test="${p!=pVO.pageNum}">
 	    				<li>
 	    			</c:if>
-	    			<a href="/master/ptGroup?pageNum=${p}
+	    			<a href="/master/report?pageNum=${p}
 		    			<c:if test='${pVO.searchWord!=null}'>
 		    				&searchKey=${pVO.searchKey}
 		    				&searchWord=${pVO.searchWord}
@@ -253,11 +298,12 @@ body {
 	    		<li>▶</li>
 	    	</c:if>
 	    	<c:if test="${pVO.pageNum<pVO.totalPage}">
-	    		<li><a href="/master/ptGroup?pageNum=${pVO.pageNum+1}
+	    		<li><a href="/master/report?pageNum=${pVO.pageNum+1}
 	    			<c:if test='${pVO.searchWord!=null}'>
 	    				&searchKey=${pVO.searchKey}&searchWord=${pVO.searchWord}
 	    			</c:if>">▶</a></li>
 	    	</c:if>
 	    </ul>
     </div>
+    
 </div>

@@ -36,9 +36,11 @@ a:hover {
 
 body {
 	font-family: "NanumBarunGothic";
+	/*
 	background-image:url('/recipeImg/recipe.jpg');
 	background-repeat : no-repeat;
     background-size : cover;
+	*/
 }
 
 ul, li {
@@ -46,13 +48,41 @@ ul, li {
 	padding: 0;
 	list-style: none;
 }
+#container{
+	margin:4%;
+	padding-top:1%;
+	padding-left:4%;
+	padding-right:4%;
+}
+.menu_list {
+	text-align: right;
+}
+.menu_list>li {
+    float: left;
+    width: 24.77%;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid #E4E5E5;
+    border-bottom: 1px solid gray;
+    border-left: none;
+    background-color: #FCFCFC;
+    cursor: pointer;
+    color: gray;
+}
 
-#mainDiv {
+.menu_active {
+	border: 1px solid gray !important;
+	border-bottom: none !important;
+	background-color: #fff !important;
+	color: #000 !important;
+}
+#ingredDiv {
 	width: 92%;
 	height: 500px;
-	padding: 4%;
-	margin-top: 3%;
+	padding:4%;
 	overflow:auto;
+	border:1px solid rgb(200,200,200);
 }
 
 input, select:focus {
@@ -66,7 +96,7 @@ input, select:focus {
 	height: 450px;
 	margin-right: 4%;
 	border-radius: 15px;
-	background-color: rgba(255,255,255,0.93);
+	background-color: rgba(230,230,230,0.5);
 }
 
 .head {
@@ -137,7 +167,7 @@ input, select:focus {
 	padding: 2%;
 	height: 450px;
 	border-radius: 15px;
-	background-color: rgba(255,255,255,0.93);
+	background-color: rgba(230,230,230,0.5);
 	float: left;
 }
 #ingredView p{
@@ -192,7 +222,7 @@ input, select:focus {
 	color:#FF5454;
 }
 .list-group>li:hover{
-	background-color: rgba(220,220,220,0.5);
+	background-color: rgba(230,230,230,0.5);
 }
 /*페이징*/
 .paging{
@@ -216,10 +246,19 @@ input, select:focus {
 	background-color:#FF5454 !important;
 }
 
+/*신고 div*/
+#reportDiv{
+	width:100%;
+	height:100%;
+	overflow:auto;
+	background-color: pink;
+	display: none;
+}
+
 @media ( min-width: 1800px ) {
-	#mainDiv{
+	#ingredDiv{
 		height: 700px;
-		margin-top:4%;
+		margin-top:2%;
 	}
 	.head{
 		font-size:1.6em;
@@ -260,7 +299,7 @@ input, select:focus {
 
 <script>
 	$(function(){
-		
+
 		//재료 등록
 		$("#addIngred").submit(function(){
 			event.preventDefault();
@@ -419,8 +458,12 @@ input, select:focus {
 	}
 </script>
 
-<div>
-	<div id="mainDiv">
+<div id="container">
+	<!-- 메뉴 -->
+	<ul class="menu_list">
+		<li id="menu_addIngred" class="menu_active">재료관리</li>
+	</ul>
+	<div id="ingredDiv">
 		<form method="post" id="addIngred" action="/master/ingredInsert">
 			<h1 class="head">재료 추가</h1>
 			<p>
