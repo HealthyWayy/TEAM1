@@ -12,6 +12,7 @@ import com.team1.health.dao.BoardDAO;
 import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.PagingVO;
 import com.team1.health.vo.ReplyVO;
+import com.team1.health.vo.SuccessPagingVO;
 import com.team1.health.vo.SuggestionPagingVO;
 
 
@@ -44,8 +45,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	//7
 	@Override
-	public void hitCount(int board_num) {
-		dao.hitCount(board_num);
+	public int hitCount(int no) {		
+		return dao.hitCount(no);
 	}
 	//8
 	@Override
@@ -134,6 +135,51 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
+	
+	
+	//성공스토리
+	@Override
+	public int successInsert(BoardVO vo) {
+		return dao.successInsert(vo);
+	}
+	
+	@Override
+	public List<BoardVO> successList(SuccessPagingVO ssVO) {
+		return dao.successList(ssVO);
+	}
+	//5
+	@Override
+	public int successtotalRecord(SuccessPagingVO ssVO) {
+		return dao.successtotalRecord(ssVO);
+	}
+	//6
+	@Override
+	public BoardVO successSelect(int board_num) {
+		return dao.successSelect(board_num);
+	}
+	
+	
+	//7
+	@Override
+	public int successUpdate(BoardVO vo) {
+		return dao.successUpdate(vo);
+	}
+	//8
+	@Override
+	public int successDelete(int board_num, String user_id) {
+		return dao.successDelete(board_num, user_id);
+	}
+	
+	@Override
+	public BoardVO successView(int board_num) {
+		return dao.successView(board_num);
+	}
+	
+	@Override
+	public BoardVO successSelectByNo(int board_num) {
+		return dao.successSelectByNo(board_num);
+		
+	}
 	
 }
 

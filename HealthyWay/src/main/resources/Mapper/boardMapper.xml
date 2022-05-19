@@ -36,6 +36,9 @@
 		from board where board_num=${param1}
 		
 	</select>
+	<update id="hitCount">
+		update board set hit = hit+1 where board_num=${param1}
+	</update>
 	<update id="boardUpdate">
 		update board set title=#{title}, content=#{content} where board_num=${board_num} and user_id=#{user_id}
 	</update>
@@ -48,7 +51,7 @@
 	
 	<insert id="suggestionInsert">
 		insert into board(user_id, title, content, type_num)
-		values(#{user_id}, #{title}, #{content}, 5);
+		values(#{user_id}, #{title}, #{content}, #{type_num);
 
 		 
 	</insert>
@@ -81,6 +84,9 @@
 		from board where board_num=${param1}
 		
 	</select>
+	
+	
+	
 	<update id="suggestionUpdate">
 		update board set title=#{title}, content=#{content} where board_num=${board_num} and user_id=#{user_id}
 	</update>
@@ -105,4 +111,52 @@
 		from reply where board_num=${param1}
 	</select>
 	
+
+
+<insert id="successInsert">
+		insert into board(user_id, title, content, type_num)
+		values(#{user_id}, #{title}, #{content}, #{type_num})
+
+		 
+	</insert>
+	<select id="successList" resultType="com.team1.health.vo.BoardVO">
+		select board_num, user_id, title, hit, date_format(write_date,'%m-%d %H:%i') write_date
+		from board where type_num=6
+		
+		<if test="searchWord != null">
+		where title like '%${searchWord}%'
+		</if>
+		order by board_num desc limit ${onePageRecord} offset ${offsetIndex}
+	</select>
+
+	<select id="successtotalRecord" resultType="int">
+
+		select count(board_num) cnt from board where type_num=6
+		<if test="searchWord != null">
+			where title like '%${searchWord}%'
+		</if>
+	</select>
+	<select id="successSelectByNo" resultType="com.team1.health.vo.BoardVO">
+  		select board_num, user_id, title, content, date_format(write_date,'%y-%m-%d %H:%i') write_date
+  		from board where board_num=${board_num}
+  	</select>
+	<select id="successSelect" resultType="com.team1.health.vo.BoardVO">
+		select board_num, user_id, title, content, hit, write_date
+		from board where board_num=${param1}
+		
+	</select>
+	
+	<update id="successUpdate">
+		update board set title=#{title}, content=#{content} where board_num=${board_num} and user_id=#{user_id}
+	</update>
+	<delete id="successDelete">
+		delete from board where board_num=#{param1} and user_id=#{param2}
+	</delete>
+
+
+
+
+
+
+
 </mapper>
