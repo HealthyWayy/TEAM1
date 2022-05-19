@@ -64,7 +64,7 @@ ul, li {
 	display: flex;
 	justify-content:space-around;
 	align-items: center;
-	width:53%;
+	width:50%;
 	height:100%;
 	padding-top:1vh;
 
@@ -110,6 +110,7 @@ ul, li {
 
 .login-container>li:last-of-type {
 	margin-right:2vw;
+	margin-left:1vw;
 }
 
 
@@ -141,23 +142,20 @@ ul, li {
 }
 
 .dropdown-content1 {
-	/**/
+	/*콘텐츠 정렬*/
 	display:flex;
 	justify-content:center;
 	align-items:center;
 	
-	/**/
+	/*박스 설정*/
 	overflow: hidden;
 	box-sizing:border-box;
 	border-radius: 5%;
 	border: 1px solid rgba(5,5,5, 0.2);
-	box-shadow: 0px 0px 5px 0px rgba(5, 5, 5, 0.1);
+	box-shadow: 0px 0px 10px 0px rgba(5, 5, 5, 0.3);
 	background-color: white;
-	width: 7.5vw;
-	padding-top: 15px;
-	padding-bottom: 15px;
 	
-	/**/
+	/*애니메이션 효과설정*/
 	opacity:0;
 	transform:scale(0);
 	transform-origin: 100% 0;
@@ -172,53 +170,48 @@ ul, li {
 	opacity:1;
 	transform:scale(1);	
 }
-.logStatus {
-	display:none;
-}
 .gnb {
 	width:100%;
 	text-align: center;
-	margin-top:1vh;
-	margin-bottom:1vh;
+	display:flex;
+	flex-direction:column;
+	justify-content: space-around;
+	margin:15px;
+	margin-top:20px;
+	margin-bottom:20px;
 }
-.gnb li {
+.gnb li {	
+	width:100%;	
+	margin-bottom: 13px;	
+}
+.gnb span {
 	position: relative;
-	width:100%;
 	cursor:pointer;
 	color: rgb(10,10,10);
-	font-size:16px;	
-	/**/
+	font-size:16px;
+	/*텍스트에서 밑줄 간격 띄우기*/
 	padding-bottom: 6px;
-	margin-bottom: 4px;	
-}
-
+} 
 .gnb li:last-of-type {
-	position: relative;
-	width:100%;
-	cursor:pointer;
-	color: rgb(10,10,10);
-	font-size:16px;	
-	/**/
-	padding-bottom: 6px;
-	margin-bottom: 0;
+	margin-bottom:0px;
 	
 }
 
-.gnb li:before {
+.gnb span:before {
 	content:"";
-	position: absolute; /*遺�紐� �슂�냼�뿉�뒗 position: relative瑜� 二쇱뼱�빞 �븳�떎.*/
+	position: absolute; /*부모 요소에는 position: relative를 주어야 한다.*/
 	background-color: crimson;
-	height: 0.35vh; /*諛묒쨪 援닿린*/
+	height: 0.35vh; /*밑줄 굴기*/
 	
-	width: 0; /**/
-	bottom: 0; /**/
-	transition: 0.5s; /**/
-	/**/
+	width: 0; /*초기에 보이지 않도록*/
+	bottom: 0; /*a태그 아래에 위치 시키기*/
+	transition: 0.5s; /*애니메이션 동작 실행 시간 정의*/
+	/*가상 요소를 가운데로 이동시키기*/
 	left:50%;
 	transform:translateX(-50%);
 }
 
-/**/
-.gnb li:hover:before {
-	width:65%;
+/*태그가 호버링 되면 가상 요소의 크기를 100%로 키우기*/
+.gnb span:hover:before {
+	width:100%;
 }
