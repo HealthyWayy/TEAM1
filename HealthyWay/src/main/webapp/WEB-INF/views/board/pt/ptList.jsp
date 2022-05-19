@@ -10,6 +10,24 @@
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <script src="${url}/js/board/pt/ptList.js"></script>
 <script>
+	$(function() {
+		$(document).ready(function() {
+			setHeart();
+		});
+
+		$(".line_heart").click(function() {
+			var num = $(this).attr("id").substring(2);
+			insertHeart(num);
+			return false;
+		});
+
+		$(".fill_heart").click(function() {
+			var num = $(this).attr("id").substring(2);
+			deleteHeart(num);
+			return false;
+		});
+	});
+
 	function btn_notlogin() {
 		alert("로그인 후 이용해 주세요.");
 		location.href = "/member/loginForm";
@@ -61,25 +79,6 @@
 		});
 
 	}
-
-	$(function() {
-		$(document).ready(function() {
-			setHeart();
-			$(".모집완료").css("display", "none");
-		});
-
-		$(".line_heart").click(function() {
-			var num = $(this).attr("id").substring(2);
-			insertHeart(num);
-			return false;
-		});
-
-		$(".fill_heart").click(function() {
-			var num = $(this).attr("id").substring(2);
-			deleteHeart(num);
-			return false;
-		});
-	});
 </script>
 <div class="head_img">
 	<%-- <img src="${url}/img/ptList_top.png"> --%>
@@ -114,8 +113,14 @@
 		<!-- <h2 class="post_head">모집중인 PT그룹</h2> -->
 		<div class="pt_top_btn_wrap">
 			<div class="top_left_wrap">
-				<button id="recu_btn">모집중</button>
-				<button id="completed_btn">모집완료</button>
+				<form method="get" action="${url}/board/ptList" id="recuFrm">
+					<input type="hidden" name="state" value="모집중">
+					<button id="recu_btn">모집중</button>
+				</form>
+				<form method="get" action="${url}/board/ptList" id="compleFrm">
+					<input type="hidden" name="state" value="모집완료">
+					<button id="completed_btn">모집완료</button>
+				</form>
 			</div>
 			<div class="top_right_wrap">
 				<!-- 검색 -->
@@ -139,22 +144,15 @@
 
 		<div class="pt_list_wrap">
 			<c:forEach var="vo" items="${ptList}">
-				<ul class="pt_post_wrap ${vo.state}">
+				<ul class="pt_post_wrap">
 					<li class="main_img_wrap"
 						onclick="location.href='${url}/board/ptView?board_num=${vo.board_num}'"><img
 						src="/ptImg/${vo.pt_img_file}"></li>
-					<li
-						onclick="location.href='${url}/board/ptView?board_num=${vo.board_num}'">${vo.keyword}</li>
-					<li
-						onclick="location.href='${url}/board/ptView?board_num=${vo.board_num}'">${vo.title}</li>
-					<li
-						onclick="location.href='${url}/board/ptView?board_num=${vo.board_num}'">조회수
-						${vo.hit}</li>
-					<li
-						onclick="location.href='${url}/board/ptView?board_num=${vo.board_num}'">${vo.write_date}</li>
-					<li class="post_bottom"
-						onclick="location.href='${url}/board/ptView?board_num=${vo.board_num}'">${vo.state}&nbsp;&nbsp;${vo.pNum}
-						/ ${vo.max_user}</li>
+					<li	onclick="location.href='${url}/board/ptView?board_num=${vo.board_num}'">${vo.keyword}</li>
+					<li onclick="location.href='${url}/board/ptView?board_num=${vo.board_num}'">${vo.title}</li>
+					<li	onclick="location.href='${url}/board/ptView?board_num=${vo.board_num}'">조회수 ${vo.hit}</li>
+					<li	onclick="location.href='${url}/board/ptView?board_num=${vo.board_num}'">${vo.write_date}</li>
+					<li class="post_bottom" onclick="location.href='${url}/board/ptView?board_num=${vo.board_num}'">${vo.state}&nbsp;&nbsp;${vo.pNum} / ${vo.max_user}</li>
 					<li class="post_bottom"
 						<c:if test="${logStatus != 'Y'}">onclick="btn_notlogin();"</c:if>>
 						<c:choose>
@@ -188,7 +186,7 @@
 				</c:if>
 				<c:if test="${pVO.pageNum > 1}">
 					<li><a
-						href="${url}/board/ptList?pageNum=${pVO.pageNum-1}<c:if test='${pVO.searchWord!=null}'>&searchWord=${pVO.searchWord}</c:if>"><</a></li>
+						href="${url}/board/ptList?pageNum=${pVO.pageNum-1}<c:if test='${pVO.state!=null}'>&state=${pVO.state}</c:if><c:if test='${pVO.searchWord!=null}'>&searchWord=${pVO.searchWord}</c:if>"><</a></li>
 				</c:if>
 
 				<!-- 페이지번호 -->
@@ -196,14 +194,12 @@
 					end="${pVO.startPage + pVO.onePageCount-1}">
 					<c:if test="${p<=pVO.totalPage}">
 						<c:if test="${p==pVO.pageNum}">
-							<li
-								style="background-color: #E2E0F8; border-radius: 50%; font-weight: bold;">
+							<li class="select_p">
 						</c:if>
 						<c:if test="${p != pVO.pageNum}">
 							<li>
 						</c:if>
-						<a
-							href="${url}/board/ptList?pageNum=${p}<c:if test='${pVO.searchWord!=null}'>&searchWord=${pVO.searchWord}</c:if>">${p}</a>
+						<a href="${url}/board/ptList?pageNum=${p}<c:if test='${pVO.state!=null}'>&state=${pVO.state}</c:if><c:if test='${pVO.searchWord!=null}'>&searchWord=${pVO.searchWord}</c:if>">${p}</a>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -211,7 +207,7 @@
 				<!-- 다음페이지 -->
 				<c:if test="${pVO.pageNum != pVO.totalPage}">
 					<li><a
-						href="${url}/board/ptList?pageNum=${pVO.pageNum+1}<c:if test='${pVO.searchWord!=null}'>&searchWord=${pVO.searchWord}</c:if>">></a></li>
+						href="${url}/board/ptList?pageNum=${pVO.pageNum+1}<c:if test='${pVO.state!=null}'>&state=${pVO.state}</c:if><c:if test='${pVO.searchWord!=null}'>&searchWord=${pVO.searchWord}</c:if>">></a></li>
 				</c:if>
 				<c:if test="${pVO.pageNum == pVO.totalPage}">
 					<li style="color: lightgray">></li>

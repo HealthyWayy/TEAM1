@@ -27,7 +27,6 @@ public class ReplyController {
 	}
 	
 	// 댓글등록
-
 	@RequestMapping(value="/writeOk", method=RequestMethod.POST)
 	public int writeOk(ReplyVO vo, HttpSession session) {
 		vo.setUser_id((String)session.getAttribute("logId"));
@@ -41,8 +40,7 @@ public class ReplyController {
 		return service.replyDel(reply_num, id);
 	}
 
-
-	
+	// 댓글수정
 	@PostMapping("editOk")
 	public int editOk(ReplyVO vo, HttpSession session) {
 		vo.setUser_id((String)session.getAttribute("logId"));

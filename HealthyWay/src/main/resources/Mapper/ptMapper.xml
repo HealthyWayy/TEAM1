@@ -23,6 +23,9 @@
 		<if test="searchWord != null">
 			and (title like '%${searchWord}%' or content like '%${searchWord}%' or user_id like '%${searchWord}%')
 		</if>
+		<if test="state != null">
+			and state=#{state}
+		</if>
 		order by b.board_num desc
 		limit ${onePageRecord} offset ${offsetIndex}
 	</select>
@@ -108,11 +111,14 @@
 	</select>
 	
 	<select id="totalRecord" resultType="int">
-		select count(board_num) cnt
-		from board
+		select count(b.board_num) cnt
+		from board b inner join PT_group p on b.board_num=p.board_num
 		where type_num = 2
 		<if	test='searchWord != null'>
 			and (title like '%${searchWord}%' or content like '%${searchWord}%' or user_id like '%${searchWord}%')
+		</if>
+		<if test="state != null">
+			and state=#{state}
 		</if>
 	</select>
 	
