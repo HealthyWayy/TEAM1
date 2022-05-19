@@ -355,6 +355,79 @@ textarea:focus{
 		font-size:1.3em;
 	}
 }
+
+/*신고하기 모달 css*/
+.modal{ 
+	position:fixed;
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0.8);
+	top:0;
+	left:0;
+	display:none;
+	z-index:8;
+}
+.modal_content{
+	width:400px;
+	background:#fff; border-radius:10px;
+	position:relative; top:50%; left:50%;
+	margin-top:-200px; margin-left:-200px;
+	box-sizing:border-box;
+	line-height:23px;
+	z-index:8;
+	padding:20px;
+}
+.modal_content div{
+	font-size:1.2em;
+	text-align:center;
+	font-weight:bold;
+	height:40px;
+	line-height:40px;
+	border-bottom:1px solid rgb(200,200,200);;
+	margin-bottom:20px;
+}
+.modal_content>div>img{
+	width:25px;
+}
+.modal_content input[type=radio]{
+	margin-bottom:20px;
+	margin-left:5px;
+	accent-color:rgb(255,84,84);
+}
+.modal_content textarea{
+	resize:none;
+	width:360px;
+	height:150px;
+	padding:3%;
+	border:1px solid rgb(200,200,200);
+}
+.modalBtn{
+	text-align: center;
+}
+.modalBtn>li{
+	display: inline-block;
+}
+.modalBtn>li>input[type=button]{
+	background-color:white;
+	height:35px;
+	line-height:35px;
+	width:100px;
+	border:1px solid rgb(200,200,200);
+	border-radius:10px;
+	cursor:pointer;
+}
+.modalBtn>li>input[type=submit]{
+	background-color:white;
+	height:35px;
+	line-height:35px;
+	width:100px;
+	border:none;
+	background-color: #FF5454;
+	border-radius:10px;
+	cursor:pointer;
+	color:white;
+}
+
 </style>
 
 <script>
@@ -386,6 +459,46 @@ $(function(){
 		var num = $(this).attr("id").substring(2);
 		deleteHeart(num);
 		return false;
+	});
+	
+	//신고하기 모달 jquery작성
+	$('.warnIcon').click(function(){
+		$(".modal").fadeIn(300);
+	});
+	$('#reportOk').click(function(){
+		$(".modal").fadeOut(300);
+	});
+	let reportCount=0;
+	$('#reportFrm').submit(function(){
+		event.preventDefault();
+		if(confirm('신고하시겠습니까?')){
+			if($("#reportContent").val()==""){
+				alert('내용을 입력해 주세요');
+				return;
+			}
+			if(reportCount!=0){
+				alert('이미 신고한 게시글 입니다!');
+				return;
+			}
+			$.ajax({
+				url:"/master/reportProcess",
+				data:$("#reportFrm").serialize(),
+				type:'post',
+				success:function(response){
+					reportCount++;
+					if(response>0){
+						alert('신고가 접수되었습니다.');						
+					}else{
+						alert('신고가 되지 않았습니다. - 이유 불명 - ');
+					}
+				},error:function(error){
+					console.log(error.responseText)
+				}
+			})
+		}else{
+			alert('신고 안함');
+			return;
+		}
 	});
 	
 });
@@ -644,5 +757,34 @@ function editReply(reply_num){
 				<input type="submit" value="등록" id="rSubmit" onclick="insertReply(${vo[0].board_num});"/>
 			</form>
 		</c:if>
+	</div>
+</div>
+
+
+<!-- 신고하기 모달창 추가 -->
+<div class="modal">
+	<div class="modal_content">
+		<div><img src="/recipeImg/warnIcon.png"/>신고하기<img src="/recipeImg/warnIcon.png"/></div>
+		<form method='post' id='reportFrm'>
+			
+			<input type='hidden' name='write_id' value='${vo[0].user_id}'/>
+			<input type='hidden' name='board_num' value='${vo[0].board_num}'/>
+			<input type='hidden' name='report_type' value='1'/>
+			
+			<input type="radio" name="report_title" value="게시판 이탈" id='reportRadio1' checked>
+			<label for="reportRadio1">게시판 이탈</label>
+			<input type="radio" name="report_title" value="광고" id='reportRadio2'>
+			<label for="reportRadio2">광고</label>
+			<input type="radio" name="report_title" value="욕설" id='reportRadio3'>
+			<label for="reportRadio3">욕설</label>
+			<input type="radio" name="report_title" value="음란물" id='reportRadio4'>
+			<label for="reportRadio4">음란물</label><br/>
+			<textarea name='report_content' placeholder="최대 200자까지 작성가능 합니다." maxlength="200" id='reportContent'></textarea>
+			<br/>
+			<ul class="modalBtn">
+				<li><input type='button' value='취소' id='reportOk'/></li>
+				<li><input type='submit' value='신고하기'/><br/></li>
+			</ul>
+  		</form>
 	</div>
 </div>

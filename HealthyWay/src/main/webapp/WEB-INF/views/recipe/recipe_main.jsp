@@ -157,7 +157,7 @@ body{
 @media ( min-width: 1800px ) {
 	#top{
 		width:100%;
-		height:1300px;
+		height:1100px;
 	}
 	#recomBtnText{
 		top:58%;

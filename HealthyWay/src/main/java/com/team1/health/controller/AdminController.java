@@ -11,33 +11,33 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team1.health.service.AdminService;
 import com.team1.health.vo.IngredientVO;
 import com.team1.health.vo.PagingVO;
+import com.team1.health.vo.ReportVO;
 
 @Controller
 public class AdminController {
 
 	@Inject
 	AdminService service;
-	
+
 	// 회원 관리자 페이지------------------------------------
 	@GetMapping("/master/member")
-	public ModelAndView masterMember(PagingVO pvo) {
+	public ModelAndView masterMember(PagingVO pVO) {
 		ModelAndView mav = new ModelAndView();
-		pvo.setTotalRecord(service.totalRecord(pvo));
-		System.out.println(pvo.getOnePageRecord()+"-"+pvo.getOffsetIndex());
-		mav.addObject("pVO", service.totalRecord(pvo));
-		mav.addObject("vo", service.memberList());
+		pVO.setTotalRecord(service.totalRecord1(pVO));
+		mav.addObject("pVO", pVO);
+		mav.addObject("vo", service.memberList(pVO));
 		mav.setViewName("/admin/master_member");
-		
+
 		return mav;
 	}
 
-	
-	// 운동 관리자 페이지------------------------------------
-	@GetMapping("/master/trainning")
-	public String masterTrainning() {
-		return "/admin/master_trainning";
+	@PostMapping("/master/member/delete")
+	@ResponseBody
+	public int memberDelete(String user_id) {
+		return service.memberDelete(user_id);
 	}
 
+	
 	
 	// 레시피 관리자 페이지------------------------------------
 	@GetMapping("/master/recipe")
@@ -70,17 +70,61 @@ public class AdminController {
 		return service.ingredDelete(gred_num);
 	}
 
-	
 	// PT그룹 관리자 페이지------------------------------------
 	@GetMapping("/master/ptGroup")
-	public String masterptGroup() {
-		return "/admin/master_pt";
+	public ModelAndView masterptGroup(PagingVO pVO) {
+		ModelAndView mav = new ModelAndView();
+		pVO.setTotalRecord(service.totalRecord2(pVO));
+		mav.addObject("vo", service.ptList(pVO));
+		mav.addObject("pVO", pVO);
+		mav.setViewName("/admin/master_pt");
+		return mav;
 	}
 
-	
+	// 글 삭제
+	@PostMapping("/master/boardDelete")
+	@ResponseBody
+	public int boardDelete(int board_num) {
+		return service.boardDelete(board_num);
+	}
+
 	// 커뮤니티 관리자 페이지------------------------------------
 	@GetMapping("/master/community")
 	public String masterCommunity() {
 		return "/admin/master_community";
+	}
+
+	// 신고 관리자 페이지-----------------------------------------
+	// 신고 목록
+	@GetMapping("/master/report")
+	public ModelAndView masterReport(PagingVO pVO) {
+		ModelAndView mav = new ModelAndView();
+		pVO.setTotalRecord(service.totalRecord4(pVO));
+		mav.addObject("vo", service.reportList(pVO));
+		mav.addObject("pVO", pVO);
+		mav.setViewName("/admin/master_report");
+		return mav;
+	}
+
+	// 신고 삭제(신고 처리는 안 함)
+	@PostMapping("/master/reportDelete")
+	@ResponseBody
+	public int reportDelete(int report_num) {
+		return service.reportDelete(report_num);
+	}
+	
+	// 신고 등록
+	@PostMapping("/master/reportInsert")
+	@ResponseBody
+	public int reportInsert(ReportVO vo) {
+		return service.reportInsert(vo);
+	}
+	
+	// 게시글 삭제 + 회원신고
+	@PostMapping("/master/reportProcess")
+	@ResponseBody
+	public int reportProcess(ReportVO vo) {
+		service.userReportCount(vo.getWrite_id());
+		return service.boardDelete(vo.getBoard_num());
 	}
 }

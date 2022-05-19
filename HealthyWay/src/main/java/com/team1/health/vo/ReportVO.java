@@ -1,19 +1,20 @@
 package com.team1.health.vo;
 
 public class ReportVO {
-	private int repot_num;
+	private int report_num;
 	private int board_num;
 	private String user_id;
 	private String report_title;
 	private String report_content;
 	private String report_write_date;
 	private int report_type;
+	private String write_id;
 	
-	public int getRepot_num() {
-		return repot_num;
+	public int getReport_num() {
+		return report_num;
 	}
-	public void setRepot_num(int repot_num) {
-		this.repot_num = repot_num;
+	public void setReport_num(int report_num) {
+		this.report_num = report_num;
 	}
 	public int getBoard_num() {
 		return board_num;
@@ -51,7 +52,11 @@ public class ReportVO {
 	public void setReport_type(int report_type) {
 		this.report_type = report_type;
 	}
-	
-	
+	public String getWrite_id() {
+		return write_id;
+	}
+	public void setWrite_id(String write_id) {
+		this.write_id = write_id;
+	}
 	
 }

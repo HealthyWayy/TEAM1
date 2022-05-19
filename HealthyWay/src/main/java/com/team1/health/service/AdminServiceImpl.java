@@ -7,9 +7,12 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.team1.health.dao.AdminDAO;
+import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.IngredientVO;
 import com.team1.health.vo.MemberVO;
 import com.team1.health.vo.PagingVO;
+import com.team1.health.vo.ReportVO;
+import com.team1.health.vo.TrainVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -17,44 +20,83 @@ public class AdminServiceImpl implements AdminService {
 	AdminDAO dao;
 
 
-
-
-
 	//회원 관리-----------------------------------------
 	@Override
-	public List<MemberVO> memberList() {//회원 목록
-		return dao.memberList();
+	public List<MemberVO> memberList(PagingVO pVO) {//회원 목록
+		return dao.memberList(pVO);
 	}
 	@Override
-	public int totalRecord(PagingVO pVO) {//totalRecord
-		return dao.totalRecord(pVO);
+	public int totalRecord1(PagingVO pVO) {//totalRecord
+		return dao.totalRecord1(pVO);
 	}
 	@Override
 	public int memberDelete(String user_id) {//회원 탈퇴
 		return dao.memberDelete(user_id);
 	}
-	//운동 관리-----------------------------------------
+	
+
+	
 	
 	//레시피 관리-----------------------------------------
 	
 	@Override
 	public String lastIngred() {//마지막 id값 구하기
-		return null;
+		return dao.lastIngred();
 	}
 
 	@Override
 	public int ingredInsert(IngredientVO vo) {//재료 추가
-		return 0;
+		return dao.ingredInsert(vo);
 	}
 
 	@Override
 	public int ingredDelete(String gred_num) {//재료 삭제
-		return 0;
+		return dao.ingredDelete(gred_num);
 	}
-
 
 	
 	//pt그룹 관리-----------------------------------------
+	@Override
+	public List<BoardVO> ptList(PagingVO pVO) {//그룹 목록
+		return dao.ptList(pVO);
+	}
+	@Override
+	public int totalRecord2(PagingVO pVO) {//totalRecord
+		return dao.totalRecord2(pVO);
+	}
+	
+	
+	//board 관련 공통 코드---------------------------------------
+	@Override
+	public int boardDelete(int gred_num) {//그룹 삭제
+		return dao.boardDelete(gred_num);
+	}
+
 	
 	//커뮤니티 관리-----------------------------------------
+	
+	
+	//신고 관리--------------------------------------------
+	@Override
+	public List<ReportVO> reportList(PagingVO pVO) {//신고 목록
+		return dao.reportList(pVO);
+	}
+	@Override
+	public int reportDelete(int report_num) {//신고 삭제
+		return dao.reportDelete(report_num);
+	}
+	@Override
+	public int reportInsert(ReportVO vo) {//신고 등록
+		return dao.reportInsert(vo);
+	}
+	@Override
+	public int userReportCount(String user_id) {//회원 신고 누적
+		return dao.userReportCount(user_id);
+	}
+	@Override
+	public int totalRecord4(PagingVO pVO) {//totalRecord
+		return dao.totalRecord4(pVO);
+	}
+
+
 }
