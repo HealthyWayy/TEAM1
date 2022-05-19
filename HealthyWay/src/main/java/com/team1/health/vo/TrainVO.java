@@ -19,6 +19,60 @@ public class TrainVO {
 	private String module_difficulty;
 	private int tnum;
 	
+	//트레이닝페이지
+	private String train_list[];
+	private String module1;
+	private String module2;
+	private String module3;
+	private String module4;
+	private String module5;
+	
+	//유저 트레이닝 카운트
+	private int train_count;
+	
+	
+	public int getTrain_count() {
+		return train_count;
+	}
+	public void setTrain_count(int train_count) {
+		this.train_count = train_count;
+	}
+	public String[] getTrain_list() {
+		return train_list;
+	}
+	public void setTrain_list(String[] train_list) {
+		this.train_list = train_list;
+	}
+	public String getModule1() {
+		return module1;
+	}
+	public void setModule1(String module1) {
+		this.module1 = module1;
+	}
+	public String getModule2() {
+		return module2;
+	}
+	public void setModule2(String module2) {
+		this.module2 = module2;
+	}
+	public String getModule3() {
+		return module3;
+	}
+	public void setModule3(String module3) {
+		this.module3 = module3;
+	}
+	public String getModule4() {
+		return module4;
+	}
+	public void setModule4(String module4) {
+		this.module4 = module4;
+	}
+	public String getModule5() {
+		return module5;
+	}
+	public void setModule5(String module5) {
+		this.module5 = module5;
+	}
 	public int getTnum() {
 		return tnum;
 	}

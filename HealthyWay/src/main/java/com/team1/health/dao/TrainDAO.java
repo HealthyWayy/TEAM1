@@ -27,4 +27,18 @@ public interface TrainDAO {
 	public List<TrainVO> get_train_list(TrainVO vo);
 	//내 운동 리스트 목록 가져오기
 	public List<TrainVO> get_all_train_list(String user_id);
+	//내 운동 리스트 삭제하기
+	public int delete_mytrain(TrainVO vo);
+	
+	//user루틴에 추가
+	public int user_routine_insert(TrainVO vo);
+	
+	//운동 시작
+	//운동 이름 가져오기
+	public String module1_name(int train_num);
+	public String module2_name(int train_num);
+	public String module3_name(int train_num);
+	public String module4_name(int train_num);
+	public String module5_name(int train_num);
+		
 }

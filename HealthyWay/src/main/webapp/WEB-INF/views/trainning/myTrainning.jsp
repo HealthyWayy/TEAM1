@@ -4,12 +4,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script>
 function delete_myList(train_num) {
-	alert("삭제되었습니다.");
+	if(confirm("운동을 삭제하시겠습니까?")){
+		location.href="/trainning/delete_mytrain?train_num="+train_num;
+		}
+	}
 	
-}
+function start_myLlist(train_num) {
+	if(confirm("운동을 시작하시겠습니까?")){
+		location.href="/trainning/testTrain";
+		}
+	}
 
 function module_set(train_num){
-	console.log("시작");
       var data = "train_num="+ train_num;
       $("#my_trainList"+ train_num).html("")
       $.ajax({
@@ -53,6 +59,7 @@ function module_set(train_num){
 		            <p><button onclick="delete_myList(${vo.train_num})">삭제하기 + ${vo.train_num }</button></p>
 			            <ul id="my_trainList${vo.train_num}" class="my_trainList">
 			      		</ul>
+			      	<p><button onclick="start_myLlist(${vo.train_num})">시작하기</button></p>
 		            <hr>
 		            <script type="text/javascript">
 		            module_set(${vo.train_num})
@@ -61,32 +68,7 @@ function module_set(train_num){
 	            </c:forEach>
         	
 
-        <div>
-            <h3>하체운동</h3><p>등록 날짜 : 22.05.04</p>
-            <p><button>삭제하기</button></p>
-            <ul>
-                <li><a href="#"><img src="/img/train_ex3.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="/img/train_ex3.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="/img/train_ex3.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="/img/train_ex3.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="/img/train_ex3.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-            </ul>
-        </div>
-
-        <div>
-            <h3>전신운동</h3><p>등록 날짜 : 22.05.04</p>
-            <p><button>삭제하기</button></p>
-            <ul>
-                <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-                <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li>
-            </ul>
-        </div>
-
-
-
+        
     </div>
     
     

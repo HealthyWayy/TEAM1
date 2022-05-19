@@ -7,37 +7,61 @@
 		document.getElementById("hideVideo").style.display="none";
 	}
 	self.setTimeout("hideDiv()",5000); // 초 지정
+	
+	$(function(){ 
+    	$("#video1").bind("ended", function() {
+ 		document.getElementById("video2").play();
+ 	});
+	$("#video2").bind("ended", function() {
+        	document.getElementById("video3").play();
+        });
+	$("#video3").bind("ended", function() {
+ 		document.getElementById("video4").play();
+ 	});
+	$("#video4").bind("ended", function() {
+ 		document.getElementById("video5").play();
+ 	});
+}); 
 </script>
+<style>
+#video1{
+	width: 50%;
+	height: 50%;
+}
+</style>
 <div id="hideVideo">
 	<video class="ready-video" src="/train_model/countdown5s.mp4" autoplay muted style="width:100%; heigth:100%; margin: 0 auto;"></video>
 </div>
+
+<P id="display"></P>
+    영상 띄워 놓는곳
+    <video id="video1" src="/train_model/moduleVod/사이드 컬.mp4" autoplay controls loop muted>
+        tmp
+    
+    
+
 <!-- <button type="button" onclick="init()">시작하기</button> -->
 <div><canvas id="canvas"></canvas></div>
 <div id="label-container"></div>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
 <script type="text/javascript">
-    // More API functions here:
-    // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
 
-    // the link to your model provided by Teachable Machine export panel
-    const URL = "/train_model/moduleImg/";
+    const URL = "/train_model/module/";
     let model, webcam, ctx, labelContainer, maxPredictions;
 
     async function init() {
-        const modelURL = URL + "model.json";
-        const metadataURL = URL + "metadata.json";
+        const modelURL = URL + "사이드 컬_model.json";
+        const metadataURL = URL + "사이드 컬_metadata.json";
 
-        // load the model and metadata
-        // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
-        // Note: the pose library adds a tmPose object to your window (window.tmPose)
+        
         model = await tmPose.load(modelURL, metadataURL);
         maxPredictions = model.getTotalClasses();
 
-        // Convenience function to setup a webcam
-        const size = 600;
-        const flip = true; // whether to flip the webcam
-        webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
+
+        const size = 600; //웹캠 사이즈
+        const flip = true;
+        webcam = new tmPose.Webcam(size, size, flip); 
         await webcam.setup(); // request access to the webcam
         await webcam.play();
         window.requestAnimationFrame(loop);
@@ -60,10 +84,9 @@
     var count = 0;
     var status = "one";
     async function predict() {
-        // Prediction #1: run input through posenet
-        // estimatePose can take in an image, video or canvas html element
+
         const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
-        // Prediction 2: run input through teachable machine classification model
+
         const prediction = await model.predict(posenetOutput);
 
         var p1 = prediction[0].probability.toFixed(2);
@@ -110,9 +133,7 @@
     }, 4000);
     // init();
 </script>
-    <P id="display"></P>
-    영상 띄워 놓는곳
-    <video src="/train_model/moduleImg/pront_raise.mp4" autoplay controls loop muted style="float:left">
-        tmp
-    </video>
+    <div>
+    	<button onclick="save_train()">운동 끝내기</button>
+    </div>
     

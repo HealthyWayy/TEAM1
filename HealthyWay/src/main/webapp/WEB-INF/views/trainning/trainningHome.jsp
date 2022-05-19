@@ -102,7 +102,7 @@ function add_train(module_num){
         success : function(result){
             var tag="";
             $(result).each(function(){
-                tag += '<li><p></p><img src="/train_model/moduleImg/'+ this.module_img +'" alt=""><p>' + this.module_title + '</p><p>'+this.module_content+'</p></li>'
+                tag += '<li><p></p><img src="/train_model/moduleImg/'+ this.module_img +'" alt=""><p>' + this.module_title + '</p><p>'+this.module_content+'</p><button class="add-btn" onclick="del_train('+this.module_num+')">삭제하기</button></li>'
                 $("#my_train").append(tag);
             });
         },
