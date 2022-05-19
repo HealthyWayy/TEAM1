@@ -118,6 +118,12 @@ body,ul,li{
 	font-size:1.2em;
 	font-weight:bold;
 }
+#seulmun{
+	position:relative;
+	margin-top:20px;
+	width:200px;
+	height:40px;
+}
 #logout{
 	position:relative;
 	margin-top:20px;
@@ -138,7 +144,24 @@ body,ul,li{
             rgba(117, 114, 184, 1) 100%
             );
 }
-.btnClass::before{
+#seulmun::before{
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%, -50%);
+	content:'설문조사';
+	width:100%;
+	height:100%;
+	line-height:40px;
+	background:linear-gradient(
+    		to right,
+            rgba(181, 179, 217, 1) 0%,
+            rgb(164,162,208) 20%,
+            rgb(145,141,199) 100%
+            );
+    transition-duration:0.5s;
+}
+#logout::before{
 	position:absolute;
 	top:50%;
 	left:50%;
@@ -188,9 +211,9 @@ body,ul,li{
 	width:250px;
 	border:1px solid #ddd;
 	border-right:none;
-	border-bottom:1px solid black;
+	border-bottom:1px solid #E4E5E5;
 	color: gray;
-	font-size:17px;
+	font-size:14px;
 }
 .inforBtn{
 	left:0px;
@@ -211,7 +234,7 @@ body,ul,li{
 .clickUpClass{
 	background-color:white;
 	z-index:5;
-	border:1px solid black;
+	border:1px solid #E4E5E5;
 	border-bottom:none;
 	color: #000;
 }
@@ -310,6 +333,9 @@ function heightSize(indexPrev){
 function logOut(){
 	location.href='/member/logout';
 }
+function seulmun(){
+	location.href='/member/question';
+}
 
 </script>
 <!-- 뒷 배경 -->
@@ -324,6 +350,7 @@ function logOut(){
 			</div>
 			<br/>
 			<span>${userData.user_id }</span><br/>
+			<button id='seulmun' class='btnClass' onclick='seulmun()'>설문조사</button>
 			<button id='logout' class='btnClass' onclick='logOut()'>로그아웃</button>
 		</div>
 		<div>

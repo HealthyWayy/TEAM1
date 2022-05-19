@@ -21,7 +21,7 @@
 	</insert>
 	<!-- 나만의 운동에 모듈 저장 -->
 	<insert id="mymodule_insert">
-		INSERT INTO training_module(train_num, module_num) VALUES(#{train_num}, #{module_num})
+		INSERT INTO training_module(train_num, module_num) VALUES(${train_num}, ${module_num})
 	</insert>
 	<!-- 임시 저장소에 있던것들 유저가 만든 나만의 운동에 저장 -->
 	<update id="update_train_num">

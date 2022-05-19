@@ -78,6 +78,7 @@ ul, li {
 .menu-container a  {
 	position: relative;
 	padding-bottom: 8px;
+	text-decoration: none !important;
 }
 .menu-container a:before {
 	content:'';
@@ -123,6 +124,7 @@ ul, li {
 	overflow: hidden;
 	cursor: pointer;
 	position: relative;	
+	margin-right:15px;
 }
 .profile-container1 img {
 	position: absolute;

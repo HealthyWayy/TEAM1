@@ -12,7 +12,6 @@
 	<select id='PTboard' resultType='BoardVO'>
 		select b.board_num, b.title,b.content,p.pt_img_file from board b 
 		join PT_group p on b.board_num=p.board_num 
-		join apply_user a on p.board_num=a.board_num 
 		where b.user_id=#{param1} and b.type_num=2;
 	</select>
 	<update id="userUpdate">
@@ -36,14 +35,14 @@
 	<select id="groupListAll" resultType='BoardVO'>
 		select b.board_num,b.title,b.content,p.pt_img_file from board b 
 		join PT_group p on b.board_num=p.board_num 
-		join apply_user a on p.board_num=a.board_num 
+		left join apply_user a on p.board_num=a.board_num 
 		where (a.user_id=#{param1} and a.user_state='참여중') or (b.user_id=#{param1} and b.type_num='2')
 		limit ${param2.onePageRecord} offset ${param2.offsetIndex};
 	</select>
 	<select id='groupCount' resultType='int'>
 		select count(b.board_num) from board b 
 		join PT_group p on b.board_num=p.board_num 
-		join apply_user a on p.board_num=a.board_num 
+		left join apply_user a on p.board_num=a.board_num 
 		where (a.user_id=#{param1} and a.user_state='참여중') or (b.user_id=#{param1} and b.type_num='2');
 	</select>
 	<select id='achieveCount' resultType='int'>
@@ -75,7 +74,7 @@
 		select weight,DATE_FORMAT(write_date,'%y.%m.%d') as write_date from weigth where user_id=#{param1} order by write_date desc limit 10;
 	</select>
 	<select id='barListAll' resultType='CountVO'>
-		select utc.user_id,utc.train_year,utc.train_month,utc.train_count,utc.train_num,utc.write_date,tr.train_title from user_training_count utc join training_routine tr on utc.train_num=tr.train_num 
+		select utc.user_id,utc.train_year,utc.train_month,utc.train_count,utc.module_num,utc.write_date from user_training_count utc 
 		where utc.user_id=#{param1} and utc.train_year=#{param2};
 	</select>
 </mapper>

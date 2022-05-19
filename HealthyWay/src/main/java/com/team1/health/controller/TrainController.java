@@ -61,9 +61,9 @@ public class TrainController {
 	@PostMapping("/trainning/mytrain_list")
 	@ResponseBody
 	public List<TrainVO> mytrainList(TrainVO vo ,int module_num) {
-		System.out.println("여기로는 가니?");
 		vo.setTrain_num(0);
 		System.out.println(vo.getTrain_num());
+
 		service.mymodule_insert(vo);
 		System.out.println(vo.getModule_num());
 		return service.mytrain_list(module_num);
