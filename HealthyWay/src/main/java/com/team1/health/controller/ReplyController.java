@@ -40,6 +40,7 @@ public class ReplyController {
 		return service.replyDel(reply_num, id);
 	}
 
+
 	@PostMapping("editOk")
 	public int editOk(ReplyVO vo, HttpSession session) {
 		vo.setUser_id((String)session.getAttribute("logId"));

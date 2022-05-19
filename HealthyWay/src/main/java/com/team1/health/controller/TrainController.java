@@ -68,6 +68,8 @@ public class TrainController {
 	@ResponseBody
 	public List<TrainVO> mytrainList(TrainVO vo ,int module_num) {
 		vo.setTrain_num(0);
+		System.out.println(vo.getTrain_num());
+		System.out.println(vo.getModule_num());
 		service.mymodule_insert(vo);
 		return service.mytrain_list(module_num);
 	}
