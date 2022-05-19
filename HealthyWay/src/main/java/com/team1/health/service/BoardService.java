@@ -6,6 +6,7 @@ import java.util.List;
 import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.PagingVO;
 import com.team1.health.vo.ReplyVO;
+import com.team1.health.vo.SuccessPagingVO;
 import com.team1.health.vo.SuggestionPagingVO;
 
 public interface BoardService {
@@ -18,7 +19,7 @@ public interface BoardService {
 	//4
 	public BoardVO boardSelect(int board_num);
 	//5
-	public void hitCount(int board_num);
+	public int hitCount(int no);
 	//6
 	public int boardUpdate(BoardVO vo);
 
@@ -57,4 +58,16 @@ public interface BoardService {
 		public BoardVO suggestionSelectByNo(int board_num);
 		
 		public BoardVO suggestionView(int board_num);
-	}
+	
+
+		//성공스토리
+		
+		public int successInsert(BoardVO vo);
+		public BoardVO successSelect(int board_num);
+		public int successUpdate(BoardVO vo);
+		public int successDelete(int board_num, String user_id);
+		public BoardVO successView(int board_num);
+		public List<BoardVO> successList(SuccessPagingVO ssVO);
+		public BoardVO successSelectByNo(int board_num);
+		public int successtotalRecord(SuccessPagingVO ssVO);
+}

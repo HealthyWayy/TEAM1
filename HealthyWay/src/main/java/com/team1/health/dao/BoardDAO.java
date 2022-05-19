@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import com.team1.health.vo.BoardVO;
 import com.team1.health.vo.PagingVO;
+import com.team1.health.vo.PtPagingVO;
 import com.team1.health.vo.ReplyVO;
+import com.team1.health.vo.SuccessPagingVO;
 import com.team1.health.vo.SuggestionPagingVO;
 
 
@@ -25,7 +27,7 @@ public interface BoardDAO {
 	
 	public BoardVO boardSelect(int board_num);
 	
-	public void hitCount(int board_num);
+	public int hitCount(int no);
 	
 	public int boardUpdate(BoardVO vo);
 	
@@ -65,4 +67,19 @@ public interface BoardDAO {
 	public BoardVO suggestionSelectByNo(int board_num);
 	
 	public BoardVO suggestionView(int board_num);
+
+
+	//성공스토리
+	
+	public int successInsert(BoardVO vo);
+	public int successtotalRecord(SuccessPagingVO ssVO);
+	public BoardVO successSelect(int board_num);
+	public int successUpdate(BoardVO vo);
+	public int successDelete(int board_num, String user_id);
+	public BoardVO successView(int board_num);
+	public BoardVO successSelectByNo(int board_num);
+	public List<BoardVO> successList(SuccessPagingVO ssVO);
+	
+
+
 }

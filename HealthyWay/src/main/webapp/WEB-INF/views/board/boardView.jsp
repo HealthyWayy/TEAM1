@@ -2,9 +2,32 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script>
 
-function delCheck(){
-	
-}
+$(function() {
+    console.log($)
+	 $("#btn_delete").on("click",function() {
+        $(function(){
+            var url = "${url}/boardList";
+            var data = $("#boardFrm").serialize()
+         $.ajax({
+            url : url,
+            type : "DELETE",
+            dataType : "JSON",
+            data : data,
+            success : function(result) {
+               alert(result.msg);
+               window.location.href = result.redirect;
+            },
+            error : function(error){
+               console.log(error.responseJSON);
+               alert(error.responseJSON.msg);
+               
+              
+            }
+            
+        }) ; 
+        });
+    });
+ });
 
 $(function(){
 	//댓글목록
@@ -150,7 +173,7 @@ $(function(){
                 </tr>
                 <tr>
                     <th>조회수</th>
-                    <td>${bvo.hit }</td>
+                    <td>${bvo.hit}</td>
                 </tr>
                 <tr>
                     <th>등록시간</th>
@@ -159,7 +182,7 @@ $(function(){
                 
             </table>
             <input class="bo__btn__m" type="submit" id="btn_submit" value="수정">
-            <input class="bo__btn__wa" type="button" value="삭제" onclick="javascript:delCheck()">
+            <input class="bo__btn__wa" type="button" id="btn_delete" value="삭제하기">
             <input class="bo__btn__mb" type="button" value="목록" onclick="javascript:history.back()">
             <input type="submit" value="댓글등록"/>
             <!-- 댓글쓰기 -->
