@@ -96,9 +96,7 @@ $(function(){
 		});
 		
 	}
-	
 
-	
 	// 관리자 -> 참가 수락
 	$(document).on("click", ".acceptBtn", function(){
 		if(confirm("수락하시겠습니까?")){
@@ -239,6 +237,24 @@ $(function(){
 	});
 	
 	// 댓글 수정(DB)
+	$(document).on("submit", ".editFrm", function(){
+		event.preventDefault();
+		
+		var url = "${url}/reply/editOk";
+		var params = $(this).serialize();
+		
+		$.ajax({
+			url: url,
+			data: params,
+			type: 'post',
+			success: function(result){
+				replyListAll();
+			},
+			error: function(e){
+				console.log(e.responseText);
+			}
+		});
+	});
 	
 	
 	
@@ -328,11 +344,11 @@ function apply(){
 				<li id="menu_info" class="all_menu">정보</li>
 				<li id="menu_member" class="all_menu">멤버</li>
 				<li id="menu_qna" class="all_menu"
-					<c:if test="${empty pList}">
-						style="cursor: no-drop;"
+					<c:if test="${empty pList and lVO.user_id == logId}">
+						onclick="qnaClick()";
 					</c:if>
 					<c:forEach var="pVO" items="${pList}">
-						<c:if test="${pVO.user_id != logId and lVO.user_id != logId}">
+						<c:if test="${(empty pList or pVO.user_id != logId)  and lVO.user_id != logId}">
 							style="cursor: no-drop;"
 						</c:if>	
 						<c:if test="${pVO.user_id == logId or lVO.user_id == logId}">
@@ -380,7 +396,6 @@ function apply(){
 						<ul>
 							<li class="main_member_img_wrap"><img src="/img/${lVO.profie_img}"></li>
 							<li>${lVO.user_nickname} (${lVO.user_id})</li>
-							<li>고수</li>
 							<li>나이 : ${lVO.age}</li>
 							<li>
 								Height : 
@@ -407,7 +422,6 @@ function apply(){
 							<ul>
 								<li class="main_member_img_wrap"><img src="/img/${pVO.profie_img}"></li>
 								<li>${pVO.user_nickname} (${pVO.user_id})</li>
-								<li>고수</li>
 								<li>나이 : ${pVO.age}세</li>
 								<li>
 									Height : 

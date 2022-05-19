@@ -41,6 +41,7 @@ public class ReplyController {
 	}
 
 
+	// 댓글수정
 	@PostMapping("editOk")
 	public int editOk(ReplyVO vo, HttpSession session) {
 		vo.setUser_id((String)session.getAttribute("logId"));

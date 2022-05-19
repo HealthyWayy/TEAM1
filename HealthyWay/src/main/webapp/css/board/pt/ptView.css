@@ -149,8 +149,8 @@ body, ul, li{
 }
 
 .member_profile .main_member_img_wrap{
-	width: 50px;
-	height: 50px;
+	width: 70px;
+	height: 70px;
 	border-radius: 10px;
 	overflow: hidden;
 	margin: 0 auto;
@@ -160,21 +160,17 @@ body, ul, li{
 .member_profile li:nth-child(2){
     font-size: 18px;
     font-weight: 600;
+    margin: 10px 0;
 }
 
-.member_profile li:nth-child(3){
-	font-size: 15px;
-    color: gray;
-    margin-bottom: 5px;
-}
-
-.member_profile li:nth-child(3) ~ li{
+.member_profile li:nth-child(2) ~ li{
 	width: 50%;
 	float: left;
 }
 
 .main_member_img_wrap img{
-	width: 50px;
+	width: 100%;
+	height: 100%;
 }
 
 .main_member_wrap .member_profile{
@@ -372,6 +368,7 @@ body, ul, li{
 
 .leader_img_wrap img{
 	width: 70px;
+	height: 100%;
 }
 
 .leader_name_wrap{
