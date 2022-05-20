@@ -8,6 +8,14 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <style>
+ul, li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.top{
+	font-family:NanumGothic;
+}
 /*a태그 설정*/
 a:link {
 	color: black;
@@ -23,7 +31,6 @@ a:hover {
 	color: black;
 	text-decoration: none;
 }
-
 @font-face {
 	font-family: 'NanumBarunGothic';
 	font-style: normal;
@@ -38,15 +45,12 @@ a:hover {
 		url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf')
 		format('truetype');
 }
-
-body {
-	font-family: "NanumBarunGothic";
-}
 #container{
 	margin:4%;
 	padding-top:1%;
 	padding-left:4%;
 	padding-right:4%;
+	font-family: "NanumBarunGothic";
 }
 #searchFrm{
 	overflow:auto;

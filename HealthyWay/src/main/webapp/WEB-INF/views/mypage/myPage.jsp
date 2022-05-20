@@ -118,12 +118,6 @@ body,ul,li{
 	font-size:1.2em;
 	font-weight:bold;
 }
-#seulmun{
-	position:relative;
-	margin-top:20px;
-	width:200px;
-	height:40px;
-}
 #logout{
 	position:relative;
 	margin-top:20px;
@@ -299,7 +293,7 @@ $(()=> {
 		$(event.target).removeClass('btnClassHover')
 	})
 	//페이지 네이션 처리 이벤트
-	var indexPrev = ${indexPrev};
+	var indexPrev = 0;
 	heightSize(indexPrev)
 	$('.pageBtn').eq(indexPrev).addClass('clickUpClass');
 	$('.pageView').eq(indexPrev).addClass('clickUpClass pageUpClass');
@@ -333,9 +327,6 @@ function heightSize(indexPrev){
 function logOut(){
 	location.href='/member/logout';
 }
-function seulmun(){
-	location.href='/member/question';
-}
 
 </script>
 <!-- 뒷 배경 -->
@@ -350,7 +341,6 @@ function seulmun(){
 			</div>
 			<br/>
 			<span>${userData.user_id }</span><br/>
-			<button id='seulmun' class='btnClass' onclick='seulmun()'>설문조사</button>
 			<button id='logout' class='btnClass' onclick='logOut()'>로그아웃</button>
 		</div>
 		<div>

@@ -52,7 +52,6 @@
 		border:1px solid #ddd;
 		cursor:pointer;
 	}
-
 	.writeLiInfor{
 		width:170px;
 		height:140px;

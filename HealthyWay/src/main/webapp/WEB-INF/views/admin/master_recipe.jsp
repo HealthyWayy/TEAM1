@@ -3,6 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <style>
+ul, li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.top{
+	font-family:NanumGothic;
+}
 /*a태그 설정*/
 a:link {
 	color: black;
@@ -35,20 +43,15 @@ a:hover {
 }
 
 body {
-	font-family: "NanumBarunGothic";
+	
 	/*
 	background-image:url('/recipeImg/recipe.jpg');
 	background-repeat : no-repeat;
     background-size : cover;
 	*/
 }
-
-ul, li {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
 #container{
+	font-family: "NanumBarunGothic";
 	margin:4%;
 	padding-top:1%;
 	padding-left:4%;
@@ -78,11 +81,15 @@ ul, li {
 	color: #000 !important;
 }
 #ingredDiv {
+	display: flex;
 	width: 92%;
 	height: 500px;
-	padding:4%;
 	overflow:auto;
 	border:1px solid rgb(200,200,200);
+	justify-content: space-between;
+	color: rgb(50,50,50);
+	align-items:center;
+	padding:4% 4% 4% 4%;
 }
 
 input, select:focus {
@@ -92,9 +99,8 @@ input, select:focus {
 #addIngred {
 	float: left;
 	width: 44%;
-	padding: 2%;
+	padding: 20px;
 	height: 450px;
-	margin-right: 4%;
 	border-radius: 15px;
 	background-color: rgba(230,230,230,0.5);
 }
@@ -164,7 +170,7 @@ input, select:focus {
 #ingredView {
 	float: left;
 	width: 44%;
-	padding: 2%;
+	padding: 20px;
 	height: 450px;
 	border-radius: 15px;
 	background-color: rgba(230,230,230,0.5);
@@ -491,10 +497,10 @@ input, select:focus {
 					<option>기타</option>
 				</select>
 			</p>
-			<p>재료 이름
+			<p>재료 이름<br/>
 				<input type="text" name="gred_name" id="gred_name">
 			</p>
-			<p>칼로리
+			<p>칼로리<br/>
 				<input type="text" name="gred_kcal" id="gred_kcal" placeholder="100g당 칼로리를 작성해 주세요.">
 			</p>
 			<div id="btnDiv">
