@@ -10,7 +10,9 @@
 <div>사이드 레터럴 레이즈</div>
 <div class="video-frm">
 	<div class="item" id="hideVideo">
+
 		<div><video class="ready-video" src="/train_model/countdown5s.mp4" autoplay muted style="width:800px"></video></div>
+
 		<div><canvas id="canvas" style="width:800px"></canvas></div>
 		<div id="label-container"></div>
 	</div>
@@ -119,4 +121,3 @@
     <div>
     	<button onclick="save_train()">운동 끝내기</button>
     </div>
-    

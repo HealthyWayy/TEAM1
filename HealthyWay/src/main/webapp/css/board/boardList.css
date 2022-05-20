@@ -112,12 +112,13 @@
 }
 
 .search_btn{
-    font-size: 13px;
+   	font-size: 13px;
     width: 75px;
     height: 35px;
     border: solid 1.5px #d3d3d3;
     border-radius: 4px;
     padding: 5px;
+    cursor: pointer;
 }
 
 #searchWord:focus{
@@ -131,19 +132,17 @@
 
 .notice_list li{
 	float: left;
-	width: 9%;
+	width: 10%;
 	text-align: center;
 	height: 45px;
 	line-height: 45px;
 	border-bottom: 1px solid #d3d3d3;
-	border-right: 1px solid #d3d3d3;
 }
 
 .notice_list li:nth-child(-n+5){
 	background-color: #f3f3f3;
 	border-top: 1.5px solid #d3d3d3;
 	border-bottom: 1.5px solid #d3d3d3;
-	border-right: 1px solid #f3f3f3;
 }
 
 .notice_list li:nth-child(5n+1) img{
@@ -155,13 +154,8 @@
 	width: 55%;
 }
 
-.notice_list li:nth-child(5n+3) a:hover{
-	text-decoration: underline;
-}
-
 .notice_list li:nth-child(5n+5){
 	width: 15%;
-	border-right: 1px solid #fff;
 }
 
 .writeBtn_wrap{

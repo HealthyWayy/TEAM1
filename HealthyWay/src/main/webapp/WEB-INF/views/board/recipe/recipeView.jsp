@@ -340,6 +340,9 @@ textarea:focus{
       width:35%;
       height:900px;
    }
+   #commentDiv>p{
+   	  font-size:1.3em;
+   }
    #rContent{
       width:85%;
       margin-right:1.6%;
@@ -465,12 +468,15 @@ $(function(){
    $('.warnIcon').click(function(){
       $(".modal").fadeIn(300);
    });
+   
    $('#reportOk').click(function(){
       $(".modal").fadeOut(300);
    });
+   
    let reportCount=0;
    $('#reportFrm').submit(function(){
       event.preventDefault();
+      
       if(confirm('신고하시겠습니까?')){
          if($("#reportContent").val()==""){
             alert('내용을 입력해 주세요');
@@ -480,8 +486,9 @@ $(function(){
             alert('이미 신고한 게시글 입니다!');
             return;
          }
+
          $.ajax({
-            url:"/master/reportProcess",
+            url:"/master/reportInsert",
             data:$("#reportFrm").serialize(),
             type:'post',
             success:function(response){
@@ -491,6 +498,7 @@ $(function(){
                }else{
                   alert('신고가 되지 않았습니다. - 이유 불명 - ');
                }
+               $(".modal").fadeOut(300);
             },error:function(error){
                console.log(error.responseText)
             }
@@ -714,7 +722,8 @@ function editReply(reply_num){
                <li>조회수:&nbsp;${vo[0].hit}</li>
                <li id="replyCount"></li>
             </ul>
-            <c:if test="${logId==vo[0].user_id}">
+           
+            <c:if test="${logId==vo[0].user_id || logId=='admin'}">
                <ul id="editDelete">
                   <li><a href="/recipe/edit?board_num=${vo[0].board_num}">수정</a></li>
                   <li><a href="javascript:deleteRecipe(${vo[0].board_num}, '${vo[0].recipe_img_file}');">삭제</a></li>

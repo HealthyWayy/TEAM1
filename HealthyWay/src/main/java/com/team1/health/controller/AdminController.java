@@ -1,6 +1,7 @@
 package com.team1.health.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ public class AdminController {
 	@GetMapping("/master/member")
 	public ModelAndView masterMember(PagingVO pVO) {
 		ModelAndView mav = new ModelAndView();
+		//회원 관련
 		pVO.setTotalRecord(service.totalRecord1(pVO));
 		mav.addObject("pVO", pVO);
 		mav.addObject("vo", service.memberList(pVO));
@@ -30,13 +32,26 @@ public class AdminController {
 
 		return mav;
 	}
-
+	//회원 삭제
 	@PostMapping("/master/member/delete")
 	@ResponseBody
 	public int memberDelete(String user_id) {
 		return service.memberDelete(user_id);
 	}
+	
+	//회원 신고 관리
+	@GetMapping("/master/member/report")
+	public ModelAndView masterMemberReport(PagingVO pVO) {
+		ModelAndView mav = new ModelAndView();
+		//신고 관련
+		pVO.setTotalRecord(service.totalReport(pVO));
+		mav.addObject("pVO", pVO);
+		mav.addObject("vo", service.memberReportList(pVO));
+		
+		mav.setViewName("/admin/master_member_report");
 
+		return mav;
+	}
 	
 	
 	// 레시피 관리자 페이지------------------------------------
@@ -90,9 +105,22 @@ public class AdminController {
 
 	// 커뮤니티 관리자 페이지------------------------------------
 	@GetMapping("/master/community")
-	public String masterCommunity() {
-		return "/admin/master_community";
+	public ModelAndView masterCommunity(PagingVO pVO) {
+		ModelAndView mav = new ModelAndView();
+		pVO.setTotalRecord(service.totalRecord3(pVO));
+		mav.addObject("pVO", pVO);
+		mav.addObject("vo", service.boardList(pVO));
+		mav.setViewName("/admin/master_community");
+		return mav;
 	}
+	
+	@GetMapping("/master/notice")
+	public ModelAndView masterNotice() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/admin/master_notice");
+		return mav;
+	}
+	
 
 	// 신고 관리자 페이지-----------------------------------------
 	// 신고 목록
@@ -100,8 +128,8 @@ public class AdminController {
 	public ModelAndView masterReport(PagingVO pVO) {
 		ModelAndView mav = new ModelAndView();
 		pVO.setTotalRecord(service.totalRecord4(pVO));
-		mav.addObject("vo", service.reportList(pVO));
 		mav.addObject("pVO", pVO);
+		mav.addObject("vo", service.reportList(pVO));
 		mav.setViewName("/admin/master_report");
 		return mav;
 	}
@@ -116,7 +144,9 @@ public class AdminController {
 	// 신고 등록
 	@PostMapping("/master/reportInsert")
 	@ResponseBody
-	public int reportInsert(ReportVO vo) {
+	public int reportInsert(ReportVO vo, HttpSession session) {
+		String logId = (String)session.getAttribute("logId");
+		vo.setUser_id(logId);
 		return service.reportInsert(vo);
 	}
 	
@@ -124,7 +154,15 @@ public class AdminController {
 	@PostMapping("/master/reportProcess")
 	@ResponseBody
 	public int reportProcess(ReportVO vo) {
-		service.userReportCount(vo.getWrite_id());
-		return service.boardDelete(vo.getBoard_num());
+		service.userReportCount(vo.getWrite_id());//회원 신고 누적
+		service.warningState("N", vo.getWrite_id());//경고 상태(N:메일 보내기 전, Y:메일 보냄)
+		return service.boardDelete(vo.getBoard_num());//게시글 삭제
+	}
+	
+	//경고 메일 보낸 후 warning_state 업데이트
+	@PostMapping("/master/warningState")
+	@ResponseBody
+	 public int warningState(String user_id) {
+		return service.warningState("Y", user_id);
 	}
 }
