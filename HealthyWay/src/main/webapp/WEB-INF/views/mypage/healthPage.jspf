@@ -125,7 +125,7 @@
 							if(mvo.train_num==vo.train_num){
 								routinList += "<div class='routinModule'>";
 								routinList += "<div class='routinModuleImg'>"
-								routinList += "<img src='/img/"+mvo.module_img+"'/>";
+								routinList += "<img src='/train_model/moduleImg/"+mvo.module_img+"'/>";
 								routinList += "</div>";
 								routinList += "<div class='module_title'>"+mvo.module_title+"</div>";
 								routinList += "<div class='module_content'>"+mvo.module_content+"</div>";
