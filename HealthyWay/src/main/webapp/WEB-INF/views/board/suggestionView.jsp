@@ -244,8 +244,8 @@ $(function() {
 	      <div><img src="/recipeImg/warnIcon.png"/>신고하기<img src="/recipeImg/warnIcon.png"/></div>
 	      <form method='post' id='reportFrm'>
 	         
-	         <input type='hidden' name='write_id' value='${vo[0].user_id}'/>
-	         <input type='hidden' name='board_num' value='${vo[0].board_num}'/>
+	         <input type='hidden' name='write_id' value='${vo.user_id}'/>
+	         <input type='hidden' name='board_num' value='${vo.board_num}'/>
 	         <input type='hidden' name='report_type' value='5'/>
 	         
 	         <input type="radio" name="report_title" value="게시판 이탈" id='reportRadio1' checked>

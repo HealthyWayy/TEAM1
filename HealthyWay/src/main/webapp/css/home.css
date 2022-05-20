@@ -24,7 +24,7 @@ a {
 	display: none;
 }
 a:hover {
-	color: orange;
+	color: #f0094a;
 }
 .nav-bar {
 	position: absolute;
@@ -307,7 +307,7 @@ iteration-count | direction | fill-mode | play-state | name */
 .colors{
 	font-weight: bold;
 	font-size:30px;
-	color:orange !important;
+	color: orange !important;
 }
 
 

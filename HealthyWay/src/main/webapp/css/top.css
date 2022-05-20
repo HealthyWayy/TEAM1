@@ -109,7 +109,7 @@ ul, li {
 }
 
 .login-container a:hover {
-	color:orange;
+	color: #f0094a;
 }
 
 .login-container>li:last-of-type {

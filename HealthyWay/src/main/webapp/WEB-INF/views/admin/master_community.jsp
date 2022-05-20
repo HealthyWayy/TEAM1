@@ -39,6 +39,17 @@ a:hover {
 body {
 	font-family: "NanumBarunGothic";
 }
+
+ul, li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.top{
+	font-family:NanumGothic;
+}
+
+
 #container{
 	margin:4%;
 	padding-top:1%;
