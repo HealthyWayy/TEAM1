@@ -52,15 +52,17 @@ a:hover {
 	padding-right:4%;
 	font-family: "NanumBarunGothic";
 }
+/*검색창*/
 #searchFrm{
 	overflow:auto;
-	width:30%;
+	width:385px;
+	margin-right:2%;
 	float:right;
 }
 #searchFrm>input[type=text]{
-	width:74%;
+	width:300px;
 	height:30px;
-	padding-left:2%;
+	padding-left:5px;
 	border-radius:10px;
 	border:1px solid rgb(200,200,200);
 }
@@ -68,8 +70,9 @@ a:hover {
 	outline-color: #FF5454;
 }
 #searchFrm>input[type=submit]{
-	width:25%;
+	width:75px;
 	height:30px;
+	margin-left:5px;
 	border-radius: 30px;
 	border:none;
 	background-color: #FF5454;
@@ -100,12 +103,16 @@ a:hover {
 }
 .table{
 	text-align: center;
+	table-layout: fixed;
 }
 .table>tbody>tr{
 	cursor: pointer;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
 }
 #deletBtn{
-	width:90%;
+	width:75px;
 	height:30px;
 	border-radius: 30px;
 	border:none;
@@ -199,20 +206,22 @@ a:hover {
 			<thead>
 				<tr>
 					<th>번호</th>
-					<th>그룹명</th>
 					<th>리더</th>
+					<th style="width:10%;">그룹명</th>
+					<th style="width:30%;">내용</th>
 					<th>참여인원</th>
-					<th>생성일</th>		
+					<th>생성일</th>
 					<th>모집현황</th>	
 					<th>삭제</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="vo" items="${vo}">
-					<tr onclick="location='/board/ptView?board_num=${vo.board_num}';">
+					<tr onclick="window.open('/board/ptView?board_num=${vo.board_num}');">
 						<td>${vo.board_num}</td>
-						<td>${vo.title}</td>
 						<td>${vo.user_id}</td>
+						<td>${vo.title}</td>
+						<td>${vo.content}</td>
 						<td>${vo.pNum}/${vo.max_user}</td>
 						<td>${vo.write_date}</td>
 						<td>${vo.state}</td>

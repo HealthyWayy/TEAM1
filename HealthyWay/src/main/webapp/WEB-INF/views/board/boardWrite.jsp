@@ -1,65 +1,51 @@
-<link rel="stylesheet" href="${url}/css/board.css">
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link rel="stylesheet" href="${url}/css/board/boardWrite.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 <script>
 $(function() {
-	console.log('찍힘')
-    $("#btn_submist").on("click",function() {
+	// 글등록 버트 누르면 submit 실행
+    $("#writeBtn").on("click",function() {
        if ($("#title").val() == "") {
           alert("글 제목을 입력하세요");
-          return false;
-       }
-       if ($("#user_id").val() == "") {
-           alert("접속하신 아이디를 입력하세요");
-           return false;
-        }
-       if ($("#content").val() == "") {
+       }else if ($("#content").val() == "") {
            alert("내용을 입력하세요");
-           return false;
-        }
-       
-       $(function(){
-         var url = "${url}/boardWrite";
-         var data = $("#boardFrm").serialize();
-         
-          $.ajax({
-             url : url,
-             type : "POST",
-             dataType : "JSON",
-             data : data,
-             success : function(result) {
-            	 alert(result);
-             },
-             error : function(error){
-                console.log(error.responseJSON);
-                alert(error.responseJSON.msg);
-                window.location.href = error.responseJSON.redirect;
-             }
-             
-         }) ;
-       });
+       }else{
+    	   $("#writeFrm").submit();
+       }
     });
+	
+	// 글등록 버튼 색변경
+	$("#writeBtn").hover(function(){
+		$(this).css("background-color", "#fff").css("border", "1px solid #bdbdbd").css("color", "#000");
+	}, function(){
+		$(this).css("background-color", "#ff5454").css("border", "1px solid #ff5454").css("color", "#fff");
+	});
  });
 </script>
-  
-   <div id="#b__table" >
-        <h1 class="bf__title">👇 게시글 작성 👇</h1>
-       <form id="boardFrm" class="bf__container" method="post" action="/boardWrite">
-        	<input type="hidden" value="suggestWrite" name="command">
-        
-            <table class="bf__table">
-                <tr>
-                    <th>제목</th>
-                    <td><input type="text" name="title" id="title" placeholder="제목을 작성해주세요"></td>
-                </tr>
-              
-                <tr>
-                    <th>내용</th>
-                    <td><textarea cols="100" rows="30"  name="content" id="content" style="padding: 10px"></textarea></td>
-                </tr>
-            </table>
-            <input class="bo__btn__wa" type="submit" id="btn_submit" value="등록">
-            <input class="bo__btn__wa" type="button" value="취소" onclick="javascript:history.back()">
-    	</form>
-    </div>
 
+
+<div class="wrap">
+	 <form id="writeFrm" method="post" action="${url}/suggestionWrite">
+		<ul>
+			<li>
+				<select name="type_num" id="type_num">
+					<option id="notice" value="4" selected>공지사항</option>
+					<option id="free" value="5">자유게시판</option>
+					<option id="success" value="3">성공스토리</option>
+				</select>
+			</li>
+			<li id="title_wrap">
+				<input type="text" name="title" id="title" placeholder="제목">
+			</li>
+			<li>
+				<textarea name="content" id="content" placeholder="내용을 입력해주세요!"></textarea>
+			</li>
+		</ul>
+	</form>
+</div> 
+<div class="writeBtn_wrap">
+	<input class="writeBtn" type="button" id="writeBtn" value="등록">
+</div> 

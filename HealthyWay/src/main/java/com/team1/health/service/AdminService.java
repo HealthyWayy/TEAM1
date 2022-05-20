@@ -20,7 +20,10 @@ public interface AdminService {
 	public int totalRecord1(PagingVO pVO);
 	//회원 삭제 
 	public int memberDelete(String user_id);
-	 
+	//신고회원 목록
+	public List<MemberVO> memberReportList(PagingVO pVO);
+	//totalRecord
+	public int totalReport(PagingVO pVO);
 	
 	
 	//레시피 관리-----------------------------------------
@@ -45,6 +48,10 @@ public interface AdminService {
 
 	
 	//커뮤니티 관리-----------------------------------------
+	//게시글 목록
+	public List<BoardVO> boardList(PagingVO pVO);
+	//totalRecord
+	public int totalRecord3(PagingVO pVO);
 	
 	
 	//신고 관리--------------------------------------------
@@ -58,4 +65,6 @@ public interface AdminService {
 	public int reportInsert(ReportVO vo);
 	// 회원 신고 누적
 	public int userReportCount(String user_id);
+	// 경고 상태
+	public int warningState(String state, String user_id);
 }

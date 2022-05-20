@@ -217,6 +217,7 @@ function addIngred(obj){
 }
 //초기화
 function ingredReset(){
+	//재료 추가폼 초기화
 	$("#ingredNum").val("");
 	$("#ingredKcal").val("");
 	$("#ingredGram").val("");
@@ -224,8 +225,11 @@ function ingredReset(){
 	$("#gKcal").html("kcal: ");
 	$("#measurement>li>img").attr("src","/recipeImg/mesure.png");
 	$(".g1").html("100g");
+	$(".g1").parent().attr("onclick","mesureClick('100');");
 	$(".g2").html("200g");
+	$(".g2").parent().attr("onclick","mesureClick('200');");
 	$(".g3").html("300g");
+	$(".g3").parent().attr("onclick","mesureClick('300');");
 	
 	$("#pageNum").val(1);	//페이지 변수값 변경
 }
@@ -299,7 +303,7 @@ function ingredList(){
 			var kcal=0;
 			$("#ingredList").html("");
 			$(result).each(function(){
-				tag = '<li id="'+this.gred_num+'"onclick="deleteIngred(\''+this.gred_num+'\', \''+this.gred_kcal+'\');">'+this.gred_name+'&nbsp;'+this.gred_gram+'g&nbsp;<span class="times">&times;</span></li>';
+				tag = '<li id="'+this.gred_num+'"onclick="deleteIngred(\''+this.gred_num+'\', \''+this.gred_gram+'\', \''+this.gred_kcal+'\');">'+this.gred_name+'&nbsp;'+this.gred_gram+'g&nbsp;<span class="times">&times;</span></li>';
 				$("#ingredList").append(tag);
 				kcal+=this.gred_kcal;
 			});
@@ -313,7 +317,7 @@ function ingredList(){
 	});
 }
 
-function deleteIngred(gredNum, gredkcal){
+function deleteIngred(gredNum, gredGram, gredKcal){
 	
 	if(confirm("재료를 삭제하시겠습니까?")==false){
 		return false;
@@ -321,18 +325,18 @@ function deleteIngred(gredNum, gredkcal){
 	
 	$.ajax({
 		url: "/recipe/deleteIngred",
-		data: "gred_num="+gredNum+"&board_num=0",
+		data: "gred_num="+gredNum+"&board_num=0"+"&gred_gram="+gredGram,
 		type: "post",
 		success: function(result){
 			if(result<0){
 				alert("재료 삭제 실패");
 			}
-			$("#gredNum").html("");
+			ingredList();
 			var kcal = $("#totalKcal").text();
 			var idx =  kcal.lastIndexOf(":")+2;
 			var idx2 = kcal.indexOf("kcal");
 			kcal = kcal.substring(idx,idx2);
-			kcal -= gredkcal;
+			kcal -= gredKcal;
 			$("#totalKcal").text("Total : "+kcal+"kcal");
 		},
 		error: function(e){

@@ -1,10 +1,14 @@
 package com.team1.health.controller;
 
+import java.util.Iterator;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -99,6 +103,40 @@ public class TrainController {
 	}
 	
 	//나만의 운동 혹은 운동 시작
+	@GetMapping("/trainning/start_train")
+	public ModelAndView start_train(int module_num) {
+		TrainVO vo = service.start_train(module_num);
+		
+		System.out.println("start_train!!!!!!!!!!!");
+		System.out.println("module_num : "+ module_num);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		
+		System.out.println("module_title : "+vo.getModule_title());
+		
+		
+		mav.setViewName("/trainning/start_train");
+		return mav;
+	}
+	
+	//운동 시간 저장
+	@GetMapping("/trainning/save_user_count")
+	public String save_user_count(TrainVO vo, HttpSession session) {
+		System.out.println("save_user_count:::::START!!!!");
+		
+		String logId = (String)session.getAttribute("logId");
+		vo.setUser_id(logId);
+		
+		service.save_user_count(vo);
+		
+		System.out.println(logId);
+		System.out.println(vo.getTrain_count());
+		
+		
+		return "redirect:/trainning/trainningHome";
+		
+	}
+	
 	//테스트중
 		@GetMapping("/trainning/testTrain")
 		public ModelAndView testTrain(TrainVO vo) {

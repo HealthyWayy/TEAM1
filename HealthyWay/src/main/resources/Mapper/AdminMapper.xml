@@ -9,9 +9,9 @@
 		select user_id, user_pw, user_email, user_name, user_nickname, tel, gender, age
 		from user
 		<if test="searchWord != null">
-			where user_id like '%${searchWord}%' || user_pw like '%${searchWord}%' || user_email like '%${searchWord}%'
-			|| user_name like '%${searchWord}%' || user_nickname like '%${searchWord}%' || tel like '%${searchWord}%'
-			|| gender like '%${searchWord}%' || age like '%${searchWord}%'
+			where user_id like '%${searchWord}%' or user_pw like '%${searchWord}%' or user_email like '%${searchWord}%'
+			or user_name like '%${searchWord}%' or user_nickname like '%${searchWord}%' or tel like '%${searchWord}%'
+			or gender like '%${searchWord}%' or age like '%${searchWord}%'
 		</if>
 		order by join_date desc limit ${onePageRecord} offset ${offsetIndex}
 	</select>
@@ -19,9 +19,9 @@
 	<select id="totalRecord1" resultType="int">
 		select count(user_id) from user
 		<if test='searchWord != null'>
-			where user_id like '%${searchWord}%' || user_pw like '%${searchWord}%' || user_email like '%${searchWord}%'
-			|| user_name like '%${searchWord}%' || user_nickname like '%${searchWord}%' || tel like '%${searchWord}%'
-			|| gender like '%${searchWord}%' || age like '%${searchWord}%'
+			where user_id like '%${searchWord}%' or user_pw like '%${searchWord}%' or user_email like '%${searchWord}%'
+			or user_name like '%${searchWord}%' or user_nickname like '%${searchWord}%' or tel like '%${searchWord}%'
+			or gender like '%${searchWord}%' or age like '%${searchWord}%'
 		</if>
 	</select>
 	
@@ -29,7 +29,16 @@
 		delete from user where user_id=#{param1}
 	</delete>
 	
-
+	<!-- 신고 회원 -->
+	<select id="memberReportList" resultType="com.team1.health.vo.MemberVO">
+		select user_id, user_pw, user_email, user_name, user_nickname, tel, report_hit, warning_state
+		from user where report_hit>0 and warning_state='N'
+		order by join_date desc limit ${onePageRecord} offset ${offsetIndex}
+	</select>
+	
+	<select id="totalReport" resultType="int">
+		select count(user_id) from user where report_hit>0 and warning_state='N'
+	</select>
 	
 	<!-- 레시피 관리 -->
 	<select id="lastIngred" resultType="String">
@@ -49,13 +58,13 @@
 	
 	<!-- pt 그룹 관리 -->
 	<select id="ptList" resultType="com.team1.health.vo.BoardVO">
-		select b.board_num, user_id, title, date_format(write_date, '%Y-%m-%d') write_date, state, start_date, end_date, max_user, pNum
+		select b.board_num, user_id, title, b.content, date_format(write_date, '%Y-%m-%d') write_date, state, start_date, end_date, max_user, pNum
 		from board b inner join PT_group p on b.board_num=p.board_num
 		left join (select board_num, count(*) pNum from apply_user where user_state="참여중" group by board_num) n on b.board_num=n.board_num
 		where type_num=2
 		<if test="searchWord != null">
-			and ( b.board_num like '%${searchWord}%' || b.user_id like '%${searchWord}%' || b.title like '%${searchWord}%' || b.content like '%${searchWord}%'
-			|| p.state like '%${searchWord}%')
+			and ( b.board_num like '%${searchWord}%' or b.user_id like '%${searchWord}%' or b.title like '%${searchWord}%' or b.content like '%${searchWord}%'
+			or p.state like '%${searchWord}%')
 		</if>
 		order by b.board_num desc limit ${onePageRecord} offset ${offsetIndex}
 	</select>
@@ -63,8 +72,8 @@
 	<select id="totalRecord2" resultType="int">
 		select count(b.board_num) from board b inner join PT_group p on b.board_num=p.board_num
 		<if test='searchWord != null'>
-			and (board_num like '%${searchWord}%' || user_id like '%${searchWord}%' || titl like '%${searchWord}%'
-			|| content like '%${searchWord}%')
+			and (board_num like '%${searchWord}%' or user_id like '%${searchWord}%' or titl like '%${searchWord}%'
+			or content like '%${searchWord}%')
 		</if>
 	</select>
 	
@@ -78,8 +87,48 @@
 	
 	
 	<!-- 커뮤니티 관리 -->
+	<select id="boardList" resultType="com.team1.health.vo.BoardVO">
+		select board_num, user_id, title, hit, date_format(write_date,'%m-%d %H:%i') write_date
+		from board 
+		<choose>
+			<when test='searchKey!=null and searchKey!=""'>
+				<if test='searchKey=="자유게시판"'>
+					where type_num=5
+				</if>
+				<if test='searchKey=="성공스토리"'>
+					where type_num=3
+				</if>
+			</when>
+			<otherwise>
+				where type_num=3 and type_num=5
+			</otherwise>
+		</choose>
+		<if test="searchWord != null">
+			and (title like '%${searchWord}%' or content like '%${searchWord}%' or user_id like '%${searchWord}%')
+		</if>
+		order by board_num desc limit ${onePageRecord} offset ${offsetIndex}
+	</select>
 	
-	
+	<select id="totalRecord3" resultType="int">
+		select count(board_num) from board
+		<choose>
+			<when test='searchKey!=null and searchKey!=""'>
+				<if test='searchKey=="자유게시판"'>
+					where type_num=5
+				</if>
+				<if test='searchKey=="성공스토리"'>
+					where type_num=3
+				</if>
+			</when>
+			<otherwise>
+				where type_num=3 and type_num=5
+			</otherwise>
+		</choose>
+		<if test="searchWord != null">
+			and (title like '%${searchWord}%' or content like '%${searchWord}%' or user_id like '%${searchWord}%')
+		</if>
+		order by board_num desc limit ${onePageRecord} offset ${offsetIndex}
+	</select>
 	
 	
 	<!-- 신고 관리 -->
@@ -113,10 +162,22 @@
 			where report_type = 3
 		</if>
 		<if test="searchKey=='자유게시판'">
-			where report_type = 4
+			where report_type = 5
 		</if>
 	</select>
 	
+	<insert id='reportInsert'>
+		insert into report(board_num, user_id, report_title, report_content, report_type) 
+		values(${board_num}, #{user_id}, #{report_title}, #{report_content}, ${report_type})
+   </insert>
+	
+	<update id="userReportCount">
+		update user set report_hit=report_hit+1, warning_state="N" where user_id=#{param1}
+	</update>
+	
+	<update id="warningState">
+		update user set warning_state=#{param1} where user_id=#{param2}
+	</update>
 	<delete id="reportDelete">
 		delete from report where report_num=#{param1}
 	</delete>
