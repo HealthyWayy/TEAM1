@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.video-frm {
+	display: flex;
+	flex-wrap: nowrap;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.item {
+	
+}

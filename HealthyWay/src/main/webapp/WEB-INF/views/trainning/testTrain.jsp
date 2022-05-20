@@ -1,48 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" type="text/css" href="/css/test_train.css">
-<div>사이드 레터럴 레이즈</div>
+<link rel="stylesheet" type="text/css" href="/css/train/test_train.css">
 <script type="text/javascript" language="JavaScript">
 	function hideDiv (){
 		document.getElementById("hideVideo").style.display="none";
 	}
 	self.setTimeout("hideDiv()",5000); // 초 지정
-	
-	$(function(){ 
-    	$("#video1").bind("ended", function() {
- 		document.getElementById("video2").play();
- 	});
-	$("#video2").bind("ended", function() {
-        	document.getElementById("video3").play();
-        });
-	$("#video3").bind("ended", function() {
- 		document.getElementById("video4").play();
- 	});
-	$("#video4").bind("ended", function() {
- 		document.getElementById("video5").play();
- 	});
-}); 
 </script>
-<style>
-#video1{
-	width: 50%;
-	height: 50%;
-}
-</style>
-<div id="hideVideo">
-	<video class="ready-video" src="/train_model/countdown5s.mp4" autoplay muted style="width:100%; heigth:100%; margin: 0 auto;"></video>
+<div>사이드 레터럴 레이즈</div>
+<div class="video-frm">
+	<div class="item" id="hideVideo">
+		<div><video class="ready-video" src="/train_model/countdown5s.mp4" autoplay muted style="width:800px"></video></div>
+		<div><canvas id="canvas" style="width:800px"></canvas></div>
+		<div id="label-container"></div>
+	</div>
+	
+	<div class="item">
+		<P id="display"></P>
+		영상 띄워 놓는곳
+		<video id="video1" src="/train_model/moduleVod/사이드 컬.mp4" autoplay controls loop muted style="width:800px"></video>
+	</div>
 </div>
 
-<P id="display"></P>
-    영상 띄워 놓는곳
-    <video id="video1" src="/train_model/moduleVod/사이드 컬.mp4" autoplay controls loop muted>
-        tmp
-    
-    
-
 <!-- <button type="button" onclick="init()">시작하기</button> -->
-<div><canvas id="canvas"></canvas></div>
-<div id="label-container"></div>
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
 <script type="text/javascript">
