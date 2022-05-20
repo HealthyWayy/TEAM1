@@ -84,6 +84,7 @@ body{
 }
 /*레시피 추천 div*/
 #main{
+	height:500px;
 	overflow:auto;
 	margin-bottom:5%;
 }
@@ -180,6 +181,9 @@ body{
 		left:39%;
 	}
 	/*추천 레시피 리스트*/
+	#main{
+		height:750px;
+	}
 	#recipe_list{
 		width:80%;
 		margin-left:9%;

@@ -232,7 +232,8 @@ function barGrap(labels,datas,destroy){
 		    borderColor: [
 		    	'rgba(151, 102, 172, 1)'
 		    ],
-		    borderWidth: 1
+		    borderWidth: 1,
+		    pointRadius: 0
 		}]
 	};
 	const config = {
@@ -263,7 +264,23 @@ function barGrap(labels,datas,destroy){
 			plugins: {
 				legend: {
 					display: false,
-				}
+				},
+				tooltip: {
+	                usePointStyle: false,
+	                callbacks: {
+	                	label: function(context) {
+	                        let label = context.dataset.label || '';
+
+	                        if (label) {
+	                            label += '';
+	                        }
+	                        if (context.parsed.y !== null) {
+	                            label += '운동시간: '+context.parsed.y+'분';
+	                        }
+	                        return label;
+	                    }
+	                }
+	            }
 			},
 			responsive: false,
 			layout: {

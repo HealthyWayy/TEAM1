@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <link rel="stylesheet" type="text/css" href="/css/train.css">
  <section class="training-view">  
 
     <ul id="menu">
-        <li><a id="list_menu" class="li-a" href="/">홈</a></li>
         <li><a class="active" class="li-a" href="/trainning/trainningHome">트레이닝 센터</a></li>
         <li><a id="list_menu" class="li-a" href="/trainning/myTrainning">나만의 운동</a></li>
         <li><a id="list_menu" class="li-a" href="/trainning/recommendTrainning">추천 운동 목록</a></li>
@@ -14,34 +14,41 @@
     <div>
         <h2>04 May Wed</h2>
         <h2>오늘도 트레이닝 센터에서 열심히 운동하세요!</h2>
-        <ul>
-            <li id="train_menu"><select name="" id="">
-                <option value="module_type" name="module_type">카테고리 선택</option>
-                <option value="module_type" name="module_type">스트레칭</option>
-                <option value="module_type" name="module_type">요가</option>
-                <option value="module_type" name="module_type">피트니스</option>
-            </select></li>
-            <li id="train_menu"><select name="" id="">
-                <option value="module_part" name="module_part">운동부위 선택</option>
-                <option value="module_part" name="module_part">가슴</option>
-                <option value="module_part" name="module_part">등</option>
-                <option value="module_part" name="module_part">어깨</option>
-                <option value="module_part" name="module_part">하체</option>
-                <option value="module_part" name="module_part">팔</option>
-                <option value="module_part" name="module_part">복근</option>
-            </select></li>
-            <li id="train_menu"><select name="" id="">
-                <option value="module_difficulty">난이도 선택</option>
-                <option value="module_difficulty" name='module_difficulty'>상</option>
-                <option value="module_difficulty" name='module_difficulty'>중</option>
-                <option value="module_difficulty" name='module_difficulty'>하</option>
-            </select></li>
-            <li id="train_menu"><button class="search-btn">검색</button></li>
-        </ul>
+        <form action="">
+	        <ul>
+	            <li id="train_menu"><select name="" id="">
+	                <option value="module_type" name="module_type">카테고리 선택</option>
+	                <option value="module_type" name="module_type">헬스</option>
+	                <option value="module_type" name="module_type">요가</option>
+	                <option value="module_type" name="module_type">피트니스</option>
+	            </select></li>
+	            <li id="train_menu"><select name="" id="">
+	                <option value="module_part" name="module_part">운동부위 선택</option>
+	                <option value="module_part" name="module_part">가슴</option>
+	                <option value="module_part" name="module_part">등</option>
+	                <option value="module_part" name="module_part">어깨</option>
+	                <option value="module_part" name="module_part">하체</option>
+	                <option value="module_part" name="module_part">팔</option>
+	                <option value="module_part" name="module_part">복근</option>
+	            </select></li>
+	            <li id="train_menu"><select name="" id="">
+	                <option value="module_difficulty">난이도 선택</option>
+	                <option value="module_difficulty" name='module_difficulty'>상</option>
+	                <option value="module_difficulty" name='module_difficulty'>중</option>
+	                <option value="module_difficulty" name='module_difficulty'>하</option>
+	            </select></li>
+	            <li id="train_menu"><button class="search-btn" onclick="search()">검색</button></li>
+	        </ul>
+        </form>
         <br><br><br>
         <ul>
+        	<li id="train_yoso" class="train-frm"><a class="li-a" href="/trainning/testTrain">
+  		    <img class="train-img" name="module_img" src="/train_model/moduleImg/프론트 레이즈.png">
+            <p class="train-subject" name="module_title">테스트 용</p>
+            <p class="train-keyword" name="module_content">테스트 용</p></a>
+        
             <c:forEach var='vo' items="${vo}">
-      		    <li id="train_yoso" class="train-frm"><a class="li-a" href="/trainning/testTrain">
+      		    <li id="train_yoso" class="train-frm"><a class="li-a" href="/trainning/start_train?module_num=${vo.module_num}">
       		    <img class="train-img" name="module_img" src="/train_model/moduleImg/${vo.module_img}">
                 <p class="train-subject" name="module_title">${vo.module_title}</p>
                 <p class="train-keyword" name="module_content">${vo.module_content }</p></a>
@@ -92,8 +99,17 @@
             </ul>
         </div>
     </div>
+
  </section>    
 <script>
+function search(){
+	$.ajax({
+		url:"/trainning/search_train",
+		type:"get",
+		data:
+	})
+}
+
 function add_train(module_num){
     $.ajax({
         url: "/trainning/mytrain_list",
@@ -102,7 +118,7 @@ function add_train(module_num){
         success : function(result){
             var tag="";
             $(result).each(function(){
-                tag += '<li><p></p><img src="/train_model/moduleImg/'+ this.module_img +'" alt=""><p>' + this.module_title + '</p><p>'+this.module_content+'</p><button class="add-btn" onclick="del_train('+this.module_num+')">삭제하기</button></li>'
+                tag += '<li class="only-li"><p></p><img src="/train_model/moduleImg/'+ this.module_img +'" alt=""><p>' + this.module_title + '</p><p>'+this.module_content+'</p><button class="deldel-btn" onclick="del_train('+this.module_num+')">삭제하기</button></li>'
                 $("#my_train").append(tag);
             });
         },

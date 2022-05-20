@@ -9,7 +9,7 @@
   </ul>
   <ul>
   	<c:if test="${logStatus != 'Y' }">
-  		<li><a href="/member/loginForm">로그인</a></li>		
+  		<li><a href="/member/loginForm">Login</a></li>		
   	</c:if>
   	<c:if test="${logStatus == 'Y' }">  		
   		<li>
@@ -41,11 +41,12 @@
         <div class="box">
         	<div class="cover">
         		<ul class="copywrite first">
-        			<li class="Title-mask"><span class="Title-line Title-effect">AI-training</span></li>
+        			<li class="Title-mask"><span class="Title-line Title-effect delayFirst">AI-training</span></li>
+        			<li class="Title-mask"><span class="Title-line Title-effect delaySecond"><span class="colors">AI 트레이너</span>와 함께 운동해보세요.</span></li>
         		</ul>
   			 	<section class="btn-container form-move">
 				    <button class="blob-btn">
-				        <span class="btn-text">Start</span>
+				        <span class="blob-text">Start</span>
 				        <span class="blob-btn__inner">
 				            <span class="blob-btn__blobs">
 				                <span class="blob-btn__blob"></span>
@@ -73,11 +74,12 @@
         <div class="box">
         	<div class="cover">
         		<ul class="copywrite second">
-        			<li class="Title-mask"><span class="Title-line Title-effect">Recipe</span></li>
+        			<li class="Title-mask"><span class="Title-line Title-effect delayFirst">Recipe</span></li>
+        			<li class="Title-mask"><span class="Title-line Title-effect delaySecond">건강한 식단을 작성하고 <span class="colors">공유</span>해보세요.</span></li>
         		</ul>
 				<section class="btn-container form-move">
 				    <button class="blob-btn">
-				        Start
+				        <span class="blob-text">Start</span>
 				        <span class="blob-btn__inner">
 				            <span class="blob-btn__blobs">
 				                <span class="blob-btn__blob"></span>
@@ -105,11 +107,12 @@
         <div class="box">
         	<div class="cover">
 				<ul class="copywrite third">
-					<li class="Title-mask"><span class="Title-line Title-effect">Group</span></li>
+					<li class="Title-mask"><span class="Title-line Title-effect delayFirst">Group</span></li>
+        			<li class="Title-mask"><span class="Title-line Title-effect delaySecond">홈트레이닝 <span class="colors">함께</span> 해보세요.</span></li>
 				</ul>
 				<section class="btn-container form-move">
 				    <button class="blob-btn">
-				        Start
+				        <span class="blob-text">Start</span>
 				        <span class="blob-btn__inner">
 				            <span class="blob-btn__blobs">
 				                <span class="blob-btn__blob"></span>
@@ -138,7 +141,8 @@
         <div class="box">
 	        <div class="cover">
 	        	<ul class="copywrite fourth">
-        			<li class="Title-mask"><span class="Title-line Title-effect">Community</span></li>
+        			<li class="Title-mask"><span class="Title-line Title-effect delayFirst">Community</span></li>
+        			<li class="Title-mask"><span class="Title-line Title-effect delaySecond">헬스에 대해 다른사람과 <span class="colors">소통</span>해보세요.</span></li>
         		</ul>
 				<!-- <p class="copywrite fourth">
 					<span class="blur-animation">It's</span>
@@ -151,7 +155,7 @@
 				</p> -->
 				<section class="btn-container form-move">
 				    <button class="blob-btn">
-				        Start
+				        <span class="blob-text">Start</span>
 				        <span class="blob-btn__inner">
 				            <span class="blob-btn__blobs">
 				                <span class="blob-btn__blob"></span>

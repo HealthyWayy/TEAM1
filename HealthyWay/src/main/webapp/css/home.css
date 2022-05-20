@@ -17,10 +17,6 @@
 
 
 /*======= top =======*/	
-* {
-	box-sizing: border-box;
-	font-family: "NanumBarunGothic";
-}
 a {
 	color:white;
 }
@@ -102,12 +98,12 @@ a:hover {
 }
 
 .dropdown-content2 {
-	/*ÄÜÅÙÃ÷ Á¤·Ä*/
+	/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 	display:flex;
 	justify-content:center;
 	align-items:center;
 	
-	/*¹Ú½º ¼³Á¤*/
+	/*ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 	overflow: hidden;
 	box-sizing:border-box;
 	border-radius: 5%;
@@ -115,7 +111,7 @@ a:hover {
 	box-shadow: 0px 0px 10px 0px rgba(5, 5, 5, 0.3);
 	background-color: white;
 	
-	/*¾Ö´Ï¸ÞÀÌ¼Ç È¿°ú¼³Á¤*/
+	/*ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	opacity:0;
 	transform:scale(0);
 	transform-origin: 100% 0;
@@ -149,7 +145,7 @@ a:hover {
 	cursor:pointer;
 	color: rgb(10,10,10);
 	font-size:16px;
-	/*ÅØ½ºÆ®¿¡¼­ ¹ØÁÙ °£°Ý ¶ç¿ì±â*/
+	/*ï¿½Ø½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 	padding-bottom: 6px;
 } 
 .gnb li:last-of-type {
@@ -159,23 +155,23 @@ a:hover {
 
 .gnb span:before {
 	content:"";
-	position: absolute; /*ºÎ¸ð ¿ä¼Ò¿¡´Â position: relative¸¦ ÁÖ¾î¾ß ÇÑ´Ù.*/
+	position: absolute; /*ï¿½Î¸ï¿½ ï¿½ï¿½Ò¿ï¿½ï¿½ï¿½ position: relativeï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ ï¿½Ñ´ï¿½.*/
 	background-color: crimson;
-	height: 0.35vh; /*¹ØÁÙ ±¼±â*/
+	height: 0.35vh; /*ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 	
-	width: 0; /*ÃÊ±â¿¡ º¸ÀÌÁö ¾Êµµ·Ï*/
-	bottom: 0; /*aÅÂ±× ¾Æ·¡¿¡ À§Ä¡ ½ÃÅ°±â*/
-	transition: 0.5s; /*¾Ö´Ï¸ÞÀÌ¼Ç µ¿ÀÛ ½ÇÇà ½Ã°£ Á¤ÀÇ*/
-	/*°¡»ó ¿ä¼Ò¸¦ °¡¿îµ¥·Î ÀÌµ¿½ÃÅ°±â*/
+	width: 0; /*ï¿½Ê±â¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Êµï¿½ï¿½ï¿½*/
+	bottom: 0; /*aï¿½Â±ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½Å°ï¿½ï¿½*/
+	transition: 0.5s; /*ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½*/
+	/*ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ò¸ï¿½ ï¿½ï¿½ï¿½îµ¥ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½Å°ï¿½ï¿½*/
 	left:50%;
 	transform:translateX(-50%);
 }
 
-/*ÅÂ±×°¡ È£¹ö¸µ µÇ¸é °¡»ó ¿ä¼ÒÀÇ Å©±â¸¦ 100%·Î Å°¿ì±â*/
+/*ï¿½Â±×°ï¿½ È£ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½â¸¦ 100%ï¿½ï¿½ Å°ï¿½ï¿½ï¿½*/
 .gnb span:hover:before {
 	width:100%;
 }
-/*===================== º»¹® =====================*/
+/*===================== ï¿½ï¿½ï¿½ï¿½ =====================*/
 
 
 .container {
@@ -183,7 +179,7 @@ a:hover {
 }
 
 .box {
-	/* ¾Æ·¡ µÎÁÙÀº Á¦ÀÌÄõ¸® ºÎºÐ¿¡¼­ box¿¡ css ÁÖ´Â°Å ¾øÀ»¶§ ÇÊ¿ä */
+	/* ï¿½Æ·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ÎºÐ¿ï¿½ï¿½ï¿½ boxï¿½ï¿½ css ï¿½Ö´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ */
 	/* float: left; width: calc(100% / 4); */
 	height: 100vh;
 	/*border: 10px solid;*/
@@ -207,16 +203,18 @@ a:hover {
 .copywrite {
 	position:absolute;	
 	left:50%;
-	top:41%;
+	top:40%;
 	transform:translate(-50%, -50%);
 }
+
+
 /*.copywrite-first li  {
 	opacity: 0;
 }*/
-/*======================Ã¹¹øÂ° ÆäÀÌÁö================================*/
+/*======================Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½================================*/
 
 
-/*==========================¾Ö´Ï¸ÞÀÌ¼Ç===============================*/
+/*==========================ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½===============================*/
 
 /* @keyframes duration | timing-function | delay |
 iteration-count | direction | fill-mode | play-state | name */
@@ -278,13 +276,13 @@ iteration-count | direction | fill-mode | play-state | name */
 
 
 
-/*================= µÎ¹ø¤Š ÆäÀÌÁö ======================*/
+/*================= ï¿½Î¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ======================*/
 
 
 .Title-mask {
 	display: block;
 	position: relative;
-	text-align: start;
+	text-align: center;
 	overflow: hidden;
 }
 
@@ -296,8 +294,22 @@ iteration-count | direction | fill-mode | play-state | name */
 }
 .Title-effect {
 	-webkit-animation: revealText 1000ms cubic-bezier(0.7, 0, 0.3, 1) 1s forwards;
-	animation: revealText 1000ms cubic-bezier(0.7, 0, 0.3, 1) 1s forwards;
+	animation: revealText 1000ms cubic-bezier(0.7, 0, 0.3, 1) forwards;
 }
+.delayFirst {
+	animation-delay:1s
+}
+.delaySecond {
+	font-size:25px;
+	animation-delay:2s;
+}
+
+.colors{
+	font-weight: bold;
+	font-size:30px;
+	color:orange !important;
+}
+
 
 @keyframes revealText {
 	from {
@@ -311,7 +323,7 @@ iteration-count | direction | fill-mode | play-state | name */
 	}
 }
 
-/*=================¼¼¹øÂ° ÆäÀÌÁö=====================*/
+/*=================ï¿½ï¿½ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½=====================*/
 /*@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap");*/
 
 /*.copywrite-third>div {
@@ -408,7 +420,7 @@ iteration-count | direction | fill-mode | play-state | name */
   	transition:800ms ease all;
 }*/
 
-/*===================== ³×¹øÂ° ÆäÀÌÁö ===========================*/
+/*===================== ï¿½×¹ï¿½Â° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ===========================*/
 
 @import url(https://fonts.googleapis.com/css?family=Hind:700);
 
@@ -467,7 +479,7 @@ iteration-count | direction | fill-mode | play-state | name */
 	40%		{text-shadow:  0 0 0px #fff;}
 	100%	{text-shadow:  0 0 0px #fff;}
 }*/
-/*== ¹öÆ° ===*/
+/*== ï¿½ï¿½Æ° ===*/
 /*.form-move {
 	position: absolute;
 	left:50%;
@@ -493,7 +505,6 @@ iteration-count | direction | fill-mode | play-state | name */
     position:absolute;;
     padding: 20px 46px;
     margin-bottom: 30px;
-    text-align: center;
     text-transform: uppercase;
     color: #f0094a;
     font-size: 16px;
@@ -505,15 +516,12 @@ iteration-count | direction | fill-mode | play-state | name */
     cursor: pointer;
     border-radius: 30px;
     box-sizing: border-box;
-    display:flex;
-    justify-content:center;
-    align-items:center;
     left:50%;
-    top:53%;
+    top:58%;
     transform:translate(-50%,-50%) scale(1);   
   }
-  .btn-text {
-  	left:50%;
+  .blob-text {
+  	position:relative;
   	
   }
   .blob-btn:before {
@@ -608,7 +616,7 @@ iteration-count | direction | fill-mode | play-state | name */
     }
   }
 
-/*============================¼­Å¬Çü ¹öÆ°======================================*/
+/*============================ï¿½ï¿½Å¬ï¿½ï¿½ ï¿½ï¿½Æ°======================================*/
 
 
 /*
@@ -618,7 +626,7 @@ iteration-count | direction | fill-mode | play-state | name */
 	list-style: none;
 }*/
 
-/*¾ÈÂÊ ¿ø*/
+/*ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½*/
 /*.activity li:before {
 	-webkit-transition: all 0.2s ease;
 	-moz-transition: all 0.2s ease;
@@ -652,7 +660,7 @@ iteration-count | direction | fill-mode | play-state | name */
 	text-align: center;
 	text-transform: lowercase; 
 	*/
-	/*Å©±â*/
+	/*Å©ï¿½ï¿½*/
 /*	width: 4em;
 	height: 4em;
 	line-height: 4em;
@@ -696,7 +704,7 @@ iteration-count | direction | fill-mode | play-state | name */
 }
 */
 
-/*================================ ¾Ö´Ï¸ÞÀÌ¼Ç µô·¹ÀÌ ===============================*/
+/*================================ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ===============================*/
 
 .dFirst {
 	animation-delay:1s;

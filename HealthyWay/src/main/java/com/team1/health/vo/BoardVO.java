@@ -14,8 +14,15 @@ public class BoardVO {
 	private int type_num;
 	private String success_img_file;
 	private String OriginSuccessImg;
+	private String profie_img;
 	
 
+	public String getProfie_img() {
+		return profie_img;
+	}
+	public void setProfie_img(String profie_img) {
+		this.profie_img = profie_img;
+	}
 	public String getSuccess_img_file() {
 		return success_img_file;
 	}

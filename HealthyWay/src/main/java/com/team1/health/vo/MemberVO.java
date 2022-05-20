@@ -19,6 +19,7 @@ public class MemberVO {
 	private String strength;
 	private String favorite;
 	private String write_date;
+	private String warning_state;
 	
 
 	public String getWrite_date() {
@@ -122,6 +123,12 @@ public class MemberVO {
 	}
 	public void setWeight(double weight) {
 		this.weight = weight;
+	}
+	public String getWarning_state() {
+		return warning_state;
+	}
+	public void setWarning_state(String warning_state) {
+		this.warning_state = warning_state;
 	}
 	
 }

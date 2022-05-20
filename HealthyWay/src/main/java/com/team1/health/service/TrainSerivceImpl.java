@@ -68,39 +68,23 @@ public class TrainSerivceImpl implements TrainService{
 	}
 
 	@Override
-	public String module1_name(int train_num) {
-		// TODO Auto-generated method stub
-		return dao.module1_name(train_num);
-	}
-
-	@Override
-	public String module2_name(int train_num) {
-		// TODO Auto-generated method stub
-		return dao.module2_name(train_num);
-	}
-
-	@Override
-	public String module3_name(int train_num) {
-		// TODO Auto-generated method stub
-		return dao.module3_name(train_num);
-	}
-
-	@Override
-	public String module4_name(int train_num) {
-		// TODO Auto-generated method stub
-		return dao.module4_name(train_num);
-	}
-
-	@Override
-	public String module5_name(int train_num) {
-		// TODO Auto-generated method stub
-		return dao.module5_name(train_num);
-	}
-
-	@Override
 	public int user_routine_insert(TrainVO vo) {
 		// TODO Auto-generated method stub
 		return dao.user_routine_insert(vo);
 	}
 
+	@Override
+	public TrainVO start_train(int module_num) {
+		// TODO Auto-generated method stub
+		return dao.start_train(module_num);
+	}
+
+	@Override
+	public int save_user_count(TrainVO vo) {
+		// TODO Auto-generated method stub
+		return dao.save_user_count(vo);
+	}
+
 }
+
+	

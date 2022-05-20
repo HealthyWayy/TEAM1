@@ -256,9 +256,6 @@ $(function(){
 		});
 	});
 	
-	
-	
-	
 	// 댓글 삭제(DB)
 	$(document).on("click", ".reply_del_btn", function(){
 		if(confirm("댓글을 삭제하시겠습까?")){
@@ -281,6 +278,50 @@ $(function(){
 	replyListAll();
 	apply_listAll();
 	
+	//신고하기 모달 jquery작성
+	   $('.warnIcon').click(function(){
+	      $(".modal").fadeIn(300);
+	   });
+	   
+	   $('#reportOk').click(function(){
+	      $(".modal").fadeOut(300);
+	   });
+	   
+	   let reportCount=0;
+	   $('#reportFrm').submit(function(){
+	      event.preventDefault();
+	      
+	      if(confirm('신고하시겠습니까?')){
+	         if($("#reportContent").val()==""){
+	            alert('내용을 입력해 주세요');
+	            return;
+	         }
+	         if(reportCount!=0){
+	            alert('이미 신고한 게시글 입니다!');
+	            return;
+	         }
+
+	         $.ajax({
+	            url:"/master/reportInsert",
+	            data:$("#reportFrm").serialize(),
+	            type:'post',
+	            success:function(response){
+	               reportCount++;
+	               if(response>0){
+	                  alert('신고가 접수되었습니다.');                  
+	               }else{
+	                  alert('신고가 되지 않았습니다. - 이유 불명 - ');
+	               }
+	               $(".modal").fadeOut(300);
+	            },error:function(error){
+	               console.log(error.responseText)
+	            }
+	         })
+	      }else{
+	         alert('신고 안함');
+	         return;
+	      }
+	   });
 	
 });
 
@@ -463,48 +504,81 @@ function apply(){
 			
 		</div>
 		
-		
-		<div class="leader_profile_wrap">
-			<div class="profile_info_wrap">
-				<h4>리더정보</h4>
-				<div class="leader_img_wrap"><img src="/img/${lVO.profie_img}"></div>
-				<div class="leader_name_wrap">
-					${lVO.user_nickname} (${lVO.user_id})
+		<div>
+			<div class="leader_profile_wrap">
+				<div class="profile_info_wrap">
+					<h4>리더정보</h4>
+					<div class="leader_img_wrap"><img src="/img/${lVO.profie_img}"></div>
+					<div class="leader_name_wrap">
+						${lVO.user_nickname} (${lVO.user_id})
+					</div>
+				</div>
+				<div class="profile_info_wrap">
+					<h4>활동 기간</h4>
+					${vo.start_date} ~ ${vo.end_date} (${vo.datecal}일)
+				</div>
+				<div>
+					<h4>그룹 멤버 (${pCount}명)</h4>
+					<c:forEach var="pVO" items="${pList}">
+						<div class="group_member_wrap">
+							<div class="member_img_wrap"><img src="/img/${pVO.profie_img}"></div>
+							<div class="member_name_wrap">${pVO.user_nickname} (${pVO.user_id})</div>
+						</div>
+					</c:forEach>
+				</div>
+				
+	
+				<c:if test="${vo.state != '모집완료'}">
+					<c:if test="${empty aList}">
+						<button class="applyBtn"<c:if test="${lVO.user_id == logId}">style="display: none;"</c:if>>참여하기</button>
+					</c:if>
+					<c:forEach var="aVO" items="${aList}">
+						<c:if test="${aVO.user_id == logId and aVO.user_state == '참여중'}">
+							<button style="cursor: initial;<c:if test="${lVO.user_id == logId}">display: none;</c:if>">참여중</button>
+						</c:if>
+						<c:if test="${aVO.user_id == logId and aVO.user_state == '대기중'}">
+							<button style="cursor: initial;<c:if test="${lVO.user_id == logId}">display: none;</c:if>">참여 대기중</button>
+						</c:if>
+					</c:forEach>
+				</c:if>
+				
+				<c:if test="${vo.user_id == logId}">
+					<button id="editBtn" onclick="location='/board/ptEdit?board_num=${vo.board_num}'">수정하기</button>
+					<button id="delBtn" onclick="location='javascript:del()'">삭제하기</button>
+				</c:if>
+			</div>
+			<div style="text-align: right; margin-top: 5px;">
+				<div style="width: 310px;">
+					<a class="warnIcon"><img src="/recipeImg/warnIcon.png"/><span> 신고하기 </span></a>
 				</div>
 			</div>
-			<div class="profile_info_wrap">
-				<h4>활동 기간</h4>
-				${vo.start_date} ~ ${vo.end_date} (${vo.datecal}일)
-			</div>
-			<div>
-				<h4>그룹 멤버 (${pCount}명)</h4>
-				<c:forEach var="pVO" items="${pList}">
-					<div class="group_member_wrap">
-						<div class="member_img_wrap"><img src="/img/${pVO.profie_img}"></div>
-						<div class="member_name_wrap">${pVO.user_nickname} (${lVO.user_id})</div>
-					</div>
-				</c:forEach>
-			</div>
-			
-
-			<c:if test="${vo.state != '모집완료'}">
-				<c:if test="${empty aList}">
-					<button class="applyBtn"<c:if test="${lVO.user_id == logId}">style="display: none;"</c:if>>참여하기</button>
-				</c:if>
-				<c:forEach var="aVO" items="${aList}">
-					<c:if test="${aVO.user_id == logId and aVO.user_state == '참여중'}">
-						<button style="cursor: initial;<c:if test="${lVO.user_id == logId}">display: none;</c:if>">참여중</button>
-					</c:if>
-					<c:if test="${aVO.user_id == logId and aVO.user_state == '대기중'}">
-						<button style="cursor: initial;<c:if test="${lVO.user_id == logId}">display: none;</c:if>">참여 대기중</button>
-					</c:if>
-				</c:forEach>
-			</c:if>
-			
-			<c:if test="${vo.user_id == logId}">
-				<button id="editBtn" onclick="location='/board/ptEdit?board_num=${vo.board_num}'">수정하기</button>
-				<button id="delBtn" onclick="location='javascript:del()'">삭제하기</button>
-			</c:if>
 		</div>
+	</div>
+	<!-- 신고하기 모달창 추가 -->
+	<div class="modal">
+	   <div class="modal_content">
+	      <div><img src="/recipeImg/warnIcon.png"/>신고하기<img src="/recipeImg/warnIcon.png"/></div>
+	      <form method='post' id='reportFrm'>
+	         
+	         <input type='hidden' name='write_id' value='${vo.user_id}'/>
+	         <input type='hidden' name='board_num' value='${vo.board_num}'/>
+	         <input type='hidden' name='report_type' value='2'/>
+	         
+	         <input type="radio" name="report_title" value="게시판 이탈" id='reportRadio1' checked>
+	         <label for="reportRadio1">게시판 이탈</label>
+	         <input type="radio" name="report_title" value="광고" id='reportRadio2'>
+	         <label for="reportRadio2">광고</label>
+	         <input type="radio" name="report_title" value="욕설" id='reportRadio3'>
+	         <label for="reportRadio3">욕설</label>
+	         <input type="radio" name="report_title" value="음란물" id='reportRadio4'>
+	         <label for="reportRadio4">음란물</label><br/>
+	         <textarea name='report_content' placeholder="최대 200자까지 작성가능 합니다." maxlength="200" id='reportContent'></textarea>
+	         <br/>
+	         <ul class="modalBtn">
+	            <li><input type='button' value='취소' id='reportOk'/></li>
+	            <li><input type='submit' value='신고하기'/><br/></li>
+	         </ul>
+	        </form>
+	   </div>
 	</div>
 </div>

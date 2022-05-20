@@ -9,6 +9,14 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <style>
 /*a태그 설정*/
+ul, li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.top{
+	font-family:NanumGothic;
+}
 a:link {
 	color: black;
 	text-decoration: none;
@@ -23,7 +31,6 @@ a:hover {
 	color: black;
 	text-decoration: none;
 }
-
 @font-face {
 	font-family: 'NanumBarunGothic';
 	font-style: normal;
@@ -38,15 +45,12 @@ a:hover {
 		url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf')
 		format('truetype');
 }
-
-body {
-	font-family: "NanumBarunGothic";
-}
 #container{
 	margin:4%;
 	padding-top:1%;
 	padding-left:4%;
 	padding-right:4%;
+	font-family: "NanumBarunGothic";
 }
 #searchFrm{
 	overflow:auto;
@@ -106,22 +110,29 @@ body {
 }
 .table{
 	text-align: center;
+	table-layout: fixed;
 }
-
+.table>tbody>tr{
+	cursor: pointer;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
 #reportBtn{
-	width:90%;
-	height:30px;
-	border-radius: 30px;
-	border: 1px solid rgb(200,191,231);
-	background-color:white;
-}
-#deleteReport{
-	width:90%;
+	width:75px;
 	height:30px;
 	border-radius: 30px;
 	border:none;
 	background-color: #FF5454;
-	color:white;
+	color: white;
+
+}
+#deleteReport{
+	width:75px;
+	height:30px;
+	border-radius: 30px;
+	border: 1px solid rgb(200,191,231);
+	background-color:white;
 }
 .paging{
 	text-align: center;
@@ -156,8 +167,8 @@ body {
 }
 @media ( min-width: 1800px ) {
 	#container{
-		padding-left:6%;
-		padding-right:6%;
+		padding-left:7%;
+		padding-right:7%;
 	}
 	#searchFrm{
 		width:20%;
@@ -166,14 +177,27 @@ body {
 }
 </style>
 
-<script>
-	$(function(){
-		
-	});
+<script>	
+$(function(){
+	var href = window.location.href;//현재 url 주소
+
+	//주소에 따라 해당 카테고리 밑줄 css 적용
+	if(href=="https://localhost:8088/master/report"){
+		$("#category_list>li>a").eq(0).css("border-bottom", "3px solid #FF5454");	//전체
+	}else if(href=="https://localhost:8088/master/report?searchKey=%EB%A0%88%EC%8B%9C%ED%94%BC"){
+		$("#category_list>li>a").eq(1).css("border-bottom", "3px solid #FF5454");	//레시피
+	}else if(href=="https://localhost:8088/master/report?searchKey=PT%EA%B7%B8%EB%A3%B9"){
+		$("#category_list>li").eq(2).css("border-bottom", "3px solid #FF5454");	//pt그룹
+	}else if(href=="https://localhost:8088/master/report?searchKey=%EC%84%B1%EA%B3%B5%EC%8A%A4%ED%86%A0%EB%A6%AC"){
+		$("#category_list>li").eq(3).css("border-bottom", "3px solid #FF5454");	//성공스토리
+	}else if(href=="https://localhost:8088/master/report?searchKey=%EC%9E%90%EC%9C%A0%EA%B2%8C%EC%8B%9C%ED%8C%90"){
+		$("#category_list>li").eq(4).css("border-bottom", "3px solid #FF5454");	//자유게시판
+	}
 	
+});
 	//신고처리
 	function reportProcess(board_num, write_id){
-		
+		event.stopPropagation();//tr onclick 중복 제거
 		if(!confirm("신고 처리를 진행하시겠습니까?")){
 			return false;
 		}
@@ -197,7 +221,8 @@ body {
 	
 	//신고글 삭제
 	function deleteReport(report_num){
-
+		event.stopPropagation();//tr onclick 중복 제거
+		
 		if(!confirm("신고글을 삭제하시겠습니까?")){
 			return false;
 		}
@@ -228,7 +253,7 @@ body {
 		<li class="menu_active">신고관리</li>
 	</ul>
 	<ul id="category_list">
-		<li><a href="/master/report?" class="category">전체</a></li>
+		<li><a href="/master/report" class="category">전체</a></li>
 		<li><a href="/master/report?searchKey=레시피" class="category">레시피</a></li>
 		<li><a href="/master/report?searchKey=PT그룹" class="category">PT그룹</a></li>
 		<li><a href="/master/report?searchKey=성공스토리" class="category">성공스토리</a></li>
@@ -245,19 +270,30 @@ body {
 					<th>분류</th>
 					<th style="width:50%;">내용</th>	
 					<th>신고처리</th>
-					<th>삭제</th>	
+					<th>허위신고</th>	
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="vo" items="${vo}">
-					<tr>
+					<c:if test="${vo.report_type==1}">
+						<tr onclick="window.open('/recipe/view?board_num=${vo.board_num}');">
+					</c:if>
+					<c:if test="${vo.report_type==2}">
+						<tr onclick="window.open('/board/ptView?board_num=${vo.board_num}';">
+					</c:if>
+					<c:if test="${vo.report_type==3}">
+						<tr onclick="window.open('/recipe/view?board_num=${vo.board_num}');">
+					</c:if>
+					<c:if test="${vo.report_type==5}">
+						<tr onclick="window.open('/board/boardList/${vo.board_num}');">
+					</c:if>
 						<td>${vo.board_num}</td>
 						<td>${vo.user_id}</td>
 						<td>${vo.write_id}</td>
 						<td>${vo.report_title}</td>
-						<td style="width:50%;">${vo.report_content}</td>
+						<td style="width:45%;">${vo.report_content}</td>
 						<td><button id="reportBtn" onclick="reportProcess('${vo.board_num}','${vo.write_id}');">신고처리</button></td>
-						<td><button id="deleteReport" onclick="deleteReport('${vo.report_num}');">삭제</button></td>
+						<td><button id="deleteReport" onclick="deleteReport('${vo.report_num}');">허위신고</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>

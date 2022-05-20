@@ -12,6 +12,10 @@
       url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf')
       format('truetype');
 }
+@font-face {
+	font-family:'NanumGothic'; 
+	src: url('images/NanumGothic.eot');
+}
 @media ( min-width: 1800px ) {
 	.top {
    		font-family: "NanumBarunGothic";

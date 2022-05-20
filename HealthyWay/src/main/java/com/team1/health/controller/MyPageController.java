@@ -35,7 +35,7 @@ public class MyPageController {
 	@Inject
 	MyPageService service;
 	@GetMapping("/mypage")
-	public ModelAndView myPage(HttpSession session, int indexPrev) {
+	public ModelAndView myPage(HttpSession session) {
 		ModelAndView mav = new ModelAndView ();
 		//임시 데이터 입력
 		String user = (String)session.getAttribute("logId");
@@ -45,7 +45,6 @@ public class MyPageController {
 		mav.addObject("PTboardData",PTboardData);
 		//유저 데이터
 		mav.addObject("userData",userData);
-		mav.addObject("indexPrev",indexPrev);
 		mav.setViewName("/mypage/myPage");
 		return mav;
 	}

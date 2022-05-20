@@ -47,29 +47,21 @@
 	<delete id="delete_mytrain">
 		delete from training_routine where train_num=#{train_num}
 	</delete>
-	<!-- 1번째 운동 -->
-	<select id="module1_name" resultType="com.team1.health.vo.TrainVO">
-		select B.module_title from training_module A, module B where A.module_num = B.module_num and train_num=#{param1} limit 0,1;
-	</select>
-	<!-- 2번째 운동 -->
-	<select id="module2_name" resultType="com.team1.health.vo.TrainVO">
-		select B.module_title from training_module A, module B where A.module_num = B.module_num and train_num=#{param1} limit 1,1;
-	</select>
-	<!-- 3번째 운동 -->
-	<select id="module3_name" resultType="com.team1.health.vo.TrainVO">
-		select B.module_title from training_module A, module B where A.module_num = B.module_num and train_num=#{param1} limit 2,1;
-	</select>
-	<!-- 4번째 운동 -->
-	<select id="module4_name" resultType="com.team1.health.vo.TrainVO">
-		select B.module_title from training_module A, module B where A.module_num = B.module_num and train_num=#{param1} limit 3,1;
-	</select>
-	<!-- 5번째 운동 -->
-	<select id="module5_name" resultType="com.team1.health.vo.TrainVO">
-		select B.module_title from training_module A, module B where A.module_num = B.module_num and train_num=#{param1} limit 4,1;
-	</select>
+	
 	
 	<!-- 유저 루틴에 추가 -->
 	<insert id="user_routine_insert">
 		insert into user_routine(user_id, train_num) values(#{user_id},#{train_num})
+	</insert>
+	
+	<!-- 운동 시작 -->
+	<select id="start_train" resultType="com.team1.health.vo.TrainVO">
+		select module_img, module_title, module_vod_file from module where module_num = #{param1}
+	</select>
+	<!-- 운동 시간 저장 -->
+	<insert id="save_user_count">
+		INSERT INTO user_training_count(user_id, train_year, train_month, train_count, module_num) 
+		VALUES(#{user_id}, year(now()), month(now()), #{train_count},#{module_num})
+		ON DUPLICATE KEY UPDATE train_count = train_count + #{train_count}
 	</insert>
 </mapper>
