@@ -41,7 +41,6 @@ function module_set(train_num){
     
 
     <ul id="menu">
-        <li><a href="/home/">홈</a></li>
         <li><a  href="/trainning/trainningHome">트레이닝 센터</a></li>
         <li><a class="active" href="/trainning/myTrainning">나만의 운동</a></li>
         <li><a href="/trainning/recommendTrainning">추천 운동 목록</a></li>

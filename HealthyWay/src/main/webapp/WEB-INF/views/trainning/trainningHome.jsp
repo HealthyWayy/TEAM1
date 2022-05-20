@@ -5,7 +5,6 @@
  <section class="training-view">  
 
     <ul id="menu">
-        <li><a id="list_menu" class="li-a" href="/">홈</a></li>
         <li><a class="active" class="li-a" href="/trainning/trainningHome">트레이닝 센터</a></li>
         <li><a id="list_menu" class="li-a" href="/trainning/myTrainning">나만의 운동</a></li>
         <li><a id="list_menu" class="li-a" href="/trainning/recommendTrainning">추천 운동 목록</a></li>
