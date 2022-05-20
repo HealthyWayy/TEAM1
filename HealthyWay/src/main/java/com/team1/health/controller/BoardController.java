@@ -5,6 +5,7 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -434,7 +435,7 @@ public ResponseEntity<HashMap<String,String>> suggestionDelete(int board_num, Ht
 }
 
 
-//성공 스토리 뷰 15
+//성공 스토리 리스트 15
 
 @GetMapping("successList")
 public ModelAndView boardList(SuccessPagingVO ssVO){
@@ -460,114 +461,50 @@ public ModelAndView successWrite() {
 
 //성공스토리 등록 데이터 베이스 17
 
-@PostMapping("/successOk")
-public ResponseEntity<String> successWriteOk(BoardVO vo, HttpServletRequest request) {
+@PostMapping("successOk")
+public int successWriteOk(BoardVO vo, HttpServletRequest request, MultipartHttpServletRequest mr){
+	// 파일 업로드
+	mr = (MultipartHttpServletRequest) request;
+	MultipartFile file = mr.getFile("file");
+	System.out.println(file);
 	
-	vo.setUser_id((String)request.getSession().getAttribute("logId"));
+	String path = request.getSession().getServletContext().getRealPath("/successImg");
+
+	// 파일명 중복되지 않게 처리
+	UUID uuid = UUID.randomUUID();
+	String filename = uuid.toString()+"_"+file.getOriginalFilename();
+	vo.setSuccess_img_file(filename);
+	File uploadFile = new File(path, filename);
 	
-	ResponseEntity<String> entity = null;
-	HttpHeaders headers = new HttpHeaders();
-	headers.setContentType(new MediaType("text", "html", Charset.forName("UTF-8")));
-	
-	
-	String path = request.getSession().getServletContext().getRealPath("/upload");
-	System.out.println("path -> "+path);
+	// 파일 업로드		
 	try {
-		
-		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)request;
-		
-		
-		List<MultipartFile> files = mr.getFiles("filename");
-		System.out.println("업로드 파일 수 = "+files.size());
-		
-		if(files!=null) {
-			int cnt = 1;
-			
-			
-			for(int i=0; i<files.size(); i++) {
-				
-				MultipartFile mf = files.get(i);
-				
-				
-				String orgFileName = mf.getOriginalFilename();
-				System.out.println("orgFileName -> "+orgFileName);
-				
-				
-				if(orgFileName!=null && !orgFileName.equals("")) {
-					File f = new File(path, orgFileName);
-					
-					
-					if(f.exists()) {
-						for(int renameNum=1; ; renameNum++) {
-							
-							int point = orgFileName.lastIndexOf(".");
-							String fileName = orgFileName.substring(0, point);
-							String ext = orgFileName.substring(point+1);
-							
-							f = new File(path, fileName+" ("+renameNum+")."+ext);
-							if(!f.exists()) {
-								orgFileName = f.getName();
-								break;
-							}
-						}
-					}
-					
-					
-					try {
-						mf.transferTo(f);
-					}catch(Exception ee) {
-						ee.printStackTrace();
-					}
-					
-					
-					if(cnt==1) {
-						vo.setFilename1(orgFileName);
-					}
-					if(cnt==2) {
-						vo.setFilename2(orgFileName);
-					}
-					cnt++;
-				}
-			}
-		}
-		System.out.println(vo.toString());
-		
-		//DB등록
-		service.successInsert(vo);
-		
-		String msg = "<script>alert('자료실 글이 등록되었습니다.');location.href='/success/dataList';</script>";
-		entity = new ResponseEntity<String>(msg, headers, HttpStatus.OK);//200
+		file.transferTo(uploadFile);
+		System.out.println("성공스토리 등록 완료");
+
 	}catch(Exception e) {
 		e.printStackTrace();
-		
-		fileDelete(path, vo.getFilename1());
-		fileDelete(path, vo.getFilename2());
-		
-		String msg = "<script>alert('성공스토리 등록에 실패했습니다.');history.back();</script>";
-		
-		entity = new ResponseEntity<String>(msg, headers, HttpStatus.BAD_REQUEST);
+		System.out.println("성공 스토리 등록 실패!");
 	}
-	return entity;
-}
 
-public void fileDelete(String path, String filename) {
-	if(filename!=null) {
-		File file = new File(path, filename);
-		file.delete();
-	}
+	vo.setUser_id((String)request.getSession().getAttribute("logId"));
+	service.boardInsert(vo);
+	service.acheiveInsert(vo);
+	int result = service.boardInsert(vo);
+	
+	return result;
 }
 
 
-//성공스토리 등록 데이터 베이스 18
+//성공스토리 뷰 18
 
-@GetMapping("/success/successView")
+@GetMapping("/successView")
 public ModelAndView view(int board_num) {
 	ModelAndView mav = new ModelAndView();
 
 	// 조회수 증가
 	service.hitCount(board_num);
 	mav.addObject("successVO", service.successView(board_num));
-	mav.setViewName("success/successView");
+	mav.setViewName("board/successView");
 	return mav;
 }
 

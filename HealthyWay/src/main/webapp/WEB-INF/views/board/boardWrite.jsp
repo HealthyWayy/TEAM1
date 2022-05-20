@@ -26,7 +26,6 @@ $(function() {
  });
 </script>
 
-
 <div class="wrap">
 	 <form id="writeFrm" method="post" action="${url}/suggestionWrite">
 		<ul>
