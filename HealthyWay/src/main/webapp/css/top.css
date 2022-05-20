@@ -24,7 +24,10 @@
 			
 }
 
-
+.top {
+   		font-family: "NanumBarunGothic";
+   		font-size:18px;
+	}
 a {
 	text-decoration: none;
 	color:rgb(50,50,50);
@@ -146,12 +149,12 @@ ul, li {
 }
 
 .dropdown-content1 {
-	/*콘텐츠 정렬*/
+	/*肄섑뀗痢� �젙�젹*/
 	display:flex;
 	justify-content:center;
 	align-items:center;
 	
-	/*박스 설정*/
+	/*諛뺤뒪 �꽕�젙*/
 	overflow: hidden;
 	box-sizing:border-box;
 	border-radius: 5%;
@@ -159,7 +162,7 @@ ul, li {
 	box-shadow: 0px 0px 10px 0px rgba(5, 5, 5, 0.3);
 	background-color: white;
 	
-	/*애니메이션 효과설정*/
+	/*�븷�땲硫붿씠�뀡 �슚怨쇱꽕�젙*/
 	opacity:0;
 	transform:scale(0);
 	transform-origin: 100% 0;
@@ -193,7 +196,7 @@ ul, li {
 	cursor:pointer;
 	color: rgb(10,10,10);
 	font-size:16px;
-	/*텍스트에서 밑줄 간격 띄우기*/
+	/*�뀓�뒪�듃�뿉�꽌 諛묒쨪 媛꾧꺽 �쓣�슦湲�*/
 	padding-bottom: 6px;
 } 
 .gnb li:last-of-type {
@@ -203,19 +206,19 @@ ul, li {
 
 .gnb span:before {
 	content:"";
-	position: absolute; /*부모 요소에는 position: relative를 주어야 한다.*/
+	position: absolute; /*遺�紐� �슂�냼�뿉�뒗 position: relative瑜� 二쇱뼱�빞 �븳�떎.*/
 	background-color: crimson;
-	height: 0.35vh; /*밑줄 굴기*/
+	height: 0.35vh; /*諛묒쨪 援닿린*/
 	
-	width: 0; /*초기에 보이지 않도록*/
-	bottom: 0; /*a태그 아래에 위치 시키기*/
-	transition: 0.5s; /*애니메이션 동작 실행 시간 정의*/
-	/*가상 요소를 가운데로 이동시키기*/
+	width: 0; /*珥덇린�뿉 蹂댁씠吏� �븡�룄濡�*/
+	bottom: 0; /*a�깭洹� �븘�옒�뿉 �쐞移� �떆�궎湲�*/
+	transition: 0.5s; /*�븷�땲硫붿씠�뀡 �룞�옉 �떎�뻾 �떆媛� �젙�쓽*/
+	/*媛��긽 �슂�냼瑜� 媛��슫�뜲濡� �씠�룞�떆�궎湲�*/
 	left:50%;
 	transform:translateX(-50%);
 }
 
-/*태그가 호버링 되면 가상 요소의 크기를 100%로 키우기*/
+/*�깭洹멸� �샇踰꾨쭅 �릺硫� 媛��긽 �슂�냼�쓽 �겕湲곕�� 100%濡� �궎�슦湲�*/
 .gnb span:hover:before {
 	width:100%;
 }
