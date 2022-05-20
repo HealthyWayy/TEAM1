@@ -8,9 +8,7 @@ ul, li {
 	padding: 0;
 	list-style: none;
 }
-.top{
-	font-family:NanumGothic;
-}
+
 /*a태그 설정*/
 a:link {
 	color: black;
