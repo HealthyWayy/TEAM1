@@ -62,4 +62,3 @@ $(function() {
             <input class="bo__btn__wa" type="button" value="취소" onclick="javascript:history.back()">
     	</form>
     </div>
-

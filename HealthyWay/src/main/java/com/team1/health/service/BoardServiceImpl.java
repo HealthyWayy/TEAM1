@@ -138,10 +138,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	//성공스토리
-	@Override
-	public int successInsert(BoardVO vo) {
-		return dao.successInsert(vo);
-	}
+	
 	
 	@Override
 	public List<BoardVO> successList(SuccessPagingVO ssVO) {
@@ -179,6 +176,11 @@ public class BoardServiceImpl implements BoardService {
 	public BoardVO successSelectByNo(int board_num) {
 		return dao.successSelectByNo(board_num);
 		
+	}
+	@Override
+	public int acheiveInsert(BoardVO vo) {
+		
+		return dao.acheiveInsert(vo);
 	}
 	
 }
