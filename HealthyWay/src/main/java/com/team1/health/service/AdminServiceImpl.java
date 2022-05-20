@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Service;
 
 import com.team1.health.dao.AdminDAO;
@@ -33,7 +34,14 @@ public class AdminServiceImpl implements AdminService {
 	public int memberDelete(String user_id) {//회원 탈퇴
 		return dao.memberDelete(user_id);
 	}
-	
+	@Override
+	public List<MemberVO> memberReportList(PagingVO pVO) {//신고회원 목록
+		return dao.memberReportList(pVO);
+	}
+	@Override
+	public int totalReport(PagingVO pVO) {//신고회원 totalRecord
+		return dao.totalReport(pVO);
+	}
 
 	
 	
@@ -74,7 +82,14 @@ public class AdminServiceImpl implements AdminService {
 
 	
 	//커뮤니티 관리-----------------------------------------
-	
+	@Override
+	public List<BoardVO> boardList(PagingVO pVO) {//게시글 목록
+		return dao.boardList(pVO);
+	}
+	@Override
+	public int totalRecord3(PagingVO pVO) {//totalRecord
+		return dao.totalRecord3(pVO);
+	}
 	
 	//신고 관리--------------------------------------------
 	@Override
@@ -96,6 +111,10 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int totalRecord4(PagingVO pVO) {//totalRecord
 		return dao.totalRecord4(pVO);
+	}
+	@Override
+	public int warningState(String state, String user_id) {//경고 상태 변경
+		return dao.warningState(state, user_id);
 	}
 
 
