@@ -48,7 +48,7 @@
 					</li>
 				</c:if>
 			<c:if test="${logStatus != 'Y' }">
-  				<li><a href="/member/loginForm">로그인</a></li>	
+  				<li><a href="/member/loginForm">Login</a></li>	
 			</c:if>
 		</ul>
 	</nav>
