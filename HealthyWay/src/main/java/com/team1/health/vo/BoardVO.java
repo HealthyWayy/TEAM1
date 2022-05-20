@@ -12,12 +12,17 @@ public class BoardVO {
 	private String write_date;
 	private String mod_date;
 	private int type_num;
-	private String filename1;
-	private String filename2;
 	private String success_img_file;
 	private String OriginSuccessImg;
+	private String profie_img;
 	
 
+	public String getProfie_img() {
+		return profie_img;
+	}
+	public void setProfie_img(String profie_img) {
+		this.profie_img = profie_img;
+	}
 	public String getSuccess_img_file() {
 		return success_img_file;
 	}
@@ -30,18 +35,7 @@ public class BoardVO {
 	public void setOriginSuccessImg(String originSuccessImg) {
 		OriginSuccessImg = originSuccessImg;
 	}
-	public String getFilename1() {
-		return filename1;
-	}
-	public void setFilename1(String filename1) {
-		this.filename1 = filename1;
-	}
-	public String getFilename2() {
-		return filename2;
-	}
-	public void setFilename2(String filename2) {
-		this.filename2 = filename2;
-	}
+	
 
 	//PT_group 테이블
 	private String state;

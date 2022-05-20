@@ -71,7 +71,8 @@ public interface BoardDAO {
 
 	//성공스토리
 	
-	public int successInsert(BoardVO vo);
+	//achieve_story 글등록
+	public int acheiveInsert(BoardVO vo);
 	public int successtotalRecord(SuccessPagingVO ssVO);
 	public BoardVO successSelect(int board_num);
 	public int successUpdate(BoardVO vo);

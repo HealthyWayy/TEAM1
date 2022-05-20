@@ -32,9 +32,9 @@
   		from board where board_num=${board_num}
   	</select>
 	<select id="boardSelect" resultType="com.team1.health.vo.BoardVO">
-		select board_num, user_id, title, content, hit, write_date
-		from board where board_num=${param1}
-		
+		select board_num, b.user_id, title, content, hit, date_format(write_date, '%Y. %m. %d') write_date, profie_img
+		from board b left join user u on b.user_id=u.user_id
+		where board_num=${param1}
 	</select>
 	<update id="hitCount">
 		update board set hit = hit+1 where board_num=${param1}
@@ -76,8 +76,9 @@
 	</select>
 	
 	<select id="suggestionSelectByNo" resultType="com.team1.health.vo.BoardVO">
-  		select board_num, user_id, title, content, date_format(write_date,'%y-%m-%d %H:%i') write_date
-  		from board where board_num=${board_num}
+  		select board_num, b.user_id, title, content, hit, date_format(write_date, '%Y. %m. %d') write_date, profie_img
+		from board b left join user u on b.user_id=u.user_id
+  		where board_num=${board_num}
   	</select>
 	<select id="suggestionSelect" resultType="com.team1.health.vo.BoardVO">
 		select board_num, user_id, title, content, hit, write_date
@@ -113,31 +114,33 @@
 	
 
 
-<insert id="successInsert">
-		insert into board(user_id, title, content, type_num)
-		values(#{user_id}, #{title}, #{content}, #{type_num})
 
-		 
+	<insert id="acheiveInsert">
+		insert into acheive_story(board_num, img_file1, img_file2)
+		values(#{board_num}, #{img_file1}, #{img_file2})
 	</insert>
+	
+
 	<select id="successList" resultType="com.team1.health.vo.BoardVO">
-		select board_num, user_id, title, hit, date_format(write_date,'%m-%d %H:%i') write_date
-		from board where type_num=6
-		
-		<if test="searchWord != null">
-		where title like '%${searchWord}%'
-		</if>
-		order by board_num desc limit ${onePageRecord} offset ${offsetIndex}
-	</select>
+        select b.board_num, user_id, title, hit, date_format(write_date,'%m-%d %H:%i') write_date, img_file1, img_file2
+		from board b inner join achieve_story a on b.board_num=a.board_num
+		where type_num=3
+
+        <if test="searchWord != null">
+        where title like '%${searchWord}%'
+        </if>
+        order by board_num desc limit ${onePageRecord} offset ${offsetIndex}
+    </select>
 
 	<select id="successtotalRecord" resultType="int">
 
-		select count(board_num) cnt from board where type_num=6
+		select count(board_num) cnt from board where type_num=3
 		<if test="searchWord != null">
 			where title like '%${searchWord}%'
 		</if>
 	</select>
 	<select id="successSelectByNo" resultType="com.team1.health.vo.BoardVO">
-  		select board_num, user_id, title, content, date_format(write_date,'%y-%m-%d %H:%i') write_date
+  		select board_num, user_id, title, content date_format(write_date,'%y-%m-%d %H:%i') write_date
   		from board where board_num=${board_num}
   	</select>
 	<select id="successSelect" resultType="com.team1.health.vo.BoardVO">
