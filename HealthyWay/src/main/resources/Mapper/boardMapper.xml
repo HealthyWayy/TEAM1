@@ -32,9 +32,9 @@
   		from board where board_num=${board_num}
   	</select>
 	<select id="boardSelect" resultType="com.team1.health.vo.BoardVO">
-		select board_num, user_id, title, content, hit, write_date
-		from board where board_num=${param1}
-		
+		select board_num, b.user_id, title, content, hit, date_format(write_date, '%Y. %m. %d') write_date, profie_img
+		from board b left join user u on b.user_id=u.user_id
+		where board_num=${param1}
 	</select>
 	<update id="hitCount">
 		update board set hit = hit+1 where board_num=${param1}
@@ -76,8 +76,9 @@
 	</select>
 	
 	<select id="suggestionSelectByNo" resultType="com.team1.health.vo.BoardVO">
-  		select board_num, user_id, title, content, date_format(write_date,'%y-%m-%d %H:%i') write_date
-  		from board where board_num=${board_num}
+  		select board_num, b.user_id, title, content, hit, date_format(write_date, '%Y. %m. %d') write_date, profie_img
+		from board b left join user u on b.user_id=u.user_id
+  		where board_num=${board_num}
   	</select>
 	<select id="suggestionSelect" resultType="com.team1.health.vo.BoardVO">
 		select board_num, user_id, title, content, hit, write_date

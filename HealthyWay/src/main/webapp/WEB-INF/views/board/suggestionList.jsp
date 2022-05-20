@@ -62,7 +62,7 @@
 			<c:forEach var="vo" items="${suggestionList}">
 				<li>${vo.board_num}</li>
 				<li>${vo.user_id}</li>
-				<li><a href="${url}/board/boardList/${vo.board_num}"> ${vo.title} </a></li>
+				<li><a href="${url}/board/suggestionList/${vo.board_num}"> ${vo.title} </a></li>
 				<li>${vo.hit}</li>
 				<li>${vo.write_date}</li>
 			</c:forEach>
