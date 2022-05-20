@@ -45,10 +45,6 @@ ul, li {
 	padding: 0;
 	list-style: none;
 }
-.top{
-	font-family:NanumGothic;
-}
-
 
 #container{
 	margin:4%;

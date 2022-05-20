@@ -14,9 +14,6 @@ ul, li {
 	padding: 0;
 	list-style: none;
 }
-.top{
-	font-family:NanumGothic;
-}
 a:link {
 	color: black;
 	text-decoration: none;
