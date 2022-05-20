@@ -91,11 +91,11 @@
 		select board_num, user_id, title, hit, date_format(write_date,'%m-%d %H:%i') write_date
 		from board 
 		<choose>
-			<when test="searchKey!=null">
-				<if test="searchKey=='자유게시판'">
+			<when test='searchKey!=null and searchKey!=""'>
+				<if test='searchKey=="자유게시판"'>
 					where type_num=5
 				</if>
-				<if test="searchKey=='성공스토리">
+				<if test='searchKey=="성공스토리"'>
 					where type_num=3
 				</if>
 			</when>
@@ -112,11 +112,11 @@
 	<select id="totalRecord3" resultType="int">
 		select count(board_num) from board
 		<choose>
-			<when test="searchKey!=null">
-				<if test="searchKey=='자유게시판'">
+			<when test='searchKey!=null and searchKey!=""'>
+				<if test='searchKey=="자유게시판"'>
 					where type_num=5
 				</if>
-				<if test="searchKey=='성공스토리">
+				<if test='searchKey=="성공스토리"'>
 					where type_num=3
 				</if>
 			</when>

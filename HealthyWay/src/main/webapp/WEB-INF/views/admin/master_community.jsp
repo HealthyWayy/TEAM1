@@ -230,8 +230,8 @@ $(function(){
 
 	<!-- 메뉴 -->
 	<ul class="menu_list">
-		<li class="menu_active">커뮤니티 관리</li>
-		<li>공지사항</li>
+		<li id="menu_community" class="menu_active">커뮤니티 관리</li>
+		<li id="menu_notice">공지사항</li>
 	</ul>
 	<ul id="category_list">
 		<li><a href="/master/community" class="category">전체</a></li>

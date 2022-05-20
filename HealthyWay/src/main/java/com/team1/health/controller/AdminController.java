@@ -114,6 +114,13 @@ public class AdminController {
 		return mav;
 	}
 	
+	@GetMapping("/master/notice")
+	public ModelAndView masterNotice() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/admin/master_notice");
+		return mav;
+	}
+	
 
 	// 신고 관리자 페이지-----------------------------------------
 	// 신고 목록
