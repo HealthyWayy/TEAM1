@@ -29,8 +29,22 @@ public class TrainVO {
 	
 	//유저 트레이닝 카운트
 	private int train_count;
+	private int train_year;
+	private int train_month;
 	
 	
+	public int getTrain_year() {
+		return train_year;
+	}
+	public void setTrain_year(int train_year) {
+		this.train_year = train_year;
+	}
+	public int getTrain_month() {
+		return train_month;
+	}
+	public void setTrain_month(int train_month) {
+		this.train_month = train_month;
+	}
 	public int getTrain_count() {
 		return train_count;
 	}
