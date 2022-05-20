@@ -96,14 +96,14 @@ input, select:focus {
 	height: 450px;
 	margin-right: 4%;
 	border-radius: 15px;
-	background-color: rgba(230,230,230,0.5);
+	background-color: rgba(240,240,240,0.5);
 }
 
 .head {
 	font-weight: normal;
 	text-align: center;
 	font-size: 1.4em;
-	margin-bottom: 6%;
+	margin-bottom: 4%;
 }
 
 #addIngred>p { /*텍스트*/
@@ -140,11 +140,11 @@ input, select:focus {
 #btnDiv {
 	width: 100%;
 	overflow: auto;
-	margin-top: 10%;
+	margin-top: 7%;
 }
 
 #btnDiv>input[type=submit], #btnDiv>input[type=reset] {
-	width: 25%;
+	width: 120px;
 	height: 40px;
 	border: none;
 	border-radius: 30px;
@@ -152,12 +152,13 @@ input, select:focus {
 	color: white;
 	cursor: pointer;
 	float: right;
-	margin-right: 15%;
 }
-
+#btnDiv>input[type=submit] {
+	margin-right:20%;
+}
 #btnDiv>input[type=reset] {
 	float: left;
-	margin-left: 15%;
+	margin-left: 20%;
 }
 
 /*재료 검색, 삭제 -----------------------------------*/
@@ -167,7 +168,7 @@ input, select:focus {
 	padding: 2%;
 	height: 450px;
 	border-radius: 15px;
-	background-color: rgba(230,230,230,0.5);
+	background-color: rgba(240,240,240,0.5);
 	float: left;
 }
 #ingredView p{
@@ -257,14 +258,14 @@ input, select:focus {
 
 @media ( min-width: 1800px ) {
 	#ingredDiv{
-		height: 700px;
+		height: 590px;
 		margin-top:2%;
 	}
 	.head{
 		font-size:1.6em;
 	}
 	#addIngred {
-		height: 600px;
+		height: 500px;
 	}
 	#addIngred>p>select{
 		width:30%;
@@ -272,16 +273,17 @@ input, select:focus {
 		font-size:1.2em;
 	}
 	#addIngred>p>input[type=text]{
-		width:80%;
+		width:70%;
 		height:40px;
 		font-size:1.2em;
 	}
 	#btnDiv>input[type=submit], #btnDiv>input[type=reset] {
+		width:170px;
 		height: 40px;
 		font-size:1.2em;
 	}
 	#ingredView{
-		height: 600px;
+		height: 500px;
 	}
 	#ingredView p{
 		font-size:1.2em;
@@ -294,6 +296,7 @@ input, select:focus {
 		height:40px;
 		font-size:1.1em;
 	}
+	
 }
 </style>
 
