@@ -89,12 +89,8 @@ public class BoardController {
 	public ModelAndView boardWrite() {
 		ModelAndView mav = new ModelAndView();
 		
-		
-		
 		mav.setViewName("board/boardWrite");
 		return mav;
-	
-	
 	}
 	
 	
@@ -179,7 +175,7 @@ public class BoardController {
 	}
 
 		//수정 뷰 7
-	    @PostMapping("/board/boardList/edit/{board_num}")
+	    @GetMapping("/board/boardList/edit/{board_num}")
 	    public ModelAndView boardEditView(@PathVariable(value="board_num")int board_num, HttpSession session) {
 	    	ModelAndView mav = new ModelAndView();
 	    	try {
@@ -243,36 +239,6 @@ public class BoardController {
 	    	
 	    	return entity;
 	    }
-	  //댓글 등록
-		@PostMapping("/reply/insertBoardReply")
-		@ResponseBody
-		public String insertReply(ReplyVO vo, HttpSession session) {
-			String user_id = (String)session.getAttribute("logId");
-			vo.setUser_id(user_id);
-			service.insertReply(vo);
-			return "/boardList/view?board_num="+vo.getBoard_num();
-		}
-		//댓글 삭제
-		@PostMapping("/reply/deleteBoardReply")
-		@ResponseBody
-		public int deleteReply(int reply_num) {
-			return service.deleteReply(reply_num);
-		}
-		//댓글 수정
-		@PostMapping("/reply/updateBoardReply")
-		@ResponseBody
-		public int updateReply(ReplyVO vo) {
-			return service.updateReply(vo);
-		}
-		//댓글 목록
-		@PostMapping("/reply/replyBoardList")
-		@ResponseBody
-		public List<ReplyVO> replyList(int board_num){
-			return service.replyList(board_num);
-		}
-	    
-	    
-	    
 		    
 //자유게시판 9
 	    @GetMapping("board/suggestionList")
