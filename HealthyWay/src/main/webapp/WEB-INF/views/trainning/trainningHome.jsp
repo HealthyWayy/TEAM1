@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <link rel="stylesheet" type="text/css" href="/css/train.css">
  <section class="training-view">  
 
@@ -98,6 +99,7 @@
             </ul>
         </div>
     </div>
+
  </section>    
 <script>
 function search(){
@@ -116,7 +118,7 @@ function add_train(module_num){
         success : function(result){
             var tag="";
             $(result).each(function(){
-                tag += '<li><p></p><img src="/train_model/moduleImg/'+ this.module_img +'" alt=""><p>' + this.module_title + '</p><p>'+this.module_content+'</p><button class="add-btn" onclick="del_train('+this.module_num+')">삭제하기</button></li>'
+                tag += '<li class="only-li"><p></p><img src="/train_model/moduleImg/'+ this.module_img +'" alt=""><p>' + this.module_title + '</p><p>'+this.module_content+'</p><button class="deldel-btn" onclick="del_train('+this.module_num+')">삭제하기</button></li>'
                 $("#my_train").append(tag);
             });
         },
