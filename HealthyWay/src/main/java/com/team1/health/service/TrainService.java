@@ -30,10 +30,7 @@ public interface TrainService {
 	
 	
 	//운동 시작
-	//운동 이름 가져오기
-	public String module1_name(int train_num);
-	public String module2_name(int train_num);
-	public String module3_name(int train_num);
-	public String module4_name(int train_num);
-	public String module5_name(int train_num);
+	public TrainVO start_train(int module_num);
+	//운동 시간 저장
+	public int save_user_count(TrainVO vo);
 }
