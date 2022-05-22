@@ -27,10 +27,15 @@
          <div>
             <video id="video1" src="/train_model/moduleVod/${vo.module_title }.mp4" autoplay controls loop muted style="width:100%"></video>
          </div>
-         <div id="label-container"></div>
-         <div class="video-3-2">
-            <div id="hs"></div>
-            <div id="count"></div>
+         <div class="video-3-1">
+            <div class="video-3-2">
+               <h3>자세측정률</h3>
+               <div id="label-container"></div>
+            </div>
+            <div class="video-3-2">
+               <h3>횟수</h3>
+               <div class="count-font" id="count"></div>
+            </div>
          </div>
       </div>
    </div>
@@ -62,8 +67,8 @@
         maxPredictions = model.getTotalClasses();
 
 
-        const size = 1200; //웹캠 사이즈
-        const size2 = 1200;
+        const size = 1000; //웹캠 사이즈
+        const size2 = 1000;
         const flip = true;
         webcam = new tmPose.Webcam(size, size2, flip); 
         await webcam.setup(); // request access to the webcam
@@ -92,20 +97,20 @@
         const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
 
         const prediction = await model.predict(posenetOutput);
-
+        
         var p1 = prediction[0].probability.toFixed(2);
         var p2 = prediction[1].probability.toFixed(2);
         
        //two에서 one이 돼야 운동 한 거
-        if (p1 == 1.0){   //어깨접기
+        if (p1 >= 0.9){   //어깨접기
            if(status=="two"){
               count++;
-              document.getElementById('hs').innerHTML = '횟수'; 
+              /* document.getElementById('hs').innerHTML = '횟수';  */
               document.getElementById('count').innerHTML = count;
               console.log(count);
            }
               status = "one";
-        }else if(p2==1.0){//앞으로
+        }else if(p2>=0.9){//앞으로
            status = "two";
         }
         
@@ -137,9 +142,17 @@
     
     function save_train(){
        const end = new Date()
-       var train_count = parseInt((end - start)/1000)
+       var train_count = parseInt((end - start)/1000);
+       var module_title = "${vo.module_title}";
        console.log(train_count);
-       location.href = "/trainning/save_user_count?train_count=" + train_count;
+       
+       if (confirm("운동을 그만 하시겠습니까??")) {
+    	   location.href = "/trainning/save_user_count?train_count=" + train_count + "&module_title=" + module_title;
+       } else {
+           alert("취소되었습니다.");
+       }
+       
+       /* location.href = "/trainning/save_user_count?train_count=" + train_count + "&module_title=" + module_title; */
     }
 </script>
     

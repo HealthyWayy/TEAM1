@@ -5,15 +5,22 @@
 <link rel="stylesheet" type="text/css" href="/css/train/train.css">
  <section class="training-view">  
 
-    <!-- <ul id="menu">
-        <li><a class="active" class="li-a" href="/trainning/trainningHome">트레이닝 센터</a></li>
-        <li><a id="list_menu" class="li-a" href="/trainning/myTrainning">나만의 운동</a></li>
-        <li><a id="list_menu" class="li-a" href="/trainning/recommendTrainning">추천 운동 목록</a></li>
+    <ul id="menu">
+        <li><a class="active" href="/trainning/trainningHome">트레이닝 센터</a></li>
+        <li><a class="li-a" href="/trainning/myTrainning">나만의 운동</a></li>
+        <li><a class="li-a" href="/trainning/recommendTrainning">추천 운동 목록</a></li>
     </ul>
-     -->
     
+<div class="divC">   
     <div>
-        <h2>04 May Wed</h2>
+    	<h2 id="current_date"></h2>
+		<script>
+		date = new Date();
+		year = date.getFullYear();
+		month = date.getMonth() + 1;
+		day = date.getDate();
+		document.getElementById("current_date").innerHTML = "Today : " + year + "년 " + month + "월 " + day + "일";
+		</script>
         <h2>오늘도 트레이닝 센터에서 열심히 운동하세요!</h2>
         <form action="/trainning/trainningHome/" id="searchFrm" method="get" onsubmit="false">
 	        <ul>
@@ -45,10 +52,10 @@
 	        </ul>
         </form>
         <br><br><br>
-        <ul>
+        <ul class="train_scroll">
  
             <c:forEach var='vo' items="${vo}">
-      		    <li id="train_yoso" class="train-frm"><a class="li-a" href="/trainning/start_train?module_num=${vo.module_num}">
+      		    <li id="train_yoso" class="train-frm"><a class="li-a2" href="/trainning/start_train?module_num=${vo.module_num}">
       		    <img class="train-img" name="module_img" src="/train_model/moduleImg/${vo.module_img}">
                 <p class="train-subject" name="module_title">${vo.module_title}</p>
                 <p class="train-keyword" name="module_content">${vo.module_content }</p></a>
@@ -71,16 +78,18 @@
         </select>
 
         <form action="/trainning/add_mytrain_list" method="post" id="mytrainFrm">
-        	<div>
+        	<div ="my-list-Div">
         		<!-- 운동 담은 리스트 -->
-       		    <ul id="my_train">
-	                <!-- <li><a href="#"><img src="/img/train_ex4.jpg" alt=""><p>운동이름</p><p>운동설명</p></a></li> -->
-	            </ul>
-	            <input type="text" name="train_title" placeholder="저장할 운동 루틴 이름을 입력하세요." style="width: 300px; text-align: center;">
-	            <input type="submit" value="저장하기">
-	        	<ul id="my_train2">
-	        	
-	        	</ul>
+       		    <ul id="my_train"></ul>
+	            
+	        	<ul id="my_train2"></ul>
+        	</div>
+        	<br>
+        	<div>
+        		<input class="my-input1" type="text" name="train_title" 
+	            		placeholder="저장할 운동 루틴 이름을 입력하세요." 
+	            		style="margin: 0; padding: 0">
+	            <input class="search-btn" type="submit" value="저장하기">
         	</div>
         </form>
         
@@ -93,19 +102,21 @@
             <ul>
             	<c:if test="${not empty rvo}">
 	                <c:forEach var='vo' items="${rvo}">
-	      		    <li id="train_yoso" class="train-frm"><a class="li-a" href="/trainning/start_train?module_num=${vo.module_num}">
+	      		    <li id="train_yoso" class="train-frm"><a class="li-a2" href="/trainning/start_train?module_num=${vo.module_num}">
 	      		    <img class="train-img" name="module_img" src="/train_model/moduleImg/${vo.module_img}">
 	                <p class="train-subject" name="module_title">${vo.module_title}</p>
 	                <p class="train-keyword" name="module_content">${vo.module_content }</p></a>
 	            	</c:forEach>
             	</c:if>
             	<c:if test="${empty rvo}">
-            		<p> 설문 조사를 진행해주세요 </p>
+            		<p> 맞춤 운동을 설정하시면 추천 운동 목록을 보여드립니다! </p>
+            		<p><button class="add-btn" onclick="location.href='/member/question'">설정 하기</button></p>
             	</c:if>
             </ul>
+            <br><br><br><br><br>
         </div>
     </div>
-
+</div>
  </section>    
 <script>
 function del_train(module_num){
@@ -181,7 +192,8 @@ $(function(){
         	  	var tag="";
         	  	
              	$(result).each(function(){
-                tag = '<li><p></p><img src="/train_model/moduleImg/'+ this.module_img +'"><p>' + this.module_title + '</p><p>'+this.module_content+'</p></li>';
+                tag = '<li id="train_yoso" class="train-frm"><a class="li-a2" href="/trainning/start_train?module_num='+this.module_num+'"><img class="train-img" src="/train_model/moduleImg/'+ this.module_img +'"><p class="train-subject">' + this.module_title + '</p><p class="train-keyword">'+this.module_content+'</p></a></li>';
+                	
                 $("#my_train2").append(tag);
              });
              	

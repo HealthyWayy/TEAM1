@@ -95,8 +95,8 @@
 	</select>
 	<!-- 운동 시간 저장 -->
 	<insert id="save_user_count">
-		INSERT INTO user_training_count(user_id, train_year, train_month, train_count, module_num) 
-		VALUES(#{user_id}, year(now()), month(now()), #{train_count},#{module_num})
+		INSERT INTO user_training_count(user_id, train_year, train_month, train_count, module_title) 
+		VALUES(#{user_id}, #{train_year}, #{train_month}, #{train_count},#{module_title})
 		ON DUPLICATE KEY UPDATE train_count = train_count + #{train_count}
 	</insert>
 	

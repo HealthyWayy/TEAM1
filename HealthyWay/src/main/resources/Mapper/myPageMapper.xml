@@ -74,7 +74,7 @@
 		select weight,DATE_FORMAT(write_date,'%y.%m.%d') as write_date from weigth where user_id=#{param1} order by write_date desc limit 10;
 	</select>
 	<select id='barListAll' resultType='CountVO'>
-		select utc.user_id,utc.train_year,utc.train_month,round(utc.train_count/60) as train_count,utc.module_num,utc.write_date from user_training_count utc 
+		select utc.user_id,utc.train_year,utc.train_month,round(utc.train_count/60) as train_count,utc.module_title,utc.write_date from user_training_count utc 
 		where utc.user_id=#{param1} and utc.train_year=#{param2};
 	</select>
 </mapper>

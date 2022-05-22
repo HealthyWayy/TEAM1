@@ -1,6 +1,7 @@
 package com.team1.health.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,30 +28,23 @@ public class TrainController {
 	//트레이닝 홈페이지
 	@GetMapping("/trainning/trainningHome")
 	public ModelAndView trainningHome(TrainVO vo, HttpSession session) {
-		System.out.println("홈 으로 가는 컨트롤러 시작");
 		MemberVO mvo = new MemberVO();
 		ModelAndView mav = new ModelAndView();
 		String logId = (String)session.getAttribute("logId");
 		vo.setUser_id(logId);
-		System.out.println("여기까지옴 1");
 		//추천 운동 불러오는곳
 //		TrainVO newvo = new TrainVO();
 		List<TrainVO> newvo = service.get_user(vo);
 		
-		System.out.println("여기까지옴 2");
 		vo.setStrength(newvo.get(0).getStrength());
 		vo.setFavorite(newvo.get(0).getFavorite());
-		System.out.println("여기까지옴 3");
-		System.out.println("-----------------------");
-		System.out.println(newvo.get(0).getStrength());
-		System.out.println(newvo.get(0).getFavorite());
+
 		
 		List<TrainVO> rvo = service.reco_list(vo);
 		Collections.shuffle(rvo);
 		
 		List<TrainVO> rnewvo = new ArrayList<TrainVO>();
-		System.out.println(rvo.size());
-		System.out.println(rnewvo.size());
+
 		if (rvo.size() >= 6) {
 			for (int i = 0; i < 6; i++) {
 				rnewvo.add(rvo.get(i));
@@ -159,13 +153,19 @@ public class TrainController {
 	public String save_user_count(TrainVO vo, HttpSession session) {
 		System.out.println("save_user_count:::::START!!!!");
 		
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.DAY_OF_YEAR);
+		System.out.println(year + month);
+		vo.setTrain_year(year);
+		vo.setTrain_month(month);
+		
 		String logId = (String)session.getAttribute("logId");
 		vo.setUser_id(logId);
 		
 		service.save_user_count(vo);
-		
-		System.out.println(logId);
-		System.out.println(vo.getTrain_count());
+		System.out.println("***********************************");
+		System.out.println(vo.getModule_title());
 		
 		
 		return "redirect:/trainning/trainningHome";
