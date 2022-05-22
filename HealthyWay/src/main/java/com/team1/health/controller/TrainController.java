@@ -1,22 +1,23 @@
 package com.team1.health.controller;
 
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team1.health.service.TrainService;
 import com.team1.health.vo.MemberVO;
 import com.team1.health.vo.TrainVO;
+
 
 @Controller
 public class TrainController {
@@ -25,15 +26,49 @@ public class TrainController {
 	TrainService service;
 	//트레이닝 홈페이지
 	@GetMapping("/trainning/trainningHome")
-	public ModelAndView trainningHome(HttpSession session) {
+	public ModelAndView trainningHome(TrainVO vo, HttpSession session) {
+		System.out.println("홈 으로 가는 컨트롤러 시작");
 		MemberVO mvo = new MemberVO();
-		TrainVO vo = new TrainVO();
+		ModelAndView mav = new ModelAndView();
 		String logId = (String)session.getAttribute("logId");
 		vo.setUser_id(logId);
-		ModelAndView mav = new ModelAndView();
+		System.out.println("여기까지옴 1");
+		//추천 운동 불러오는곳
+//		TrainVO newvo = new TrainVO();
+		List<TrainVO> newvo = service.get_user(vo);
+		
+		System.out.println("여기까지옴 2");
+		vo.setStrength(newvo.get(0).getStrength());
+		vo.setFavorite(newvo.get(0).getFavorite());
+		System.out.println("여기까지옴 3");
+		System.out.println("-----------------------");
+		System.out.println(newvo.get(0).getStrength());
+		System.out.println(newvo.get(0).getFavorite());
+		
+		List<TrainVO> rvo = service.reco_list(vo);
+		Collections.shuffle(rvo);
+		
+		List<TrainVO> rnewvo = new ArrayList<TrainVO>();
+		System.out.println(rvo.size());
+		System.out.println(rnewvo.size());
+		if (rvo.size() >= 6) {
+			for (int i = 0; i < 6; i++) {
+				rnewvo.add(rvo.get(i));
+			
+			}
+			mav.addObject("rvo", rnewvo);
+		} else {
+			mav.addObject("rvo", rvo);
+		}
+		
+		
+		
+		
 		session.getAttribute(mvo.getUser_id());
-		mav.addObject("vo", service.train_list());
+		
+		mav.addObject("vo", service.train_list(vo));
 		mav.addObject("selectvo", service.get_train_title(vo));
+		
 		mav.setViewName("/trainning/trainningHome");
 		return mav;
 	}
@@ -137,28 +172,21 @@ public class TrainController {
 		
 	}
 	
-	//테스트중
-		@GetMapping("/trainning/testTrain")
-		public ModelAndView testTrain(TrainVO vo) {
-			System.out.println("TEST TRAIN START!!!!!!!");
-//			String[] now_list = vo.getTrain_list();
-//			String module1 = service.module1_name(vo.getTrain_num());
-//			String module2 = service.module2_name(vo.getTrain_num());
-//			String module3 = service.module3_name(vo.getTrain_num());
-//			String module4 = service.module4_name(vo.getTrain_num());
-//			String module5 = service.module5_name(vo.getTrain_num());
-			
-//			now_list[0] = module1;
-//			now_list[1] = module2;
-//			now_list[2] = module3;
-//			now_list[3] = module4;
-//			now_list[4] = module5;
-			
-//			System.out.println(now_list[0] + now_list[1]);
-			
-			
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("/trainning/testTrain");
-			return mav;
-		}
+	//나만의 운동 담은 것 삭제
+	@PostMapping("/trainning/del_mytrain")
+	@ResponseBody
+	public int del_mytrain(int module_num) {
+		System.out.println("***********************************");
+		System.out.println(module_num);
+		
+		return service.del_mytrain(module_num , 0);
+	}
+	
+	@PostMapping("/trainning/train_set")
+	@ResponseBody
+	public List<TrainVO> train_set(int train_num){
+		System.out.println("여기는 트레인 셋****************");
+		return service.train_set(train_num);
+	}
+
 }
