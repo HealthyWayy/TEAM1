@@ -218,8 +218,8 @@ a:hover {
 					<tr onclick="window.open('/board/ptView?board_num=${vo.board_num}');">
 						<td>${vo.board_num}</td>
 						<td>${vo.user_id}</td>
-						<td>${vo.title}</td>
-						<td>${vo.content}</td>
+						<td style="width:10%;">${vo.title}</td>
+						<td style="width:30%;">${vo.content}</td>
 						<td>${vo.pNum}/${vo.max_user}</td>
 						<td>${vo.write_date}</td>
 						<td>${vo.state}</td>

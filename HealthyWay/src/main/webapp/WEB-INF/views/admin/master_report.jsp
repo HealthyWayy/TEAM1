@@ -107,7 +107,6 @@ a:hover {
 }
 .table{
 	text-align: center;
-	table-layout: fixed;
 }
 .table>tbody>tr{
 	cursor: pointer;
@@ -288,7 +287,7 @@ $(function(){
 						<td>${vo.user_id}</td>
 						<td>${vo.write_id}</td>
 						<td>${vo.report_title}</td>
-						<td style="width:45%;">${vo.report_content}</td>
+						<td style="width:40%;">${vo.report_content}</td>
 						<td><button id="reportBtn" onclick="reportProcess('${vo.board_num}','${vo.write_id}');">신고처리</button></td>
 						<td><button id="deleteReport" onclick="deleteReport('${vo.report_num}');">허위신고</button></td>
 					</tr>
