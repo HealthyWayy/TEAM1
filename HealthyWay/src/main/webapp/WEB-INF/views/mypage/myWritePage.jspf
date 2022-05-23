@@ -96,7 +96,7 @@ function movePage(url,board_num){
 		location.href="/board/ptView?board_num="+board_num;
 	}else if(url==3){
 		//게시판으로 이동 링크 달아야 함.
-		location.href="/";
+		location.href="/successView?board_num="+board_num;
 	}
 }
 //그룹 목록 페이지 네이션
@@ -110,8 +110,6 @@ function groupPageNation(pageNum){
 			//'searchWord':$('#').val()
 		},
 		success:function(result){
-			console.log('실행')
-			console.log(result);
 			var tag = "<ul class='pageNation'>"
 			if(result.pageNum==1){
 				tag+="<li>prev</li>";				

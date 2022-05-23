@@ -14,9 +14,9 @@ public class TrainSerivceImpl implements TrainService{
 	TrainDAO dao;
 	
 	@Override
-	public List<TrainVO> train_list() {
+	public List<TrainVO> train_list(TrainVO vo) {
 		// TODO Auto-generated method stub
-		return dao.train_list();
+		return dao.train_list(vo);
 	}
 
 	@Override
@@ -83,6 +83,30 @@ public class TrainSerivceImpl implements TrainService{
 	public int save_user_count(TrainVO vo) {
 		// TODO Auto-generated method stub
 		return dao.save_user_count(vo);
+	}
+
+	@Override
+	public int del_mytrain(int module_num, int train_num) {
+		// TODO Auto-generated method stub
+		return dao.del_mytrain(module_num, train_num);
+	}
+
+	@Override
+	public List<TrainVO> reco_list(TrainVO vo) {
+		// TODO Auto-generated method stub
+		return dao.reco_list(vo);
+	}
+
+	@Override
+	public List<TrainVO> get_user(TrainVO newvo) {
+		// TODO Auto-generated method stub
+		return dao.get_user(newvo);
+	}
+
+	@Override
+	public List<TrainVO> train_set(int train_num) {
+		// TODO Auto-generated method stub
+		return dao.train_set(train_num);
 	}
 
 }

@@ -35,7 +35,7 @@
 					<div><span class="material-symbols-rounded">arrow_forward_ios</span></div>
 				</div>
 			</li>
-			<li><a href="#">성공스토리</a></li>
+			<li><a href="${url}/successList">성공스토리</a></li>
 		</ul>
 	</div>
 	

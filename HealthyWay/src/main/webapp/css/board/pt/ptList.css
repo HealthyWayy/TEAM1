@@ -1,15 +1,13 @@
 @charset "UTF-8";
-
+@media ( min-width: 1800px ) {
+	.menu-container {
+		margin-top:0vh;	
+	}	
+}
 body, ul, li{
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
-}
-
-.top{
-	height: 70px;
-	border-bottom: 1px solid gray;
-	margin-bottom: 3px;
 }
 
 .wrap{

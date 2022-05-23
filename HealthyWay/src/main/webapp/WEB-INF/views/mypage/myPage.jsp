@@ -161,6 +161,7 @@ body,ul,li{
 	left:50%;
 	transform: translate(-50%, -50%);
 	content:'로그아웃';
+	border-radius:15px;
 	width:100%;
 	height:100%;
 	line-height:40px;
@@ -297,9 +298,6 @@ $(()=> {
 	heightSize(indexPrev)
 	$('.pageBtn').eq(indexPrev).addClass('clickUpClass');
 	$('.pageView').eq(indexPrev).addClass('clickUpClass pageUpClass');
-	//console.log($('.pageView').eq(0).html())
-	//console.log($('.pageView').eq(1).html())
-	//console.log($('.pageView').eq(2).html())
 	$(".pageBtn").on('click',function(){
 		var index = $(event.target).index();
 		if(index!=indexPrev){
@@ -311,6 +309,19 @@ $(()=> {
 		}
 		heightSize(index);
 	});
+	let scrollTop=0;
+	//MyGroup 항목 무한 스크롤 비슷하게 구현
+	$("#groupPageDiv").scroll(function(){
+		if($(this).scrollTop()<scrollTop){
+			$(this).scrollTop(scrollTop);
+			return;
+		}
+		scrollTop=$(this).scrollTop();
+		if(Math.ceil($(this).scrollTop()) + Math.ceil($(this).innerHeight()) >= Math.floor($(this)[0].scrollHeight)) {
+			$(this).scrollTop(0);
+			scrollTop=0;
+		}
+	})
 });
 function heightSize(indexPrev){
 	if(indexPrev==0){

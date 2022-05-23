@@ -14,6 +14,7 @@
 <div class="wrap">
 	<section class="findForm">
 		<div id="log">
+		<h2>비밀번호 찾기</h2>
 			<form method="post" class="form-signin" action="findUserPw" name="findform">
 				<div class="findFrm_btn_wrap">
 					<div>

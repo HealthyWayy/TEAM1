@@ -34,7 +34,7 @@ function warnMember(user_name, report_hit, user_email, userid){
 		    template_params: {
 		        'user_name': user_name,
 		        'report_hit': report_hit,
-		        'user_email': 'seyun373@gmail.com'
+		        'user_email': user_email
 		    }
 		};
 		 

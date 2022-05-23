@@ -1,19 +1,20 @@
-<link rel="stylesheet" href="${url}/css/board.css">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link rel="stylesheet" href="${url}/css/board/boardWrite.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 <script>
 $(function() {
-    $("#btn_edit").on("click",function() {
+	// 글등록 버트 누르면 submit 실행
+    $("#writeBtn").on("click",function() {
        if ($("#title").val() == "") {
           alert("글 제목을 입력하세요");
-          return false;
-       }
-       if ($("#user_id").val() == "") {
-           alert("접속하신 아이디를 입력하세요");
-           return false;
-        }
-       if ($("#content").val() == "") {
+       }else if ($("#content").val() == "") {
            alert("내용을 입력하세요");
-           return false;
+           return false;}else{
+    	   $("#writeFrm").submit();
+       }
         }
        
        
@@ -62,33 +63,38 @@ $(function() {
             
         }) ; 
         });
-    });
- });
-			
-</script>
-  
-<div id="#b__table">
-        <h1 class="bf__title"> 공지사항 </h1>
-        <form id="boardFrm" name="boardFrm" class="bf__container">
-        	<input type="hidden" value="${bvo.board_num}" name="board_num">
-        	<input type="hidden" value="suggestionwrite" name="command">
-            <table>
-                <tr>
-                    <th>제목</th>
-                    <td><input type="text" name="title" id="title" value="${bvo.title}"></td>
-                </tr>
-                <tr>
-                    <th>아이디</th>
-                    <td><input type="text" name="user_id" id="user_id" value="${bvo.user_id}"></td>
-                </tr>
-                <tr>
-                    <th>내용</th>
-                    <td><textarea cols="100" rows="30"  name="content" id="content">${bvo.content}</textarea></td>
-                </tr>
-            </table>
-            <input class="bo__btn__wa" type="button" id="btn_edit" value="글 작성">
-            
-            <input class="bo__btn__wa" type="button" value="취소" onclick="location.href='${url}/board/boardlist'">
-        </form>
 
-    </div>   
+    });
+	
+	// 글등록 버튼 색변경
+	$("#writeBtn").hover(function(){
+		$(this).css("background-color", "#fff").css("border", "1px solid #bdbdbd").css("color", "#000");
+	}, function(){
+		$(this).css("background-color", "#ff5454").css("border", "1px solid #ff5454").css("color", "#fff");
+	});
+ });
+</script>
+
+
+<div class="wrap">
+	 <form id="writeFrm" method="post" action="${url}/boardEditOk">
+		<ul id="writeFrm_wrap">
+			<li>
+				<select name="type_num" id="type_num">
+					<option id="notice" value="4" selected>공지사항</option>
+				</select>
+			</li>
+			<li id="title_wrap">
+				<input type="text" name="title" id="title" placeholder="제목"  value="${bvo.title}">
+			</li>
+			<li>
+				<textarea name="content" id="content" placeholder="내용을 입력해주세요!">${bvo.content}</textarea>
+			</li>
+			<li><input type="hidden" name="board_num" value="${bvo.board_num}"></li>
+		</ul>
+	</form>
+</div> 
+<div class="writeBtn_wrap">
+	<input class="writeBtn" type="button" id="writeBtn" value="등록">
+</div> 
+    

@@ -4,8 +4,8 @@
     
 
     <ul id="menu">
-        <li><a  href="/trainning/trainningHome">트레이닝 센터</a></li>
-        <li><a href="/trainning/myTrainning">나만의 운동</a></li>
+        <li><a class="li-a" href="/trainning/trainningHome">트레이닝 센터</a></li>
+        <li><a class="li-a" href="/trainning/myTrainning">나만의 운동</a></li>
         <li><a class="active" href="/trainning/recommendTrainning">추천 운동 목록</a></li>
     </ul>
     

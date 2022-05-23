@@ -9,7 +9,7 @@ body{
 	overflow: hidden;
 }
 
-#writeFrm{
+#writeFrm_wrap{
 	width: 45%;
 	height: 100%;
     margin: 0 auto;
@@ -72,6 +72,7 @@ body{
 	line-height: 350px;
 	color: gray;
 	cursor: pointer;
+	overflow: hidden;
 }
 
 .img_div img{

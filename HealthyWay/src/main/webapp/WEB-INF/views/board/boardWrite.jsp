@@ -28,7 +28,7 @@ $(function() {
 
 <div class="wrap">
 	 <form id="writeFrm" method="post" action="${url}/suggestionWrite">
-		<ul>
+		<ul id="writeFrm_wrap">
 			<li>
 				<select name="type_num" id="type_num">
 					<option id="notice" value="4" selected>공지사항</option>

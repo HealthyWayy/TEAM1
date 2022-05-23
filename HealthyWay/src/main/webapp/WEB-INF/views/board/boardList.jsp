@@ -30,7 +30,7 @@
 				</div>
 			</li>
 			<li><a href="${url}/board/suggestionList">자유게시판</a></li>
-			<li><a href="#">성공스토리</a></li>
+			<li><a href="${url}/successList">성공스토리</a></li>
 		</ul>
 	</div>
 	
