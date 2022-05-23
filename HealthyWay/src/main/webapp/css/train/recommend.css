@@ -11,6 +11,38 @@
   overflow: auto;
 }
 
+.head_img{
+	margin : 0 auto;
+	margin-bottom: 2%;
+    position: relative;
+    top: -3px;
+    width: 80%;
+    height: 80%;
+}
+
+#video{
+	width: 100%;
+	height: 100%;
+	object-fit: fill;
+}
+
+.head_img h1{
+	text-align: center;
+    position: absolute;
+    top: 35%;
+    width: 100%;
+    color: #fff;
+    font-size: 3em;
+}
+.head_img p{
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+	color: #fff;
+    font-size: 1.5em;
+}
+
 .li-a {
    display: block;
    color: #000;
