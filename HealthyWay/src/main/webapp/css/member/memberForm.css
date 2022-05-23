@@ -5,6 +5,9 @@ body, ul, li{
 	padding: 0;
 	list-style-type: none;
 }
+.memberForm-body {
+	min-height: 1200px;
+}
 
 .wrap{
 	display: flex;
