@@ -1,6 +1,7 @@
 
 package com.team1.health.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -43,6 +44,20 @@ public class BoardServiceImpl implements BoardService {
 	public BoardVO boardSelect(int board_num) {
 		return dao.boardSelect(board_num);
 	}
+	
+	
+	
+	
+	@Override
+	public ArrayList<BoardVO> boardSelectAll(PagingVO vo) {
+		// TODO Auto-generated method stub
+		return dao.boardSelectAll(vo);
+	}
+	@Override
+	public ArrayList<BoardVO> suggestionSelectAll(SuggestionPagingVO vo) {
+		// TODO Auto-generated method stub
+		return dao.suggestionSelectAll(vo);
+	}
 	//7
 	@Override
 	public int hitCount(int no) {		
@@ -55,8 +70,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	//9
 	@Override
-	public int boardDelete(int board_num, String user_id) {
-		return dao.boardDelete(board_num, user_id);
+	public int boardDelete(String user_id, int board_num) {
+		return dao.boardDelete(user_id, board_num);
 	}
 	@Override
 	public BoardVO boardSelectByNo(int board_num) {
@@ -68,6 +83,13 @@ public class BoardServiceImpl implements BoardService {
 		return dao.boardView(board_num);
 	}
 
+	
+	
+	
+	
+	
+	
+	
 	//자유게시판
 	@Override
 	public int suggestionInsert(BoardVO vo) {
@@ -99,7 +121,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public int suggestionDelete(int board_num, String user_id) {
+	public int suggestionDelete(String user_id, int board_num) {
 		return dao.suggestionDelete(board_num, user_id);
 	}
 	@Override

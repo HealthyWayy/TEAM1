@@ -18,7 +18,7 @@ $(function() {
        
        
     $(function(){
-           var url = "${url}/boardList";
+           var url = "${url}/board/boardList";
            var data = $("#boardFrm").serialize();
         $.ajax({
            url : url,
@@ -42,7 +42,7 @@ $(function() {
     console.log($)
 	 $("#btn_delete").on("click",function() {
         $(function(){
-            var url = "${url}/boardList";
+            var url = "${url}/board/boardList";
             var data = $("#boardFrm").serialize()
          $.ajax({
             url : url,
@@ -68,7 +68,7 @@ $(function() {
 </script>
   
 <div id="#b__table">
-        <h1 class="bf__title">👇 자유게시판 👇</h1>
+        <h1 class="bf__title"> 공지사항 </h1>
         <form id="boardFrm" name="boardFrm" class="bf__container">
         	<input type="hidden" value="${bvo.board_num}" name="board_num">
         	<input type="hidden" value="suggestionwrite" name="command">
@@ -87,8 +87,8 @@ $(function() {
                 </tr>
             </table>
             <input class="bo__btn__wa" type="button" id="btn_edit" value="글 작성">
-            <input class="bo__btn__wa" type="button" id="btn_delete" value="삭제하기">
-            <input class="bo__btn__wa" type="button" value="취소" onclick="location.href='${url}/boardlist'">
+            
+            <input class="bo__btn__wa" type="button" value="취소" onclick="location.href='${url}/board/boardlist'">
         </form>
 
     </div>   
