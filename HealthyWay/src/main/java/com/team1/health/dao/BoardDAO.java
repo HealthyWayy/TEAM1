@@ -34,7 +34,7 @@ public interface BoardDAO {
 	
 	public int boardUpdate(BoardVO vo);
 	
-	public int boardDelete(String user_id, int board_num);
+	public int boardDelete(int board_num, String user_id);
 	
 	public BoardVO boardSelectByNo(int board_num);
 	
