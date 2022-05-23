@@ -228,7 +228,7 @@
 
 .img_wrap{
     width: 100%;
-    height: 290px;
+    height: 300px;
     border-bottom: 1.5px solid #ddd;
     overflow: hidden;
     display: flex;
@@ -246,11 +246,14 @@
 }
 
 .title{
-	height: 55px;
-    line-height: 55px;
+	height: 50px;
+    line-height: 50px;
     font-size: 1.3em;
     padding: 10px 20px;
     font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .hit_date_wrap{

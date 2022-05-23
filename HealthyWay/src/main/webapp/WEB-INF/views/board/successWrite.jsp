@@ -56,7 +56,7 @@
 			}
 		});
 
-		// 글등록 버트 누르면 submit 실행
+		// 글등록 버튼 누르면 submit 실행
 		$("#writeBtn").on("click", function() {
 			// 유효성 검사
 			if ($("#title").val() == "") {
@@ -147,12 +147,13 @@
 						<span class="material-symbols-outlined">add_a_photo</span> After
 					</div>
 					<img src="" id="after_preview">
-				</div> <!-- after 이미지 첨부 --> <input type="file" name="filename" value=""
-				id="after_file" style="display: none"> <input type="hidden"
-				name="img_file2" value="" id="after_img_file">
+				</div> <!-- after 이미지 첨부 --> 
+				<input type="file" name="filename" value="" id="after_file" style="display: none"> 
+				<input type="hidden" name="img_file2" value="" id="after_img_file">
 			</li>
-			<li><textarea name="content" id="content"
-					placeholder="내용을 입력해주세요!"></textarea></li>
+			<li>
+				<textarea name="content" id="content" placeholder="내용을 입력해주세요!"></textarea>
+			</li>
 		</ul>
 	</div>
 	<div class="writeBtn_wrap">

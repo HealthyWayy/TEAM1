@@ -28,13 +28,6 @@ $(function(){
 });
 
 
-
-
-
-
-
-
-
 $(function() {
     $("#btn_delete").on("click",function() {
         $(function(){
@@ -190,7 +183,9 @@ $(function() {
 		<li class="title">${bvo.title}</li>
 		<li class="write_date">${bvo.write_date}</li>
 		<li class="hit">조회수 ${bvo.hit}</li>
-		<li class="content">${bvo.content}</li>
+		<li class="content">
+			<textarea class="content_text" readonly>${bvo.content}</textarea>
+		</li>
 		<li class="writer">
 			<div class="writer_profile" style="margin-bottom: 15px;">
 				<div class="writer_img"><img src="${url}/img/${bvo.profie_img}"></div>
