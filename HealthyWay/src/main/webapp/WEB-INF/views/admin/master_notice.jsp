@@ -52,6 +52,33 @@ ul, li {
 	padding-left:4%;
 	padding-right:4%;
 }
+#manageDiv{
+	position: relative;
+}
+#searchFrm{
+	position:absolute;
+	bottom:10px;
+	right:58px;
+}
+#searchFrm>input[type=text]{
+	width:250px;
+	height:30px;
+	padding-left:2%;
+	margin-right:5px;
+	border-radius:10px;
+	border:1px solid rgb(200,200,200);
+}
+#searchFrm>input[type=text]:focus{
+	outline-color: #FF5454;
+}
+#searchFrm>input[type=submit]{
+	width:75px;
+	height:30px;
+	border-radius: 30px;
+	border:none;
+	background-color: #FF5454;
+	color:white;
+}
 .menu_list {
 	text-align: right;
 }
@@ -75,13 +102,53 @@ ul, li {
 	background-color: #fff !important;
 	color: #000 !important;
 }
-#deleteReport{
+
+.writeBtn_wrap{
+	width: 97%;
+	text-align: right;
+	margin-right: 3%;
+	margin-top: 20px;
+}
+
+.writeBtn_wrap button{
+	background-color: #FF5454;
+    color: #fff;
+    padding: 5px 20px;
+    border: 1.5px solid #ff5454;
+    border-radius: 4px;
+    height: 33px;
+    cursor: pointer;
+}
+
+#category_list{
+	text-align: right;
+}
+#category_list>li{
+	display:inline-block;
+	margin-left:0.6%;
+}
+#category_list>li:hover{
+	text-decoration: underline;
+}
+.table{
+	text-align: center;
+}
+.table>tbody>tr{
+	cursor: pointer;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+#deleteBtn{
 	width:75px;
 	height:30px;
 	border-radius: 30px;
-	border: 1px solid rgb(200,191,231);
-	background-color:white;
+	border:none;
+	background-color: #FF5454;
+	color: white;
+
 }
+
 .paging{
 	text-align: center;
 	margin:0 auto;
@@ -105,22 +172,15 @@ ul, li {
 	background-color:#FF5454 !important;
 }
 
-/*회원 신고 div*/
-#reportDiv{
-	width:100%;
-	height:100%;
-	overflow:auto;
-	background-color: pink;
-	display: none;
-}
+
 @media ( min-width: 1800px ) {
 	#container{
 		padding-left:7%;
 		padding-right:7%;
-	}
+	}	
 	#searchFrm{
-		width:20%;
-		margin-right:1%;
+		bottom:10px;
+		right:125px;
 	}
 }
 </style>
@@ -171,5 +231,85 @@ $(function(){
 		<li id="menu_community">커뮤니티 관리</li>
 		<li id="menu_notice" class="menu_active">공지사항</li>
 	</ul>
+	<!-- 공지사항 관리 -->
+	<div id="manageDiv">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>작성자</th>
+					<th style="width:30%;">제목</th>
+					<th>조회수</th>
+					<th>작성일</th>
+					<th>삭제</th>	
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="vo" items="${vo}">
+					<c:if test="${vo.type_num==4}">
+						<tr onclick="window.open('/boardView?board_num=${vo.board_num});">
+					</c:if>
+						<td>${vo.board_num}</td>
+						<td>${vo.user_id}</td>
+						<td style="width:35%;">${vo.title}</td>
+						<td>${vo.hit}</td>
+						<td>${vo.write_date}</td>
+						<td><button id="deleteBtn" onclick="deleteBoard('${vo.board_num}');">삭제</button></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	
+		<div class="writeBtn_wrap">
+			<button id="writeBtn" onclick="location.href='${url}/boardWrite'">글쓰기</button>
+		</div>
+	<!-- 페이징 -->
+	    <ul class="paging">
+	    	<!-- prev -->
+	    	<c:if test="${pVO.pageNum==1&&pVO.totalRecord>0}">
+	    		<li>◀</li>
+	    	</c:if>
+	    	<c:if test="${pVO.pageNum>1}">
+	    		<li><a href="/master/notice?pageNum=${pVO.pageNum-1}
+	    		<c:if test='${pVO.searchWord!=null}'>
+	    			&searchKey=${pVO.searchKey}&searchWord=${pVO.searchWord}
+	    		</c:if>">◀</a></li>
+	    	</c:if>
+	    	
+	    	<!-- pageNum -->
+	    	<c:forEach var="p" begin="${pVO.startPage}" end="${pVO.startPage+pVO.onePageCount-1}">
+	    		<c:if test="${p<=pVO.totalPage}">
+	    			<c:if test="${p==pVO.pageNum}">
+	    				<li class="active">
+	    			</c:if>
+	    			<c:if test="${p!=pVO.pageNum}">
+	    				<li>
+	    			</c:if>
+	    			<a href="/master/notice?pageNum=${p}
+		    			<c:if test='${pVO.searchWord!=null}'>
+		    				&searchKey=${pVO.searchKey}
+		    				&searchWord=${pVO.searchWord}
+		    			</c:if>
+	    			">${p}</a></li>
+	    		</c:if>
+	    	</c:forEach>
+	    	
+	    	<!-- next -->
+	    	<c:if test="${pVO.pageNum==pVO.totalPage}">
+	    		<li>▶</li>
+	    	</c:if>
+	    	<c:if test="${pVO.pageNum<pVO.totalPage}">
+	    		<li><a href="/master/notice?pageNum=${pVO.pageNum+1}
+	    			<c:if test='${pVO.searchWord!=null}'>
+	    				&searchKey=${pVO.searchKey}&searchWord=${pVO.searchWord}
+	    			</c:if>">▶</a></li>
+	    	</c:if>
+	    </ul>
+	    
+	    <form method="get" action="/master/notice" id="searchFrm">
+	      <input type="text" name="searchWord"/>
+	      <input type="submit" value="검색"/>
+	    </form>
+    </div>
+    
 </div>
