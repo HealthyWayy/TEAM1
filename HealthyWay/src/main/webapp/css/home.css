@@ -1,4 +1,4 @@
-
+@charset "UTF-8";
 /*media 1800px*/
 @media ( min-width: 1800px ) {
 	.cover {
@@ -22,6 +22,9 @@ a {
 }
 .top {
 	display: none;
+}
+.bottom {
+	display:none;
 }
 a:hover {
 	color: #f0094a;
@@ -98,12 +101,12 @@ a:hover {
 }
 
 .dropdown-content2 {
-	/*������ ����*/
+	/*占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙*/
 	display:flex;
 	justify-content:center;
 	align-items:center;
 	
-	/*�ڽ� ����*/
+	/*占쌘쏙옙 占쏙옙占쏙옙*/
 	overflow: hidden;
 	box-sizing:border-box;
 	border-radius: 5%;
@@ -111,7 +114,7 @@ a:hover {
 	box-shadow: 0px 0px 10px 0px rgba(5, 5, 5, 0.3);
 	background-color: white;
 	
-	/*�ִϸ��̼� ȿ������*/
+	/*占쌍니몌옙占싱쇽옙 효占쏙옙占쏙옙占쏙옙*/
 	opacity:0;
 	transform:scale(0);
 	transform-origin: 100% 0;
@@ -145,7 +148,7 @@ a:hover {
 	cursor:pointer;
 	color: rgb(10,10,10);
 	font-size:16px;
-	/*�ؽ�Ʈ���� ���� ���� ����*/
+	/*占쌔쏙옙트占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙*/
 	padding-bottom: 6px;
 } 
 .gnb li:last-of-type {
@@ -155,23 +158,23 @@ a:hover {
 
 .gnb span:before {
 	content:"";
-	position: absolute; /*�θ� ��ҿ��� position: relative�� �־�� �Ѵ�.*/
+	position: absolute; /*占싸몌옙 占쏙옙奴占쏙옙占� position: relative占쏙옙 占쌍억옙占� 占싼댐옙.*/
 	background-color: crimson;
-	height: 0.35vh; /*���� ����*/
+	height: 0.35vh; /*占쏙옙占쏙옙 占쏙옙占쏙옙*/
 	
-	width: 0; /*�ʱ⿡ ������ �ʵ���*/
-	bottom: 0; /*a�±� �Ʒ��� ��ġ ��Ű��*/
-	transition: 0.5s; /*�ִϸ��̼� ���� ���� �ð� ����*/
-	/*���� ��Ҹ� ����� �̵���Ű��*/
+	width: 0; /*占십기에 占쏙옙占쏙옙占쏙옙 占십듸옙占쏙옙*/
+	bottom: 0; /*a占승깍옙 占싣뤄옙占쏙옙 占쏙옙치 占쏙옙키占쏙옙*/
+	transition: 0.5s; /*占쌍니몌옙占싱쇽옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占시곤옙 占쏙옙占쏙옙*/
+	/*占쏙옙占쏙옙 占쏙옙恬占� 占쏙옙占쏘데占쏙옙 占싱듸옙占쏙옙키占쏙옙*/
 	left:50%;
 	transform:translateX(-50%);
 }
 
-/*�±װ� ȣ���� �Ǹ� ���� ����� ũ�⸦ 100%�� Ű���*/
+/*占승그곤옙 호占쏙옙占쏙옙 占실몌옙 占쏙옙占쏙옙 占쏙옙占쏙옙占� 크占썩를 100%占쏙옙 키占쏙옙占�*/
 .gnb span:hover:before {
 	width:100%;
 }
-/*===================== ���� =====================*/
+/*===================== 占쏙옙占쏙옙 =====================*/
 
 
 .container {
@@ -179,7 +182,7 @@ a:hover {
 }
 
 .box {
-	/* �Ʒ� ������ �������� �κп��� box�� css �ִ°� ������ �ʿ� */
+	/* 占싣뤄옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占싸분울옙占쏙옙 box占쏙옙 css 占쌍는곤옙 占쏙옙占쏙옙占쏙옙 占십울옙 */
 	/* float: left; width: calc(100% / 4); */
 	height: 100vh;
 	/*border: 10px solid;*/
@@ -211,10 +214,10 @@ a:hover {
 /*.copywrite-first li  {
 	opacity: 0;
 }*/
-/*======================ù��° ������================================*/
+/*======================첫占쏙옙째 占쏙옙占쏙옙占쏙옙================================*/
 
 
-/*==========================�ִϸ��̼�===============================*/
+/*==========================占쌍니몌옙占싱쇽옙===============================*/
 
 /* @keyframes duration | timing-function | delay |
 iteration-count | direction | fill-mode | play-state | name */
@@ -276,7 +279,7 @@ iteration-count | direction | fill-mode | play-state | name */
 
 
 
-/*================= �ι��� ������ ======================*/
+/*================= 占싸뱄옙占쏙옙 占쏙옙占쏙옙占쏙옙 ======================*/
 
 
 .Title-mask {
@@ -323,7 +326,7 @@ iteration-count | direction | fill-mode | play-state | name */
 	}
 }
 
-/*=================����° ������=====================*/
+/*=================占쏙옙占쏙옙째 占쏙옙占쏙옙占쏙옙=====================*/
 /*@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap");*/
 
 /*.copywrite-third>div {
@@ -420,7 +423,7 @@ iteration-count | direction | fill-mode | play-state | name */
   	transition:800ms ease all;
 }*/
 
-/*===================== �׹�° ������ ===========================*/
+/*===================== 占쌓뱄옙째 占쏙옙占쏙옙占쏙옙 ===========================*/
 
 @import url(https://fonts.googleapis.com/css?family=Hind:700);
 
@@ -479,7 +482,7 @@ iteration-count | direction | fill-mode | play-state | name */
 	40%		{text-shadow:  0 0 0px #fff;}
 	100%	{text-shadow:  0 0 0px #fff;}
 }*/
-/*== ��ư ===*/
+/*== 占쏙옙튼 ===*/
 /*.form-move {
 	position: absolute;
 	left:50%;
@@ -616,7 +619,7 @@ iteration-count | direction | fill-mode | play-state | name */
     }
   }
 
-/*============================��Ŭ�� ��ư======================================*/
+/*============================占쏙옙클占쏙옙 占쏙옙튼======================================*/
 
 
 /*
@@ -626,7 +629,7 @@ iteration-count | direction | fill-mode | play-state | name */
 	list-style: none;
 }*/
 
-/*���� ��*/
+/*占쏙옙占쏙옙 占쏙옙*/
 /*.activity li:before {
 	-webkit-transition: all 0.2s ease;
 	-moz-transition: all 0.2s ease;
@@ -660,7 +663,7 @@ iteration-count | direction | fill-mode | play-state | name */
 	text-align: center;
 	text-transform: lowercase; 
 	*/
-	/*ũ��*/
+	/*크占쏙옙*/
 /*	width: 4em;
 	height: 4em;
 	line-height: 4em;
@@ -704,7 +707,7 @@ iteration-count | direction | fill-mode | play-state | name */
 }
 */
 
-/*================================ �ִϸ��̼� ������ ===============================*/
+/*================================ 占쌍니몌옙占싱쇽옙 占쏙옙占쏙옙占쏙옙 ===============================*/
 
 .dFirst {
 	animation-delay:1s;
