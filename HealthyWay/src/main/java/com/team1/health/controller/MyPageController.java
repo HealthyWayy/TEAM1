@@ -41,6 +41,9 @@ public class MyPageController {
 		String user = (String)session.getAttribute("logId");
 		MemberVO userData = service.userData(user);
 		List<BoardVO> PTboardData = service.PTboard(user);
+		if(PTboardData.size()>=2) {
+			PTboardData.add(PTboardData.get(0));
+		}
 		//pt그룹 데이터
 		mav.addObject("PTboardData",PTboardData);
 		//유저 데이터
@@ -112,7 +115,6 @@ public class MyPageController {
 	public MyPagePagingVO groupPageNagion(MyPagePagingVO vo, HttpSession session) {
 		String user = (String)session.getAttribute("logId");
 		vo.setTotalRecord(service.groupCount(user));
-		System.out.println(service.groupCount(user));
 		return vo;
 	}
 	@PostMapping("/mypage/routineListAll")
@@ -190,29 +192,22 @@ public class MyPageController {
 	public int updateUser(MemberVO vo,HttpServletRequest request) {
 		//나중에 배포를 위해서라도 링크 외부 파일로 돌리기!
 		String path = request.getSession().getServletContext().getRealPath("/img");
-		System.out.println(path);
 		String orgFileName = "";
 		try {
 			MultipartHttpServletRequest mr = (MultipartHttpServletRequest) request;
 			List<MultipartFile> files = mr.getFiles("profile_img");
-			System.out.println("업로드 파일수 = "+files.size());
-			System.out.println(vo.getUser_id());
 			if(files!=null) {
-				System.out.println("실행!!!");
 				for (int i=0; i<files.size();i++) {
 					MultipartFile mf = files.get(i);
 					orgFileName = mf.getOriginalFilename();
-					System.out.println("orgFileName = "+orgFileName);
 					if(orgFileName!=null && !orgFileName.equals("")) {
 						File f = new File(path,orgFileName);
-						System.out.println("if1"+f.exists());
 						if(f.exists()) {
 							for(int renameNum=0;;renameNum++) {
 								int point = orgFileName.lastIndexOf(".");
 								String fileName = orgFileName.substring(0,point);
 								String ext = orgFileName.substring(point+1);
 								f = new File(path,fileName+"-"+renameNum+"."+ext);
-								System.out.println("if2"+!f.exists());
 								if(!f.exists()) {
 									orgFileName = f.getName();
 									break;
@@ -220,7 +215,6 @@ public class MyPageController {
 							}
 						}
 						try {
-							System.out.println("파일 업로드 실행");
 							mf.transferTo(f);//실제 업로드됨
 							if(!vo.getProfie_img().equals("noprofile.png")) {
 								fileDelete(path,vo.getProfie_img());
@@ -238,11 +232,9 @@ public class MyPageController {
 			if(!orgFileName.equals("noprofile.png")) {
 				fileDelete(path,orgFileName);
 			}
-			System.out.println("삭제 실행");
 		}
 		//수정 DAO작성
 		int result = service.userUpdate(vo);
-		System.out.println(result+"결과");
 		return result;
 	}
 	public void fileDelete(String path, String fileName) {

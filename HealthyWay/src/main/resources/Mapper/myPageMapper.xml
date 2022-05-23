@@ -35,8 +35,9 @@
 	<select id="groupListAll" resultType='BoardVO'>
 		select b.board_num,b.title,b.content,p.pt_img_file from board b 
 		join PT_group p on b.board_num=p.board_num 
-		left join apply_user a on p.board_num=a.board_num 
+		left join apply_user a on p.board_num=a.board_num
 		where (a.user_id=#{param1} and a.user_state='참여중') or (b.user_id=#{param1} and b.type_num='2')
+		ORDER BY b.board_num DESC
 		limit ${param2.onePageRecord} offset ${param2.offsetIndex};
 	</select>
 	<select id='groupCount' resultType='int'>
@@ -49,13 +50,17 @@
 		select count(board_num) from board where user_id=#{param1} and type_num=3;
 	</select>
 	<select id='achieveListAll' resultType='BoardVO'>
-		select a.img_file1,b.board_num,b.title,b.content from board b join achieve_story a on b.board_num=a.board_num where user_id=#{param1} limit ${param2.onePageRecord} offset ${param2.offsetIndex};
+		select a.img_file1,b.board_num,b.title,b.content from board b join achieve_story a on b.board_num=a.board_num where user_id=#{param1} 
+		ORDER BY b.board_num DESC
+		limit ${param2.onePageRecord} offset ${param2.offsetIndex};
 	</select>
 	<select id='foodCount' resultType='int'>
 		select count(board_num) from board where user_id=#{param1} and type_num=1 and board_num!=0;
 	</select>
 	<select id='foodListAll' resultType='BoardVO'>
-		select r.recipe_img_file,b.board_num,b.title,b.content from board b join recipe_board r on b.board_num=r.board_num where b.user_id=#{param1} limit ${param2.onePageRecord} offset ${param2.offsetIndex};
+		select r.recipe_img_file,b.board_num,b.title,b.content from board b join recipe_board r on b.board_num=r.board_num where b.user_id=#{param1} 
+		ORDER BY b.board_num DESC
+		limit ${param2.onePageRecord} offset ${param2.offsetIndex};
 	</select>
 	<select id='userRoutineListAll' resultType='TrainVO'>
 		select ur.user_id,ur.train_num,tr.train_title from user_routine ur join training_routine tr on tr.train_num=ur.train_num where ur.user_id=#{param1};
