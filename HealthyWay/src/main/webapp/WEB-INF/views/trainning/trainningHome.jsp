@@ -5,6 +5,9 @@
 <link rel="stylesheet" type="text/css" href="/css/train/train.css">
  <section class="training-view">  
 
+
+
+
     <ul id="menu">
         <li><a class="active" href="/trainning/trainningHome">트레이닝 센터</a></li>
         <li><a class="li-a" href="/trainning/myTrainning">나만의 운동</a></li>

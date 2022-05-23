@@ -319,19 +319,19 @@ function foodPageNation(pageNum){
 </script>
 <div id='writeDiv'>
  	<ul>
- 		<li class='writeDivFirstLi' style='background-color:rgb(81,187,202); color:white;'>가입 그룹</li>
+ 		<li class='writeDivFirstLi' style='background-color:#FF748C; color:white;'>가입 그룹</li>
  		<li id='groupList'></li>
  		
  		<li class='writeDivlastLi' id='groupPageNation'></li>
  	</ul>
  	<ul>
- 		<li class='writeDivFirstLi' style='background-color:rgb(235,43,124); color:white;'>성공 스토리</li>
+ 		<li class='writeDivFirstLi' style='background-color:#FF748C; color:white;'>성공 스토리</li>
  		<li id='achieveList'></li>
  		
  		<li class='writeDivlastLi' id='achievePageNation'></li>
  	</ul>
  	<ul>
- 		<li class='writeDivFirstLi' style='background-color:rgb(249,185,0); color:white;'>레시피</li>
+ 		<li class='writeDivFirstLi' style='background-color:#FF748C; color:white;'>레시피</li>
  		<li id='foodList'></li>
  		<li class='writeDivlastLi' id='foodPageNation'></li>
  	</ul>

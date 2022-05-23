@@ -48,7 +48,6 @@
 
 #viewList .img{
 	width: 100%;
-	height: 55vh;
 	margin-top: 50px;
 	overflow: hidden;
 }
@@ -79,7 +78,7 @@
 }
 
 #viewList .img img{
-	height: 100%;
+	height: 60vh;
 	width: 100%;
 }
 

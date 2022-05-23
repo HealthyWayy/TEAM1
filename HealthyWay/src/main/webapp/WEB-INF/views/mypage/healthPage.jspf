@@ -311,7 +311,7 @@ function circleGrap(toDayData,toDayLabel){
 		labels: toDayLabel,
 		datasets: [{
 			data: toDayData,
-			backgroundColor: ['rgba(148, 145, 200, 0.5)','rgba(154, 151, 204, 0.5)','rgba(166, 164, 210, 0.5)','rgba(181, 179, 217, 0.5)','rgba(200, 199, 226, 0.5)'],
+			backgroundColor: ['#8977ad','#9c8cba','#b0a2c8','#c3b9d6','#d7d0e3', '#ebe7f1', '#ffffff'],
 		    borderColor: ['rgba(148, 145, 200, 0.5)','rgba(154, 151, 204, 0.5)','rgba(166, 164, 210, 0.5)','rgba(181, 179, 217, 0.5)','rgba(200, 199, 226, 0.5)'],
 			hoverOffset: 3
 		}]
