@@ -148,53 +148,8 @@ $(function() {
 		}
 	});
 	
-	
 	replyListAll();
-    
-  //신고하기 모달 jquery작성
-    $('.warnIcon').click(function(){
-       $(".modal").fadeIn(300);
-    });
-    
-    $('#reportOk').click(function(){
-       $(".modal").fadeOut(300);
-    });
-    
-    let reportCount=0;
-    $('#reportFrm').submit(function(){
-       event.preventDefault();
-       
-       if(confirm('신고하시겠습니까?')){
-          if($("#reportContent").val()==""){
-             alert('내용을 입력해 주세요');
-             return;
-          }
-          if(reportCount!=0){
-             alert('이미 신고한 게시글 입니다!');
-             return;
-          }
-
-          $.ajax({
-             url:"/master/reportInsert",
-             data:$("#reportFrm").serialize(),
-             type:'post',
-             success:function(response){
-                reportCount++;
-                if(response>0){
-                   alert('신고가 접수되었습니다.');                  
-                }else{
-                   alert('신고가 되지 않았습니다. - 이유 불명 - ');
-                }
-                $(".modal").fadeOut(300);
-             },error:function(error){
-                console.log(error.responseText)
-             }
-          })
-       }else{
-          alert('신고 안함');
-          return;
-       }
-    });
+   
  });
 </script>
 
@@ -206,23 +161,14 @@ $(function() {
 		<li class="hit">조회수 ${bvo.hit}</li>
 		<li class="content">${bvo.content}</li>
 		<li class="writer">
-			<div class="writer_profile">
+			<div class="writer_profile" style="margin-bottom: 15px;">
 				<div class="writer_img"><img src="${url}/img/${bvo.profie_img}"></div>
 				<div class="writer_id">${bvo.user_id}</div>
 			</div>
 		</li>
-		<li class="report">
-			<button class="warnIcon"><img src="${url}/img/report_img.png"> 신고</button>
-		</li>
-		<li class="edit_del_wrap">
-			<c:if test="${bvo.user_id == logId}">
-				<button onclick="location='/board/boardList/edit/${bvo.board_num}'">수정</button>
-				<button id="btn_delete">삭제</button>
-			</c:if>
-		</li>
 	</ul>
 	<!-- 댓글 -->
-	<div class="reply_all_wrap">
+	<div class="reply_all_wrap" style="border-top: 1px solid #a4a4a4;">
 		<h3>댓글</h3>
 		<form method="post" id="replyFrm">
 			<input type="hidden" name="board_num" value="${bvo.board_num}">
@@ -238,33 +184,5 @@ $(function() {
 	</div>
 	<div id="backBtn_wrap">
 		<button onclick="location.href='/boardList'">목록</button>
-	</div>
-	
-	<!-- 신고하기 모달창 추가 -->
-	<div class="modal">
-	   <div class="modal_content">
-	      <div><img src="/recipeImg/warnIcon.png"/>신고하기<img src="/recipeImg/warnIcon.png"/></div>
-	      <form method='post' id='reportFrm'>
-	         
-	         <input type='hidden' name='write_id' value='${vo.user_id}'/>
-	         <input type='hidden' name='board_num' value='${vo.board_num}'/>
-	         <input type='hidden' name='report_type' value='4'/>
-	         
-	         <input type="radio" name="report_title" value="게시판 이탈" id='reportRadio1' checked>
-	         <label for="reportRadio1">게시판 이탈</label>
-	         <input type="radio" name="report_title" value="광고" id='reportRadio2'>
-	         <label for="reportRadio2">광고</label>
-	         <input type="radio" name="report_title" value="욕설" id='reportRadio3'>
-	         <label for="reportRadio3">욕설</label>
-	         <input type="radio" name="report_title" value="음란물" id='reportRadio4'>
-	         <label for="reportRadio4">음란물</label><br/>
-	         <textarea name='report_content' placeholder="최대 200자까지 작성가능 합니다." maxlength="200" id='reportContent'></textarea>
-	         <br/>
-	         <ul class="modalBtn">
-	            <li><input type='button' value='취소' id='reportOk'/></li>
-	            <li><input type='submit' value='신고하기'/><br/></li>
-	         </ul>
-	        </form>
-	   </div>
 	</div>
 </div>

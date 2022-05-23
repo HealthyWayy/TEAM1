@@ -67,14 +67,11 @@ public interface BoardDAO {
 	public BoardVO suggestionSelectByNo(int board_num);
 	
 	public BoardVO suggestionView(int board_num);
-
-
-	//성공스토리
 	
 	//achieve_story 글등록
+	// 성공스토리 글등록(achieve_story)
 	public int acheiveInsert(BoardVO vo);
 	public int successtotalRecord(SuccessPagingVO ssVO);
-	public BoardVO successSelect(int board_num);
 	public int successUpdate(BoardVO vo);
 	public int successDelete(int board_num, String user_id);
 	public BoardVO successView(int board_num);

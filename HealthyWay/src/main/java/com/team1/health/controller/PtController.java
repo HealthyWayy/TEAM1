@@ -179,6 +179,7 @@ public class PtController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(new MediaType("text", "html", Charset.forName("UTF-8")));
 		System.out.print(pt_img_file);
+		
 		// 이미지 파일 삭제
 		String path = request.getSession().getServletContext().getRealPath("/ptImg");
 		File file = new File(path, pt_img_file);

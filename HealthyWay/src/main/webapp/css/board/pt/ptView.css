@@ -6,12 +6,6 @@ body, ul, li{
 	list-style-type: none;
 }
 
-.top{
-	height: 70px;
-	border-bottom: 1px solid gray;
-	margin-bottom: 3px;
-}
-
 .wrap{
 	width: 75%;
 	margin: 0 auto;
@@ -334,6 +328,12 @@ body, ul, li{
 }
 
 /****************************************************************/
+.right_wrap{
+    height: max-content;
+    position: sticky;
+    top: 10px;
+}
+
 .leader_profile_wrap{
 	border: 1px solid #bdbdbd;
     height: max-content;

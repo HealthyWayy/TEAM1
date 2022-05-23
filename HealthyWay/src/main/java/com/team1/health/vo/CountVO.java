@@ -8,13 +8,13 @@ public class CountVO {
 	private int train_num;
 	private String write_date;
 	
-	private String train_title;
-
-	public String getTrain_title() {
-		return train_title;
+	private String module_title;
+	
+	public String getModule_title() {
+		return module_title;
 	}
-	public void setTrain_title(String train_title) {
-		this.train_title = train_title;
+	public void setModule_title(String module_title) {
+		this.module_title = module_title;
 	}
 	public String getUser_id() {
 		return user_id;

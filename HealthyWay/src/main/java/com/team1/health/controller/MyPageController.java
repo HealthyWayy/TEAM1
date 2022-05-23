@@ -76,6 +76,7 @@ public class MyPageController {
 			}
 			if(cal.get(Calendar.DAY_OF_YEAR)==lst.get(i).getTrain_month()) {
 				lst2.add(lst.get(i));
+				System.out.println(lst2.get(i).getModule_title());
 			}
 		}
 		map.put("toDayData", lst2);
