@@ -3,6 +3,9 @@
 body {
 	background-color: rgba(249, 247, 253);
 }
+.question-body{
+	min-height: 1100px;
+}
 
 .wrap {
 	margin: 0 auto;
@@ -11,7 +14,7 @@ body {
 	padding: 20px 0px 240px 0px;
 	background-color: rgba(252, 253, 254);
 	border-radius: 5px;
-	margin-top: 180px;
+	margin-top: 80px;
 	box-shadow: 0 4px 10px 0 lightgray;
 }
 

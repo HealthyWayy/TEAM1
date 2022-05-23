@@ -21,4 +21,6 @@ public interface MemberDAO {
 	
 	public int memberQuestion(MemberVO vo);
 	public int weightInsert(MemberVO vo);
+	
+	public MemberVO memberQuestionSelect(MemberVO vo);
 }

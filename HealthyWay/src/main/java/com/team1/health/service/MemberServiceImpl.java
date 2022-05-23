@@ -61,4 +61,9 @@ public class MemberServiceImpl implements MemberService {
 	public int weightInsert(MemberVO vo) {
 		return dao.weightInsert(vo);
 	}
+
+	@Override
+	public MemberVO memberQuestionSelect(MemberVO vo) {
+		return dao.memberQuestionSelect(vo);
+	}
 }

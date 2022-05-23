@@ -86,7 +86,7 @@
 				<li><</li>
 				</c:if>
 				<c:if test="${spvo.pageNum>1 }">
-				<li><a href="${url}/board/suggestionList?pageNum=${bvo.pageNum-1}<c:if test='${bvo.searchWord!=null}'>&searchWord=${bvo.searchWord}</c:if>"><</a></li>
+				<li><a href="${url}/board/successList?pageNum=${bvo.pageNum-1}<c:if test='${bvo.searchWord!=null}'>&searchWord=${bvo.searchWord}</c:if>"><</a></li>
 				</c:if>
 				<!-- 페이지 번호  -->
 				<c:forEach var="p" begin="${spvo.startPage}" end="${spvo.startPage+spvo.onePageCount}">
@@ -96,7 +96,7 @@
 							<li style="font-size= 20px"><a href="${url}/board?pageNum=${p}">${p}</a></li>
 						</c:if>
 						<c:if test="${p!=spvo.pageNum }">
-							<li><a href=${url}/board/suggestionList?pageNum=${p}<c:if test='${spvo.searchWord!=null}'>&searchWord=${spvo.searchWord}</c:if>>${p}</a></li>
+							<li><a href=${url}/board/successList?pageNum=${p}<c:if test='${spvo.searchWord!=null}'>&searchWord=${spvo.searchWord}</c:if>>${p}</a></li>
 						</c:if>
 					</c:if>
 				</c:forEach>
@@ -105,7 +105,7 @@
 					<li>></li>
 				</c:if>
 				<c:if test="${spvo.pageNum < spvo.totalPage }">
-					<li><a href="${url}/board/suggestionList?pageNum=${spvo.pageNum+1}<c:if test='${spvo.searchWord!=null}'>&searchWord=${spvo.searchWord}</c:if>">></a></li>
+					<li><a href="${url}/board/successList?pageNum=${spvo.pageNum+1}<c:if test='${spvo.searchWord!=null}'>&searchWord=${spvo.searchWord}</c:if>">></a></li>
 				</c:if>
 			</ul>
 		</div>

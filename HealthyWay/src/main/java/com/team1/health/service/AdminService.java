@@ -53,6 +53,16 @@ public interface AdminService {
 	//totalRecord
 	public int totalRecord3(PagingVO pVO);
 	
+	//공지사항-----------------------------------------
+	
+	//공지사항 목록
+	public List<BoardVO> noticeList(PagingVO pVO);
+	//공지사항 등록
+	public int boardInsert(BoardVO vo);
+	//공지사항 삭제
+	public int boardDelete(String user_id, int board_num);
+	//total Notice Record
+	public int totalNoticeRecord(PagingVO pVO);
 	
 	//신고 관리--------------------------------------------
 	//신고 목록
@@ -66,5 +76,5 @@ public interface AdminService {
 	// 회원 신고 누적
 	public int userReportCount(String user_id);
 	// 경고 상태
-	public int warningState(String state, String user_id);
-}
+	public int warningState(String state, String user_id);	
+	}

@@ -17,7 +17,7 @@
 		</if>
 		order by board_num desc limit ${onePageRecord} offset ${offsetIndex}
 	</select>
-
+	
 	<select id="totalRecord" resultType="int">
 	select count(board_num) cnt from board where type_num=4
 		<if test='searchWord != null'>
@@ -114,7 +114,8 @@
 	</update>
 	
 	<delete id="suggestionDelete">
-		delete from board where board_num=#{param1} and user_id=#{param2}
+		delete from board 
+		where board_num=#{param1} and user_id=#{param2}
 	</delete>
 	
 	<insert id="insertBoardReply">

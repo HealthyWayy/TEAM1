@@ -177,9 +177,9 @@ body,ul,li{
 	opacity:0;
 }
 #mainPage{
-	position:absolute;
-	left:300px;
-	width:1200px;
+	position:relative;
+	left:100px;
+	width:1000px;
 	z-index:0;
 }
 #mainPage>div{
@@ -325,13 +325,17 @@ $(()=> {
 });
 function heightSize(indexPrev){
 	if(indexPrev==0){
-		$('#myPageContainer').css('height','760px');
+		$('#myPageContainer').css('height','850px');
 	}else if(indexPrev==1){
-		$('#myPageContainer').css('height','1500px');
+		if(checkRountineData==false){
+			$('#myPageContainer').css('height','1400px');
+		}else{
+			$('#myPageContainer').css('height','1900px');
+		}
 	}else if(indexPrev==2){
-		$('#myPageContainer').css('height','750px');
+		$('#myPageContainer').css('height','850px');
 	}else{
-		$('#myPageContainer').css('height','760px');
+		$('#myPageContainer').css('height','850px');
 	}
 }
 
@@ -379,7 +383,7 @@ function logOut(){
 	<!-- 메인메뉴 : 전체 데이터는 다 이 페이지로 가져오고, 페이지 네이션은 include방식으로 -->
 	<section id='mainPage'>
 		<!-- 페이지 출력 -->
-		<div style="position:absolute;">
+		<div>
 			<button class='pageBtn inforBtn'>개인 정보</button>
 			<button class='pageBtn healthBtn'>운동 관리</button>
 			<button class='pageBtn foodBtn'>식단 관리</button>

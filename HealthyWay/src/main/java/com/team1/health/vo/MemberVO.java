@@ -21,7 +21,16 @@ public class MemberVO {
 	private String write_date;
 	private String warning_state;
 	
-
+	private String write_date_print;
+	
+	
+	
+	public String getWrite_date_print() {
+		return write_date_print;
+	}
+	public void setWrite_date_print(String write_date_print) {
+		this.write_date_print = write_date_print;
+	}
 	public String getWrite_date() {
 		return write_date;
 	}

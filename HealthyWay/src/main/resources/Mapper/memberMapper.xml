@@ -45,4 +45,12 @@
 		insert into weigth (user_id, weight)
 		values (#{user_id}, #{weight})
 	</insert>
+	<select id="memberQuestionSelect" resultType="com.team1.health.vo.MemberVO">
+		SELECT a.height, a.strength, a.favorite, b.weight
+		FROM user AS a
+		JOIN weigth AS b
+		ON a.user_id = b.user_id
+		WHERE b.user_id = #{user_id}
+		ORDER BY b.write_date desc limit 1
+	</select>
 </mapper>

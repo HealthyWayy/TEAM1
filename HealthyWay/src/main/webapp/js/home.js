@@ -107,7 +107,7 @@ $(document).ready(function() {
 		}else if($('.blob-btn').index(this)==2) {
 			location.href="/board/ptList";
 		}else if($('.blob-btn').index(this)==3) {
-			location.href="/community/boardList";
+			location.href="/boardList";
 		}else {
 			alert($('.blob-btn').index(this)+'해당클릭은 아무것도 연결되어있지 않습니다.');
 		}

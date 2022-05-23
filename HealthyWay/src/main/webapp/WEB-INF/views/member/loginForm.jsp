@@ -25,39 +25,40 @@
 		})
 	});
 </script>
-<div class="wrap">
-	<section class="loginForm">
-		<div id="log">
-			<form method="post" action="/member/loginOk" id="logFrm">
-				<div class="logFrm_btn_wrap">
-					<div>	
-						<div class="input-id">
-							<div class="input-area1">
-								<label for="user_id">ID</label> 
+<div class="loginForm-body">
+	<div class="wrap">
+		<section class="loginForm">
+			<div id="log">
+				<form method="post" action="/member/loginOk" id="logFrm">
+					<div class="logFrm_btn_wrap">
+						<div>	
+							<div class="input-id">
+								<div class="input-area1">
+									<label for="user_id">ID</label> 
+								</div>
+								<div class="input-area2">
+									<input type="text" name="user_id" id="user_id" required />
+								</div>
 							</div>
-							<div class="input-area2">
-								<input type="text" name="user_id" id="user_id" required />
+							<div class="input-id">
+								<div class="input-area1">
+									<label for="user_pw">Password</label>
+								</div>
+								<div class="input-area2">
+									<input type="password" name="user_pw" id="user_pw" autocomplete="off" required>
+								</div>
 							</div>
 						</div>
-						<div class="input-id">
-							<div class="input-area1">
-								<label for="user_pw">Password</label>
-							</div>
-							<div class="input-area2">
-								<input type="password" name="user_pw" id="user_pw" autocomplete="off" required>
-							</div>
+						<div class="login-btn">
+							<button type="submit" value="로그인" onclick="LogFormCheck()">LOGIN</button>
 						</div>
 					</div>
-					<div class="login-btn">
-						<button type="submit" value="로그인" onclick="LogFormCheck()">LOGIN</button>
+					<div class="bottom-menu">
+						<div class="bottom-menu-left">Forgot?&nbsp;&nbsp;<a href="${url}/member/findId">Find ID&nbsp;</a>/<a href="${url}/member/findPw">&nbsp;Find PW</a></div>
+						<div>Not a member?&nbsp;<a href="${url}/member/memberForm">Join Us</a></div>
 					</div>
-				</div>
-				<div class="bottom-menu">
-					<div class="bottom-menu-left">Forgot?&nbsp;&nbsp;<a href="${url}/member/findId">Find ID&nbsp;</a>/<a href="${url}/member/findPw">&nbsp;Find PW</a></div>
-					<div>Not a member?&nbsp;<a href="${url}/member/memberForm">Join Us</a></div>
-				</div>
-			</form>
-		</div>
-	</section>
+				</form>
+			</div>
+		</section>
+	</div>
 </div>
-

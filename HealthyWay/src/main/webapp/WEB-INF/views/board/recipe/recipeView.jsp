@@ -519,7 +519,7 @@ function deleteRecipe(boardNum, img){
    
    $.ajax({
       url: "/recipe/delete",
-      data : "board_num="+boardNum+"&recipe_img_file="+img,
+      data: 'board_num='+board_num,
       type: "post",
       success: function(result){
          if(result>0){

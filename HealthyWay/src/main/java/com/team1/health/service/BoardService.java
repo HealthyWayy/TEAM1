@@ -27,7 +27,7 @@ public interface BoardService {
 	public int boardUpdate(BoardVO vo);
 
 	//7
-	public int boardDelete(String user_id, int board_num);
+	public int boardDelete(int board_num, String user_id);
 	
 	//8
 	public BoardVO boardSelectByNo(int board_num);

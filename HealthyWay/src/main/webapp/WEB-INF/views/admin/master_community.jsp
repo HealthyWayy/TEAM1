@@ -252,7 +252,7 @@ $(function(){
 						<tr onclick="window.open('/successView?board_num=${vo.board_num}');">
 					</c:if>
 					<c:if test="${vo.type_num==5}"><!-- 자유게시판 -->
-						<tr onclick="window.open('/board/boardList/${vo.board_num}');">
+						<tr onclick="window.open('/board/suggestionList/${vo.board_num}');">
 					</c:if>
 						<td>${vo.board_num}</td>
 						<td>${vo.user_id}</td>
@@ -264,6 +264,7 @@ $(function(){
 				</c:forEach>
 			</tbody>
 		</table>
+	
 		
 		<!-- 페이징 -->
 	    <ul class="paging">

@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 
-
 import com.team1.health.service.MemberService;
 import com.team1.health.vo.MemberVO;
 
@@ -138,8 +137,14 @@ public class MemberController {
     
 	// 설문조사 폼
 	@GetMapping("question")
-	public String question() {
-		return "member/question";
+	public ModelAndView question(MemberVO vo, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		vo.setUser_id((String)session.getAttribute("logId"));
+		mav.addObject("vo", service.memberQuestionSelect(vo));
+		mav.setViewName("member/question");
+		System.out.println(vo.getHeight());
+		System.out.println(vo.getUser_id());
+		return mav;
 	}
 	
 	// 설문조사 확인
