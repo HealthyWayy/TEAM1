@@ -170,6 +170,11 @@
 		where board_num=${board_num} and user_id=#{user_id}
 	</update>
 	
+	<update id="achieveUpdate">
+		update achieve_story set img_file1=#{img_file1}, img_file2=#{img_file2}
+		where board_num=#{board_num}
+	</update>
+	
 	<delete id="successDelete">
 		delete from board 
 		where board_num=#{param1} and user_id=#{param2}

@@ -94,26 +94,9 @@ public class PtController {
 	public ModelAndView ptView(int board_num, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
-		//수정...
-		String user = (String)session.getAttribute("logId");
-		List<Apply_userVO> applyList = service.apply_list(board_num);
-		String apply = "미신청";
-		for(Apply_userVO vo:applyList) {
-			if(vo.getUser_id().equals(user)) {
-				if(vo.getUser_state().equals("참여중")) {
-					apply="참여중";
-					break;
-				}else if(vo.getUser_state().equals("대기중")){
-					apply="대기중";
-					break;
-				}
-			}
-		}
-		mav.addObject("applyStatus",apply);
-		
 		// 조회수 증가
 		service.hitCount(board_num);
-//		mav.addObject("aList", service.apply_list(board_num));
+		mav.addObject("aList", service.apply_list(board_num));
 		mav.addObject("pCount", service.applySelect(board_num).size());
 		mav.addObject("pList", service.applySelect(board_num));
 		mav.addObject("lVO", service.leaderSelect(board_num));

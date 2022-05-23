@@ -69,6 +69,9 @@ public interface BoardService {
 		//achieve_story 글등록
 		public int acheiveInsert(BoardVO vo);
 		public int successUpdate(BoardVO vo);
+		// 성공스토리 글수정(achieve_story)
+		public int achieveUpdate(BoardVO vo);
+		
 		public int successDelete(int board_num, String user_id);
 		public BoardVO successView(int board_num);
 		public List<BoardVO> successList(SuccessPagingVO ssVO);

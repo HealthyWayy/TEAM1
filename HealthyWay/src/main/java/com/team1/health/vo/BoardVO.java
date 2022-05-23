@@ -38,6 +38,8 @@ public class BoardVO {
 	//acheive 성공 스토리 테이블
 	private String img_file1;
 	private String img_file2;
+	private String originBeforeImg;
+	private String originAfterImg;
 	
 	public int getDatecal() {
 		return datecal;
@@ -199,6 +201,18 @@ public class BoardVO {
 	}
 	public void setProfie_img(String profie_img) {
 		this.profie_img = profie_img;
+	}
+	public String getOriginBeforeImg() {
+		return originBeforeImg;
+	}
+	public void setOriginBeforeImg(String originBeforeImg) {
+		this.originBeforeImg = originBeforeImg;
+	}
+	public String getOriginAfterImg() {
+		return originAfterImg;
+	}
+	public void setOriginAfterImg(String originAfterImg) {
+		this.originAfterImg = originAfterImg;
 	}
 
 

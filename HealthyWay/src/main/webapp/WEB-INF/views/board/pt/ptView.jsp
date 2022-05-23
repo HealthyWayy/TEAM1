@@ -385,17 +385,30 @@ function apply(){
 				<li id="menu_info" class="all_menu">정보</li>
 				<li id="menu_member" class="all_menu">멤버</li>
 				<li id="menu_qna" class="all_menu"
-					<c:if test="${empty pList and lVO.user_id == logId}">
-						onclick="qnaClick()";
-					</c:if>
-					<c:forEach var="pVO" items="${pList}">
-						<c:if test="${(empty pList or pVO.user_id != logId)  and lVO.user_id != logId}">
-							style="cursor: no-drop;"
-						</c:if>	
-						<c:if test="${pVO.user_id == logId or lVO.user_id == logId}">
-							onclick="qnaClick()";
-						</c:if>	
-					</c:forEach>
+					<c:choose>
+						<c:when test="${empty pList}">
+							<c:if test="${lVO.user_id == logId}">
+								onclick="qnaClick()";
+							</c:if>
+							<c:if test="${lVO.user_id != logId}">
+								style="cursor: no-drop;"
+							</c:if>
+						</c:when>
+						<c:otherwise>
+							<c:set var="pCnt" value="0"/>
+							<c:forEach var="pVO" items="${pList}">
+								<c:if test="${pVO.user_id == logId}">
+									<c:set var="pCnt" value="${pCtn + 1}"/>
+								</c:if>
+							</c:forEach>
+							<c:if test="${pCnt == 0 and lVO.user_id != logId}">
+								style="cursor: no-drop;"
+							</c:if>
+							<c:if test="${pCnt > 0 or lVO.user_id == logId}">
+								onclick="qnaClick()";
+							</c:if>
+						</c:otherwise>
+					</c:choose>
 				>소통방 <span class="material-symbols-outlined" style="vertical-align: sub;">lock</span></li>
 				<li id="menu_manage" class="all_menu" <c:if test="${lVO.user_id != logId}">style="cursor: no-drop;"</c:if>>관리 <span class="material-symbols-outlined" style="vertical-align: sub;">lock</span></li>
 			</ul>
@@ -538,6 +551,7 @@ function apply(){
 								<c:forEach var="aVO" items="${aList}">
 									<c:if test="${aVO.user_id == logId}">
 										<c:set var="cnt" value="${cnt + 1}"/>
+										<c:set var="userState" value="${aVO.user_state}"/>
 									</c:if>
 								</c:forEach>
 								<c:choose>
@@ -545,14 +559,12 @@ function apply(){
 										<button class="applyBtn"<c:if test="${lVO.user_id == logId}">style="display: none;"</c:if>>참여하기</button>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="aVO" items="${aList}">
-											<c:if test="${aVO.user_id == logId and aVO.user_state == '참여중'}">
-												<button style="cursor: initial;<c:if test="${lVO.user_id == logId}">display: none;</c:if>">참여중</button>
-											</c:if>
-											<c:if test="${aVO.user_id == logId and aVO.user_state == '대기중'}">
-												<button style="cursor: initial;<c:if test="${lVO.user_id == logId}">display: none;</c:if>">참여 대기중</button>
-											</c:if>
-										</c:forEach>
+										<c:if test="${userState ==  '참여중'}">
+											<button style="cursor: initial;<c:if test="${lVO.user_id == logId}">display: none;</c:if>">참여중</button>
+										</c:if>
+										<c:if test="${userState == '대기중'}">
+											<button style="cursor: initial;<c:if test="${lVO.user_id == logId}">display: none;</c:if>">참여 대기중</button>
+										</c:if>
 									</c:otherwise>
 								</c:choose>
 						</c:otherwise>

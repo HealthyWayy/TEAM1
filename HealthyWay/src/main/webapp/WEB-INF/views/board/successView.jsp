@@ -186,13 +186,19 @@ function del(){
 		<li class="title">${bvo.title}</li>
 		<li class="write_date">${bvo.write_date}</li>
 		<li class="hit">조회수 ${bvo.hit}</li>
-		<li class="img" id="before_img">
-			<img src="/successImg/${bvo.img_file1}">
+		<li class="img">
+			<div class="img_wrap" id="before_img">
+				<div class="real_img_wrap"><img src="/successImg/${bvo.img_file1}"></div>
+				<div id="before_bottom">BEFORE</div>
+			</div>
+			<div class="img_wrap" id="after_img">
+				<div class="real_img_wrap"><img src="successImg/${bvo.img_file2}"></div>
+				<div id="after_bottom">AFTER</div>
+			</div>
 		</li>
-		<li class="img" id="after_img">
-			<img src="successImg/${bvo.img_file2}">
+		<li class="content" style="height: 20vh">
+			<textarea class="content_text" readonly>${bvo.content}</textarea>
 		</li>
-		<li class="content" style="height: 20vh">${bvo.content}</li>
 		<li class="writer">
 			<div class="writer_profile">
 				<div class="writer_img"><img src="${url}/img/${bvo.profie_img}"></div>

@@ -331,7 +331,7 @@ public class BoardController {
 	@PostMapping("/board/suggestionList")
 	public int suggestionWrite(BoardVO vo, HttpServletRequest request) {
 		vo.setUser_id((String) request.getSession().getAttribute("logId"));
-
+		
 		int result = service.suggestionInsert(vo);
 		return result;
 	}
@@ -488,10 +488,71 @@ public class BoardController {
 	}
 
 	// 성공스토리 수정(DB)
+	@PostMapping("successEditOk")
+	public int successEditOk(BoardVO vo,HttpServletRequest request) {
+		System.out.print("성공스토리 수정!");
+		
+		String newBeforeImg = vo.getImg_file1();
+		String newAfterImg = vo.getImg_file2();
+		System.out.println(newBeforeImg + "    " + newAfterImg);
+		
+		String originBeforeImg = vo.getOriginBeforeImg();
+		String originAfterImg = vo.getOriginAfterImg();
+		System.out.println(originBeforeImg + "     " + originAfterImg);
+		
+		// 파일 업로드
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) request;
+
+		// mr에 파일의 수만큼 MultipartFile객체가 존재한다.
+		List<MultipartFile> files = mr.getFiles("filename");
+		System.out.println("업로드 파일수 = " + files.size());
+		
+		
+		
+		// before 이미지 수정된 경우
+		if(!newBeforeImg.equals(originBeforeImg)) {
+			vo.setImg_file1(originBeforeImg);
+			MultipartFile mf = files.get(0);
+			String path = request.getSession().getServletContext().getRealPath("successImg");
+			File uploadFile = new File(path, vo.getImg_file1());
+			
+			// 덮어쓰기
+			try {
+				mf.transferTo(uploadFile);
+				System.out.println("성공");
+			}catch(Exception e) {
+				e.printStackTrace();
+				System.out.println("실패");
+			}
+		}
+		
+		// after 이미지 수정된 경우
+		if(!newAfterImg.equals(originAfterImg)) {
+			vo.setImg_file2(originAfterImg);
+			MultipartFile mf = files.get(1);
+			String path = request.getSession().getServletContext().getRealPath("successImg");
+			File uploadFile = new File(path, vo.getImg_file2());
+			
+			// 덮어쓰기
+			try {
+				mf.transferTo(uploadFile);
+				System.out.println("성공");
+			}catch(Exception e) {
+				e.printStackTrace();
+				System.out.println("실패");
+			}
+		}
+		
+		vo.setUser_id((String) request.getSession().getAttribute("logId"));
+		service.successUpdate(vo);
+		int result = service.achieveUpdate(vo);
+		
+		return result;
+	}
+	
 
 	@GetMapping("successDel")
-	public ResponseEntity<String> successDel(int board_num, String img_file1, String img_file2, HttpSession session,
-			HttpServletRequest request) {
+	public ResponseEntity<String> successDel(int board_num, String img_file1, String img_file2, HttpSession session, HttpServletRequest request) {
 		ResponseEntity<String> entity = null;
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(new MediaType("text", "html", Charset.forName("UTF-8")));
@@ -505,8 +566,10 @@ public class BoardController {
 		File file2 = new File(path, img_file2);
 		file2.delete();
 
-		String id = (String) session.getAttribute("logId");
-		int result = service.boardDelete(board_num, id);
+
+		String id = (String)request.getSession().getAttribute("logId");
+		int result = service.successDelete(board_num, id);
+
 
 		try {
 			if (result > 0) {

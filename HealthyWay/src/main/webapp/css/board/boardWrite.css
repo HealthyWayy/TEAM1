@@ -55,6 +55,7 @@ body{
     height: 70vh;
     border: none;
     resize: none;
+    line-height: 25px;
 }
 
 .img_wrap{

@@ -141,7 +141,7 @@ body, ul, li{
 .pt_post_wrap{
 	width: 22.5%;
     overflow: hidden;
-    border: 1px solid #e9e9e9;
+    border: 1.5px solid #e9e9e9;
     border-radius: 10px;
     float: left;
     cursor: pointer;

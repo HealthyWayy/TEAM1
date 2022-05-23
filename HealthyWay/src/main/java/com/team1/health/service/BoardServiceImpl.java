@@ -198,6 +198,10 @@ public class BoardServiceImpl implements BoardService {
 		
 		return dao.acheiveInsert(vo);
 	}
+	@Override
+	public int achieveUpdate(BoardVO vo) {
+		return dao.achieveUpdate(vo);
+	}
 	
 }
 
