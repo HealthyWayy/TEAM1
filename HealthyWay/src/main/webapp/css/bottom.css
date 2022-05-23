@@ -5,11 +5,17 @@
 	font-size:13px;
 }
 .bottom-title {
+	display:flex;
+	justify-content: center;
+	align-items: center; 
 	margin-left: 5vw;
 }
+
 .bottom-box>li {
-	margin-bottom: 5px;
-	
+	margin-bottom: 5px;	
+}
+.bottom-box>li:last-of-type {
+	margin-bottom: 0px;	
 }
 .bottom-mid {
 	display: flex;
@@ -31,3 +37,25 @@
 .bottom-logo img {
 	width: 100%;
 }
+
+
+@media ( min-width: 1800px ) {
+	.bottom {
+		margin-top:5vw;		
+	}
+	
+	.bottom-container {
+		font-size:20px;
+	}
+	.bottom-logo {
+		width: 30%;
+	}
+	.bottom-logo img {
+		width: 80%;
+	}
+	.bottom-box>li {
+		margin-bottom: 10px;	
+	}		
+}
+/*media 1800px*/
+

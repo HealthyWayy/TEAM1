@@ -1,5 +1,9 @@
 @charset "UTF-8";
-
+@media ( min-width: 1800px ) {
+	.menu-container {
+		margin-top:0vh;	
+	}	
+}
 body, ul, li{
 	margin: 0;
 	padding: 0;
