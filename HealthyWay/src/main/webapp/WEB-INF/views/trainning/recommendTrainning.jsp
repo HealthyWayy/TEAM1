@@ -9,6 +9,15 @@
         <li><a class="active" href="/trainning/recommendTrainning">추천 운동 목록</a></li>
     </ul>
     
+    <div class="head_img">
+		<%-- <img src="${url}/img/ptList_top.png"> --%>
+		<video muted autoplay loop id="video">
+			<source src="${url}/img/aiVideo.mp4" type="video/mp4">
+		</video>
+		<h1>FIND YOUR HEALHTY MATE</h1>
+		<P><button class="del-btn" onclick="location.href='/trainning/trainningHome'">해보기</button></P>
+	</div>
+    
     <div class="mytrain-frm">
         <h2>04 May Wed</h2>
         <h2>추천 운동 루틴</h2>
