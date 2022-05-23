@@ -17,6 +17,17 @@ import com.team1.health.vo.TrainVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
+	@Override
+	public int boardInsert(BoardVO vo) {
+		
+		return dao.boardInsert(vo);
+	}
+	
+	@Override
+	public int boardDelete(String user_id, int board_num) {
+		
+		return dao.boardDelete(user_id, board_num);
+	}
 	@Inject
 	AdminDAO dao;
 
@@ -117,5 +128,14 @@ public class AdminServiceImpl implements AdminService {
 		return dao.warningState(state, user_id);
 	}
 
+	@Override
+	public List<BoardVO> noticeList(PagingVO pVO) {
+		return dao.noticeList(pVO);
+	}
 
+	@Override
+	public int totalNoticeRecord(PagingVO pVO) {
+		
+		return dao.totalNoticeRecord(pVO);
+	}
 }

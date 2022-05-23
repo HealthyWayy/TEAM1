@@ -16,7 +16,6 @@ $(function() {
 			data: params,
 			success: function(result){
 				var $result = $(result);
-
 				var tag = "<ul>";
 				$result.each(function(idx, vo){
 					tag += "<li class='reply_wrap'>";
@@ -42,7 +41,6 @@ $(function() {
 					tag += "<input type='text' name='content' value='" + vo.content + "'>";
 					tag += "<input type='submit' value='수정'>";
 					tag += "</form></div>";
-
 					tag += "</li>";
 				});
 				tag += "</ul>";
@@ -150,7 +148,6 @@ $(function() {
              alert('이미 신고한 게시글 입니다!');
              return;
           }
-
           $.ajax({
              url:"/master/reportInsert",
              data:$("#reportFrm").serialize(),

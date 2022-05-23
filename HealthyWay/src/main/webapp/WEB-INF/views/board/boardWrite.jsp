@@ -27,7 +27,7 @@ $(function() {
 </script>
 
 <div class="wrap">
-	 <form id="writeFrm" method="post" action="${url}/suggestionWrite">
+	 <form id="writeFrm" method="post" action="${url}/board/suggestionList">
 		<ul id="writeFrm_wrap">
 			<li>
 				<select name="type_num" id="type_num">

@@ -113,10 +113,13 @@ public class AdminController {
 		mav.setViewName("/admin/master_community");
 		return mav;
 	}
-	
+	//공지사항
 	@GetMapping("/master/notice")
-	public ModelAndView masterNotice() {
+	public ModelAndView masterNotice(PagingVO pVO) {
 		ModelAndView mav = new ModelAndView();
+		pVO.setTotalRecord(service.totalNoticeRecord(pVO));
+		mav.addObject("pVO", pVO);
+		mav.addObject("vo", service.noticeList(pVO));
 		mav.setViewName("/admin/master_notice");
 		return mav;
 	}

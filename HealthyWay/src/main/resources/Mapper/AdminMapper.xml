@@ -82,9 +82,20 @@
    <delete id="boardDelete">
       delete from board where board_num=${param1}
    </delete>
+   <insert id="boardInsert">
+		insert into board(user_id, title, content, type_num)
+		values(#{user_id}, #{title}, #{content}, #{type_num})
+	</insert>
    
-   
-   
+   <select id="noticeList" resultType="com.team1.health.vo.BoardVO">
+		select board_num, user_id, title, hit, date_format(write_date,'%Y-%m-%d') write_date, type_num
+      	from board where type_num=4
+		order by board_num desc limit ${onePageRecord} offset ${offsetIndex}
+	</select>
+   	<select id="totalNoticeRecord" resultType="int">
+   		 select count(board_num) from board
+   	 	 where type_num=4
+   	</select>
    
    <!-- 커뮤니티 관리 -->
    <select id="boardList" resultType="com.team1.health.vo.BoardVO">
@@ -172,5 +183,7 @@
    <delete id="reportDelete">
       delete from report where report_num=#{param1}
    </delete>
+   
+   
    
 </mapper>
