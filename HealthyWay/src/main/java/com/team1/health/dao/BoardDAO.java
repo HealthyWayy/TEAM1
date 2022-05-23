@@ -1,5 +1,6 @@
 package com.team1.health.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -27,11 +28,13 @@ public interface BoardDAO {
 	
 	public BoardVO boardSelect(int board_num);
 	
+	public ArrayList<BoardVO> boardSelectAll(PagingVO vo);
+	
 	public int hitCount(int no);
 	
 	public int boardUpdate(BoardVO vo);
 	
-	public int boardDelete(int board_num, String user_id);
+	public int boardDelete(String user_id, int board_num);
 	
 	public BoardVO boardSelectByNo(int board_num);
 	
@@ -59,6 +62,7 @@ public interface BoardDAO {
 	
 	public BoardVO suggestionSelect(int board_num);
 	
+	public ArrayList<BoardVO> suggestionSelectAll(SuggestionPagingVO vo);
 	
 	public int suggestionUpdate(BoardVO vo);
 	

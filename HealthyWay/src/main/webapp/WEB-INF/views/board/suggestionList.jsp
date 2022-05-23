@@ -6,7 +6,7 @@
 <script>
 	$(function(){
 		$("#searchFrm").submit(function(event){
-			event.preventDefault();
+			
 			if($("#searchWord").val()== ""){
 				alert("검색어를 입력하세요");
 				return false;
@@ -19,8 +19,10 @@
 			$(this).css("background-color", "#ff5454").css("border", "1.5px solid #ff5454").css("color", "#fff");
 		});
 	});
-</script>
 
+	
+	
+</script>
 
 <div class="wrap">
 	<div class="menu_wrap">

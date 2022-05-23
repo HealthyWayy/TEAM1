@@ -12,9 +12,58 @@ $(function() {
           alert("글 제목을 입력하세요");
        }else if ($("#content").val() == "") {
            alert("내용을 입력하세요");
-       }else{
+           return false;}else{
     	   $("#writeFrm").submit();
        }
+        }
+       
+       
+    $(function(){
+           var url = "${url}/board/suggestionList";
+           var data = $("#suggestionFrm").serialize();
+        $.ajax({
+           url : url,
+           type : "put",
+           dataType : "JSON",
+           data : data,
+           success : function(result) {
+              alert(result.msg);
+              window.location.href = result.redirect;
+           },
+           error : function(error){
+              console.log(error.responseJSON);
+              alert(error.responseJSON.msg);
+              window.location.href = error.responseJSON.redirect;
+           }
+        });
+ 	   });
+	 });
+   });
+ $(function() {
+    console.log($)
+	 $("#btn_delete").on("click",function() {
+        $(function(){
+            var url = "${url}/board/suggestionList";
+            var data = $("#suggestionFrm").serialize()
+         $.ajax({
+            url : url,
+            type : "DELETE",
+            dataType : "JSON",
+            data : data,
+            success : function(result) {
+               alert(result.msg);
+               window.location.href = result.redirect;
+            },
+            error : function(error){
+               console.log(error.responseJSON);
+               alert(error.responseJSON.msg);
+               
+              //window.location.href = error.responseJSON.redirect;
+            }
+            
+        }) ; 
+        });
+
     });
 	
 	// 글등록 버튼 색변경
@@ -25,6 +74,7 @@ $(function() {
 	});
  });
 </script>
+
 
 <div class="wrap">
 	 <form id="writeFrm" method="post" action="${url}/boardEditOk">

@@ -13,17 +13,31 @@
 		select board_num, user_id, title, hit, date_format(write_date,'%m-%d %H:%i') write_date
 		from board where type_num=4
 		<if test="searchWord != null">
-		where title like '%${searchWord}%'
+		and ${searchKey} like '%${searchWord}%'
 		</if>
 		order by board_num desc limit ${onePageRecord} offset ${offsetIndex}
 	</select>
 
 	<select id="totalRecord" resultType="int">
-		select count(board_num) cnt from board where type_num=4
-		<if test="searchWord != null">
-			where title like '%${searchWord}%'
-		</if>
+	select count(board_num) cnt from board where type_num=4
+		<if test='searchWord != null'>
+  			and ${searchKey} like '%${searchWord}%'
+  		</if>
 	</select>
+	 <select id="boardSelectAll" resultType="com.team1.health.vo.BoardVO">
+  		select board_num, user_id, title, hit, date_format(write_date,'%y-%m-%d %H:%i') write_date
+  		from board where type_num=4
+  		<if test='user_id != null' >
+  			and user_id=#{user_id}
+  		</if>
+  		<if test='searchWord != null'>
+  			and title like '%${searchWord}%'
+  		</if>
+  		order by board_num desc, no desc 
+  		limit ${onePageRecord} offset ${offsetIndex}
+  	</select>
+	
+
 	
 	<select id="boardSelectByNo" resultType="com.team1.health.vo.BoardVO">
   		select board_num, user_id, title, content, date_format(write_date,'%y-%m-%d %H:%i') write_date
@@ -58,7 +72,7 @@
 		select board_num, user_id, title, hit, date_format(write_date,'%m-%d %H:%i') write_date
 		from board where type_num=5
 		<if test="searchWord != null">
-		where title like '%${searchWord}%'
+			and ${searchKey} like '%${searchWord}%'
 		</if>
 		order by board_num desc limit ${onePageRecord} offset ${offsetIndex}
 	</select>
@@ -66,7 +80,7 @@
 	<select id="SuggestiontotalRecord" resultType="int">
 		select count(board_num) cnt from board where type_num=5
 		<if test="searchWord != null">
-			where title like '%${searchWord}%'
+			and ${searchKey} like '%${searchWord}%'
 		</if>
 	</select>
 	
@@ -80,7 +94,20 @@
 		select board_num, user_id, title, content, hit, write_date
 		from board where board_num=${param1}
 	</select>
-
+  
+	<select id="suggestionSelectAll" resultType="com.team1.health.vo.BoardVO">
+  		select board_num, user_id, title, hit, date_format(write_date,'%y-%m-%d %H:%i') write_date
+  		from board where type_num=5
+  		<if test='user_id != null' >
+  			and user_id=#{user_id}
+  		</if>
+  		<if test='searchWord != null'>
+  			and title like '%${searchWord}%'
+  		</if>
+  		order by board_num desc, no desc 
+  		limit ${onePageRecord} offset ${offsetIndex}
+  	</select>
+	
 	<update id="suggestionUpdate">
 		update board set title=#{title}, content=#{content} 
 		where board_num=${board_num} and user_id=#{user_id}

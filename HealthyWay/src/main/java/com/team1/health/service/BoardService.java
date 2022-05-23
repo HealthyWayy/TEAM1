@@ -1,5 +1,6 @@
 package com.team1.health.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,12 +20,14 @@ public interface BoardService {
 	//4
 	public BoardVO boardSelect(int board_num);
 	//5
+	public ArrayList<BoardVO> boardSelectAll(PagingVO vo);
+	
 	public int hitCount(int no);
 	//6
 	public int boardUpdate(BoardVO vo);
 
 	//7
-	public int boardDelete(int board_num, String user_id);
+	public int boardDelete(String user_id, int board_num);
 	
 	//8
 	public BoardVO boardSelectByNo(int board_num);
@@ -53,12 +56,13 @@ public interface BoardService {
 		
 		public int suggestionUpdate(BoardVO vo);
 		
-		public int suggestionDelete(int board_num, String user_id);
+		public int suggestionDelete(String user_id, int board_num);
 		
 		public BoardVO suggestionSelectByNo(int board_num);
 		
 		public BoardVO suggestionView(int board_num);
 	
+		public ArrayList<BoardVO> suggestionSelectAll(SuggestionPagingVO vo);
 
 		//성공스토리
 		
