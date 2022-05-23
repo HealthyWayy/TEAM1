@@ -6,12 +6,6 @@ body, ul, li{
 	list-style-type: none;
 }
 
-.top{
-	height: 70px;
-	border-bottom: 1px solid gray;
-	margin-bottom: 3px;
-}
-
 .wrap{
 	width: 80%;
 	margin: 0 auto;

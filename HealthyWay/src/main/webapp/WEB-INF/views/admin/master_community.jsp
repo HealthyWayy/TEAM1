@@ -228,7 +228,7 @@ $(function(){
 	</ul>
 	
 	<ul id="category_list">
-		<li><a href="/master/community" class="category">전체</a></li>
+		<li><a href="/master/community?" class="category">전체</a></li>
 		<li><a href="/master/community?searchKey=자유게시판" class="category">자유게시판</a></li>
 		<li><a href="/master/community?searchKey=성공스토리" class="category">성공스토리</a></li>
 	</ul>

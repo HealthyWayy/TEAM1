@@ -149,12 +149,6 @@ public class BoardServiceImpl implements BoardService {
 	public int successtotalRecord(SuccessPagingVO ssVO) {
 		return dao.successtotalRecord(ssVO);
 	}
-	//6
-	@Override
-	public BoardVO successSelect(int board_num) {
-		return dao.successSelect(board_num);
-	}
-	
 	
 	//7
 	@Override

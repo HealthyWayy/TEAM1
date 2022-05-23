@@ -12,30 +12,7 @@ public class BoardVO {
 	private String write_date;
 	private String mod_date;
 	private int type_num;
-	private String success_img_file;
-	private String OriginSuccessImg;
 	private String profie_img;
-	
-
-	public String getProfie_img() {
-		return profie_img;
-	}
-	public void setProfie_img(String profie_img) {
-		this.profie_img = profie_img;
-	}
-	public String getSuccess_img_file() {
-		return success_img_file;
-	}
-	public void setSuccess_img_file(String success_img_file) {
-		this.success_img_file = success_img_file;
-	}
-	public String getOriginSuccessImg() {
-		return OriginSuccessImg;
-	}
-	public void setOriginSuccessImg(String originSuccessImg) {
-		OriginSuccessImg = originSuccessImg;
-	}
-	
 
 	//PT_group 테이블
 	private String state;
@@ -49,7 +26,6 @@ public class BoardVO {
 
 	// pt참여자 수
 	private int pNum;
-
 	private String originPtImg;
 	
 	// 좋아요 아이디
@@ -217,6 +193,12 @@ public class BoardVO {
 	}
 	public void setOriginPtImg(String originPtImg) {
 		this.originPtImg = originPtImg;
+	}
+	public String getProfie_img() {
+		return profie_img;
+	}
+	public void setProfie_img(String profie_img) {
+		this.profie_img = profie_img;
 	}
 
 
