@@ -32,7 +32,23 @@ public class TrainVO {
 	private int train_year;
 	private int train_month;
 	
+	//유저 설문조사결과
+	private String strength;
+	private String favorite;
 	
+	
+	public String getStrength() {
+		return strength;
+	}
+	public void setStrength(String strength) {
+		this.strength = strength;
+	}
+	public String getFavorite() {
+		return favorite;
+	}
+	public void setFavorite(String favorite) {
+		this.favorite = favorite;
+	}
 	public int getTrain_year() {
 		return train_year;
 	}

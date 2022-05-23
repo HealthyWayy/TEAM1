@@ -7,13 +7,11 @@
 	<insert id="boardInsert">
 		insert into board(user_id, title, content, type_num)
 		values(#{user_id}, #{title}, #{content}, #{type_num})
-
-		 
 	</insert>
+	
 	<select id="boardList" resultType="com.team1.health.vo.BoardVO">
 		select board_num, user_id, title, hit, date_format(write_date,'%m-%d %H:%i') write_date
 		from board where type_num=4
-		
 		<if test="searchWord != null">
 		where title like '%${searchWord}%'
 		</if>
@@ -21,46 +19,44 @@
 	</select>
 
 	<select id="totalRecord" resultType="int">
-
 		select count(board_num) cnt from board where type_num=4
 		<if test="searchWord != null">
 			where title like '%${searchWord}%'
 		</if>
 	</select>
+	
 	<select id="boardSelectByNo" resultType="com.team1.health.vo.BoardVO">
   		select board_num, user_id, title, content, date_format(write_date,'%y-%m-%d %H:%i') write_date
   		from board where board_num=${board_num}
   	</select>
+  	
 	<select id="boardSelect" resultType="com.team1.health.vo.BoardVO">
 		select board_num, b.user_id, title, content, hit, date_format(write_date, '%Y. %m. %d') write_date, profie_img
 		from board b left join user u on b.user_id=u.user_id
 		where board_num=${param1}
 	</select>
+	
 	<update id="hitCount">
 		update board set hit = hit+1 where board_num=${param1}
 	</update>
+	
 	<update id="boardUpdate">
 		update board set title=#{title}, content=#{content} where board_num=${board_num} and user_id=#{user_id}
 	</update>
+	
 	<delete id="boardDelete">
 		delete from board where board_num=#{param1} and user_id=#{param2}
 	</delete>
-	
-	
-	
-	
+
+
 	<insert id="suggestionInsert">
 		insert into board(user_id, title, content, type_num)
-		values(#{user_id}, #{title}, #{content}, #{type_num);
-
-		 
+		values(#{user_id}, #{title}, #{content}, #{type_num})
 	</insert>
-	
-	
+
 	<select id="suggestionList" resultType="com.team1.health.vo.BoardVO">
 		select board_num, user_id, title, hit, date_format(write_date,'%m-%d %H:%i') write_date
 		from board where type_num=5
-		
 		<if test="searchWord != null">
 		where title like '%${searchWord}%'
 		</if>
@@ -68,7 +64,6 @@
 	</select>
 	
 	<select id="SuggestiontotalRecord" resultType="int">
-
 		select count(board_num) cnt from board where type_num=5
 		<if test="searchWord != null">
 			where title like '%${searchWord}%'
@@ -80,17 +75,17 @@
 		from board b left join user u on b.user_id=u.user_id
   		where board_num=${board_num}
   	</select>
+  	
 	<select id="suggestionSelect" resultType="com.team1.health.vo.BoardVO">
 		select board_num, user_id, title, content, hit, write_date
 		from board where board_num=${param1}
-		
 	</select>
-	
-	
-	
+
 	<update id="suggestionUpdate">
-		update board set title=#{title}, content=#{content} where board_num=${board_num} and user_id=#{user_id}
+		update board set title=#{title}, content=#{content} 
+		where board_num=${board_num} and user_id=#{user_id}
 	</update>
+	
 	<delete id="suggestionDelete">
 		delete from board where board_num=#{param1} and user_id=#{param2}
 	</delete>
@@ -111,21 +106,17 @@
 		select reply_num, user_id, board_num, content, date_format(reply_date, '%Y-%m-%d %H:%i') reply_date
 		from reply where board_num=${param1}
 	</select>
-	
-
 
 
 	<insert id="acheiveInsert">
-		insert into acheive_story(board_num, img_file1, img_file2)
-		values(#{board_num}, #{img_file1}, #{img_file2})
+		insert into achieve_story(board_num, img_file1, img_file2) 
+		values((select board_num from board where title=#{title} and user_id=#{user_id} and content=#{content}), #{img_file1}, #{img_file2})
 	</insert>
 	
-
 	<select id="successList" resultType="com.team1.health.vo.BoardVO">
         select b.board_num, user_id, title, hit, date_format(write_date,'%m-%d %H:%i') write_date, img_file1, img_file2
 		from board b inner join achieve_story a on b.board_num=a.board_num
 		where type_num=3
-
         <if test="searchWord != null">
         where title like '%${searchWord}%'
         </if>
@@ -133,33 +124,26 @@
     </select>
 
 	<select id="successtotalRecord" resultType="int">
-
 		select count(board_num) cnt from board where type_num=3
 		<if test="searchWord != null">
 			where title like '%${searchWord}%'
 		</if>
 	</select>
-	<select id="successSelectByNo" resultType="com.team1.health.vo.BoardVO">
-  		select board_num, user_id, title, content date_format(write_date,'%y-%m-%d %H:%i') write_date
-  		from board where board_num=${board_num}
+	
+	<select id="successView" resultType="com.team1.health.vo.BoardVO">
+  		select b.board_num, b.user_id, title, content, date_format(write_date,'%y-%m-%d %H:%i') write_date, img_file1, img_file2, profie_img
+		from board b inner join achieve_story a on b.board_num=a.board_num
+		left join user u on b.user_id=u.user_id
+		where b.board_num=${param1}
   	</select>
-	<select id="successSelect" resultType="com.team1.health.vo.BoardVO">
-		select board_num, user_id, title, content, hit, write_date
-		from board where board_num=${param1}
-		
-	</select>
 	
 	<update id="successUpdate">
-		update board set title=#{title}, content=#{content} where board_num=${board_num} and user_id=#{user_id}
+		update board set title=#{title}, content=#{content} 
+		where board_num=${board_num} and user_id=#{user_id}
 	</update>
+	
 	<delete id="successDelete">
-		delete from board where board_num=#{param1} and user_id=#{param2}
+		delete from board 
+		where board_num=#{param1} and user_id=#{param2}
 	</delete>
-
-
-
-
-
-
-
 </mapper>

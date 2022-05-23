@@ -7,7 +7,7 @@ import com.team1.health.vo.TrainVO;
 public interface TrainService {
 
 	//운동 목록
-	public List<TrainVO> train_list();
+	public List<TrainVO> train_list(TrainVO vo);
 	//내운동 추가
 	public List<TrainVO> mytrain_list(int module_num);
 	//trainning_routine DB 추가
@@ -33,4 +33,14 @@ public interface TrainService {
 	public TrainVO start_train(int module_num);
 	//운동 시간 저장
 	public int save_user_count(TrainVO vo);
+	
+	// 담은 운동 삭제
+	public int del_mytrain(int module_num, int train_num);
+	
+	//추천 운동
+	public List<TrainVO> reco_list(TrainVO vo);
+	//유저 S / F 불러오기
+	public List<TrainVO> get_user(TrainVO newvo);
+	//장바구니 요소 삭제 후 리스트
+	public List<TrainVO> train_set(int train_num);
 }

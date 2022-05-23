@@ -63,7 +63,7 @@
 		left join (select board_num, count(*) pNum from apply_user where user_state="참여중" group by board_num) n on b.board_num=n.board_num
 		where type_num=2
 		<if test="searchWord != null">
-			and ( b.board_num like '%${searchWord}%' or b.user_id like '%${searchWord}%' or b.title like '%${searchWord}%' or b.content like '%${searchWord}%'
+			and ( b.user_id like '%${searchWord}%' or b.title like '%${searchWord}%' or b.content like '%${searchWord}%'
 			or p.state like '%${searchWord}%')
 		</if>
 		order by b.board_num desc limit ${onePageRecord} offset ${offsetIndex}
@@ -72,8 +72,8 @@
 	<select id="totalRecord2" resultType="int">
 		select count(b.board_num) from board b inner join PT_group p on b.board_num=p.board_num
 		<if test='searchWord != null'>
-			and (board_num like '%${searchWord}%' or user_id like '%${searchWord}%' or titl like '%${searchWord}%'
-			or content like '%${searchWord}%')
+			and (b.user_id like '%${searchWord}%' or b.title like '%${searchWord}%' or b.content like '%${searchWord}%'
+			or p.state like '%${searchWord}%')
 		</if>
 	</select>
 	
@@ -88,46 +88,37 @@
 	
 	<!-- 커뮤니티 관리 -->
 	<select id="boardList" resultType="com.team1.health.vo.BoardVO">
-		select board_num, user_id, title, hit, date_format(write_date,'%m-%d %H:%i') write_date
+		select board_num, user_id, title, hit, date_format(write_date,'%Y-%m-%d') write_date, type_num
 		from board 
-		<choose>
-			<when test='searchKey!=null and searchKey!=""'>
-				<if test='searchKey=="자유게시판"'>
-					where type_num=5
-				</if>
-				<if test='searchKey=="성공스토리"'>
-					where type_num=3
-				</if>
-			</when>
-			<otherwise>
-				where type_num=3 and type_num=5
-			</otherwise>
-		</choose>
+		<if test='searchKey==null or searchKey==""'>
+			where (type_num=3 or type_num=5)
+		</if>
+		<if test='searchKey=="자유게시판"'>
+			where type_num=5
+		</if>
+		<if test='searchKey=="성공스토리"'>
+			where type_num=3
+		</if>
 		<if test="searchWord != null">
-			and (title like '%${searchWord}%' or content like '%${searchWord}%' or user_id like '%${searchWord}%')
+			and (title like '%${searchWord}%' or write_date like '%${searchWord}%' or user_id like '%${searchWord}%')
 		</if>
 		order by board_num desc limit ${onePageRecord} offset ${offsetIndex}
 	</select>
 	
 	<select id="totalRecord3" resultType="int">
 		select count(board_num) from board
-		<choose>
-			<when test='searchKey!=null and searchKey!=""'>
-				<if test='searchKey=="자유게시판"'>
-					where type_num=5
-				</if>
-				<if test='searchKey=="성공스토리"'>
-					where type_num=3
-				</if>
-			</when>
-			<otherwise>
-				where type_num=3 and type_num=5
-			</otherwise>
-		</choose>
-		<if test="searchWord != null">
-			and (title like '%${searchWord}%' or content like '%${searchWord}%' or user_id like '%${searchWord}%')
+		<if test='searchKey==null or searchKey==""'>
+			where (type_num=3 or type_num=5)
 		</if>
-		order by board_num desc limit ${onePageRecord} offset ${offsetIndex}
+		<if test='searchKey=="자유게시판"'>
+			where type_num=5
+		</if>
+		<if test='searchKey=="성공스토리"'>
+			where type_num=3
+		</if>
+		<if test="searchWord != null">
+			and (title like '%${searchWord}%' or write_date like '%${searchWord}%' or user_id like '%${searchWord}%')
+		</if>
 	</select>
 	
 	
