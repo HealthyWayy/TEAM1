@@ -33,6 +33,7 @@ import com.team1.health.service.MemberService;
 import com.team1.health.service.ReplyService;
 import com.team1.health.service.BoardService;
 
+
 @RestController
 
 public class BoardController {
