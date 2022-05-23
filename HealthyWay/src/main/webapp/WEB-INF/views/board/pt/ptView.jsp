@@ -504,7 +504,7 @@ function apply(){
 			
 		</div>
 		
-		<div>
+		<div class="right_wrap">
 			<div class="leader_profile_wrap">
 				<div class="profile_info_wrap">
 					<h4>리더정보</h4>
@@ -529,17 +529,34 @@ function apply(){
 				
 	
 				<c:if test="${vo.state != '모집완료'}">
-					<c:if test="${empty aList}">
-						<button class="applyBtn"<c:if test="${lVO.user_id == logId}">style="display: none;"</c:if>>참여하기</button>
-					</c:if>
-					<c:forEach var="aVO" items="${aList}">
-						<c:if test="${aVO.user_id == logId and aVO.user_state == '참여중'}">
-							<button style="cursor: initial;<c:if test="${lVO.user_id == logId}">display: none;</c:if>">참여중</button>
-						</c:if>
-						<c:if test="${aVO.user_id == logId and aVO.user_state == '대기중'}">
-							<button style="cursor: initial;<c:if test="${lVO.user_id == logId}">display: none;</c:if>">참여 대기중</button>
-						</c:if>
-					</c:forEach>
+					<c:choose>
+						<c:when test="${empty aList}">
+							<button class="applyBtn"<c:if test="${lVO.user_id == logId}">style="display: none;"</c:if>>참여하기</button>
+						</c:when>
+						<c:otherwise>
+							<c:set var="cnt" value="0"/>
+								<c:forEach var="aVO" items="${aList}">
+									<c:if test="${aVO.user_id == logId}">
+										<c:set var="cnt" value="${cnt + 1}"/>
+									</c:if>
+								</c:forEach>
+								<c:choose>
+									<c:when test="${cnt == 0}">
+										<button class="applyBtn"<c:if test="${lVO.user_id == logId}">style="display: none;"</c:if>>참여하기</button>
+									</c:when>
+									<c:otherwise>
+										<c:forEach var="aVO" items="${aList}">
+											<c:if test="${aVO.user_id == logId and aVO.user_state == '참여중'}">
+												<button style="cursor: initial;<c:if test="${lVO.user_id == logId}">display: none;</c:if>">참여중</button>
+											</c:if>
+											<c:if test="${aVO.user_id == logId and aVO.user_state == '대기중'}">
+												<button style="cursor: initial;<c:if test="${lVO.user_id == logId}">display: none;</c:if>">참여 대기중</button>
+											</c:if>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+						</c:otherwise>
+					</c:choose>
 				</c:if>
 				
 				<c:if test="${vo.user_id == logId}">
