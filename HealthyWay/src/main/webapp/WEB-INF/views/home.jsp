@@ -69,7 +69,7 @@
 				    </svg>
 				</section>
         	</div>
-        		<img alt="" src="/img/home/training04.jpg">
+        		<img alt="" src="/img/home/trainning07.png">
         </div>
         <div class="box">
         	<div class="cover">

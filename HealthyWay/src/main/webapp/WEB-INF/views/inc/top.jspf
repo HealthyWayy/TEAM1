@@ -31,7 +31,7 @@
 				<li><a href="/trainning/trainningHome">AI-Training</a></li>
 				<li><a href="/recipe/main">Recipe</a></li>
 				<li><a href="/board/ptList">PT group</a></li>
-				<li><a href="/community/boardList">Community</a></li>		
+				<li><a href="/boardList">Community</a></li>		
 			</c:if>		
 		</ul>
 		<ul class="login-container">
