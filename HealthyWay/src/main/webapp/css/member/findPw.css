@@ -7,12 +7,15 @@ body {
 	background-image: url(../../img/loginback2.jpg);
 	background-repeat: no-repeat;
 }
+.findPw-body {
+	min-height: 700px;	
+}
 
 .findForm {
 	margin: 0 auto;
 	width: 700px;
 	height: 200px;
-	padding: 90px 0px 240px 0px;
+	padding: 40px 0px 300px 0px;
 	background-color: rgba(252, 253, 254);
 	border-radius: 5px;
 	margin-top: 180px;
