@@ -52,15 +52,19 @@ ul, li {
 	padding-left:4%;
 	padding-right:4%;
 }
+#manageDiv{
+	position: relative;
+}
 #searchFrm{
-	overflow:auto;
-	width:30%;
-	float:right;
+	position:absolute;
+	bottom:10px;
+	right:58px;
 }
 #searchFrm>input[type=text]{
-	width:74%;
+	width:250px;
 	height:30px;
 	padding-left:2%;
+	margin-right:5px;
 	border-radius:10px;
 	border:1px solid rgb(200,200,200);
 }
@@ -68,7 +72,7 @@ ul, li {
 	outline-color: #FF5454;
 }
 #searchFrm>input[type=submit]{
-	width:25%;
+	width:75px;
 	height:30px;
 	border-radius: 30px;
 	border:none;
@@ -110,7 +114,6 @@ ul, li {
 }
 .table{
 	text-align: center;
-	table-layout: fixed;
 }
 .table>tbody>tr{
 	cursor: pointer;
@@ -118,7 +121,7 @@ ul, li {
 	text-overflow:ellipsis;
 	white-space:nowrap;
 }
-#reportBtn{
+#deleteBtn{
 	width:75px;
 	height:30px;
 	border-radius: 30px;
@@ -127,13 +130,7 @@ ul, li {
 	color: white;
 
 }
-#deleteReport{
-	width:75px;
-	height:30px;
-	border-radius: 30px;
-	border: 1px solid rgb(200,191,231);
-	background-color:white;
-}
+
 .paging{
 	text-align: center;
 	margin:0 auto;
@@ -157,22 +154,15 @@ ul, li {
 	background-color:#FF5454 !important;
 }
 
-/*회원 신고 div*/
-#reportDiv{
-	width:100%;
-	height:100%;
-	overflow:auto;
-	background-color: pink;
-	display: none;
-}
+
 @media ( min-width: 1800px ) {
 	#container{
 		padding-left:7%;
 		padding-right:7%;
-	}
+	}	
 	#searchFrm{
-		width:20%;
-		margin-right:1%;
+		bottom:10px;
+		right:125px;
 	}
 }
 </style>
@@ -182,16 +172,12 @@ $(function(){
 	var href = window.location.href;//현재 url 주소
 
 	//주소에 따라 해당 카테고리 밑줄 css 적용
-	if(href=="https://localhost:8088/master/report"){
+	if(href=="https://localhost:8088/master/community"){
 		$("#category_list>li>a").eq(0).css("border-bottom", "3px solid #FF5454");	//전체
-	}else if(href=="https://localhost:8088/master/report?searchKey=%EB%A0%88%EC%8B%9C%ED%94%BC"){
-		$("#category_list>li>a").eq(1).css("border-bottom", "3px solid #FF5454");	//레시피
-	}else if(href=="https://localhost:8088/master/report?searchKey=PT%EA%B7%B8%EB%A3%B9"){
-		$("#category_list>li").eq(2).css("border-bottom", "3px solid #FF5454");	//pt그룹
-	}else if(href=="https://localhost:8088/master/report?searchKey=%EC%84%B1%EA%B3%B5%EC%8A%A4%ED%86%A0%EB%A6%AC"){
-		$("#category_list>li").eq(3).css("border-bottom", "3px solid #FF5454");	//성공스토리
-	}else if(href=="https://localhost:8088/master/report?searchKey=%EC%9E%90%EC%9C%A0%EA%B2%8C%EC%8B%9C%ED%8C%90"){
-		$("#category_list>li").eq(4).css("border-bottom", "3px solid #FF5454");	//자유게시판
+	}else if(href=="https://localhost:8088/master/community?searchKey=%EC%9E%90%EC%9C%A0%EA%B2%8C%EC%8B%9C%ED%8C%90"){
+		$("#category_list>li>a").eq(1).css("border-bottom", "3px solid #FF5454");	//자유게시판
+	}else if(href=="https://localhost:8088/master/community?searchKey=%EC%84%B1%EA%B3%B5%EC%8A%A4%ED%86%A0%EB%A6%AC"){
+		$("#category_list>li").eq(2).css("border-bottom", "3px solid #FF5454");	//성공스토리
 	}
 	
 	//커뮤니티 관리 메뉴 클릭 이벤트
@@ -240,12 +226,14 @@ $(function(){
 		<li id="menu_community" class="menu_active">커뮤니티 관리</li>
 		<li id="menu_notice">공지사항</li>
 	</ul>
+	
 	<ul id="category_list">
-		<li><a href="/master/community" class="category">전체</a></li>
+		<li><a href="/master/community?" class="category">전체</a></li>
 		<li><a href="/master/community?searchKey=자유게시판" class="category">자유게시판</a></li>
 		<li><a href="/master/community?searchKey=성공스토리" class="category">성공스토리</a></li>
 	</ul>
-	<!-- 회원 관리 -->
+   
+	<!-- 커뮤니티 게시글 관리 -->
 	<div id="manageDiv">
 		<table class="table table-hover">
 			<thead>
@@ -260,30 +248,31 @@ $(function(){
 			</thead>
 			<tbody>
 				<c:forEach var="vo" items="${vo}">
-					<c:if test="${vo.type_num==3}">
-						<tr onclick="window.open('/recipe/view?board_num=${vo.board_num}');">
+					<c:if test="${vo.type_num==3}"><!-- 성공스토리 -->
+						<tr onclick="window.open('/successView?board_num=${vo.board_num}');">
 					</c:if>
-					<c:if test="${vo.type_num==5}">
+					<c:if test="${vo.type_num==5}"><!-- 자유게시판 -->
 						<tr onclick="window.open('/board/boardList/${vo.board_num}');">
 					</c:if>
 						<td>${vo.board_num}</td>
 						<td>${vo.user_id}</td>
-						<td style="width:30%;">${vo.title}</td>
+						<td style="width:35%;">${vo.title}</td>
 						<td>${vo.hit}</td>
 						<td>${vo.write_date}</td>
-						<td><button id="deleteReport" onclick="deleteBoard('${vo.board_num}');">삭제</button></td>
+						<td><button id="deleteBtn" onclick="deleteBoard('${vo.board_num}');">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-			 <!-- 페이징 -->
+		
+		<!-- 페이징 -->
 	    <ul class="paging">
 	    	<!-- prev -->
 	    	<c:if test="${pVO.pageNum==1&&pVO.totalRecord>0}">
 	    		<li>◀</li>
 	    	</c:if>
 	    	<c:if test="${pVO.pageNum>1}">
-	    		<li><a href="/master/report?pageNum=${pVO.pageNum-1}
+	    		<li><a href="/master/community?pageNum=${pVO.pageNum-1}
 	    		<c:if test='${pVO.searchWord!=null}'>
 	    			&searchKey=${pVO.searchKey}&searchWord=${pVO.searchWord}
 	    		</c:if>">◀</a></li>
@@ -298,7 +287,7 @@ $(function(){
 	    			<c:if test="${p!=pVO.pageNum}">
 	    				<li>
 	    			</c:if>
-	    			<a href="/master/report?pageNum=${p}
+	    			<a href="/master/community?pageNum=${p}
 		    			<c:if test='${pVO.searchWord!=null}'>
 		    				&searchKey=${pVO.searchKey}
 		    				&searchWord=${pVO.searchWord}
@@ -312,12 +301,17 @@ $(function(){
 	    		<li>▶</li>
 	    	</c:if>
 	    	<c:if test="${pVO.pageNum<pVO.totalPage}">
-	    		<li><a href="/master/report?pageNum=${pVO.pageNum+1}
+	    		<li><a href="/master/community?pageNum=${pVO.pageNum+1}
 	    			<c:if test='${pVO.searchWord!=null}'>
 	    				&searchKey=${pVO.searchKey}&searchWord=${pVO.searchWord}
 	    			</c:if>">▶</a></li>
 	    	</c:if>
 	    </ul>
+	    
+	    <form method="get" action="/master/community" id="searchFrm">
+	      <input type="text" name="searchWord"/>
+	      <input type="submit" value="검색"/>
+	    </form>
     </div>
     
 </div>

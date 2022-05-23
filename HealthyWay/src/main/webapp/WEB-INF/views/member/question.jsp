@@ -36,9 +36,9 @@
 	            			<li>운동강도</li>
 	            		</div>
 	            		<div class="input-area3">
-	            			<input type="radio" id="select1" name="strength" value="top" required><label for="select1">상</label>&nbsp;&nbsp;&nbsp;
-							<input type="radio" id="select2" name="strength" value="middle" required><label for="select2">중</label>&nbsp;&nbsp;&nbsp;
-							<input type="radio" id="select3" name="strength" value="bottom" required><label for="select3">하</label>
+	            			<input type="radio" id="select1" name="strength" value="상" required><label for="select1">상</label>&nbsp;&nbsp;&nbsp;
+							<input type="radio" id="select2" name="strength" value="중" required><label for="select2">중</label>&nbsp;&nbsp;&nbsp;
+							<input type="radio" id="select3" name="strength" value="하" required><label for="select3">하</label>
 	            		</div>
 	            	</div>
 	            	
@@ -47,9 +47,9 @@
 	            			<li>즐겨하는 운동</li>
 	            		</div>
 	            		<div class="input-area4">
-	            			<input type="radio" id="select4" name="favorite" value="yoga" required><label for="select4">요가</label>&nbsp;&nbsp;&nbsp;
-							<input type="radio" id="select5" name="favorite" value="pilates" required><label for="select5">필라테스</label>&nbsp;&nbsp;&nbsp;
-							<input type="radio" id="select6" name="favorite" value="health" required><label for="select6">헬스</label>
+	            			<input type="radio" id="select4" name="favorite" value="요가" required><label for="select4">요가</label>&nbsp;&nbsp;&nbsp;
+							<input type="radio" id="select5" name="favorite" value="필라테스" required><label for="select5">필라테스</label>&nbsp;&nbsp;&nbsp;
+							<input type="radio" id="select6" name="favorite" value="헬스" required><label for="select6">헬스</label>
 	            		</div>
 	            	</div>
 	            	<br><br>

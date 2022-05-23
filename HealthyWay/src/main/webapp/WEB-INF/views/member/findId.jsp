@@ -17,6 +17,7 @@
 <div class="wrap">
 	<section class="findForm">
 		<div id="log">
+		<h2>아이디 찾기</h2>
 			<form method="post" class="form-signin" action="findUserId" name="findform">
 				<div class="findFrm_btn_wrap">
 					<div>

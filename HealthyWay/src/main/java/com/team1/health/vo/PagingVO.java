@@ -10,8 +10,14 @@ public class PagingVO {
 	private int onePageCount = 10;
 	private int startPage = 1;
 	private int pageSize = 10;
+	private String user_id;
 	
-	
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
 	public int getPageSize() {
 		return pageSize;
 	}

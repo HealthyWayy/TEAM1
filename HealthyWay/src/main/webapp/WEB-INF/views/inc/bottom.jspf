@@ -5,7 +5,7 @@
 <link href="/css/bottom.css" rel="stylesheet" type="text/css"/>
 <section class="bottom">
 	<ul class="bottom-container">
-		<li class="bottom-logo"><a href="/"><img src="/img/logo/logo6.png"/></a></li>
+		<li class="bottom-logo"><a href="/" style="text-align: right;"><img src="/img/logo/logo6.png"/></a></li>
 		<li class="bottom-title">
 			<ul class="bottom-box">
 				<li class="address">(주)healthy way : 서울특별시 강남구 언주로 508 14층(역삼동, 서울상록빌딩)</li>

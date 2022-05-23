@@ -6,11 +6,10 @@
 
 <script>
 $(function() {
-    console.log($)
-	 $("#btn_delete").on("click",function() {
+	$("#btn_delete").on("click",function() {
         $(function(){
-            var url = "${url}/boardList";
-            var data = $("#boardFrm").serialize()
+            var url = "${url}/board/suggestionList";
+            var data = $("#sugestionFrm").serialize()
          $.ajax({
             url : url,
             type : "DELETE",
@@ -23,9 +22,10 @@ $(function() {
             error : function(error){
                console.log(error.responseJSON);
                alert(error.responseJSON.msg);
+               window.location.href = error.responseJSON.redirect;
             }
-        }) ;
         });
+     });
     });
     
 	// 댓글 목록
@@ -147,11 +147,10 @@ $(function() {
 			});
 		}
 	});
-	
-	
+		
 	replyListAll();
     
-  //신고하기 모달 jquery작성
+  	//신고하기 모달 jquery작성
     $('.warnIcon').click(function(){
        $(".modal").fadeIn(300);
     });
@@ -216,7 +215,7 @@ $(function() {
 		</li>
 		<li class="edit_del_wrap">
 			<c:if test="${bvo.user_id == logId}">
-				<button onclick="location='/board/boardList/edit/${bvo.board_num}'">수정</button>
+				<button onclick="location='/board/suggestionList/edit/${bvo.board_num}'">수정</button>
 				<button id="btn_delete">삭제</button>
 			</c:if>
 		</li>
@@ -235,7 +234,7 @@ $(function() {
 		<div id="replyList"></div>
 	</div>
 	<div id="backBtn_wrap">
-		<button onclick="location.href='/boardList'">목록</button>
+		<button onclick="location.href='/board/suggestionList'">목록</button>
 	</div>
 	
 	<!-- 신고하기 모달창 추가 -->
@@ -244,8 +243,8 @@ $(function() {
 	      <div><img src="/recipeImg/warnIcon.png"/>신고하기<img src="/recipeImg/warnIcon.png"/></div>
 	      <form method='post' id='reportFrm'>
 	         
-	         <input type='hidden' name='write_id' value='${vo.user_id}'/>
-	         <input type='hidden' name='board_num' value='${vo.board_num}'/>
+	         <input type='hidden' name='write_id' value='${bvo.user_id}'/>
+	         <input type='hidden' name='board_num' value='${bvo.board_num}'/>
 	         <input type='hidden' name='report_type' value='5'/>
 	         
 	         <input type="radio" name="report_title" value="게시판 이탈" id='reportRadio1' checked>

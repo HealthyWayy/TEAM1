@@ -115,7 +115,7 @@
 				if(r.userRList.length>=1){
 					$userRList.each(function(idx,vo){
 						routinList += "<div class='routineDiv'>";
-						routinList += "<img src='/img/start.PNG' class='startImg'/>"
+						routinList += "<img src='/img/start.PNG' class='startImg' onclick='startHealth()'/>"
 						routinList += "<div class='train_title'>";
 						routinList += "<span>"+vo.train_title+"</span><br/>";
 						routinList += "</div>"
@@ -149,6 +149,10 @@
 			}
 		})
 	});
+	
+	function startHealth(){
+		location.href='/trainning/myTrainning';
+	}
 	function showRoutine(){
 		location.href='/trainning/trainningHome';
 	}
@@ -188,7 +192,7 @@ $(()=>{
 			$toDayData = $(r.toDayData);
 			if(r.toDayData.length!=0){
 				$toDayData.each(function(idx,vo){
-					toDayDataHtml+="<span>"+vo.train_title+": </span><span>"+vo.train_count+"</span><span>회</span>";
+					toDayDataHtml+="<span>"+vo.module_title+": </span><span>"+vo.train_count+"</span><span>분</span>";
 					toDayDataHtml+="<br/>";
 					toDayData.push(vo.train_count);
 					toDayLabel.push(vo.train_title);
@@ -360,7 +364,7 @@ function circleGrap(toDayData,toDayLabel){
 		width:73%;
 		margin-right:2%;
 		height:200px;
-		overflow:auto;
+		
 	}
 	#healthPlanDiv>div{
 		float:left;
@@ -368,7 +372,35 @@ function circleGrap(toDayData,toDayLabel){
 	#healthPlanDiv>div:nth-of-type(1){
 		width:80%;
 		margin-left:40px;
+		height: 100px;
+		overflow-y:scroll;
 	}
+	
+/* 	#healthPlanDiv>div:nth-of-type(1)::-webkit-scrollbar-thumb{
+		height: 30%;  스크롤바의 길이 
+	    background: #217af4; 스크롤바의 색상
+	    
+	    border-radius: 10px;
+	} */
+	
+	/* 스크롤바 설정*/
+	#healthPlanDiv>div:nth-of-type(1)::-webkit-scrollbar{
+	    width: 6px;
+	}
+	
+	/* 스크롤바 막대 설정*/
+	#healthPlanDiv>div:nth-of-type(1)::-webkit-scrollbar-thumb{
+	    height: 17%;
+	    background-color: lightgray;
+	    /* 스크롤바 둥글게 설정    */
+	    border-radius: 10px;    
+	}
+	
+	/* 스크롤바 뒷 배경 설정*/
+	#healthPlanDiv>div:nth-of-type(1)::-webkit-scrollbar-track{
+	    background-color: rgba(0,0,0,0);
+	}
+	
 	#toDayHealth{
 		width:25%;
 		text-align:center;
@@ -558,7 +590,7 @@ function circleGrap(toDayData,toDayLabel){
 </style>
 
 <div id='healthPlanDiv' class='healthDiv'>
-	<span>데일리 헬쓰</span>
+	<span>데일리 헬스</span>
 	<span>☑</span>
 	<span>오늘 당신의 기록을 보여줍니다.</span>
 	<br/>
@@ -584,7 +616,7 @@ function circleGrap(toDayData,toDayLabel){
 	</div>
 </div>
 <div id='myRoutin' class='healthDiv'>
-	<span>헬쓰 루틴!</span>
+	<span>헬스 루틴!</span>
 	<span>☑</span>
 	<span>내가 저장한 루틴을 보여줍니다!</span>
 	<br/>

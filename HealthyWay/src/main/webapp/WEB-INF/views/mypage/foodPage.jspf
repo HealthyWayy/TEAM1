@@ -351,7 +351,7 @@
 				pa=1.48;
 			}
 			dayKcal=662-9.53*age+pa*(15.92*weight+539.6*0.01*height)
-			return parseInt(dayKcal)
+			return dayKcal
 		}
 	}
 	//권장 칼로리 표기
@@ -375,8 +375,8 @@
 			calResultView='<span>열량이 조금 과해 보이네요!!</span>';
 		}
 		
-		$('#calKcalShow').html('권장 칼로리(일반): '+dayKcal+'Kcal');
-		$('#lessKcalShow').html('권장 칼로리(저염): '+lessDayKcal+'Kcal');
+		$('#calKcalShow').html('권장 칼로리(일반): '+dayKcal.toFixed(1)+'Kcal');
+		$('#lessKcalShow').html('권장 칼로리(저염): '+lessDayKcal.toFixed(1)+'Kcal');
 		$('#calResult').html(calResultView)
 	}
 	//좋아요 식단 삭제

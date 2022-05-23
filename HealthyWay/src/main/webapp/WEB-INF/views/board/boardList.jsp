@@ -5,15 +5,15 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
 <script>
 	$(function(){
-		$("#searchFrm").submit(function(event){
-			event.preventDefault();
-			if($("#searchWord").val()== ""){
+		$("#searchFrm").submit(function(){
+			if($("#searchWord").val()==""){
 				alert("검색어를 입력하세요");
 				return false;
 			}
 		});
 	});
 </script>
+	
 
 <!-- <div class="top_img_wrap">
 	<img src="/img/board2.jpg">
@@ -30,7 +30,7 @@
 				</div>
 			</li>
 			<li><a href="${url}/board/suggestionList">자유게시판</a></li>
-			<li><a href="#">성공스토리</a></li>
+			<li><a href="${url}/successList">성공스토리</a></li>
 		</ul>
 	</div>
 	
@@ -44,7 +44,7 @@
 					<option value="content">글 내용</option>
 					<option value="user_id">작성자</option>
 				</select> 
-				<input type="text" name="searchWord" id="searchWord" /> 
+				<input type="text" name="searchWord" id="searchWord"/> 
 				<input type="submit" value="Search" class="search_btn" />
 			</form>
 		</div>
