@@ -107,7 +107,7 @@
         <div class="box">
         	<div class="cover">
 				<ul class="copywrite third">
-					<li class="Title-mask"><span class="Title-line Title-effect delayFirst">Group</span></li>
+					<li class="Title-mask"><span class="Title-line Title-effect delayFirst">PT Group</span></li>
         			<li class="Title-mask"><span class="Title-line Title-effect delaySecond">홈트레이닝 <span class="colors">함께</span> 해보세요.</span></li>
 				</ul>
 				<section class="btn-container form-move">
