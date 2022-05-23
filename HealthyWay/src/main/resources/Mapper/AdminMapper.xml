@@ -100,7 +100,7 @@
 				</if>
 			</when>
 			<otherwise>
-				where type_num=3 and type_num=5
+				where type_num=3 or type_num=5
 			</otherwise>
 		</choose>
 		<if test="searchWord != null">
