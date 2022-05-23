@@ -136,7 +136,7 @@ public class BoardController {
 
 				entity = new ResponseEntity<HashMap<String, String>>(result, HttpStatus.OK);
 			} else {
-				service.boardDelete(bvo.getUser_id(), bvo.getBoard_num());
+				service.boardDelete(bvo.getBoard_num(), bvo.getUser_id());
 
 				result.put("status", "200");
 				result.put("msg", "글 삭제 완료.");
@@ -539,7 +539,7 @@ public class BoardController {
 		file2.delete();
 
 		String id = (String) session.getAttribute("logId");
-		int result = service.boardDelete(id, board_num);
+		int result = service.boardDelete(board_num, id);
 
 		try {
 			if (result > 0) {

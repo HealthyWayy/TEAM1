@@ -70,8 +70,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	//9
 	@Override
-	public int boardDelete(String user_id, int board_num) {
-		return dao.boardDelete(user_id, board_num);
+	public int boardDelete(int board_num, String user_id) {
+		return dao.boardDelete(board_num,user_id);
 	}
 	@Override
 	public BoardVO boardSelectByNo(int board_num) {

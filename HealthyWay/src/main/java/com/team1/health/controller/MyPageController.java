@@ -104,7 +104,7 @@ public class MyPageController {
 		Map<String,Object>map=new HashMap<String,Object>();
 		for(int i=0; i<list.size();i++) {
 			weight[i] = list.get(i).getWeight();
-			write_date[i] = list.get(i).getWrite_date();
+			write_date[i] = list.get(i).getWrite_date_print();
 		}
 		map.put("weight", weight);
 		map.put("writeDate", write_date);

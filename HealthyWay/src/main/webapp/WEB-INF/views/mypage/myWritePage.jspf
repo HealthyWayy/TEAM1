@@ -192,7 +192,7 @@ function achieveListAll(pageNum) {
 					tag += "<div class='writeInfor' onclick='movePage(3,"+vo.board_num+")'>";
 					tag += "<div class='writeLiInforDiv'>";
 					tag += "<div class='writeLiInfor'>";
-					tag += "<img src='/img/"+vo.img_file1+"'/>"
+					tag += "<img src='/successImg/"+vo.img_file1+"'/>"
 					tag += "</div>";
 					tag += "<div class='writeLiInforTitle'>"+vo.title+"</div>";
 					tag += "</div>";
