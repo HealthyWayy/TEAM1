@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Component
 public class LoginIntercepter implements HandlerInterceptor {
 	public List<String> loginEssential
-    = Arrays.asList("/recipe/**","/board/**","/trainning/**","/mypage/**");
+    = Arrays.asList("/recipe/**","/board/**","/trainning/**","/mypage/**","/master/**");
 
 	public List<String> loginInessential
     = Arrays.asList("/member/**", "/");
