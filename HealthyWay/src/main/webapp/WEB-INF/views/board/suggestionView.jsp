@@ -189,25 +189,23 @@ $(function() {
 function deleteSuggestion(board_num){
 	event.stopPropagation();//tr onclick 중복 제거
 	
-	if(!confirm("게시글을 삭제하시겠습니까?")){
-		return false;
-	}
-	
-	$.ajax({
-		url: '/suggestionDelete',
-		data: 'board_num='+board_num,
-		type: 'get',
-		success: function(result){
-			if(result>0){
-				alert("게시글이 삭제되었습니다.");
+	if(confirm("게시글을 삭제하시겠습니까?")){
+		$.ajax({
+			url: '/suggestionDelete',
+			data: 'board_num='+board_num,
+			type: 'get',
+			success: function(result){
+				if(result>0){
+					alert("게시글이 삭제되었습니다.");
+				}
+				location.reload();
+			},
+			error: function(e){
+				console.log(e.responseText);
+				alert("게시글 삭제 실패하였습니다.");
 			}
-			location.reload();
-		},
-		error: function(e){
-			console.log(e.responseText);
-			alert("게시글 삭제 실패하였습니다.");
-		}
-	});
+		});
+	}
 	
 }
 </script>
@@ -234,7 +232,7 @@ function deleteSuggestion(board_num){
 		<li class="edit_del_wrap">
 			<c:if test="${bvo.user_id == logId}">
 				<button onclick="location='/board/suggestionList/edit/${bvo.board_num}'">수정</button>
-				<button id="deleteBtn" onclick="deleteSuggestion('${vo.board_num}');">삭제</button>
+				<button id="deleteBtn" onclick="deleteSuggestion('${bvo.board_num}');">삭제</button>
 				
 			</c:if>
 		</li>

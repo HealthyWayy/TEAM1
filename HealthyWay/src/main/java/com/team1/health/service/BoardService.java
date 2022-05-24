@@ -74,7 +74,7 @@ public interface BoardService {
 		
 		public int successDelete(int board_num, String user_id);
 		public BoardVO successView(int board_num);
-		public List<BoardVO> successList(SuccessPagingVO ssVO);
+		public ArrayList<BoardVO> successList(SuccessPagingVO ssVO);
 		public BoardVO successSelectByNo(int board_num);
 		public int successtotalRecord(SuccessPagingVO ssVO);
 }

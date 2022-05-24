@@ -72,7 +72,7 @@
 					var params = new FormData($("#writeFrm")[0]);
 
 					$.ajax({
-						url : "/suggestionWrite",
+						url : "/board/suggestionList",
 						data : params,
 						method : 'post',
 						processData : false,

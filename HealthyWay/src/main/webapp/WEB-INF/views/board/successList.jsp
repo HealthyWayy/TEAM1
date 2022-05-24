@@ -6,7 +6,7 @@
 <script>
 	$(function(){
 		$("#searchFrm").submit(function(event){
-			event.preventDefault();
+			
 			if($("#searchWord").val()== ""){
 				alert("검색어를 입력하세요");
 				return false;
@@ -73,42 +73,45 @@
 				</c:forEach>
 			</ul>
 		</div>
-		
 		<div class="writeBtn_wrap">
 			<button id="writeBtn" onclick="location.href='${url}/successWrite'">글쓰기</button>
 		</div>
 		
-		<div class="paging_wrap">
-			<!-- 페이징 -->
-			<ul class="paging">
-				<!-- 이전페이지 -->
-				<c:if test="${spvo.pageNum==1 }">
-				<li><</li>
-				</c:if>
-				<c:if test="${spvo.pageNum>1 }">
-				<li><a href="${url}/board/successList?pageNum=${bvo.pageNum-1}<c:if test='${bvo.searchWord!=null}'>&searchWord=${bvo.searchWord}</c:if>"><</a></li>
-				</c:if>
-				<!-- 페이지 번호  -->
-				<c:forEach var="p" begin="${spvo.startPage}" end="${spvo.startPage+spvo.onePageCount}">
-					<!-- 총 페이지수 보다 출력할 페이지 번호가 작을 때 -->
-					<c:if test ="${p <= spvo.totalPage}">
-						<c:if test="${p==spvo.pageNum }">
-							<li style="font-size= 20px"><a href="${url}/board?pageNum=${p}">${p}</a></li>
-						</c:if>
-						<c:if test="${p!=spvo.pageNum }">
-							<li><a href=${url}/board/successList?pageNum=${p}<c:if test='${spvo.searchWord!=null}'>&searchWord=${spvo.searchWord}</c:if>>${p}</a></li>
-						</c:if>
-					</c:if>
-				</c:forEach>
-				<!-- 다음 페이지  -->
-				<c:if test="${spvo.pageNum == spvo.totalPage }">
-					<li>></li>
-				</c:if>
-				<c:if test="${spvo.pageNum < spvo.totalPage }">
-					<li><a href="${url}/board/successList?pageNum=${spvo.pageNum+1}<c:if test='${spvo.searchWord!=null}'>&searchWord=${spvo.searchWord}</c:if>">></a></li>
-				</c:if>
-			</ul>
-		</div>
+		<div class="paging_wrap" style="margin-top: 40px;">
 		
+		<div class="bo__n__page">
+		현재 페이지 ${pvo.pageNo}/ ${pvo.totalPage }
 	</div>
+	
+	
+	<!-- 페이징 -->
+	<ul class="paging">
+		<!-- 이전페이지 -->
+		<c:if test="${pvo.pageNum==1 }">
+		<li>prev</li>
+		</c:if>
+		<c:if test="${pvo.pageNum>1 }">
+		<li><a href="${url}/suggest?pageNo=${pvo.pageNo-1}<c:if test='${pvo.searchWord!=null}'>&searchWord=${pvo.searchWord}</c:if>">prev</a></li>
+		</c:if>
+		<!-- 페이지 번호  -->
+		<c:forEach var="p" begin="${pvo.startPage}" end="${pvo.startPage+pvo.onePageCount}">
+			<!-- 총 페이지수 보다 출력할 페이지 번호가 작을 때 -->
+			<c:if test ="${p <= pvo.totalPage}">
+				<c:if test="${p==pvo.pageNo }">
+					<li style="font-size= 20px"><a href="${url}/suggest?pageNum=${p}">${p}</a></li>
+				</c:if>
+				<c:if test="${p!=pvo.pageNo }">
+					<li><a href=${url}/suggest?pageNum=${p}<c:if test='${pvo.searchWord!=null}'>&searchWord=${pvo.searchWord}</c:if>>${p}</a></li>
+				</c:if>
+			</c:if>
+		</c:forEach>
+		<!-- 다음 페이지  -->
+		<c:if test="${pvo.pageNo == pvo.totalPage }">
+			<li>next</li>
+		</c:if>
+		<c:if test="${pvo.pageNo < pvo.totalPage }">
+			<li><a href="${url}/suggest?pageNo=${pvo.pageNo+1}<c:if test='${pvo.searchWord!=null}'>&searchWord=${pvo.searchWord}</c:if>">next</a></li>
+		</c:if>
+	</ul>
 </div>
+

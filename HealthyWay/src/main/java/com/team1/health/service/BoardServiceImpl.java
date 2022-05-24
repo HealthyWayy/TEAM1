@@ -163,7 +163,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	@Override
-	public List<BoardVO> successList(SuccessPagingVO ssVO) {
+	public ArrayList<BoardVO> successList(SuccessPagingVO ssVO) {
 		return dao.successList(ssVO);
 	}
 	//5
@@ -204,4 +204,3 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 }
-

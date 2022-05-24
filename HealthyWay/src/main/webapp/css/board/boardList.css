@@ -177,7 +177,6 @@
 /***************************************************************/
 /* 페이징 */
 .paging_wrap{
-	width: 100%;
 	overflow: auto;
 	display: flex;
 }
@@ -188,10 +187,13 @@
 }
 
 .paging li{
-	float:left;
-	padding: 10px 15px;
-	width: 10px;
-	cursor: pointer;
+	float: left;
+    padding: 10px;
+    text-align: center;
+    width: 10px;
+    height: 10px;
+    line-height: 10px;
+    font-size: 1.05em;
 }
 
 @media ( min-width: 1800px ) {	

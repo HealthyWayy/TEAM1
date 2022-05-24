@@ -401,7 +401,7 @@ public class BoardController {
 		ssVO.setSuccessTotalRecord(service.successtotalRecord(ssVO));
 
 		mav.addObject("list", service.successList(ssVO));
-		mav.addObject("SSVO", ssVO);
+		mav.addObject("SuccessPagingVO", ssVO);
 
 		mav.setViewName("board/successList");
 		return mav;
