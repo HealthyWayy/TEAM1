@@ -103,6 +103,12 @@ a:hover {
 	text-align: center;
 	table-layout: fixed;
 }
+
+.table td{
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .table>tbody>tr{
 	cursor: pointer;
 	overflow:hidden;
