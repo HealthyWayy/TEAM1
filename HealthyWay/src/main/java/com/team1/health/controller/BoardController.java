@@ -228,11 +228,11 @@ public class BoardController {
 		}
 		// 전체 게시글 업데이트
 		spvo.setOnePageRecord(pageCount);
-		spvo.setSuggestionTotalRecord(service.suggestiontotalRecord(spvo));
+		spvo.setSuggestionTotalRecord(service.SuggestiontotalRecord(spvo));
 		spvo.setPageNum(pageNum);
 
 		// 총 페이지 수
-		spvo.setSuggestionTotalRecord(service.suggestiontotalRecord(spvo));
+		spvo.setSuggestionTotalRecord(service.SuggestiontotalRecord(spvo));
 
 		// DB연결
 		mav.addObject("suggestionList", service.suggestionList(spvo));
@@ -353,13 +353,10 @@ public class BoardController {
 	//***********************************************************************************
 	// 성공 스토리 리스트
 	@GetMapping("successList")
-	public ModelAndView boardList(SuccessPagingVO ssVO) {
+	public ModelAndView boardList() {
 		ModelAndView mav = new ModelAndView();
 
-		ssVO.setSuccessTotalRecord(service.successtotalRecord(ssVO));
-
-		mav.addObject("list", service.successList(ssVO));
-		mav.addObject("SuccessPagingVO", ssVO);
+		mav.addObject("list", service.successList());
 
 		mav.setViewName("board/successList");
 		return mav;

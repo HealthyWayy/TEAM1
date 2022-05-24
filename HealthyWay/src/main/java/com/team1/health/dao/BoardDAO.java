@@ -50,10 +50,8 @@ public interface BoardDAO {
 		public List<ReplyVO> replyList(int board_num);
 	
 	
-	
+	//////////////////////////////////////////////////////////////////
 	//자유게시판
-	
-	
 	public int suggestionInsert(BoardVO vo);
 	
 	public List<BoardVO> suggestionList(SuggestionPagingVO spVO);
@@ -72,21 +70,21 @@ public interface BoardDAO {
 	
 	public BoardVO suggestionView(int board_num);
 	
-	//achieve_story 글등록
+	///////////////////////////////////////////////////////////////////
+	// 성공스토리
+	// 성공스토리 글목록
+	public ArrayList<BoardVO> successList();
 	// 성공스토리 글등록(achieve_story)
 	public int acheiveInsert(BoardVO vo);
-	public int successtotalRecord(SuccessPagingVO ssVO);
-	
 	// 성공스토리 글수정(board) 
 	public int successUpdate(BoardVO vo);
-	
 	// 성공스토리 글수정(achieve_story)
 	public int achieveUpdate(BoardVO vo);
 	
 	public int successDelete(int board_num, String user_id);
 	public BoardVO successView(int board_num);
 	public BoardVO successSelectByNo(int board_num);
-	public ArrayList<BoardVO> successList(SuccessPagingVO ssVO);
+	
 	
 
 

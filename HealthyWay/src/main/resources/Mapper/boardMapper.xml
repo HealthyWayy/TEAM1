@@ -149,7 +149,7 @@
         <if test="searchWord != null">
 			and (title like '%${searchWord}%' or content like '%${searchWord}%' or user_id like '%${searchWord}%')
 		</if>
-        order by board_num desc limit ${onePageRecord} offset ${offsetIndex}
+        order by board_num desc
     </select>
 
 	<select id="successtotalRecord" resultType="int">

@@ -171,6 +171,7 @@ body, ul, li{
     color: #929292;
     width: 93%;
     height: 15.5px;
+    overflow: hidden;
 }
 
 .pt_post_wrap li:nth-child(7n+3){

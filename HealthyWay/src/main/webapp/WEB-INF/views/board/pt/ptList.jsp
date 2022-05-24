@@ -93,23 +93,6 @@
 
 
 	<div class="main_wrap">
-		<%-- <h2>새로운 PT그룹</h2>
-
-		<div class="pt_list_wrap">
-			<c:forEach var="vo" items="${ptList}" begin="0" end="3">
-				<ul class="pt_post_wrap"
-					onclick="location.href='${url}/board/ptView'">
-					<li class="main_img_wrap"><img src="/ptImg/${vo.pt_img_file}"></li>
-					<li>${vo.keyword}</li>
-					<li>${vo.title}</li>
-					<li>조회수 ${vo.hit}</li>
-					<li>${vo.write_date }</li>
-					<li>모집 중&nbsp;&nbsp;0 / ${vo.max_user}</li>
-					<li><span class="material-symbols-rounded">favorite</span></li>
-					<li style="display: none;">${vo.board_num}</li>
-				</ul>
-			</c:forEach>
-		</div> --%>
 		<!-- <h2 class="post_head">모집중인 PT그룹</h2> -->
 		<div class="pt_top_btn_wrap">
 			<div class="top_left_wrap">
