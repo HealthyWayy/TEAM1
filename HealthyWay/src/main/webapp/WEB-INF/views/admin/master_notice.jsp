@@ -249,7 +249,9 @@ $(function(){
 			<tbody>
 				<c:forEach var="vo" items="${vo}">
 					<c:if test="${vo.type_num==4}">
+
 						<tr onclick="window.open('${url}/board/boardList/${vo.board_num}');">
+
 					</c:if>
 						<td>${vo.board_num}</td>
 						<td>${vo.user_id}</td>

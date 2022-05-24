@@ -2,14 +2,14 @@ package com.team1.health.vo;
 
 public class SuccessPagingVO {
 	
-	private int onePageRecord = 10; 
+	private int onePageRecord = 6; 
 	private int pageNum = 1; 
 	private int successtotalRecord; 
 	private int totalPage; 
 	private int offsetIndex = 0;
-	private int onePageCount = 10;
+	private int onePageCount = 5;
 	private int startPage = 1;
-	private int pageSize = 10;
+	private int pageSize = 8;
 
 	public int getPageSize() {
 		return pageSize;
@@ -17,7 +17,7 @@ public class SuccessPagingVO {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
-	private String searchKey;
+
 	private String searchWord;
 	
 	
@@ -76,23 +76,11 @@ public class SuccessPagingVO {
 		this.startPage = startPage;
 	}
 	
-	public String getSearchKey() {
-		return searchKey;
-	}
-	public void setSearchKey(String searchKey) {
-		this.searchKey = searchKey;
-	}
 	public String getSearchWord() {
 		return searchWord;
 	}
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
-
 	}
-
 	
-	
-	
-	
-
 }

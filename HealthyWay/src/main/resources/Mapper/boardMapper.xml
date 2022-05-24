@@ -147,15 +147,15 @@
 		from board b inner join achieve_story a on b.board_num=a.board_num
 		where type_num=3
         <if test="searchWord != null">
-        where title like '%${searchWord}%'
-        </if>
+			and (title like '%${searchWord}%' or content like '%${searchWord}%' or user_id like '%${searchWord}%')
+		</if>
         order by board_num desc limit ${onePageRecord} offset ${offsetIndex}
     </select>
 
 	<select id="successtotalRecord" resultType="int">
 		select count(board_num) cnt from board where type_num=3
-		<if test="searchWord != null">
-			where title like '%${searchWord}%'
+		<if	test='searchWord != null'>
+			and (title like '%${searchWord}%' or content like '%${searchWord}%' or user_id like '%${searchWord}%')
 		</if>
 	</select>
 	

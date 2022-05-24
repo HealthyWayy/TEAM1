@@ -170,7 +170,7 @@ $(function() {
        }
     });
  });
- 
+
 //글 삭제 확인
 function del(){
 	if(confirm("삭제하시겠습니까?")){
@@ -203,6 +203,7 @@ function del(){
 			<c:if test="${bvo.user_id == logId}">
 				<button onclick="location='/board/suggestionList/edit/${bvo.board_num}'">수정</button>
 				<button id="btn_delete" onclick="location='javascript:del()'">삭제</button>
+
 			</c:if>
 		</li>
 	</ul>
