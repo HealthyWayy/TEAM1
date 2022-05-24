@@ -97,11 +97,6 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 	
-	@Override
-	public int suggestiontotalRecord(SuggestionPagingVO spVO) {
-		return dao.SuggestiontotalRecord(spVO);
-	}
-	
 	//4
 	@Override
 	public List<BoardVO> suggestionList(SuggestionPagingVO pVO) {
@@ -119,11 +114,7 @@ public class BoardServiceImpl implements BoardService {
 	public int suggestionUpdate(BoardVO vo) {
 		return dao.suggestionUpdate(vo);
 	}
-	
-	@Override
-	public int suggestionDelete(String user_id, int board_num) {
-		return dao.suggestionDelete(board_num, user_id);
-	}
+
 	@Override
 	public BoardVO suggestionSelectByNo(int board_num) {
 		return dao.suggestionSelectByNo(board_num);
@@ -134,6 +125,14 @@ public class BoardServiceImpl implements BoardService {
 		return dao.suggestionView(board_num);
 	}
 
+	@Override
+	public int SuggestiontotalRecord(SuggestionPagingVO spVO) {
+		return dao.SuggestiontotalRecord(spVO);
+	}
+	@Override
+	public int suggestionDelete(int board_num, String user_id) {
+		return dao.suggestionDelete(board_num, user_id);
+	}
 
 	//댓글 등록
 	@Override
@@ -158,18 +157,11 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	
-	
+	/////////////////////////////////////////////////////////////////////
 	//성공스토리
-	
-	
 	@Override
-	public ArrayList<BoardVO> successList(SuccessPagingVO ssVO) {
-		return dao.successList(ssVO);
-	}
-	//5
-	@Override
-	public int successtotalRecord(SuccessPagingVO ssVO) {
-		return dao.successtotalRecord(ssVO);
+	public ArrayList<BoardVO> successList() {
+		return dao.successList();
 	}
 	
 	//7
@@ -202,5 +194,6 @@ public class BoardServiceImpl implements BoardService {
 	public int achieveUpdate(BoardVO vo) {
 		return dao.achieveUpdate(vo);
 	}
+
 	
 }

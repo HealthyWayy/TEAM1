@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="${url}/css/board/boardView.css">
 
 <script>
+$(function(){
 	// 댓글 목록
 	function replyListAll(){
 		var url = "${url}/reply/list";
@@ -15,7 +16,6 @@
 			data: params,
 			success: function(result){
 				var $result = $(result);
-
 				var tag = "<ul>";
 				$result.each(function(idx, vo){
 					tag += "<li class='reply_wrap'>";
@@ -41,7 +41,6 @@
 					tag += "<input type='text' name='content' value='" + vo.content + "'>";
 					tag += "<input type='submit' value='수정'>";
 					tag += "</form></div>";
-
 					tag += "</li>";
 				});
 				tag += "</ul>";
@@ -124,8 +123,9 @@
 			});
 		}
 	});
-	
+		
 	replyListAll();
+});
    
 
 //글 삭제 확인
