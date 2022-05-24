@@ -28,9 +28,9 @@ function warnMember(user_name, report_hit, user_email, userid){
 		return false;
 	}
 	var data = {
-		    service_id: 'service_ls0t36d',
-		    template_id: 'template_ca6y5h3',
-		    user_id: 'XTNxVmR_DyB0q1fU3',
+		    service_id: 'test',
+		    template_id: 'test',
+		    user_id: 'test',
 		    template_params: {
 		        'user_name': user_name,
 		        'report_hit': report_hit,
