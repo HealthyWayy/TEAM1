@@ -81,6 +81,7 @@ ul, li {
 }
 .menu_list {
 	text-align: right;
+	overflow: auto;
 }
 .menu_list>li {
     float: left;
@@ -189,6 +190,7 @@ ul, li {
 $(function(){
 	//커뮤니티 관리 메뉴 클릭 이벤트
 	$("#menu_community").click(function(){
+		console.log("aaa");
 		location="/master/community";
 	});
 		
@@ -247,7 +249,7 @@ $(function(){
 			<tbody>
 				<c:forEach var="vo" items="${vo}">
 					<c:if test="${vo.type_num==4}">
-						<tr onclick="window.open('/boardView?board_num=${vo.board_num});">
+						<tr onclick="window.open('${url}/board/boardList/${vo.board_num}');">
 					</c:if>
 						<td>${vo.board_num}</td>
 						<td>${vo.user_id}</td>

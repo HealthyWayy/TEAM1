@@ -79,8 +79,7 @@ public class BoardController {
 		return mav;
 	}
 
-	// 공지사항 등록 뷰 2
-
+	// 공지사항 등록 뷰
 	@GetMapping("boardWrite")
 	public ModelAndView boardWrite() {
 		ModelAndView mav = new ModelAndView();
@@ -89,7 +88,7 @@ public class BoardController {
 		return mav;
 	}
 
-	// 공지사항 게시글 생성 요청 db 3
+	// 공지사항 글등록(DB)
 	@PostMapping("/boardWrite")
 	public int boardWrite(BoardVO vo, HttpServletRequest request) {
 		vo.setUser_id((String) request.getSession().getAttribute("logId"));
@@ -97,42 +96,32 @@ public class BoardController {
 		int result = service.boardInsert(vo);
 		return result;
 	}
-	// 공지 삭제요청 3
-	@DeleteMapping("/board/boardList")
-	public ResponseEntity<HashMap<String, String>> boardDelete(int board_num, HttpServletRequest request,
-			HttpSession session) {
-		ResponseEntity<HashMap<String, String>> entity = null;
-		HashMap<String, String> result = new HashMap<String, String>();
-		String user_id = (String) session.getAttribute("logId");
+	
+	// 공지사항 삭제
+	@GetMapping("boardDel")
+	public ResponseEntity<String> boardDel(int board_num, HttpSession session, HttpServletRequest request) {
+		ResponseEntity<String> entity = null;
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("text", "html", Charset.forName("UTF-8")));
+
+		String id = (String)request.getSession().getAttribute("logId");
+		int result = service.boardDelete(board_num, id);
 
 		try {
-			BoardVO bvo = service.boardSelectByNo(board_num);
-			// 작성자가 다른경우
-			if (bvo.getUser_id().equals(user_id) == false) {
-				result.put("status", "200");
-				result.put("msg", "잘못된 접근입니다");
-				result.put("redirect", "/boardList");
-
-				entity = new ResponseEntity<HashMap<String, String>>(result, HttpStatus.OK);
+			if (result > 0) {
+				String msg = "<script>alert('삭제가 완료되었습니다.'); location.href='/master/notice';</script>";
+				entity = new ResponseEntity<String>(msg, headers, HttpStatus.OK);
 			} else {
-				service.boardDelete(bvo.getBoard_num(), bvo.getUser_id());
-
-				result.put("status", "200");
-				result.put("msg", "글 삭제 완료.");
-				result.put("redirect", "/boardList");
-				entity = new ResponseEntity<HashMap<String, String>>(result, HttpStatus.OK);
+				throw new Exception();
 			}
 		} catch (Exception e) {
-			// 삭제할 게시글이 존재하지 않을 경우
-			// user_id가 null일 경우
 			e.printStackTrace();
-			result.put("status", "400");
-			result.put("msg", "글 삭제 요청 Error...");
-			result.put("redirect", "/boardList");
-			entity = new ResponseEntity<HashMap<String, String>>(result, HttpStatus.BAD_REQUEST);
+			String msg = "<script>alert('글삭제를 실패하였습니다.');history.back();</script>";
+			entity = new ResponseEntity<String>(msg, headers, HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	}
+	
 
 	// 공지사항 상세보기 5
 	@GetMapping("board/boardList/{board_num}")
@@ -145,68 +134,83 @@ public class BoardController {
 		mav.setViewName("board/boardView");
 		return mav;
 	}
-
-	// 수정 뷰 7
-	@GetMapping("/board/boardEdit/{board_num}")
-	public ModelAndView boardEditView(@PathVariable(value = "board_num") int board_num, HttpSession session) {
+	
+	// 공지사항 수정폼으로 이동
+	@GetMapping("/board/boardEdit")
+	public ModelAndView boardEdit(int board_num) {
 		ModelAndView mav = new ModelAndView();
-		try {
-			String user_id = (String) session.getAttribute("logId");
-			BoardVO bvo = service.boardSelectByNo(board_num);
-			// 작성자 본인 확인
-			if (user_id != null && bvo.getUser_id().equals(user_id) == true) {
-				mav.setViewName("/board/boardEdit");
-				mav.addObject("bvo", service.boardSelectByNo(board_num));
-			} else {
-
-				mav.setViewName("/board/boardList");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			mav.setViewName("/board/boardList");
-		}
+		
+		mav.addObject("bvo", service.boardSelectByNo(board_num));
+		mav.setViewName("/board/boardEdit");
 		return mav;
 	}
-
-	// 수정하기 요청 8
-	@PutMapping("/board/boardList")
-	public ResponseEntity<HashMap<String, String>> boardUpdate(BoardVO bvo, HttpServletRequest request,
-			HttpSession session) {
-		ResponseEntity<HashMap<String, String>> entity = null;
-		HashMap<String, String> result = new HashMap<String, String>();
-		String user_id = (String) session.getAttribute("logId");
-
+	
+	// 공지사항 수정(DB)
+	@PostMapping("/board/boardEditOk")
+	public ResponseEntity<String> boardEditOk(BoardVO vo, HttpSession session) {
+		ResponseEntity<String> entity = null;
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("text", "html", Charset.forName("UTF-8")));
+		
+		vo.setUser_id((String)session.getAttribute("logId"));
+		
 		try {
-			if (service.boardSelectByNo(bvo.getBoard_num()) == null) {
-				// 수정할 게시글이 존재하지 않는 경우
-				result.put("status", "200");
-				result.put("msg", "존재하지 않는 게시물 입니다.");
-				result.put("redirect", "/boardList");
-				entity = new ResponseEntity<HashMap<String, String>>(result, HttpStatus.OK);
+			int result = service.boardUpdate(vo);
+			if(result > 0) { // 수정성공
+				String msg = "<script>alert('수정이 완료되었습니다.'); location.href='/master/notice';</script>";
+				entity = new ResponseEntity<String>(msg, headers, HttpStatus.OK);
+			}else { // 수정못함
+				throw new Exception();
 			}
-			// 작성자가 다른경우
-			if (bvo.getUser_id().equals(user_id) == false) {
-				result.put("status", "200");
-				result.put("msg", "잘못된 접근입니다");
-				result.put("redirect", "/boardList");
-				entity = new ResponseEntity<HashMap<String, String>>(result, HttpStatus.OK);
-			} else {
-
-				service.boardUpdate(bvo);
-				result.put("status", "200");
-				result.put("msg", "글 수정 완료.");
-				result.put("redirect", "/boardList");
-				entity = new ResponseEntity<HashMap<String, String>>(result, HttpStatus.OK);
-			}
-		} catch (Exception e) {
-			result.put("status", "400");
-			result.put("msg", "글 수정 요청 Error...");
-			result.put("redirect", "/boardList");
-			entity = new ResponseEntity<HashMap<String, String>>(result, HttpStatus.BAD_REQUEST);
+		}catch(Exception e) {
+			e.printStackTrace();
+			// 수정실패
+			String msg = "<script>alert('수정을 실패하였습니다.');history.back();</script>";
+			entity = new ResponseEntity<String>(msg, headers, HttpStatus.BAD_REQUEST);
 		}
-
+		
 		return entity;
 	}
+
+//	// 수정하기 요청 8
+//	@PutMapping("/board/boardList")
+//	public ResponseEntity<HashMap<String, String>> boardUpdate(BoardVO bvo, HttpServletRequest request,
+//			HttpSession session) {
+//		ResponseEntity<HashMap<String, String>> entity = null;
+//		HashMap<String, String> result = new HashMap<String, String>();
+//		String user_id = (String) session.getAttribute("logId");
+//
+//		try {
+//			if (service.boardSelectByNo(bvo.getBoard_num()) == null) {
+//				// 수정할 게시글이 존재하지 않는 경우
+//				result.put("status", "200");
+//				result.put("msg", "존재하지 않는 게시물 입니다.");
+//				result.put("redirect", "/boardList");
+//				entity = new ResponseEntity<HashMap<String, String>>(result, HttpStatus.OK);
+//			}
+//			// 작성자가 다른경우
+//			if (bvo.getUser_id().equals(user_id) == false) {
+//				result.put("status", "200");
+//				result.put("msg", "잘못된 접근입니다");
+//				result.put("redirect", "/boardList");
+//				entity = new ResponseEntity<HashMap<String, String>>(result, HttpStatus.OK);
+//			} else {
+//
+//				service.boardUpdate(bvo);
+//				result.put("status", "200");
+//				result.put("msg", "글 수정 완료.");
+//				result.put("redirect", "/boardList");
+//				entity = new ResponseEntity<HashMap<String, String>>(result, HttpStatus.OK);
+//			}
+//		} catch (Exception e) {
+//			result.put("status", "400");
+//			result.put("msg", "글 수정 요청 Error...");
+//			result.put("redirect", "/boardList");
+//			entity = new ResponseEntity<HashMap<String, String>>(result, HttpStatus.BAD_REQUEST);
+//		}
+//
+//		return entity;
+//	}
 
 	// 자유게시판 9
 	@GetMapping("board/suggestionList")
@@ -252,71 +256,8 @@ public class BoardController {
 			return mav;
 		}
 
-	//// 자유게시판 수정 뷰 12
-	// @GetMapping("/board/suggestionEdit/{board_num}")
-	// public ModelAndView suggestionEditView(@PathVariable(value="board_num")int
-	//// board_num, HttpSession session) {
-	// ModelAndView mav = new ModelAndView();
-	// try {
-	// String user_id = (String)session.getAttribute("logId");
-	// BoardVO bvo = service.suggestionSelectByNo(board_num);
-	// //작성자 본인 확인
-	// if(user_id != null && bvo.getUser_id().equals(user_id) == true){
-	// mav.setViewName("board/suggestionEdit");
-	// mav.addObject("bvo",service.suggestionSelectByNo(board_num));
-	// }
-	// else {
-	// mav.setViewName("redirect:/board/suggestionList");
-	// }
-	// }catch(Exception e) {
-	// e.printStackTrace();
-	// mav.setViewName("redirect:/board/suggestionList");
-	// }
-	// return mav;
-	// }
+	
 
-	//// 13 자유게시판 수정 요청
-	// @PutMapping("/board/suggestionList")
-	// public ResponseEntity<HashMap<String,String>> suggestionUpdate(BoardVO bvo,
-	//// HttpServletRequest request, HttpSession session){
-	// ResponseEntity<HashMap<String,String>> entity = null;
-	// HashMap<String,String> result = new HashMap<String,String>();
-	// String user_id = (String)session.getAttribute("logId");
-	//
-	// try {
-	// if(service.suggestionSelectByNo(bvo.getBoard_num()) == null) {
-	// //수정할 게시글이 존재하지 않는 경우
-	// result.put("status", "200");
-	// result.put("msg", "존재하지 않는 게시물 입니다.");
-	// result.put("redirect", "/board/suggestionList");
-	// entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.OK);
-	// }
-	// //작성자가 다른경우
-	// if(bvo.getUser_id().equals(user_id)== false) {
-	// result.put("status", "200");
-	// result.put("msg", "잘못된 접근입니다");
-	// result.put("redirect", "/board/suggestionList");
-	// entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.OK);
-	// }
-	// else {
-	//
-	// service.suggestionUpdate(bvo);
-	// result.put("status", "200");
-	// result.put("msg", "글 수정 완료.");
-	// result.put("redirect", "/board/suggestionList");
-	// entity = new ResponseEntity<HashMap<String,String>>(result, HttpStatus.OK);
-	// }
-	// }catch(Exception e) {
-	// result.put("status", "400");
-	// result.put("msg", "글 수정 요청 Error...");
-	// result.put("redirect", "/board/suggestionList");
-	// entity = new ResponseEntity<HashMap<String,String>>(result,
-	//// HttpStatus.BAD_REQUEST);
-	// }
-	//
-	//
-	// return entity;
-	// }
 
 	// 자유게시판 글등록 폼으로 이동
 	@GetMapping("suggestionWrite")
@@ -356,43 +297,60 @@ public class BoardController {
 		}
 		return mav;
 	}
+	
+	// 자유게시판 글수정(DB)
+	@PostMapping("/suggestionEditOk")
+	public ResponseEntity<String> suggestionEditOk(BoardVO vo, HttpSession session) {
+		ResponseEntity<String> entity = null;
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("text", "html", Charset.forName("UTF-8")));
+		
+		vo.setUser_id((String)session.getAttribute("logId"));
+		
+		try {
+			int result = service.boardUpdate(vo);
+			if(result > 0) { // 수정성공
+				String msg = "<script>alert('수정이 완료되었습니다.'); location.href='/board/suggestionList';</script>";
+				entity = new ResponseEntity<String>(msg, headers, HttpStatus.OK);
+			}else { // 수정못함
+				throw new Exception();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			// 수정실패
+			String msg = "<script>alert('수정을 실패하였습니다.');history.back();</script>";
+			entity = new ResponseEntity<String>(msg, headers, HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
 
-	// 자유게시판 삭제 14
-	@GetMapping("/suggestionDelete")
-	public ResponseEntity<HashMap<String,String>> suggestionDelete(int board_num, HttpServletRequest request, HttpSession session){
-    	ResponseEntity<HashMap<String,String>> entity = null;
-    	HashMap<String,String> result = new HashMap<String,String>();
-    	String user_id = (String)session.getAttribute("logId");
+	// 자유게시판 글삭제
+	@GetMapping("/suggestionDel")
+	public ResponseEntity<String> suggestionDel(int board_num, HttpSession session, HttpServletRequest request) {
+		ResponseEntity<String> entity = null;
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("text", "html", Charset.forName("UTF-8")));
+
+		String id = (String)request.getSession().getAttribute("logId");
+		int result = service.successDelete(board_num, id);
 
 		try {
-			BoardVO bvo = service.suggestionSelectByNo(board_num);
-			// 작성자가 다른경우
-			if (bvo.getUser_id().equals(user_id) == false) {
-				result.put("status", "200");
-				result.put("msg", "잘못된 접근입니다");
-				result.put("redirect", "board/suggestionList");
-
-				entity = new ResponseEntity<HashMap<String, String>>(result, HttpStatus.OK);
+			if (result > 0) {
+				String msg = "<script>alert('삭제가 완료되었습니다.'); location.href='/board/suggestionList';</script>";
+				entity = new ResponseEntity<String>(msg, headers, HttpStatus.OK);
 			} else {
-				service.suggestionDelete(bvo.getUser_id(), bvo.getBoard_num());
-
-				result.put("status", "200");
-				result.put("msg", "글 삭제 완료.");
-				result.put("redirect", "board/suggestionList");
-				entity = new ResponseEntity<HashMap<String, String>>(result, HttpStatus.OK);
+				throw new Exception();
 			}
 		} catch (Exception e) {
-			// 삭제할 게시글이 존재하지 않을 경우
-			// user_id가 null일 경우
 			e.printStackTrace();
-			result.put("status", "400");
-			result.put("msg", "글 삭제 요청 Error...");
-			result.put("redirect", "/suggestionList");
-			entity = new ResponseEntity<HashMap<String, String>>(result, HttpStatus.BAD_REQUEST);
+			String msg = "<script>alert('글삭제를 실패하였습니다.');history.back();</script>";
+			entity = new ResponseEntity<String>(msg, headers, HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	}
 
+	//***********************************************************************************
 	// 성공 스토리 리스트
 	@GetMapping("successList")
 	public ModelAndView boardList(SuccessPagingVO ssVO) {
@@ -465,7 +423,7 @@ public class BoardController {
 		return result;
 	}
 
-	// 성공스토리 뷰
+	// 성공스토리 뷰페이지로 이동
 	@GetMapping("/successView")
 	public ModelAndView view(int board_num) {
 		ModelAndView mav = new ModelAndView();
@@ -550,7 +508,7 @@ public class BoardController {
 		return result;
 	}
 	
-
+	// 성공스토리 글삭제(DB)
 	@GetMapping("successDel")
 	public ResponseEntity<String> successDel(int board_num, String img_file1, String img_file2, HttpSession session, HttpServletRequest request) {
 		ResponseEntity<String> entity = null;
