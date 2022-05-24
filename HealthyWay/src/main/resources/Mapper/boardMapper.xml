@@ -55,7 +55,8 @@
 	</update>
 	
 	<update id="boardUpdate">
-		update board set title=#{title}, content=#{content} where board_num=${board_num} and user_id=#{user_id}
+		update board set title=#{title}, content=#{content} 
+		where board_num=${board_num} and user_id=#{user_id}
 	</update>
 	
 	<delete id="boardDelete">

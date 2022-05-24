@@ -83,7 +83,7 @@
 						},
 						error : function(e) {
 							alert("자유게시판 글등록에 실패했습니다.");
-							location = history.back();
+							console.log(e.responseText);
 						}
 					});
 				} else if ($("#type_num").val() == 3) {

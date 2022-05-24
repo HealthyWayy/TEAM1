@@ -15,69 +15,20 @@ $(function() {
            return false;}else{
     	   $("#writeFrm").submit();
        }
-        }
-       
-       
-    $(function(){
-           var url = "${url}/board/boardList";
-           var data = $("#boardFrm").serialize();
-        $.ajax({
-           url : url,
-           type : "put",
-           dataType : "JSON",
-           data : data,
-           success : function(result) {
-              alert(result.msg);
-              window.location.href = result.redirect;
-           },
-           error : function(error){
-              console.log(error.responseJSON);
-              alert(error.responseJSON.msg);
-              window.location.href = error.responseJSON.redirect;
-           }
-        });
- 	   });
-	 });
-   });
- $(function() {
-    console.log($)
-	 $("#btn_delete").on("click",function() {
-        $(function(){
-            var url = "${url}/board/boardList";
-            var data = $("#boardFrm").serialize()
-         $.ajax({
-            url : url,
-            type : "DELETE",
-            dataType : "JSON",
-            data : data,
-            success : function(result) {
-               alert(result.msg);
-               window.location.href = result.redirect;
-            },
-            error : function(error){
-               console.log(error.responseJSON);
-               alert(error.responseJSON.msg);
-               
-              //window.location.href = error.responseJSON.redirect;
-            }
-            
-        }) ; 
-        });
-
     });
 	
-	// 글등록 버튼 색변경
+ 	// 글등록 버튼 색변경
 	$("#writeBtn").hover(function(){
 		$(this).css("background-color", "#fff").css("border", "1px solid #bdbdbd").css("color", "#000");
 	}, function(){
 		$(this).css("background-color", "#ff5454").css("border", "1px solid #ff5454").css("color", "#fff");
 	});
- });
+       
+});
 </script>
 
-
 <div class="wrap">
-	 <form id="writeFrm" method="post" action="${url}/boardEditOk">
+	 <form id="writeFrm" method="post" action="${url}/board/boardEditOk">
 		<ul id="writeFrm_wrap">
 			<li>
 				<select name="type_num" id="type_num">

@@ -5,53 +5,6 @@
 <link rel="stylesheet" href="${url}/css/board/boardView.css">
 
 <script>
-$(function(){
-    var url = "${url}/board/boardEdit";
-    var data = $("#boardFrm").serialize();
- $.ajax({
-    url : url,
-    type : "get",
-    dataType : "JSON",
-    data : data,
-    success : function(result) {
-       alert(result.msg);
-       window.location.href = result.redirect;
-    },
-    error : function(error){
-       console.log(error.responseJSON);
-       alert(error.responseJSON.msg);
-       window.location.href = error.responseJSON.redirect;
-    }
- });
- });
-});
-});
-
-
-$(function() {
-    $("#btn_delete").on("click",function() {
-        $(function(){
-            var url = "${url}/board/boardList";
-            var data = $("#boardFrm").serialize()
-         $.ajax({
-            url : url,
-            type : "DELETE",
-            dataType : "JSON",
-            data : data,
-            success : function(result) {
-               alert(result.msg);
-               window.location.href = result.redirect;
-            },
-            error : function(error){
-               console.log(error.responseJSON);
-               alert(error.responseJSON.msg);
-               window.location.href = error.responseJSON.redirect;
-            }
-            
-        }) ; 
-        });
-    });
- });
 	// 댓글 목록
 	function replyListAll(){
 		var url = "${url}/reply/list";
@@ -174,7 +127,14 @@ $(function() {
 	
 	replyListAll();
    
- });
+
+//글 삭제 확인
+ function del(){
+ 	if(confirm("삭제하시겠습니까?")){
+ 			// 확인버튼 선택시
+ 			location.href = "${url}/boardDel?board_num=${bvo.board_num}";
+ 		}
+ }
 </script>
 
 <div class="wrap">
@@ -192,6 +152,15 @@ $(function() {
 				<div class="writer_id">${bvo.user_id}</div>
 			</div>
 		</li>
+		<c:if test="${logId == 'admin'}">
+			<li class="report" style="border-bottom: none; margin: 15px 0 0;"></li>
+			<li class="edit_del_wrap" style="border-bottom: none; margin: 15px 0 0;">
+				<c:if test="${bvo.user_id == logId}">
+					<button onclick="location='/board/boardEdit?board_num=${bvo.board_num}'">수정</button>
+					<button id="btn_delete" onclick="location='javascript:del()'">삭제</button>
+				</c:if>
+			</li>
+		</c:if>
 
 	</ul>
 	<!-- 댓글 -->
